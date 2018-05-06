@@ -11,20 +11,20 @@ import java.sql.SQLIntegrityConstraintViolationException;
 public class UserRegistrationCommand implements Command {
     @Override
     public String execute(HttpServletRequest request) {
-        if (!DataValidation.userDataValidation(request)) {
-            return "/user_registration_page.jsp";
-        } else {
+        if (DataValidation.userDataValidation(request)) {
             User user = CreateEntityFromRequest.getUserFromRequest(request);
             UserService userService = new UserService();
             try {
                 userService.registerUser(user);
             } catch (SQLIntegrityConstraintViolationException e) {
                 e.printStackTrace();
-                request.setAttribute("wrongInputMessage", DataValidation.loginOrEmailNotUniqueDetermination(e));
-                return "/user_registration_page.jsp";
+                request.getSession().setAttribute("wrongInputMessage", DataValidation.loginOrEmailNotUniqueDetermination(e));
+                return "redirect"+"user_registration_page";
             }
-            request.setAttribute("informationMessage", "Registration is successful");
-            return "/index.jsp";
+            request.getSession().setAttribute("informationMessage", "Registration is successful");
+            return "redirect"+"index";
+        } else {
+            return "redirect"+"user_registration_page";
         }
     }
 

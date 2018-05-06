@@ -20,6 +20,6 @@ public class User implements Entity<Integer> {
     private Role role;
 
     public enum Role {
-        USER, ADMIN, UNKNOWN
+        USER, ADMIN
     }
 }

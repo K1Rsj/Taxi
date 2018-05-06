@@ -4,10 +4,7 @@ import ua.finalproject.dao.UserDao;
 import ua.finalproject.dao.mapper.UserMapper;
 import ua.finalproject.model.entities.impl.User;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
-import java.sql.SQLIntegrityConstraintViolationException;
+import java.sql.*;
 import java.util.List;
 import java.util.Optional;
 
@@ -21,23 +18,33 @@ public class UserDaoImpl implements UserDao {
 
     @Override
     public Optional<User> findByLogin(String login) {
+        UserMapper userMapper = new UserMapper();
+        try (PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM USERS WHERE LOGIN = ?")) {
+            preparedStatement.setString(1, login);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            if (resultSet.next()) {
+                return Optional.of(userMapper.extractFromResultSet(resultSet));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
         return Optional.empty();
     }
 
+
     @Override
-    public void create(User user) throws SQLException {
+    public void create(User user) throws SQLIntegrityConstraintViolationException {
         UserMapper userMapper = new UserMapper();
         try (PreparedStatement preparedStatement = connection
                 .prepareStatement("INSERT INTO users(login, password, email, first_name, second_name, phone_number) " +
                         "VALUES (?,?,?,?,?,?) ")) {
             userMapper.setValuesForQuery(user, preparedStatement);
             preparedStatement.executeUpdate();
-        }catch (SQLIntegrityConstraintViolationException e) {
+        } catch (SQLIntegrityConstraintViolationException e) {
             e.printStackTrace();
             throw new SQLIntegrityConstraintViolationException(e);
         } catch (SQLException e) {
             e.printStackTrace();
-            throw new SQLException(e);
         }
     }
 

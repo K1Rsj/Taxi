@@ -17,6 +17,18 @@
         <welcome-file>index.jsp</welcome-file>
     </welcome-file-list>
 
+    <listener>
+        <listener-class>
+            ua.finalproject.controller.listeners.SessionListener
+        </listener-class>
+    </listener>
+
+    <listener>
+        <listener-class>
+            ua.finalproject.controller.listeners.ContextListener
+        </listener-class>
+    </listener>
+
     <!--<error-page>-->
         <!--<exception-type>java.lang.Exception</exception-type>-->
         <!--<location>/error.jsp</location>-->

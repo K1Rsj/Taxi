@@ -24,6 +24,12 @@ public class UserService {
     }
 
     public Optional<User> findUserByLogin(String login) {
-        return null;
+        Connection connection = ConnectionPoolHolder.getConnection();
+        try (UserDao userDao = DaoFactory.getInstance().createUserDao(connection)) {
+            return userDao.findByLogin(login);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return Optional.empty();
     }
 }

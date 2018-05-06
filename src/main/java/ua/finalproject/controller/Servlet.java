@@ -1,6 +1,10 @@
 package ua.finalproject.controller;
 
 import ua.finalproject.controller.commands.*;
+import ua.finalproject.controller.commands.redirect.AdminFoundationPageCommand;
+import ua.finalproject.controller.commands.redirect.IndexPageCommand;
+import ua.finalproject.controller.commands.redirect.UserFoundationPageCommand;
+import ua.finalproject.controller.commands.redirect.UserRegistrationPageCommand;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -17,9 +21,13 @@ public class Servlet extends HttpServlet {
     public void init(){
         commands.put("login", new LoginCommand());
         commands.put("logout", new LogOutCommand());
-        commands.put("user_registration_page", new UserRegPageCommand());
+        commands.put("user_registration_page", new UserRegistrationPageCommand());
         commands.put("user_registration", new UserRegistrationCommand());
         commands.put("exception" , new ExceptionCommand());
+        commands.put("all_cars", new AllCarsCommand());
+        commands.put("index", new IndexPageCommand());
+        commands.put("admin_foundation", new AdminFoundationPageCommand());
+        commands.put("user_foundation", new UserFoundationPageCommand());
     }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -43,7 +51,7 @@ public class Servlet extends HttpServlet {
         System.out.println(page);
 
         if(page.contains("redirect")){
-            response.sendRedirect(page.replace("redirect", "/taxi"));
+            response.sendRedirect(page.replace("redirect", ""));
         }else {
             request.getRequestDispatcher(page).forward(request, response);
         }

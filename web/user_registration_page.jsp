@@ -12,8 +12,8 @@
     <title>Registration</title>
 </head>
 <body>
-<c:if test="${requestScope.wrongInputMessage != null}">
-    <p>${requestScope.wrongInputMessage}</p>
+<c:if test="${sessionScope.wrongInputMessage != null}">
+    <p>${sessionScope.wrongInputMessage}</p>
 </c:if>
 <form method="post" action="${pageContext.request.contextPath}/taxi/user_registration">
     <table border="1px" style = text-align:center>

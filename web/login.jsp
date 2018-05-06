@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8"%>
 
 <html>
@@ -6,21 +7,21 @@
     <title>Login Page</title>
 </head>
 <body>
-
-        <h1>Вход в систему</h1><br/>
-        <form method="get" action="${pageContext.request.contextPath}/taxi/login">
+<c:if test="${sessionScope.informationMessage != null}">
+    <p>${sessionScope.informationMessage}</p>
+</c:if>
+<br>
+        <h1>Login form</h1><br/>
+        <form method="post" action="${pageContext.request.contextPath}/taxi/login">
 
             <label>
-                <input type="text" name="name">
+                <input type="text" name="login">
             </label><br/>
             <label>
-                <input type="password" name="pass">
+                <input type="password" name="password">
             </label><br/><br/>
-            <input class="button" type="submit" value="Войти">
-
+            <input class="button" type="submit" value="Submit">
         </form>
         <br/>
-        <a href="${pageContext.request.contextPath}/taxi/logout">На головну</a>
-
 </body>
 </html>
