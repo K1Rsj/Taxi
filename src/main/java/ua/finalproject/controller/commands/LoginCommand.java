@@ -17,31 +17,31 @@ public class LoginCommand implements Command {
         System.out.println("login=" + login + "  " + "password=" + pass);
 
         if (DataValidation.validationOfLoginAndPassword(request, login, pass)) {
-            return "/index.jsp";
+            return "redirect"+"index";
         }
 
         Optional<User> userOptional = userService.findUserByLogin(login);
         if (!userOptional.isPresent() || !userOptional.get().getPassword().equals(pass)) {
             request.getSession().setAttribute("informationMessage", "Wrong login or password");
             System.out.println(userOptional);
-            return "redirect/index.jsp";
+            return "redirect"+"index";
         }
         User user = userOptional.get();
 
         if (ControllerUtil.checkUserAlreadyIsLogged(request.getSession(), login)) {
             request.getSession().setAttribute("informationMessage", "User is already logged");
-            return "redirect/index.jsp";
+            return "redirect"+"index";
         }
         request.getSession().removeAttribute("informationMessage");
         request.getSession().removeAttribute("wrongInputMessage");
         if (user.getRole().equals(User.Role.ADMIN)) {
             ControllerUtil.setUserRole(request, User.Role.ADMIN, login);
-            return "redirect"+"admin_foundation";
+            return "redirect"+"admin_foundation.jsp";
         }
         if (user.getRole().equals(User.Role.USER)) {
             ControllerUtil.setUserRole(request, User.Role.USER, login);
             return "redirect"+"user_foundation";
         }
-        return "/index.jsp";
+        return "/WEB-INF/index.jsp";
     }
 }

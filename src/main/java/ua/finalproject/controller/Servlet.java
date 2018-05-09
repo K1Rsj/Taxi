@@ -1,10 +1,7 @@
 package ua.finalproject.controller;
 
 import ua.finalproject.controller.commands.*;
-import ua.finalproject.controller.commands.redirect.AdminFoundationPageCommand;
-import ua.finalproject.controller.commands.redirect.IndexPageCommand;
-import ua.finalproject.controller.commands.redirect.UserFoundationPageCommand;
-import ua.finalproject.controller.commands.redirect.UserRegistrationPageCommand;
+import ua.finalproject.controller.commands.redirect.*;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -28,6 +25,8 @@ public class Servlet extends HttpServlet {
         commands.put("index", new IndexPageCommand());
         commands.put("admin_foundation", new AdminFoundationPageCommand());
         commands.put("user_foundation", new UserFoundationPageCommand());
+        commands.put("make_order_page", new MakeOrderPageCommand());
+        commands.put("make_order", new MakeOrderCommand());
     }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -46,7 +45,7 @@ public class Servlet extends HttpServlet {
         path = path.replaceAll(".*/taxi/" , "");
         System.out.println(path);
         Command command = commands.getOrDefault(path ,
-                (HttpServletRequest r) ->"/index.jsp)");
+                (HttpServletRequest r) ->"/WEB-INF/index.jsp");
         String page = command.execute(request);
         System.out.println(page);
 

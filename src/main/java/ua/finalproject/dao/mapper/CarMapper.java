@@ -29,12 +29,12 @@ public class CarMapper implements ObjectMapper<Car> {
     }
 
     @Override
-    public void setValuesForQuery(Car entity, PreparedStatement preparedStatement) {
+    public void setValuesForQuery(Car car, PreparedStatement preparedStatement) {
 
     }
 
     @Override
-    public Car makeUnique(Map<Integer, Car> cache, Car entity) {
+    public Car makeUnique(Map<Integer, Car> cache, Car car) {
         return null;
     }
 }

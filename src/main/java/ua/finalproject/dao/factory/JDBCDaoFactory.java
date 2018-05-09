@@ -4,6 +4,7 @@ import ua.finalproject.dao.CarDao;
 import ua.finalproject.dao.OrderDao;
 import ua.finalproject.dao.UserDao;
 import ua.finalproject.dao.impl.CarDaoImpl;
+import ua.finalproject.dao.impl.OrderDaoImpl;
 import ua.finalproject.dao.impl.UserDaoImpl;
 
 import java.sql.Connection;
@@ -21,6 +22,6 @@ public class JDBCDaoFactory extends DaoFactory {
 
     @Override
     public OrderDao createOrderDao(Connection connection) {
-        return null;
+        return new OrderDaoImpl(connection);
     }
 }

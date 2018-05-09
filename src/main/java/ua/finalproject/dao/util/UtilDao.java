@@ -37,4 +37,22 @@ public class UtilDao {
             throw new RuntimeException("Incorrect car type");
         }
     }
+
+    public static Integer parseCarType(Car.Type type) {
+        if (type == Car.Type.STANDARD) {
+            return 1;
+        }
+        else if (type == Car.Type.COMFORT) {
+            return 2;
+        }
+        else if (type == Car.Type.MINIBUS) {
+            return 3;
+        }
+        else if (type == Car.Type.PREMIUM) {
+            return 4;
+        }
+        else {
+            throw new RuntimeException("Incorrect car type");
+        }
+    }
 }

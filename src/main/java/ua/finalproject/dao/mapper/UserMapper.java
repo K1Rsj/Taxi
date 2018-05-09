@@ -47,7 +47,7 @@ public class UserMapper implements ObjectMapper<User> {
     }
 
     @Override
-    public User makeUnique(Map<Integer, User> cache, User entity) {
+    public User makeUnique(Map<Integer, User> cache, User user) {
         return null;
     }
 }

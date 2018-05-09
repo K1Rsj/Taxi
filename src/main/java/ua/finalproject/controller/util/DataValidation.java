@@ -5,10 +5,6 @@ import java.sql.SQLIntegrityConstraintViolationException;
 
 public class DataValidation {
 
-//    public static String validateClientData(HttpServletRequest request){
-//        return userDataValidation(request, "/user_registration_page.jsp");
-//    }
-
     public static boolean userDataValidation(HttpServletRequest request) {
         String login = request.getParameter("login");
         String password = request.getParameter("password");

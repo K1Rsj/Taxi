@@ -8,13 +8,10 @@ public class Order implements Entity<Integer> {
     private Integer id;
     private String departureStreet;
     private String destinationStreet;
-    private Status status;
+    private Car car;
     private User user;
     private Car.Type type;
-
-    public enum Status {
-        PENDING, DENIED, ACCEPTED
-    }
+    private Integer price;
 
     @Override
     public Integer getId() {
@@ -41,12 +38,12 @@ public class Order implements Entity<Integer> {
         this.destinationStreet = destinationStreet;
     }
 
-    public Status getStatus() {
-        return status;
+    public Car getCar() {
+        return car;
     }
 
-    public void setStatus(Status status) {
-        this.status = status;
+    public void setCar(Car car) {
+        this.car = car;
     }
 
     public User getUser() {
@@ -65,14 +62,23 @@ public class Order implements Entity<Integer> {
         this.type = type;
     }
 
+    public Integer getPrice() {
+        return price;
+    }
+
+    public void setPrice(Integer price) {
+        this.price = price;
+    }
+
     public static final class OrderBuilder implements EntityBuilder<Order> {
 
         private Integer id;
         private String departureStreet;
         private String destinationStreet;
-        private Status status;
+        private Car car;
         private User user;
         private Car.Type type;
+        private Integer price;
 
         public OrderBuilder setId(Integer id) {
             this.id = id;
@@ -89,8 +95,8 @@ public class Order implements Entity<Integer> {
             return this;
         }
 
-        public OrderBuilder setStatus(Status status) {
-            this.status = status;
+        public OrderBuilder setCar(Car car) {
+            this.car = car;
             return this;
         }
 
@@ -104,6 +110,11 @@ public class Order implements Entity<Integer> {
             return this;
         }
 
+        public OrderBuilder setPrice(Integer price) {
+            this.price = price;
+            return this;
+        }
+
 
         @Override
         public Order build() {
@@ -111,9 +122,10 @@ public class Order implements Entity<Integer> {
             order.setId(id);
             order.setDepartureStreet(departureStreet);
             order.setDestinationStreet(destinationStreet);
-            order.setStatus(status);
+            order.setCar(car);
             order.setUser(user);
             order.setType(type);
+            order.setPrice(price);
             return order;
         }
     }

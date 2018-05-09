@@ -14,7 +14,7 @@
     </servlet-mapping>
 
     <welcome-file-list>
-        <welcome-file>index.jsp</welcome-file>
+        <welcome-file>/WEB-INF/index.jsp</welcome-file>
     </welcome-file-list>
 
     <listener>
@@ -31,6 +31,6 @@
 
     <!--<error-page>-->
         <!--<exception-type>java.lang.Exception</exception-type>-->
-        <!--<location>/error.jsp</location>-->
+        <!--<location>/WEB-INF/error.jsp</location>-->
     <!--</error-page>-->
 </web-app>

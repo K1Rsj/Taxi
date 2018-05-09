@@ -31,6 +31,16 @@ public class UserDaoImpl implements UserDao {
         return Optional.empty();
     }
 
+    @Override
+    public void updateMoneySpent(Integer userId, Long moneySpent) {
+        try (PreparedStatement preparedStatement = connection.prepareStatement("UPDATE users set money_spent = ? where id = ?")) {
+            preparedStatement.setLong(1, moneySpent);
+            preparedStatement.setInt(2, userId);
+            preparedStatement.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
 
     @Override
     public void create(User user) throws SQLIntegrityConstraintViolationException {
@@ -59,7 +69,7 @@ public class UserDaoImpl implements UserDao {
     }
 
     @Override
-    public void update(User entity) {
+    public void update(User user) {
 
     }
 

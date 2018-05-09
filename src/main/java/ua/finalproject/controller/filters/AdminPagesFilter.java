@@ -27,7 +27,7 @@ public class AdminPagesFilter implements Filter {
         if (role.isPresent() && role.equals(Optional.of(User.Role.ADMIN))) {
             filterChain.doFilter(servletRequest, servletResponse);
         }
-        request.getRequestDispatcher("/index.jsp").forward(servletRequest, servletResponse);
+        request.getRequestDispatcher("/WEB-INF/index.jsp").forward(servletRequest, servletResponse);
     }
 
     @Override

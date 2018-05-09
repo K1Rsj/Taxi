@@ -12,6 +12,10 @@
 </head>
 <body>
     <p>Hello user</p>
+
+
     <a href="${pageContext.request.contextPath}/taxi/logout">Log Out</a>
+    <br>
+    <a href="${pageContext.request.contextPath}/taxi/make_order_page">Make order</a>
 </body>
 </html>
