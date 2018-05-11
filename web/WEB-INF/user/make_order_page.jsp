@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%--
   Created by IntelliJ IDEA.
   User: HOME
@@ -11,6 +12,9 @@
     <title>Make order</title>
 </head>
 <body>
+<c:if test="${requestScope.orderInformationMessage != null}">
+    <p>${requestScope.orderInformationMessage}</p>
+</c:if>
 <form method="post" action="${pageContext.request.contextPath}/taxi/make_order">
     <table border="1px" style = text-align:center>
         <tr>

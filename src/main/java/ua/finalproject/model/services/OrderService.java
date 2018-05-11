@@ -27,26 +27,27 @@ public class OrderService {
             Integer typeId = UtilDao.parseTypeString(type);
             connection.setAutoCommit(false);
             Optional<Car> car = carDao.getFreeCarByTypeId(typeId);
-            if (!car.isPresent()) {
+            if (car.isPresent()) {
+                carDao.updateCarState(car.get().getId(), Car.State.BUSY.toString().toLowerCase());
+                User user = userDao.findByLogin(login).get();
+                Long moneySpent = user.getMoneySpent();
+                CarType carType = carTypeDao.findById(typeId).get();
+                Long orderPrice = OrderPriceGenerator.getOrderPrice(moneySpent, departureStreet, destinationStreet, carType);
+                moneySpent = moneySpent + orderPrice;
+                userDao.updateMoneySpent(user.getId(), moneySpent);
+                Order order = new Order.OrderBuilder()
+                        .setDepartureStreet(departureStreet)
+                        .setDestinationStreet(destinationStreet)
+                        .setCar(car.get())
+                        .setUser(user)
+                        .setCarType(carType)
+                        .setPrice(orderPrice)
+                        .build();
+                connection.commit();
+                return order;
+            } else {
                 throw new NoFreeCarWithSuchTypeException();
             }
-            carDao.updateCarState(car.get().getId(), Car.State.BUSY.toString().toLowerCase());
-            User user = userDao.findByLogin(login).get();
-            Long moneySpent = user.getMoneySpent();
-            CarType carType = carTypeDao.findById(typeId).get();
-            Long orderPrice = OrderPriceGenerator.getOrderPrice(moneySpent, departureStreet, destinationStreet, carType);
-            moneySpent = moneySpent + orderPrice;
-            userDao.updateMoneySpent(user.getId(), moneySpent);
-            Order order = new Order.OrderBuilder()
-                    .setDepartureStreet(departureStreet)
-                    .setDestinationStreet(destinationStreet)
-                    .setCar(car.get())
-                    .setUser(user)
-                    .setCarType(carType)
-                    .setPrice(orderPrice)
-                    .build();
-            connection.commit();
-            return order;
         } catch (SQLException e) {
             connection.rollback();
             return null;

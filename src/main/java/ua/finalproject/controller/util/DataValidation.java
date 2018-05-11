@@ -61,4 +61,16 @@ public class DataValidation {
         }
         return false;
     }
+
+    public static boolean orderDataValidation(String departureStreet, String destinationStreet) {
+        if (departureStreet == null || !departureStreet.matches("^[А-Яа-яЁёЇїІіЄєҐґ]{1,3}[А-Яа-яЁёЇїІіЄєҐґ']{1,17} [\\d]{1,3}$")) {
+            return false;
+        }
+        else
+            return destinationStreet != null && destinationStreet.matches("^[А-Яа-яЁёЇїІіЄєҐґ]{1,3}[А-Яа-яЁёЇїІіЄєҐґ']{1,17} [\\d]{1,3}$");
+    }
+
+    public static boolean checkDiscountAmount(Integer discount) {
+        return discount < 16 && discount > 0;
+    }
 }

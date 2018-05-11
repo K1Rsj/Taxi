@@ -1,5 +1,6 @@
 package ua.finalproject.controller.commands;
 
+import ua.finalproject.controller.util.DataValidation;
 import ua.finalproject.model.services.CarTypeService;
 
 import javax.servlet.http.HttpServletRequest;
@@ -7,11 +8,16 @@ import javax.servlet.http.HttpServletRequest;
 public class AddDiscountCommand implements Command {
     @Override
     public String execute(HttpServletRequest request) {
-        CarTypeService carTypeService = new CarTypeService();
         String type = request.getParameter("type");
         Integer discount = Integer.parseInt(request.getParameter("discount"));
-        carTypeService.updateDiscount(type, discount);
-        request.setAttribute("discountInformation", "Discount added successfully");
-        return "/WEB-INF/admin/admin_foundation.jsp";
+        if (DataValidation.checkDiscountAmount(discount)) {
+            CarTypeService carTypeService = new CarTypeService();
+            carTypeService.updateDiscount(type, discount);
+            request.setAttribute("discountInformation", "Discount added successfully");
+            return "/WEB-INF/admin/admin_foundation.jsp";
+        } else {
+            request.setAttribute("discountInformation", "Wrong amount of discount");
+            return "/WEB-INF/admin/add_discount_page.jsp";
+        }
     }
 }
