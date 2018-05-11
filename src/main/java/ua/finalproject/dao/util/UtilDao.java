@@ -24,35 +24,18 @@ public class UtilDao {
         }
     }
 
-    public static Car.Type parseCarType(String type) {
-        if (type.equalsIgnoreCase(String.valueOf(Car.Type.STANDARD))) {
-            return Car.Type.STANDARD;
-        } else if (type.equalsIgnoreCase(String.valueOf(Car.Type.COMFORT))) {
-            return Car.Type.COMFORT;
-        } else if (type.equalsIgnoreCase(String.valueOf(Car.Type.MINIBUS))) {
-            return Car.Type.MINIBUS;
-        } else if (type.equalsIgnoreCase(String.valueOf(Car.Type.PREMIUM))) {
-            return Car.Type.PREMIUM;
+    public static Integer parseTypeString(String type) {
+        if (type.equals("standard")) {
+            return 1;
+        } else if (type.equals("comfort")) {
+            return 2;
+        } else if (type.equals("minibus")) {
+            return 3;
+        } else if (type.equals("premium")) {
+            return 4;
         } else {
             throw new RuntimeException("Incorrect car type");
-        }
-    }
 
-    public static Integer parseCarType(Car.Type type) {
-        if (type == Car.Type.STANDARD) {
-            return 1;
-        }
-        else if (type == Car.Type.COMFORT) {
-            return 2;
-        }
-        else if (type == Car.Type.MINIBUS) {
-            return 3;
-        }
-        else if (type == Car.Type.PREMIUM) {
-            return 4;
-        }
-        else {
-            throw new RuntimeException("Incorrect car type");
         }
     }
 }

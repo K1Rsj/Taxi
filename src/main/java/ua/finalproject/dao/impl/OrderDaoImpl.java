@@ -25,7 +25,7 @@ public class OrderDaoImpl implements OrderDao {
                 .prepareStatement("INSERT INTO orders(departure_street, destination_street, cars_id, users_id, car_type_id, price) " +
                         "VALUES (?,?,?,?,?,?)")) {
             orderMapper.setValuesForQuery(order, preparedStatement);
-            preparedStatement.executeQuery();
+            preparedStatement.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
         }

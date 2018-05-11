@@ -1,18 +1,21 @@
 package ua.finalproject.model.util;
 
-import ua.finalproject.model.entities.impl.Order;
+import ua.finalproject.model.entities.impl.CarType;
 
 public class OrderPriceGenerator {
-    public static Long getOrderPrice(Long moneySpent, Order order) {
-        Integer distance = getOrderDistance(order.getDepartureStreet(), order.getDestinationStreet());
-        Integer discount = getDiscountBasedOnMoneySpent(moneySpent);
-        return (long) (distance * discount);
+    public static Long getOrderPrice(Long moneySpent, String departureStreet, String destinationStreet, CarType carType) {
+        Integer distance = getOrderDistance(departureStreet, destinationStreet);
+        Integer discount = getDiscountBasedOnMoneySpent(moneySpent) + carType.getDiscount();
+        Integer orderPrice = (carType.getStartingPrice() + (distance * carType.getPricePerKilometer()));
+        if (discount.equals(0)) {
+            return (long) orderPrice;
+        }
+        orderPrice = orderPrice - (orderPrice / 100) * discount;
+        return (long) orderPrice;
     }
 
     private static Integer getOrderDistance(String departureStreet, String destinationStreet) {
-//        departureStreet = "Tupoleva 24";
-//        destinationStreet = "Sherbakova 5";
-        return departureStreet.length() * destinationStreet.length();
+        return departureStreet.length() + destinationStreet.length();
     }
 
     private static Integer getDiscountBasedOnMoneySpent(Long moneySpent) {

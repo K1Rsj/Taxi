@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%--
   Created by IntelliJ IDEA.
   User: HOME
@@ -12,8 +13,15 @@
 </head>
 <body>
     <p>Hello admin</p>
-    <a href="${pageContext.request.contextPath}/taxi/logout">Log Out</a>
+    <br>
+    <c:if test="${requestScope.discountInformation != null}">
+        <p>${requestScope.discountInformation}</p>
+    </c:if>
+    <br>
+    <a href="${pageContext.request.contextPath}/taxi/add_discount_page">Add discount</a>
     <br>
     <a href="${pageContext.request.contextPath}/taxi/all_cars">Show all cars</a>
+    <br>
+    <a href="${pageContext.request.contextPath}/taxi/logout">Log Out</a>
 </body>
 </html>

@@ -8,7 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 import java.util.Optional;
 
-@WebFilter(urlPatterns = {"/taxi/index", "/taxi/login", "/"}, filterName = "PublicPagesFilter")
+@WebFilter(urlPatterns = {"/taxi/index", "/taxi/login", "/", "/taxi/user_registration", "/taxi/user_registration_page"}, filterName = "PublicPagesFilter")
 public class PublicPagesFilter implements Filter {
 
     @Override

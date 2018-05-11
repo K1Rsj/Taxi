@@ -33,7 +33,7 @@ public class UserDaoImpl implements UserDao {
 
     @Override
     public void updateMoneySpent(Integer userId, Long moneySpent) {
-        try (PreparedStatement preparedStatement = connection.prepareStatement("UPDATE users set money_spent = ? where id = ?")) {
+        try (PreparedStatement preparedStatement = connection.prepareStatement("UPDATE users set money_spent = ? where id_user = ?")) {
             preparedStatement.setLong(1, moneySpent);
             preparedStatement.setInt(2, userId);
             preparedStatement.executeUpdate();

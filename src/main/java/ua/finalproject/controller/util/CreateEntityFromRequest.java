@@ -1,8 +1,5 @@
 package ua.finalproject.controller.util;
 
-import ua.finalproject.dao.util.UtilDao;
-import ua.finalproject.model.entities.impl.Car;
-import ua.finalproject.model.entities.impl.Order;
 import ua.finalproject.model.entities.impl.User;
 
 import javax.servlet.http.HttpServletRequest;
@@ -23,17 +20,6 @@ public class CreateEntityFromRequest {
                 .firstName(firstName)
                 .secondName(secondName)
                 .phoneNumber(phoneNumber)
-                .build();
-    }
-
-    public static Order getOrderFromRequest(HttpServletRequest request) {
-        String departureStreet = request.getParameter("departure");
-        String destinationStreet = request.getParameter("destination");
-        Car.Type type = UtilDao.parseCarType(request.getParameter("type"));
-        return new Order.OrderBuilder()
-                .setDepartureStreet(departureStreet)
-                .setDestinationStreet(destinationStreet)
-                .setCarType(type)
                 .build();
     }
 }

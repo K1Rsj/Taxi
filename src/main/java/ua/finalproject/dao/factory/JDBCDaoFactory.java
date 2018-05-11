@@ -1,9 +1,11 @@
 package ua.finalproject.dao.factory;
 
 import ua.finalproject.dao.CarDao;
+import ua.finalproject.dao.CarTypeDao;
 import ua.finalproject.dao.OrderDao;
 import ua.finalproject.dao.UserDao;
 import ua.finalproject.dao.impl.CarDaoImpl;
+import ua.finalproject.dao.impl.CarTypeDaoImpl;
 import ua.finalproject.dao.impl.OrderDaoImpl;
 import ua.finalproject.dao.impl.UserDaoImpl;
 
@@ -24,4 +26,11 @@ public class JDBCDaoFactory extends DaoFactory {
     public OrderDao createOrderDao(Connection connection) {
         return new OrderDaoImpl(connection);
     }
+
+    @Override
+    public CarTypeDao createCarTypeDao(Connection connection) {
+        return new CarTypeDaoImpl(connection);
+    }
+
+
 }

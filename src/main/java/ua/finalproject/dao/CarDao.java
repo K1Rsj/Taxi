@@ -2,9 +2,9 @@ package ua.finalproject.dao;
 
 import ua.finalproject.model.entities.impl.Car;
 
-import java.util.List;
+import java.util.Optional;
 
 public interface CarDao extends Dao<Car, Integer> {
-    List<Car> getFreeCarByType(Car.Type type);
+    Optional<Car> getFreeCarByTypeId(Integer typeId);
     void updateCarState(Integer carId, String carState);
 }

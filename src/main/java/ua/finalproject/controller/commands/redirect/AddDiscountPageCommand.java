@@ -4,9 +4,9 @@ import ua.finalproject.controller.commands.Command;
 
 import javax.servlet.http.HttpServletRequest;
 
-public class MakeOrderPageCommand implements Command {
+public class AddDiscountPageCommand implements Command {
     @Override
     public String execute(HttpServletRequest request) {
-        return "/WEB-INF/user/make_order_page.jsp";
+        return "/WEB-INF/admin/add_discount_page.jsp";
     }
 }

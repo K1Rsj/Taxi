@@ -1,6 +1,10 @@
 package ua.finalproject.controller;
 
 import ua.finalproject.controller.commands.*;
+import ua.finalproject.controller.commands.order.CancelOrderCommand;
+import ua.finalproject.controller.commands.order.ConfirmOrderCommand;
+import ua.finalproject.controller.commands.order.MakeOrderCommand;
+import ua.finalproject.controller.commands.order.MakeOrderPageCommand;
 import ua.finalproject.controller.commands.redirect.*;
 
 import javax.servlet.ServletException;
@@ -27,6 +31,10 @@ public class Servlet extends HttpServlet {
         commands.put("user_foundation", new UserFoundationPageCommand());
         commands.put("make_order_page", new MakeOrderPageCommand());
         commands.put("make_order", new MakeOrderCommand());
+        commands.put("cancel_order", new CancelOrderCommand());
+        commands.put("confirm_order", new ConfirmOrderCommand());
+        commands.put("add_discount_page", new AddDiscountPageCommand());
+        commands.put("add_discount", new AddDiscountCommand());
     }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

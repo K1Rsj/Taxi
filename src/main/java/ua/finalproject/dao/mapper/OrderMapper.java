@@ -20,8 +20,8 @@ public class OrderMapper implements ObjectMapper<Order> {
         preparedStatement.setString(2, order.getDestinationStreet());
         preparedStatement.setInt(3, order.getCar().getId());
         preparedStatement.setInt(4, order.getUser().getId());
-        preparedStatement.setInt(5, UtilDao.parseCarType(order.getType()));
-        preparedStatement.setInt(6, order.getPrice());
+        preparedStatement.setInt(5, order.getCarType().getId());
+        preparedStatement.setLong(6, order.getPrice());
     }
 
     @Override

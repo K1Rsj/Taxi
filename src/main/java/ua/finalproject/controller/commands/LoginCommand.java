@@ -1,6 +1,6 @@
 package ua.finalproject.controller.commands;
 
-import ua.finalproject.controller.util.ControllerUtil;
+import ua.finalproject.controller.util.ContexUtil;
 import ua.finalproject.controller.util.DataValidation;
 import ua.finalproject.model.entities.impl.User;
 import ua.finalproject.model.services.UserService;
@@ -28,18 +28,18 @@ public class LoginCommand implements Command {
         }
         User user = userOptional.get();
 
-        if (ControllerUtil.checkUserAlreadyIsLogged(request.getSession(), login)) {
+        if (ContexUtil.checkUserAlreadyIsLogged(request.getSession(), login)) {
             request.getSession().setAttribute("informationMessage", "User is already logged");
             return "redirect"+"index";
         }
         request.getSession().removeAttribute("informationMessage");
         request.getSession().removeAttribute("wrongInputMessage");
         if (user.getRole().equals(User.Role.ADMIN)) {
-            ControllerUtil.setUserRole(request, User.Role.ADMIN, login);
-            return "redirect"+"admin_foundation.jsp";
+            ContexUtil.setUserRole(request, User.Role.ADMIN, login);
+            return "redirect"+"admin_foundation";
         }
         if (user.getRole().equals(User.Role.USER)) {
-            ControllerUtil.setUserRole(request, User.Role.USER, login);
+            ContexUtil.setUserRole(request, User.Role.USER, login);
             return "redirect"+"user_foundation";
         }
         return "/WEB-INF/index.jsp";

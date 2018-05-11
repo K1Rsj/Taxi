@@ -35,7 +35,7 @@
             <td><c:out value="${car.number}" /></td>
             <td><c:out value="${car.state}" /></td>
             <td><c:out value="${car.driver}" /></td>
-            <td><c:out value="${car.type}" /></td>
+            <td><c:out value="${car.carType.type}" /></td>
         </tr>
     </c:forEach>
     </tbody>

@@ -10,8 +10,8 @@ public class Order implements Entity<Integer> {
     private String destinationStreet;
     private Car car;
     private User user;
-    private Car.Type type;
-    private Integer price;
+    private CarType type;
+    private Long price;
 
     @Override
     public Integer getId() {
@@ -54,19 +54,19 @@ public class Order implements Entity<Integer> {
         this.user = user;
     }
 
-    public Car.Type getType() {
+    public CarType getCarType() {
         return type;
     }
 
-    public void setType(Car.Type type) {
+    public void setCarType(CarType type) {
         this.type = type;
     }
 
-    public Integer getPrice() {
+    public Long getPrice() {
         return price;
     }
 
-    public void setPrice(Integer price) {
+    public void setPrice(Long price) {
         this.price = price;
     }
 
@@ -77,8 +77,8 @@ public class Order implements Entity<Integer> {
         private String destinationStreet;
         private Car car;
         private User user;
-        private Car.Type type;
-        private Integer price;
+        private CarType type;
+        private Long price;
 
         public OrderBuilder setId(Integer id) {
             this.id = id;
@@ -105,12 +105,12 @@ public class Order implements Entity<Integer> {
             return this;
         }
 
-        public OrderBuilder setCarType(Car.Type type) {
+        public OrderBuilder setCarType(CarType type) {
             this.type = type;
             return this;
         }
 
-        public OrderBuilder setPrice(Integer price) {
+        public OrderBuilder setPrice(Long price) {
             this.price = price;
             return this;
         }
@@ -124,7 +124,7 @@ public class Order implements Entity<Integer> {
             order.setDestinationStreet(destinationStreet);
             order.setCar(car);
             order.setUser(user);
-            order.setType(type);
+            order.setCarType(type);
             order.setPrice(price);
             return order;
         }

@@ -10,16 +10,13 @@ public class Car implements Entity<Integer> {
     private String number;
     private State state;
     private String driver;
-    private Type type;
+    private CarType carType;
 
 
     public enum State {
         FREE, BUSY
     }
 
-    public enum Type {
-        STANDARD, COMFORT, MINIBUS, PREMIUM
-    }
 
     @Override
     public Integer getId() {
@@ -62,12 +59,12 @@ public class Car implements Entity<Integer> {
         this.driver = driver;
     }
 
-    public Type getType() {
-        return type;
+    public CarType getCarType() {
+        return carType;
     }
 
-    public void setType(Type type) {
-        this.type = type;
+    public void setCarType(CarType carType) {
+        this.carType = carType;
     }
 
     public static final class CarBuilder implements EntityBuilder<Car> {
@@ -77,7 +74,7 @@ public class Car implements Entity<Integer> {
         private String number;
         private State state;
         private String driver;
-        private Type type;
+        private CarType carType;
 
         public CarBuilder setId(Integer id) {
             this.id = id;
@@ -104,8 +101,8 @@ public class Car implements Entity<Integer> {
             return this;
         }
 
-        public CarBuilder setType(Type type) {
-            this.type = type;
+        public CarBuilder setCarType(CarType carType) {
+            this.carType = carType;
             return this;
         }
 
@@ -118,7 +115,7 @@ public class Car implements Entity<Integer> {
             car.setNumber(number);
             car.setState(state);
             car.setDriver(driver);
-            car.setType(type);
+            car.setCarType(carType);
             return car;
         }
     }

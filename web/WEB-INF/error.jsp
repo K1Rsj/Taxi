@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%--
   Created by IntelliJ IDEA.
   User: HOME
@@ -11,6 +12,10 @@
     <title>Error</title>
 </head>
 <body>
-<p>Oops something went wrong</p>
+    <c:if test="${requestScope.errorMessage != null}">
+    <p>${requestScope.errorMessage}</p>
+    </c:if>
+
+    <p>Oops something went wrong</p>
 </body>
 </html>
