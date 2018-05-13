@@ -26,8 +26,8 @@ public class Servlet extends HttpServlet {
         commands.put("user_registration_page", new UserRegistrationPageCommand());
         commands.put("user_registration", new UserRegistrationCommand());
         commands.put("exception" , new ExceptionCommand());
-        commands.put("all_cars", new AllCarsCommand());
         commands.put("index", new IndexPageCommand());
+        commands.put("all_cars", new AllCarsCommand());
         commands.put("admin_foundation", new AdminFoundationPageCommand());
         commands.put("user_foundation", new UserFoundationPageCommand());
         commands.put("make_order_page", new MakeOrderPageCommand());

@@ -15,32 +15,8 @@
 <c:if test="${requestScope.message != null}">
 <p>${requestScope.message}</p>
 </c:if>
-<table border=1>
-    <thead>
-    <tr>
-        <th>Car Id</th>
-        <th>Model</th>
-        <th>Number</th>
-        <th>State</th>
-        <th>Driver</th>
-        <th>Type</th>
-    </tr>
-    </thead>
-    <tbody>
-
-    <c:forEach items="${requestScope.cars}" var="car">
-        <tr>
-            <td><c:out value="${car.id}" /></td>
-            <td><c:out value="${car.model}" /></td>
-            <td><c:out value="${car.number}" /></td>
-            <td><c:out value="${car.state}" /></td>
-            <td><c:out value="${car.driver}" /></td>
-            <td><c:out value="${car.carType.type}" /></td>
-        </tr>
-    </c:forEach>
-    </tbody>
-</table>
+<jsp:include page="all_cars_table.jsp"/>
 <br>
-<a href="${pageContext.request.contextPath}/taxi/index">Homepage</a>
+<a href="${pageContext.request.contextPath}/taxi/admin_foundation">Homepage</a>
 </body>
 </html>
