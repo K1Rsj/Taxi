@@ -7,7 +7,6 @@ import ua.finalproject.model.entities.impl.User;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.Map;
 
 public class UserMapper implements ObjectMapper<User> {
 
@@ -44,10 +43,5 @@ public class UserMapper implements ObjectMapper<User> {
         preparedStatement.setString(4, user.getFirstName());
         preparedStatement.setString(5, user.getSecondName());
         preparedStatement.setString(6, user.getPhoneNumber());
-    }
-
-    @Override
-    public User makeUnique(Map<Integer, User> cache, User user) {
-        return null;
     }
 }

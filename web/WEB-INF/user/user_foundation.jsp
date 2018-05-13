@@ -37,5 +37,11 @@
     <a href="${pageContext.request.contextPath}/taxi/logout">Log Out</a>
     <br>
     <a href="${pageContext.request.contextPath}/taxi/make_order_page">Make order</a>
+    <br>
+    <a href="${pageContext.request.contextPath}/taxi/my_orders">My orders</a>
+    <br>
+    <a href="${pageContext.request.contextPath}/taxi/my_discount">My discount</a>
+    <br>
+    <a href="${pageContext.request.contextPath}/taxi/all_car_types">View all car types</a>
 </body>
 </html>

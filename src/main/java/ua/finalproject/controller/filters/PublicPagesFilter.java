@@ -8,7 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 import java.util.Optional;
 
-@WebFilter(urlPatterns = {"/taxi/index", "/taxi/login", "/", "/taxi/user_registration", "/taxi/user_registration_page"}, filterName = "PublicPagesFilter")
+@WebFilter(filterName = "PublicPagesFilter")
 public class PublicPagesFilter implements Filter {
 
     @Override
@@ -25,10 +25,12 @@ public class PublicPagesFilter implements Filter {
         if (role.isPresent() && role.equals(Optional.of(User.Role.ADMIN))) {
             request.getRequestDispatcher("/WEB-INF/admin/admin_foundation.jsp").forward(servletRequest, servletResponse);
         }
-        if (role.isPresent() && role.equals(Optional.of(User.Role.USER))) {
+        else if (role.isPresent() && role.equals(Optional.of(User.Role.USER))) {
             request.getRequestDispatcher("/WEB-INF/user/user_foundation.jsp").forward(servletRequest, servletResponse);
         }
-        filterChain.doFilter(servletRequest, servletResponse);
+        else {
+            filterChain.doFilter(servletRequest, servletResponse);
+        }
     }
 
     @Override

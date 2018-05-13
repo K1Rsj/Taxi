@@ -1,6 +1,6 @@
 package ua.finalproject.controller.listeners;
 
-import ua.finalproject.controller.util.ContexUtil;
+import ua.finalproject.controller.util.ContextUtil;
 import ua.finalproject.controller.util.ControllerUtil;
 import ua.finalproject.model.services.CarService;
 
@@ -15,7 +15,7 @@ public class SessionListener implements HttpSessionListener {
 
     @Override
     public void sessionDestroyed(HttpSessionEvent httpSessionEvent) {
-        ContexUtil.deleteLoggedUserFromContext(httpSessionEvent.getSession());
+        ContextUtil.deleteLoggedUserFromContext(httpSessionEvent.getSession());
         CarService carService = new CarService();
         ControllerUtil.ChangeCarStateToFree(httpSessionEvent.getSession(), carService);
     }

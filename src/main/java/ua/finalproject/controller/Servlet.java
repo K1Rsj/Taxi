@@ -1,10 +1,11 @@
 package ua.finalproject.controller;
 
 import ua.finalproject.controller.commands.*;
+
 import ua.finalproject.controller.commands.order.CancelOrderCommand;
 import ua.finalproject.controller.commands.order.ConfirmOrderCommand;
 import ua.finalproject.controller.commands.order.MakeOrderCommand;
-import ua.finalproject.controller.commands.order.MakeOrderPageCommand;
+import ua.finalproject.controller.commands.order.MyOrdersCommand;
 import ua.finalproject.controller.commands.redirect.*;
 
 import javax.servlet.ServletException;
@@ -35,6 +36,13 @@ public class Servlet extends HttpServlet {
         commands.put("confirm_order", new ConfirmOrderCommand());
         commands.put("add_discount_page", new AddDiscountPageCommand());
         commands.put("add_discount", new AddDiscountCommand());
+        commands.put("my_orders", new MyOrdersCommand());
+        commands.put("my_discount", new MyDiscountCommand());
+        commands.put("add_car_page", new AddCarPageCommand());
+        commands.put("add_car", new AddCarCommand());
+        commands.put("all_car_types", new AllCarTypesCommand());
+        commands.put("all_users", new AllUsersCommand());
+        commands.put("delete_user", new DeleteUserCommand());
     }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

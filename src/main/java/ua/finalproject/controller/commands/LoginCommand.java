@@ -1,6 +1,7 @@
 package ua.finalproject.controller.commands;
 
-import ua.finalproject.controller.util.ContexUtil;
+import ua.finalproject.controller.util.ContextUtil;
+import ua.finalproject.controller.util.ControllerUtil;
 import ua.finalproject.controller.util.DataValidation;
 import ua.finalproject.model.entities.impl.User;
 import ua.finalproject.model.services.UserService;
@@ -16,32 +17,26 @@ public class LoginCommand implements Command {
         String pass = request.getParameter("password");
         System.out.println("login=" + login + "  " + "password=" + pass);
 
-        if (DataValidation.validationOfLoginAndPassword(request, login, pass)) {
-            return "redirect"+"index";
+        if (DataValidation.validationOfLoginAndPassword(login, pass)) {
+            request.setAttribute("informationMessage", "Login or password is missed");
+            return "/WEB-INF/index.jsp";
         }
 
         Optional<User> userOptional = userService.findUserByLogin(login);
         if (!userOptional.isPresent() || !userOptional.get().getPassword().equals(pass)) {
-            request.getSession().setAttribute("informationMessage", "Wrong login or password");
+            request.setAttribute("informationMessage", "Wrong login or password");
             System.out.println(userOptional);
-            return "redirect"+"index";
+            return "/WEB-INF/index.jsp";
         }
         User user = userOptional.get();
 
-        if (ContexUtil.checkUserAlreadyIsLogged(request.getSession(), login)) {
-            request.getSession().setAttribute("informationMessage", "User is already logged");
-            return "redirect"+"index";
+        if (ContextUtil.checkUserAlreadyIsLogged(request.getSession(), login)) {
+            request.setAttribute("informationMessage", "User is already logged");
+            return "/WEB-INF/index.jsp";
         }
-        request.getSession().removeAttribute("informationMessage");
-        request.getSession().removeAttribute("wrongInputMessage");
-        if (user.getRole().equals(User.Role.ADMIN)) {
-            ContexUtil.setUserRole(request, User.Role.ADMIN, login);
-            return "redirect"+"admin_foundation";
-        }
-        if (user.getRole().equals(User.Role.USER)) {
-            ContexUtil.setUserRole(request, User.Role.USER, login);
-            return "redirect"+"user_foundation";
-        }
-        return "/WEB-INF/index.jsp";
+
+        request.getSession().setAttribute("userLogin", login);
+        request.getSession().setAttribute("role", user.getRole());
+        return ControllerUtil.getUserIndexPage(user.getRole());
     }
 }

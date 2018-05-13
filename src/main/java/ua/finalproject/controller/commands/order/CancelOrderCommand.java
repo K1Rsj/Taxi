@@ -3,6 +3,7 @@ package ua.finalproject.controller.commands.order;
 import ua.finalproject.controller.commands.Command;
 import ua.finalproject.controller.util.ControllerUtil;
 import ua.finalproject.model.entities.impl.Order;
+import ua.finalproject.model.entities.impl.User;
 import ua.finalproject.model.services.OrderService;
 
 import javax.servlet.http.HttpServletRequest;
@@ -23,6 +24,6 @@ public class CancelOrderCommand implements Command {
             }
             request.getSession().removeAttribute("order");
         }
-        return ControllerUtil.getUserIndexPage(request);
+        return ControllerUtil.getUserIndexPage((User.Role)request.getSession().getAttribute("role"));
     }
 }

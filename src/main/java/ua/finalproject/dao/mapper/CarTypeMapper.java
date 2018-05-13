@@ -5,7 +5,6 @@ import ua.finalproject.model.entities.impl.CarType;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.Map;
 
 public class CarTypeMapper implements ObjectMapper<CarType> {
     @Override
@@ -26,12 +25,10 @@ public class CarTypeMapper implements ObjectMapper<CarType> {
     }
 
     @Override
-    public void setValuesForQuery(CarType entity, PreparedStatement preparedStatement) {
-
-    }
-
-    @Override
-    public CarType makeUnique(Map<Integer, CarType> cache, CarType entity) {
-        return null;
+    public void setValuesForQuery(CarType carType, PreparedStatement preparedStatement) throws SQLException {
+        preparedStatement.setString(1, carType.getType());
+        preparedStatement.setInt(2, carType.getStartingPrice());
+        preparedStatement.setInt(3, carType.getPricePerKilometer());
+        preparedStatement.setInt(4, carType.getDiscount());
     }
 }

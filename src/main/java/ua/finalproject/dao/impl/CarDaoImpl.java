@@ -4,10 +4,7 @@ import ua.finalproject.dao.CarDao;
 import ua.finalproject.dao.mapper.CarMapper;
 import ua.finalproject.model.entities.impl.Car;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -21,12 +18,33 @@ public class CarDaoImpl implements CarDao {
     }
 
     @Override
-    public void create(Car car) {
-
+    public void create(Car car) throws SQLIntegrityConstraintViolationException {
+        CarMapper carMapper = new CarMapper();
+        try (PreparedStatement preparedStatement = connection
+                .prepareStatement("INSERT INTO CARS(model, number, driver, car_type_id) " +
+                        "VALUES (?,?,?,?) ")) {
+            carMapper.setValuesForQuery(car, preparedStatement);
+            preparedStatement.executeUpdate();
+        } catch (SQLIntegrityConstraintViolationException e) {
+            e.printStackTrace();
+            throw new SQLIntegrityConstraintViolationException(e);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
-    public Optional<Car> findById(Integer integer) {
+    public Optional<Car> findById(Integer id) {
+        CarMapper carMapper = new CarMapper();
+        try (PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM CARS WHERE id_car = ?")) {
+            preparedStatement.setInt(1, id);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            if (resultSet.next()) {
+                return Optional.of(carMapper.extractFromResultSet(resultSet));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
         return Optional.empty();
     }
 
@@ -34,37 +52,28 @@ public class CarDaoImpl implements CarDao {
     public Optional<List<Car>> findAll() {
         List<Car> allCars = new ArrayList<>();
         CarMapper carMapper = new CarMapper();
-        try (PreparedStatement ps = connection.prepareStatement("SELECT *" +
+        try (PreparedStatement preparedStatement = connection.prepareStatement("SELECT *" +
                 "  FROM CARS LEFT JOIN car_type on car_type_id = id_car_type");
-             ResultSet resultSet = ps.executeQuery()) {
+             ResultSet resultSet = preparedStatement.executeQuery()) {
             while (resultSet.next()) {
                 allCars.add(carMapper.extractFromResultSet(resultSet));
             }
             return Optional.of(allCars);
         } catch (SQLException e) {
             e.printStackTrace();
-            return Optional.empty();
         }
+        return Optional.empty();
     }
 
     @Override
-    public void update(Car car) {
-
-    }
-
-    @Override
-    public void delete(Integer integer) {
-
-    }
-
-    @Override
-    public void deleteByParameter(String parameterName, String parameterValue) {
-
-    }
-
-    @Override
-    public void close() throws Exception {
-        connection.close();
+    public void delete(Integer id) {
+        try (PreparedStatement preparedStatement = connection
+                .prepareStatement("DELETE FROM CARS WHERE id_car = ?")) {
+            preparedStatement.setInt(1, id);
+            preparedStatement.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
@@ -92,5 +101,10 @@ public class CarDaoImpl implements CarDao {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+    }
+
+    @Override
+    public void close() throws Exception {
+        connection.close();
     }
 }

@@ -16,6 +16,7 @@ import ua.finalproject.model.util.OrderPriceGenerator;
 
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.util.List;
 import java.util.Optional;
 
 public class OrderService {
@@ -33,8 +34,6 @@ public class OrderService {
                 Long moneySpent = user.getMoneySpent();
                 CarType carType = carTypeDao.findById(typeId).get();
                 Long orderPrice = OrderPriceGenerator.getOrderPrice(moneySpent, departureStreet, destinationStreet, carType);
-                moneySpent = moneySpent + orderPrice;
-                userDao.updateMoneySpent(user.getId(), moneySpent);
                 Order order = new Order.OrderBuilder()
                         .setDepartureStreet(departureStreet)
                         .setDestinationStreet(destinationStreet)
@@ -53,12 +52,21 @@ public class OrderService {
             return null;
         }
     }
+
     public void confirmOrder(Order order) throws Exception {
         Connection connection = ConnectionPoolHolder.getConnection();
         try (CarDao carDao = DaoFactory.getInstance().createCarDao(connection);
-             OrderDao orderDao = DaoFactory.getInstance().createOrderDao(connection)) {
+             OrderDao orderDao = DaoFactory.getInstance().createOrderDao(connection);
+             UserDao userDao = DaoFactory.getInstance().createUserDao(connection)) {
+            connection.setAutoCommit(false);
             orderDao.create(order);
+            Long moneySpent = order.getUser().getMoneySpent();
+            moneySpent = moneySpent + order.getPrice();
+            userDao.updateMoneySpent(order.getUser().getId(), moneySpent);
             carDao.updateCarState(order.getCar().getId(), Car.State.FREE.toString().toLowerCase());
+            connection.commit();
+        } catch (SQLException e) {
+            connection.rollback();
         }
     }
 
@@ -69,5 +77,13 @@ public class OrderService {
         }
     }
 
-
+    public Optional<List<Order>> getAllUserOrders(String login) {
+        Connection connection = ConnectionPoolHolder.getConnection();
+        try (OrderDao orderDao = DaoFactory.getInstance().createOrderDao(connection)) {
+            return orderDao.findOrdersByUserLogin(login);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return Optional.empty();
+    }
 }

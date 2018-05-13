@@ -1,5 +1,6 @@
 package ua.finalproject.controller.util;
 
+import ua.finalproject.model.entities.impl.Car;
 import ua.finalproject.model.entities.impl.User;
 
 import javax.servlet.http.HttpServletRequest;

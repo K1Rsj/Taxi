@@ -1,12 +1,9 @@
 package ua.finalproject.controller.util;
 
-import ua.finalproject.model.entities.impl.User;
-
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.util.HashSet;
 
-public class ContexUtil {
+public class ContextUtil {
     public static boolean checkUserAlreadyIsLogged(HttpSession session, String userLogin) {
         HashSet<String> loggedUsers = getLoggedUsersFromContext(session);
         if (loggedUsers.stream().anyMatch(userLogin::equals)) {
@@ -28,11 +25,6 @@ public class ContexUtil {
 
     private static void updateLoggedUsersInContext(HttpSession session, HashSet<String> loggedUsers) {
         session.getServletContext().setAttribute("loggedUsers", loggedUsers);
-    }
-
-    public static void setUserRole(HttpServletRequest request, User.Role role, String login) {
-        request.getSession().setAttribute("userLogin", login);
-        request.getSession().setAttribute("role", role);
     }
 
     public static void deleteLoggedUserFromContext(HttpSession session) {

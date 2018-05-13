@@ -9,8 +9,7 @@ import javax.servlet.http.HttpSession;
 import java.util.Optional;
 
 public class ControllerUtil {
-    public static String getUserIndexPage(HttpServletRequest request) {
-        User.Role role = (User.Role) request.getSession().getAttribute("role");
+    public static String getUserIndexPage(User.Role role) {
         if (role == User.Role.ADMIN) {
             return "/WEB-INF/admin/admin_foundation.jsp";
         }

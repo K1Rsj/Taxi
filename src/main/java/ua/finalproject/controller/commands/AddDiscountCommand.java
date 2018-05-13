@@ -13,10 +13,10 @@ public class AddDiscountCommand implements Command {
         if (DataValidation.checkDiscountAmount(discount)) {
             CarTypeService carTypeService = new CarTypeService();
             carTypeService.updateDiscount(type, discount);
-            request.setAttribute("discountInformation", "Discount added successfully");
+            request.setAttribute("informationMessage", "Discount added successfully");
             return "/WEB-INF/admin/admin_foundation.jsp";
         } else {
-            request.setAttribute("discountInformation", "Wrong amount of discount");
+            request.setAttribute("informationMessage", "Wrong amount of discount");
             return "/WEB-INF/admin/add_discount_page.jsp";
         }
     }

@@ -1,17 +1,37 @@
 package ua.finalproject.dao.mapper;
 
-import ua.finalproject.dao.util.UtilDao;
+import ua.finalproject.model.entities.impl.Car;
+import ua.finalproject.model.entities.impl.CarType;
 import ua.finalproject.model.entities.impl.Order;
+import ua.finalproject.model.entities.impl.User;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.Map;
 
 public class OrderMapper implements ObjectMapper<Order> {
     @Override
-    public Order extractFromResultSet(ResultSet resultSet) {
-        return null;
+    public Order extractFromResultSet(ResultSet resultSet) throws SQLException {
+        CarMapper carMapper = new CarMapper();
+        UserMapper userMapper = new UserMapper();
+        CarTypeMapper carTypeMapper = new CarTypeMapper();
+        Integer id = resultSet.getInt("id_order");
+        String departureStreet = resultSet.getString("departure_street");
+        String destinationStreet = resultSet.getString("destination_street");
+        Car car = carMapper.extractFromResultSet(resultSet);
+        User user = userMapper.extractFromResultSet(resultSet);
+        CarType carType = carTypeMapper.extractFromResultSet(resultSet);
+        Long price = resultSet.getLong("price");
+
+        return new Order.OrderBuilder()
+                .setId(id)
+                .setDepartureStreet(departureStreet)
+                .setDestinationStreet(destinationStreet)
+                .setCar(car)
+                .setUser(user)
+                .setCarType(carType)
+                .setPrice(price)
+                .build();
     }
 
     @Override
@@ -22,10 +42,5 @@ public class OrderMapper implements ObjectMapper<Order> {
         preparedStatement.setInt(4, order.getUser().getId());
         preparedStatement.setInt(5, order.getCarType().getId());
         preparedStatement.setLong(6, order.getPrice());
-    }
-
-    @Override
-    public Order makeUnique(Map<Integer, Order> cache, Order order) {
-        return null;
     }
 }

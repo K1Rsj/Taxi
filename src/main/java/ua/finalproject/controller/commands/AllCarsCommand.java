@@ -16,7 +16,7 @@ public class AllCarsCommand implements Command {
             request.setAttribute("cars", allCars.get());
             return "/WEB-INF/admin/all_cars.jsp";
         }
-        request.setAttribute("message", "There are no cars");
+        request.setAttribute("message", "There are no orders");
         return "/WEB-INF/admin/all_cars.jsp";
     }
 }

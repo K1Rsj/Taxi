@@ -29,6 +29,45 @@
         </listener-class>
     </listener>
 
+    <filter-mapping>
+        <filter-name>EncodingFilter</filter-name>
+            <url-pattern>/*</url-pattern>
+    </filter-mapping>
+
+    <filter-mapping>
+        <filter-name>PublicPagesFilter</filter-name>
+        <url-pattern>/taxi/index</url-pattern>
+        <url-pattern>/taxi/login</url-pattern>
+        <url-pattern>/</url-pattern>
+        <url-pattern>/taxi</url-pattern>
+        <url-pattern>/taxi/user_registration</url-pattern>
+        <url-pattern>/taxi/user_registration_page</url-pattern>
+    </filter-mapping>
+
+    <filter-mapping>
+        <filter-name>AdminPagesFilter</filter-name>
+        <url-pattern>/taxi/all_cars</url-pattern>
+        <url-pattern>/taxi/admin_foundation</url-pattern>
+        <url-pattern>/taxi/add_discount_page</url-pattern>
+        <url-pattern>/taxi/add_discount</url-pattern>
+        <url-pattern>/taxi/add_car_page</url-pattern>
+        <url-pattern>/taxi/add_car</url-pattern>
+        <url-pattern>/taxi/all_users</url-pattern>
+        <url-pattern>/taxi/delete_user</url-pattern>
+    </filter-mapping>
+
+    <filter-mapping>
+        <filter-name>UserPagesFilter</filter-name>
+        <url-pattern>/taxi/make_order_page</url-pattern>
+        <url-pattern>/taxi/make_order</url-pattern>
+        <url-pattern>/taxi/user_foundation</url-pattern>
+        <url-pattern>/taxi/cancel_order</url-pattern>
+        <url-pattern>/taxi/confirm_order</url-pattern>
+        <url-pattern>/taxi/my_orders</url-pattern>
+        <url-pattern>/taxi/my_discount</url-pattern>
+        <url-pattern>/taxi/all_car_types</url-pattern>
+    </filter-mapping>
+
     <!--<error-page>-->
         <!--<exception-type>java.lang.Exception</exception-type>-->
         <!--<location>/WEB-INF/error.jsp</location>-->

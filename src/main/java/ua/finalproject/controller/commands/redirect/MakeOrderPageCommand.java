@@ -1,4 +1,4 @@
-package ua.finalproject.controller.commands.order;
+package ua.finalproject.controller.commands.redirect;
 
 import ua.finalproject.controller.commands.Command;
 

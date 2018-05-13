@@ -11,9 +11,6 @@ public interface Dao<T, ID> extends AutoCloseable {
 
     Optional<List<T>> findAll();
 
-    void update(T entity);
-
     void delete(ID id);
 
-    void deleteByParameter(String parameterName, String parameterValue);
 }

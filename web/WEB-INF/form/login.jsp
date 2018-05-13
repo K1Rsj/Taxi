@@ -7,8 +7,8 @@
     <title>Login Page</title>
 </head>
 <body>
-<c:if test="${sessionScope.informationMessage != null}">
-    <p>${sessionScope.informationMessage}</p>
+<c:if test="${requestScope.informationMessage != null}">
+    <p>${requestScope.informationMessage}</p>
 </c:if>
 <br>
         <h1>Login form</h1><br/>

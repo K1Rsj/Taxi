@@ -18,7 +18,7 @@ public class OrderPriceGenerator {
         return departureStreet.length() + destinationStreet.length();
     }
 
-    private static Integer getDiscountBasedOnMoneySpent(Long moneySpent) {
+    public static Integer getDiscountBasedOnMoneySpent(Long moneySpent) {
         Integer discountRate;
         if (moneySpent <= 100000) {
             discountRate = 0;

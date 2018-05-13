@@ -11,6 +11,4 @@ public interface ObjectMapper<T> {
 
     void setValuesForQuery(T entity, PreparedStatement preparedStatement) throws SQLException;
 
-    T makeUnique(Map<Integer, T> cache,
-                 T entity);
 }

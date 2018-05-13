@@ -8,6 +8,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -21,8 +22,16 @@ public class CarTypeDaoImpl implements CarTypeDao {
     }
 
     @Override
-    public void create(CarType entity) {
-
+    public void create(CarType carType) {
+        CarTypeMapper carTypeMapper = new CarTypeMapper();
+        try (PreparedStatement preparedStatement = connection
+                .prepareStatement("INSERT INTO car_type(type, starting_price, price_per_km, discount) " +
+                        "VALUES (?,?,?,?) ")) {
+            carTypeMapper.setValuesForQuery(carType, preparedStatement);
+            preparedStatement.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
@@ -42,27 +51,36 @@ public class CarTypeDaoImpl implements CarTypeDao {
 
     @Override
     public Optional<List<CarType>> findAll() {
+        List<CarType> allCarTypes = new ArrayList<>();
+        CarTypeMapper carTypeMapper = new CarTypeMapper();
+        try (PreparedStatement preparedStatement = connection.prepareStatement("SELECT *" +
+                "  FROM car_type");
+             ResultSet resultSet = preparedStatement.executeQuery()) {
+            while (resultSet.next()) {
+                allCarTypes.add(carTypeMapper.extractFromResultSet(resultSet));
+            }
+            return Optional.of(allCarTypes);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
         return Optional.empty();
     }
 
     @Override
-    public void update(CarType carType) {
-
-    }
-
-    @Override
-    public void delete(Integer integer) {
-
-    }
-
-    @Override
-    public void deleteByParameter(String parameterName, String parameterValue) {
-
+    public void delete(Integer id) {
+        try (PreparedStatement preparedStatement = connection
+                .prepareStatement("DELETE FROM car_type WHERE id_car_type = ?")) {
+            preparedStatement.setInt(1, id);
+            preparedStatement.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
     public void updateDiscount(Integer id, Integer discount) {
-        try (PreparedStatement preparedStatement = connection.prepareStatement("UPDATE car_type SET discount = ? WHERE id_car_type = ?")) {
+        try (PreparedStatement preparedStatement = connection.prepareStatement("UPDATE car_type" +
+                " SET discount = ? WHERE id_car_type = ?")) {
             preparedStatement.setInt(1, discount);
             preparedStatement.setInt(2, id);
             preparedStatement.executeUpdate();

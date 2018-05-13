@@ -14,13 +14,17 @@
 <body>
     <p>Hello admin</p>
     <br>
-    <c:if test="${requestScope.discountInformation != null}">
-        <p>${requestScope.discountInformation}</p>
+    <c:if test="${requestScope.informationMessage != null}">
+        <p>${requestScope.informationMessage}</p>
     </c:if>
     <br>
     <a href="${pageContext.request.contextPath}/taxi/add_discount_page">Add discount</a>
     <br>
     <a href="${pageContext.request.contextPath}/taxi/all_cars">Show all cars</a>
+    <br>
+    <a href="${pageContext.request.contextPath}/taxi/add_car_page">Add new car</a>
+    <br>
+    <a href="${pageContext.request.contextPath}/taxi/all_users">Show all users</a>
     <br>
     <a href="${pageContext.request.contextPath}/taxi/logout">Log Out</a>
 </body>
