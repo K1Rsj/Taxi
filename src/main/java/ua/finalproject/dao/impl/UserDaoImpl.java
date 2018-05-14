@@ -3,6 +3,7 @@ package ua.finalproject.dao.impl;
 import ua.finalproject.dao.UserDao;
 import ua.finalproject.dao.mapper.UserMapper;
 import ua.finalproject.model.entities.impl.User;
+import ua.finalproject.util.LogMessageBuilder;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -26,10 +27,9 @@ public class UserDaoImpl implements UserDao {
             userMapper.setValuesForQuery(user, preparedStatement);
             preparedStatement.executeUpdate();
         } catch (SQLIntegrityConstraintViolationException e) {
-            e.printStackTrace();
             throw new SQLIntegrityConstraintViolationException(e);
         } catch (SQLException e) {
-            e.printStackTrace();
+            logger.error(LogMessageBuilder.INSTANCE.createEntryError("users"), e.getMessage());
         }
     }
 
@@ -43,7 +43,7 @@ public class UserDaoImpl implements UserDao {
                 return Optional.of(userMapper.extractFromResultSet(resultSet));
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            logger.error(LogMessageBuilder.INSTANCE.findByIdError("users"), e.getMessage());
         }
         return Optional.empty();
     }
@@ -60,7 +60,7 @@ public class UserDaoImpl implements UserDao {
             }
             return Optional.of(allUsers);
         } catch (SQLException e) {
-            e.printStackTrace();
+            logger.error(LogMessageBuilder.INSTANCE.findAllError("users"), e.getMessage());
         }
         return Optional.empty();
     }
@@ -72,7 +72,7 @@ public class UserDaoImpl implements UserDao {
             preparedStatement.setInt(1, id);
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
-            e.printStackTrace();
+            logger.error(LogMessageBuilder.INSTANCE.deleteEntryError("users", id), e.getMessage());
         }
     }
 
@@ -86,7 +86,7 @@ public class UserDaoImpl implements UserDao {
                 return Optional.of(userMapper.extractFromResultSet(resultSet));
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            logger.error("Find by login error", e.getMessage());
         }
         return Optional.empty();
     }
@@ -99,12 +99,16 @@ public class UserDaoImpl implements UserDao {
             preparedStatement.setInt(2, userId);
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
-            e.printStackTrace();
+            logger.error("Update money spent error", e.getMessage());
         }
     }
 
     @Override
-    public void close() throws Exception {
-        connection.close();
+    public void close() {
+        try {
+            connection.close();
+        } catch (SQLException e) {
+            logger.error("Connection close error", e.getMessage());
+        }
     }
 }

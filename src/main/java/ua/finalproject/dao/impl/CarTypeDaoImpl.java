@@ -3,6 +3,7 @@ package ua.finalproject.dao.impl;
 import ua.finalproject.dao.CarTypeDao;
 import ua.finalproject.dao.mapper.CarTypeMapper;
 import ua.finalproject.model.entities.impl.CarType;
+import ua.finalproject.util.LogMessageBuilder;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -30,7 +31,7 @@ public class CarTypeDaoImpl implements CarTypeDao {
             carTypeMapper.setValuesForQuery(carType, preparedStatement);
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
-            e.printStackTrace();
+            logger.error(LogMessageBuilder.INSTANCE.createEntryError("car_type"), e.getMessage());
         }
     }
 
@@ -44,7 +45,7 @@ public class CarTypeDaoImpl implements CarTypeDao {
                 return Optional.of(carTypeMapper.extractFromResultSet(resultSet));
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            logger.error(LogMessageBuilder.INSTANCE.findByIdError("car_type"), e.getMessage());
         }
         return Optional.empty();
     }
@@ -61,7 +62,7 @@ public class CarTypeDaoImpl implements CarTypeDao {
             }
             return Optional.of(allCarTypes);
         } catch (SQLException e) {
-            e.printStackTrace();
+            logger.error(LogMessageBuilder.INSTANCE.findAllError("car_type"), e.getMessage());
         }
         return Optional.empty();
     }
@@ -73,7 +74,7 @@ public class CarTypeDaoImpl implements CarTypeDao {
             preparedStatement.setInt(1, id);
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
-            e.printStackTrace();
+            logger.error(LogMessageBuilder.INSTANCE.deleteEntryError("car_type", id), e.getMessage());
         }
     }
 
@@ -85,12 +86,16 @@ public class CarTypeDaoImpl implements CarTypeDao {
             preparedStatement.setInt(2, id);
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
-            e.printStackTrace();
+            logger.error("Update discount error", e.getMessage());
         }
     }
 
     @Override
-    public void close() throws Exception {
-        connection.close();
+    public void close() {
+        try {
+            connection.close();
+        } catch (SQLException e) {
+            logger.error("Connection close error", e.getMessage());
+        }
     }
 }

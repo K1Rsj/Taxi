@@ -1,5 +1,6 @@
-package ua.finalproject.controller.commands;
+package ua.finalproject.controller.commands.discount;
 
+import ua.finalproject.controller.commands.Command;
 import ua.finalproject.model.services.UserService;
 
 import javax.servlet.http.HttpServletRequest;

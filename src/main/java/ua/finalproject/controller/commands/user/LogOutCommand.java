@@ -1,6 +1,7 @@
-package ua.finalproject.controller.commands;
+package ua.finalproject.controller.commands.user;
 
 import com.google.common.base.Strings;
+import ua.finalproject.controller.commands.Command;
 import ua.finalproject.controller.util.ContextUtil;
 import ua.finalproject.controller.util.ControllerUtil;
 import ua.finalproject.model.services.CarService;

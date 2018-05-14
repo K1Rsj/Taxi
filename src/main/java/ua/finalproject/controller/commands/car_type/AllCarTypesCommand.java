@@ -1,5 +1,6 @@
-package ua.finalproject.controller.commands;
+package ua.finalproject.controller.commands.car_type;
 
+import ua.finalproject.controller.commands.Command;
 import ua.finalproject.model.entities.impl.CarType;
 import ua.finalproject.model.services.CarTypeService;
 

@@ -1,5 +1,6 @@
-package ua.finalproject.controller.commands;
+package ua.finalproject.controller.commands.user;
 
+import ua.finalproject.controller.commands.Command;
 import ua.finalproject.model.entities.impl.User;
 import ua.finalproject.model.services.UserService;
 
@@ -16,7 +17,7 @@ public class AllUsersCommand implements Command {
             request.setAttribute("users", allUsers.get());
             return "/WEB-INF/admin/all_users.jsp";
         }
-        request.setAttribute("message", "There are no car types");
+        request.setAttribute("message", "There are no users");
         return "/WEB-INF/admin/all_users.jsp";
     }
 }

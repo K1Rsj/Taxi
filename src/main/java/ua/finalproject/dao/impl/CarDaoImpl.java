@@ -3,6 +3,7 @@ package ua.finalproject.dao.impl;
 import ua.finalproject.dao.CarDao;
 import ua.finalproject.dao.mapper.CarMapper;
 import ua.finalproject.model.entities.impl.Car;
+import ua.finalproject.util.LogMessageBuilder;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -26,10 +27,9 @@ public class CarDaoImpl implements CarDao {
             carMapper.setValuesForQuery(car, preparedStatement);
             preparedStatement.executeUpdate();
         } catch (SQLIntegrityConstraintViolationException e) {
-            e.printStackTrace();
             throw new SQLIntegrityConstraintViolationException(e);
         } catch (SQLException e) {
-            e.printStackTrace();
+            logger.error(LogMessageBuilder.INSTANCE.createEntryError("cars"), e.getMessage());
         }
     }
 
@@ -43,7 +43,7 @@ public class CarDaoImpl implements CarDao {
                 return Optional.of(carMapper.extractFromResultSet(resultSet));
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            logger.error(LogMessageBuilder.INSTANCE.findByIdError("cars"), e.getMessage());
         }
         return Optional.empty();
     }
@@ -60,7 +60,7 @@ public class CarDaoImpl implements CarDao {
             }
             return Optional.of(allCars);
         } catch (SQLException e) {
-            e.printStackTrace();
+            logger.error(LogMessageBuilder.INSTANCE.findAllError("cars"), e.getMessage());
         }
         return Optional.empty();
     }
@@ -72,7 +72,7 @@ public class CarDaoImpl implements CarDao {
             preparedStatement.setInt(1, id);
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
-            e.printStackTrace();
+            logger.error(LogMessageBuilder.INSTANCE.deleteEntryError("cars", id), e.getMessage());
         }
     }
 
@@ -87,7 +87,7 @@ public class CarDaoImpl implements CarDao {
                 return Optional.of(carMapper.extractFromResultSet(resultSet));
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            logger.error("Get free car by type error", e.getMessage());
         }
         return Optional.empty();
     }
@@ -99,12 +99,16 @@ public class CarDaoImpl implements CarDao {
             preparedStatement.setInt(2, carId);
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
-            e.printStackTrace();
+            logger.error("Update car state error", e.getMessage());
         }
     }
 
     @Override
-    public void close() throws Exception {
-        connection.close();
+    public void close(){
+        try {
+            connection.close();
+        } catch (SQLException e) {
+            logger.error("Connection close error", e.getMessage());
+        }
     }
 }

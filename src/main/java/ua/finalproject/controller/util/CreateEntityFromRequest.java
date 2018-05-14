@@ -23,4 +23,15 @@ public class CreateEntityFromRequest {
                 .phoneNumber(phoneNumber)
                 .build();
     }
+
+    public static Car getCarFromRequest(HttpServletRequest request) {
+        String model = request.getParameter("model");
+        String number = request.getParameter("number");
+        String driver = request.getParameter("driver");
+        return new Car.CarBuilder()
+                .setModel(model)
+                .setNumber(number)
+                .setDriver(driver)
+                .build();
+    }
 }

@@ -1,5 +1,6 @@
-package ua.finalproject.controller.commands;
+package ua.finalproject.controller.commands.car;
 
+import ua.finalproject.controller.commands.Command;
 import ua.finalproject.controller.util.ControllerUtil;
 import ua.finalproject.model.entities.impl.Car;
 import ua.finalproject.model.services.CarService;
@@ -17,7 +18,7 @@ public class AllCarsCommand implements Command {
             request.setAttribute("cars", ControllerUtil.getSubListForPagination(request, allCars.get()));
             return "/WEB-INF/admin/all_cars.jsp";
         }
-        request.setAttribute("message", "There are no orders");
+        request.setAttribute("message", "There are no cars");
         return "/WEB-INF/admin/all_cars.jsp";
     }
 }

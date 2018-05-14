@@ -16,7 +16,5 @@
 <p>${requestScope.message}</p>
 </c:if>
 <jsp:include page="all_cars_table.jsp"/>
-<br>
-<a href="${pageContext.request.contextPath}/taxi/admin_foundation">Homepage</a>
 </body>
 </html>

@@ -1,12 +1,20 @@
 package ua.finalproject.controller;
 
-import ua.finalproject.controller.commands.*;
-
+import ua.finalproject.controller.commands.Command;
+import ua.finalproject.controller.commands.ExceptionCommand;
+import ua.finalproject.controller.commands.car.AddCarCommand;
+import ua.finalproject.controller.commands.car.AllCarsCommand;
+import ua.finalproject.controller.commands.car_type.AllCarTypesCommand;
+import ua.finalproject.controller.commands.discount.AddDiscountCommand;
+import ua.finalproject.controller.commands.discount.MyDiscountCommand;
 import ua.finalproject.controller.commands.order.CancelOrderCommand;
 import ua.finalproject.controller.commands.order.ConfirmOrderCommand;
 import ua.finalproject.controller.commands.order.MakeOrderCommand;
 import ua.finalproject.controller.commands.order.MyOrdersCommand;
 import ua.finalproject.controller.commands.redirect.*;
+import ua.finalproject.controller.commands.user.*;
+import ua.finalproject.controller.util.ControllerUtil;
+import ua.finalproject.model.entities.impl.User;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -28,8 +36,6 @@ public class Servlet extends HttpServlet {
         commands.put("exception" , new ExceptionCommand());
         commands.put("index", new IndexPageCommand());
         commands.put("all_cars", new AllCarsCommand());
-        commands.put("admin_foundation", new AdminFoundationPageCommand());
-        commands.put("user_foundation", new UserFoundationPageCommand());
         commands.put("make_order_page", new MakeOrderPageCommand());
         commands.put("make_order", new MakeOrderCommand());
         commands.put("cancel_order", new CancelOrderCommand());
@@ -61,7 +67,7 @@ public class Servlet extends HttpServlet {
         path = path.replaceAll(".*/taxi/" , "");
         System.out.println(path);
         Command command = commands.getOrDefault(path ,
-                (HttpServletRequest r) ->"/WEB-INF/index.jsp");
+                (HttpServletRequest r) -> ControllerUtil.getUserIndexPage((User.Role)request.getSession().getAttribute("role")));
         String page = command.execute(request);
         System.out.println(page);
 

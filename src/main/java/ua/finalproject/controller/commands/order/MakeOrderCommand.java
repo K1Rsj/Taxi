@@ -5,6 +5,7 @@ import ua.finalproject.controller.util.DataValidation;
 import ua.finalproject.model.entities.impl.Order;
 import ua.finalproject.model.exceptions.NoFreeCarWithSuchTypeException;
 import ua.finalproject.model.services.OrderService;
+import ua.finalproject.util.LogMessageBuilder;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.Optional;
@@ -26,11 +27,14 @@ public class MakeOrderCommand implements Command {
             try {
                 Order order = orderService.makeOrder(login, departureStreet, destinationStreet, type);
                 request.getSession().setAttribute("order", order);
+                logger.info(LogMessageBuilder.INSTANCE.makeOrderInfo(order.getUser().getFirstName(),
+                        order.getUser().getSecondName(), order.getCar().getNumber()));
             } catch (NoFreeCarWithSuchTypeException e) {
                 request.setAttribute("orderInformationMessage", e.getMessage());
-            } catch (Exception e2) {
+                logger.info(e.getMessage());
+            } catch (Exception e) {
                 request.setAttribute("orderInformationMessage", "Order error");
-                e2.printStackTrace();
+                logger.error("Make order error", e.getMessage());
             }
         }
         else {

@@ -3,6 +3,7 @@ package ua.finalproject.dao.impl;
 import ua.finalproject.dao.OrderDao;
 import ua.finalproject.dao.mapper.OrderMapper;
 import ua.finalproject.model.entities.impl.Order;
+import ua.finalproject.util.LogMessageBuilder;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -29,7 +30,7 @@ public class OrderDaoImpl implements OrderDao {
             orderMapper.setValuesForQuery(order, preparedStatement);
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
-            e.printStackTrace();
+            logger.error(LogMessageBuilder.INSTANCE.createEntryError("orders"), e.getMessage());
         }
     }
 
@@ -43,7 +44,7 @@ public class OrderDaoImpl implements OrderDao {
                 return Optional.of(orderMapper.extractFromResultSet(resultSet));
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            logger.error(LogMessageBuilder.INSTANCE.findByIdError("orders"), e.getMessage());
         }
         return Optional.empty();
     }
@@ -61,7 +62,7 @@ public class OrderDaoImpl implements OrderDao {
             }
             return Optional.of(orders);
         } catch (SQLException e) {
-            e.printStackTrace();
+            logger.error(LogMessageBuilder.INSTANCE.findAllError("orders"), e.getMessage());
         }
         return Optional.empty();
     }
@@ -69,11 +70,11 @@ public class OrderDaoImpl implements OrderDao {
     @Override
     public void delete(Integer id) {
         try (PreparedStatement preparedStatement = connection
-                .prepareStatement("DELETE FROM ORDERS WHERE users_id = ?")){
+                .prepareStatement("DELETE FROM ORDERS WHERE users_id = ?")) {
             preparedStatement.setInt(1, id);
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
-            e.printStackTrace();
+            logger.error(LogMessageBuilder.INSTANCE.deleteEntryError("orders", id), e.getMessage());
         }
     }
 
@@ -91,13 +92,17 @@ public class OrderDaoImpl implements OrderDao {
             }
             return Optional.of(userOrders);
         } catch (SQLException e) {
-            e.printStackTrace();
+            logger.error("Find orders by user login error", e.getMessage());
         }
         return Optional.empty();
     }
 
     @Override
-    public void close() throws Exception {
-        connection.close();
+    public void close() {
+        try {
+            connection.close();
+        } catch (SQLException e) {
+            logger.error("Connection close error", e.getMessage());
+        }
     }
 }

@@ -36,16 +36,16 @@ public class CarService {
         }
     }
 
-    public void addCar(String model, String number, String driver, String type) throws SQLException {
+    public void addCar(Car carFromRequest, String type) throws SQLException {
         Connection connection = ConnectionPoolHolder.getConnection();
         try (CarDao carDao = DaoFactory.getInstance().createCarDao(connection);
              CarTypeDao carTypeDao = DaoFactory.getInstance().createCarTypeDao(connection)) {
             connection.setAutoCommit(false);
             Optional<CarType> carType = carTypeDao.findById(UtilDao.parseTypeString(type));
             Car car = new Car.CarBuilder()
-                    .setModel(model)
-                    .setNumber(number)
-                    .setDriver(driver)
+                    .setModel(carFromRequest.getModel())
+                    .setNumber(carFromRequest.getNumber())
+                    .setDriver(carFromRequest.getDriver())
                     .setCarType(carType.get())
                     .build();
             carDao.create(car);
