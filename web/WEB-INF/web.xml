@@ -65,7 +65,6 @@
         <url-pattern>/taxi/confirm_order</url-pattern>
         <url-pattern>/taxi/my_orders</url-pattern>
         <url-pattern>/taxi/my_discount</url-pattern>
-        <url-pattern>/taxi/all_car_types</url-pattern>
     </filter-mapping>
 
     <!--<error-page>-->

@@ -11,13 +11,7 @@ public class DeleteUserCommand implements Command {
     public String execute(HttpServletRequest request) {
         Integer userId = Integer.parseInt(request.getParameter("id"));
         UserService userService = new UserService();
-        try {
-            userService.deleteUserById(userId);
-        } catch (SQLException e) {
-            request.setAttribute("errorMessage", "User wasn't deleted");
-            logger.error("User wasn't deleted", e.getMessage());
-            return "/WEB-INF/error.jsp";
-        }
-        return "redirect"+"all_users";
+        userService.deleteUserById(userId);
+        return "redirect" + "all_users";
     }
 }

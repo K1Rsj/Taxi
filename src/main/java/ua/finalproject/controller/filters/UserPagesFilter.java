@@ -24,7 +24,7 @@ public class UserPagesFilter implements Filter {
         if (role.isPresent() && role.equals(Optional.of(User.Role.USER))) {
             filterChain.doFilter(servletRequest, servletResponse);
         } else if (role.isPresent() && role.equals(Optional.of(User.Role.ADMIN))) {
-            filterChain.doFilter(servletRequest, servletResponse);
+            request.getRequestDispatcher("/WEB-INF/admin/admin_foundation.jsp").forward(servletRequest, servletResponse);
         } else {
             request.getRequestDispatcher("/WEB-INF/index.jsp").forward(servletRequest, servletResponse);
         }

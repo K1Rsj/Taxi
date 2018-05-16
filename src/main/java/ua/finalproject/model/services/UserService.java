@@ -1,5 +1,7 @@
 package ua.finalproject.model.services;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import ua.finalproject.dao.OrderDao;
 import ua.finalproject.dao.UserDao;
 import ua.finalproject.dao.connectionPool.ConnectionPoolHolder;
@@ -15,15 +17,16 @@ import java.util.Optional;
 
 public class UserService {
 
+    private static final Logger logger = LogManager.getLogger(UserService.class);
+
     public void registerUser(User user) throws SQLIntegrityConstraintViolationException {
         Connection connection = ConnectionPoolHolder.getConnection();
         try (UserDao userDao = DaoFactory.getInstance().createUserDao(connection)) {
             userDao.create(user);
         } catch (SQLIntegrityConstraintViolationException e) {
-            e.printStackTrace();
             throw new SQLIntegrityConstraintViolationException(e);
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.error("User registration error");
         }
     }
 
@@ -32,7 +35,7 @@ public class UserService {
         try (UserDao userDao = DaoFactory.getInstance().createUserDao(connection)) {
             return userDao.findByLogin(login);
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.error("Find user by login error", e.getMessage());
         }
         return Optional.empty();
     }
@@ -43,7 +46,7 @@ public class UserService {
         try (UserDao userDao = DaoFactory.getInstance().createUserDao(connection)) {
             discount = OrderPriceGenerator.getDiscountBasedOnMoneySpent(userDao.findByLogin(login).get().getMoneySpent());
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.error("Get user discount error", e.getMessage());
         }
         return discount;
     }
@@ -53,12 +56,12 @@ public class UserService {
         try (UserDao userDao = DaoFactory.getInstance().createUserDao(connection)) {
             return userDao.findAll();
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.error("Show all users error", e.getMessage());
         }
         return Optional.empty();
     }
 
-    public void deleteUserById(Integer id) throws SQLException {
+    public void deleteUserById(Integer id) {
         Connection connection = ConnectionPoolHolder.getConnection();
         try (UserDao userDao = DaoFactory.getInstance().createUserDao(connection);
              OrderDao orderDao = DaoFactory.getInstance().createOrderDao(connection)) {
@@ -67,8 +70,16 @@ public class UserService {
             userDao.delete(id);
             connection.commit();
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.error("Delete user by id error", e.getMessage());
+            SQLExceptionRollbackErrorHandle(connection);
+        }
+    }
+
+    private void SQLExceptionRollbackErrorHandle(Connection connection) {
+        try {
             connection.rollback();
+        } catch (SQLException e1) {
+            logger.error("Delete user by id connection rollback error", e1.getMessage());
         }
     }
 }

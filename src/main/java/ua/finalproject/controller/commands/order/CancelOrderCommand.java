@@ -16,17 +16,11 @@ public class CancelOrderCommand implements Command {
         OrderService orderService = new OrderService();
         Optional<Order> order = Optional.ofNullable((Order) request.getSession().getAttribute("order"));
         if (order.isPresent()) {
-            try {
-                orderService.cancelOrder(order.get());
-            } catch (Exception e) {
-                request.setAttribute("errorMessage", "Something wrong with cancellation of an order");
-                logger.error("Error with cancellation of an order", e.getMessage());
-                return "/WEB-INF/error.jsp";
-            }
+            orderService.cancelOrder(order.get());
             request.getSession().removeAttribute("order");
             logger.info(LogMessageBuilder.INSTANCE.cancelOrderInfo(order.get().getUser().getFirstName(),
                     order.get().getUser().getSecondName()));
         }
-        return ControllerUtil.getUserIndexPage((User.Role)request.getSession().getAttribute("role"));
+        return ControllerUtil.getUserIndexPage((User.Role) request.getSession().getAttribute("role"));
     }
 }

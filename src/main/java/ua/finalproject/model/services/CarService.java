@@ -1,5 +1,7 @@
 package ua.finalproject.model.services;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import ua.finalproject.dao.CarDao;
 import ua.finalproject.dao.CarTypeDao;
 import ua.finalproject.dao.connectionPool.ConnectionPoolHolder;
@@ -17,12 +19,15 @@ import java.util.Optional;
 
 public class CarService {
 
+    private static final Logger logger = LogManager.getLogger(CarService.class);
+
+
     public Optional<List<Car>> showAllCars() {
         Connection connection = ConnectionPoolHolder.getConnection();
         try (CarDao carDao = DaoFactory.getInstance().createCarDao(connection)) {
             return carDao.findAll();
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.error("Show all cars error", e.getMessage());
         }
         return Optional.empty();
     }
@@ -32,11 +37,11 @@ public class CarService {
         try (CarDao carDao = DaoFactory.getInstance().createCarDao(connection)) {
             carDao.updateCarState(order.getCar().getId(), Car.State.FREE.toString().toLowerCase());
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.error("Change car state from busy to free error", e.getMessage());
         }
     }
 
-    public void addCar(Car carFromRequest, String type) throws SQLException {
+    public void addCar(Car carFromRequest, String type) throws SQLIntegrityConstraintViolationException {
         Connection connection = ConnectionPoolHolder.getConnection();
         try (CarDao carDao = DaoFactory.getInstance().createCarDao(connection);
              CarTypeDao carTypeDao = DaoFactory.getInstance().createCarTypeDao(connection)) {
@@ -51,11 +56,18 @@ public class CarService {
             carDao.create(car);
             connection.commit();
         } catch (SQLIntegrityConstraintViolationException e) {
-            e.printStackTrace();
             throw new SQLIntegrityConstraintViolationException(e);
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.error("Add car error", e.getMessage());
+            SQLExceptionRollbackErrorHandle(connection);
+        }
+    }
+
+    private void SQLExceptionRollbackErrorHandle(Connection connection) {
+        try {
             connection.rollback();
+        } catch (SQLException e1) {
+            logger.error("Add car connection rollback error", e1.getMessage());
         }
     }
 }

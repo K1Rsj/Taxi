@@ -1,0 +1,165 @@
+2018-05-15 15:12:58.994 Command - Invalid attempt of login user:'dfdfj'
+2018-05-15 15:23:21.573 Command - Invalid attempt of login user:'sdhs'
+2018-05-15 17:01:18.971 Command - Invalid attempt of login user:'asg'
+2018-05-15 17:04:36.355 Command - Invalid attempt of login user:'dfh'
+2018-05-15 17:38:10.945 Command - Invalid attempt of login user:'asg'
+2018-05-15 17:40:03.644 Command - Invalid attempt of login user:'sdg'
+2018-05-15 17:44:45.657 Command - Invalid attempt of login user:'jdfjq'
+2018-05-15 17:46:03.393 Command - Invalid attempt of login user:'jdfjq'
+2018-05-15 17:46:07.017 Command - User adm logged successfully
+2018-05-15 19:25:28.270 Command - Invalid attempt of login user:'fdhsadhash'
+2018-05-15 19:27:11.402 Command - Invalid attempt of login user:'hsdhn'
+2018-05-15 19:28:59.381 Command - Invalid attempt of login user:'cvmcvq'
+2018-05-15 19:29:07.648 Command - Invalid attempt of login user:'hsdh'
+2018-05-15 19:34:13.962 Command - Invalid attempt of login user:'fgjf'
+2018-05-15 19:34:27.976 Command - User adm logged successfully
+2018-05-15 19:42:04.456 Command - Invalid attempt of login user:'jdfjd'
+2018-05-15 19:44:28.957 Command - Invalid attempt of login user:'dejd'
+2018-05-15 19:46:04.739 Command - Invalid attempt of login user:'asgas'
+2018-05-15 19:47:35.499 Command - Invalid attempt of login user:'cxn xZX'
+2018-05-15 19:52:22.587 Command - Invalid attempt of login user:'gasg'
+2018-05-15 19:52:52.106 Command - Invalid attempt of login user:'sdh'
+2018-05-15 20:53:00.974 Command - User adm logged successfully
+2018-05-15 22:08:28.744 Command - Invalid attempt of login user:'gasg'
+2018-05-16 01:48:22.728 Command - User adm logged successfully
+2018-05-16 02:04:18.893 Command - User adm logged successfully
+2018-05-16 02:11:00.902 Command - User adm logged successfully
+2018-05-16 02:12:43.525 Command - User adm logged successfully
+2018-05-16 02:15:37.252 Command - User adm logged successfully
+2018-05-16 02:16:52.598 Command - User adm logged successfully
+2018-05-16 02:18:49.579 Command - User adm logged successfully
+2018-05-16 02:19:52.435 Command - User adm logged successfully
+2018-05-16 02:25:46.798 Command - User adm logged successfully
+2018-05-16 02:27:36.741 Command - User adm logged successfully
+2018-05-16 02:30:29.066 Command - User adm logged successfully
+2018-05-16 02:33:31.655 Command - Invalid attempt of login user:'adm'
+2018-05-16 02:33:35.379 Command - User adm logged successfully
+2018-05-16 02:34:28.464 Command - User adm logged successfully
+2018-05-16 02:35:12.580 Command - User adm logged successfully
+2018-05-16 02:37:53.018 Command - User adm logged successfully
+2018-05-16 02:39:21.473 Command - User adm logged successfully
+2018-05-16 02:42:11.773 Command - User adm logged successfully
+2018-05-16 02:49:23.411 Command - User adm logged successfully
+2018-05-16 02:50:43.940 Command - User adm logged successfully
+2018-05-16 02:52:40.770 Command - User adm logged successfully
+2018-05-16 03:00:04.247 Command - User adm logged successfully
+2018-05-16 03:01:57.693 Command - User adm logged successfully
+2018-05-16 03:03:23.401 Command - User adm logged successfully
+2018-05-16 03:05:38.579 Command - User adm logged successfully
+2018-05-16 03:09:37.780 Command - User adm logged successfully
+2018-05-16 03:17:17.284 Command - User adm logged successfully
+2018-05-16 03:23:17.854 Command - User adm logged successfully
+2018-05-16 03:24:21.495 Command - User adm logged successfully
+2018-05-16 03:25:20.176 Command - User adm logged successfully
+2018-05-16 03:30:28.975 Command - User adm logged successfully
+2018-05-16 11:22:26.000 ConnectionPoolHolder - Connection error
+2018-05-16 11:23:11.475 Command - Invalid attempt of login user:'asgas'
+2018-05-16 11:23:30.860 Command - User adm logged successfully
+2018-05-16 11:26:38.150 Command - User adm logged successfully
+2018-05-16 11:28:15.150 Command - User adm logged successfully
+2018-05-16 11:44:18.604 Command - Invalid attempt of login user:'gasgasga'
+2018-05-16 11:52:00.155 Command - Invalid attempt of login user:'dhs'
+2018-05-16 11:56:39.641 Command - Invalid attempt of login user:'sdgsd'
+2018-05-16 12:15:08.555 Command - Invalid attempt of login user:'ag'
+2018-05-16 12:23:13.403 Command - User adm logged successfully
+2018-05-16 12:38:12.219 Command - User misha logged successfully
+2018-05-16 12:38:42.561 Command - User:'Михаил Тестовый make order for car АА1251НМ
+2018-05-16 12:39:03.085 Command - User:'Михаил Тестовый cancelled order
+2018-05-16 12:40:54.914 Command - User misha logged successfully
+2018-05-16 12:41:53.690 Command - User misha logged successfully
+2018-05-16 12:51:56.791 Command - User adm logged successfully
+2018-05-16 13:03:18.887 Command - User misha logged successfully
+2018-05-16 13:04:40.537 Command - User misha logged successfully
+2018-05-16 13:05:29.682 Command - User misha logged successfully
+2018-05-16 13:05:55.660 Command - User:'Михаил Тестовый make order for car АА1251НМ
+2018-05-16 13:08:18.231 Command - User misha logged successfully
+2018-05-16 13:08:26.215 Command - User:'Михаил Тестовый make order for car АА1251НМ
+2018-05-16 13:09:32.297 Command - User misha logged successfully
+2018-05-16 13:09:39.139 Command - User:'Михаил Тестовый make order for car АА4444АА
+2018-05-16 13:11:14.277 Command - User misha logged successfully
+2018-05-16 13:11:23.348 Command - No free car such type yet
+2018-05-16 13:12:41.628 Command - User:'Михаил Тестовый make order for car АА5421НМ
+2018-05-16 13:15:11.588 Command - User misha logged successfully
+2018-05-16 13:15:20.001 Command - User:'Михаил Тестовый make order for car АА8712НМ
+2018-05-16 13:16:37.326 Command - User misha logged successfully
+2018-05-16 13:16:43.059 Command - User:'Михаил Тестовый make order for car АА1251НМ
+2018-05-16 13:19:25.666 Command - User misha logged successfully
+2018-05-16 13:19:33.884 Command - User:'Михаил Тестовый make order for car АА5421НМ
+2018-05-16 13:21:40.853 Command - User misha logged successfully
+2018-05-16 13:21:47.897 Command - User:'Михаил Тестовый make order for car АА8712НМ
+2018-05-16 13:27:34.723 Command - User misha logged successfully
+2018-05-16 13:27:40.611 Command - User:'Михаил Тестовый make order for car АА8712НМ
+2018-05-16 13:30:24.307 Command - User misha logged successfully
+2018-05-16 13:30:29.541 Command - User:'Михаил Тестовый make order for car АА1251НМ
+2018-05-16 13:35:17.769 Command - User misha logged successfully
+2018-05-16 13:35:23.300 Command - User:'Михаил Тестовый make order for car АА1251НМ
+2018-05-16 13:39:38.580 Command - User misha logged successfully
+2018-05-16 13:39:44.831 Command - User:'Михаил Тестовый make order for car АА1251НМ
+2018-05-16 13:41:31.892 Command - User misha logged successfully
+2018-05-16 13:41:39.627 Command - User:'Михаил Тестовый make order for car АА5421НМ
+2018-05-16 13:43:53.251 Command - User misha logged successfully
+2018-05-16 13:43:58.791 Command - User:'Михаил Тестовый make order for car АА5421НМ
+2018-05-16 13:46:51.638 Command - User misha logged successfully
+2018-05-16 13:46:57.985 Command - User:'Михаил Тестовый make order for car АА8712НМ
+2018-05-16 13:48:29.344 Command - User misha logged successfully
+2018-05-16 13:48:36.636 Command - User:'Михаил Тестовый make order for car АА1251НМ
+2018-05-16 13:55:11.684 Command - User misha logged successfully
+2018-05-16 13:55:21.793 Command - User:'Михаил Тестовый make order for car АА1251НМ
+2018-05-16 13:56:47.482 Command - User misha logged successfully
+2018-05-16 13:56:52.766 Command - User:'Михаил Тестовый make order for car АА1251НМ
+2018-05-16 13:59:59.405 Command - User misha logged successfully
+2018-05-16 14:00:05.659 Command - User:'Михаил Тестовый make order for car АА1251НМ
+2018-05-16 16:07:37.666 Command - User misha logged successfully
+2018-05-16 16:09:32.566 Command - User misha logged successfully
+2018-05-16 16:17:40.056 Command - User misha logged successfully
+2018-05-16 16:20:33.672 Command - User misha logged successfully
+2018-05-16 16:23:05.286 Command - User misha logged successfully
+2018-05-16 16:27:03.701 Command - User misha logged successfully
+2018-05-16 16:27:18.097 Command - User adm logged successfully
+2018-05-16 16:27:27.847 Command - User misha logged successfully
+2018-05-16 16:27:37.684 Command - User:'Михаил Тестовый make order for car АА1251НМ
+2018-05-16 16:27:44.329 Command - User:'Михаил Тестовый cancelled order
+2018-05-16 16:46:55.862 Command - User misha logged successfully
+2018-05-16 17:10:48.276 Command - User adm logged successfully
+2018-05-16 17:31:24.195 Command - User adm logged successfully
+2018-05-16 17:33:29.381 Command - User adm logged successfully
+2018-05-16 17:36:12.071 Command - User misha logged successfully
+2018-05-16 17:36:43.829 Command - User:'Михаил Тестовый make order for car АА1251НМ
+2018-05-16 17:37:20.055 Command - User:'Михаил Тестовый cancelled order
+2018-05-16 18:31:46.961 Command - Invalid attempt of login user:'dfhj'
+2018-05-16 18:42:29.841 Command - New user ashas is registered
+2018-05-16 19:30:55.548 Command - User adm logged successfully
+2018-05-16 19:31:52.213 Command - User misha logged successfully
+2018-05-16 19:32:09.277 Command - User:'Михаил Тестовый make order for car АА1251НМ
+2018-05-16 19:34:06.479 Command - User:'Михаил Тестовый cancelled order
+2018-05-16 19:36:32.198 Command - User:'Михаил Тестовый make order for car АА1251НМ
+2018-05-16 19:36:34.206 Command - User:'Михаил Тестовый confirmed order
+2018-05-16 19:37:12.381 Command - User adm logged successfully
+2018-05-16 20:19:18.715 Command - User misha logged successfully
+2018-05-16 21:14:02.030 Command - User misha logged successfully
+2018-05-16 21:14:18.449 Command - User:'Михаил Тестовый make order for car АА1251НМ
+2018-05-16 21:14:23.760 Command - User:'Михаил Тестовый cancelled order
+2018-05-16 21:17:33.397 Command - User adm logged successfully
+2018-05-16 21:20:17.720 Command - Invalid attempt of login user:'zxvz'
+2018-05-16 21:48:22.053 Command - User adm logged successfully
+2018-05-16 21:48:33.513 Command - User adm logged successfully
+2018-05-16 21:48:58.711 Command - Added new car:'АА1241АА'
+2018-05-16 21:49:04.546 Command - Duplicate car number:'АА1241АА'
+2018-05-16 21:56:02.447 Command - User adm logged successfully
+2018-05-16 21:57:39.840 Command - User adm logged successfully
+2018-05-16 21:57:50.972 Command - Added new discount:'15'% for car type: premium
+2018-05-16 21:59:04.093 Command - User adm logged successfully
+2018-05-16 21:59:11.490 Command - Added new discount:'10'% for car type: comfort
+2018-05-16 22:09:42.518 Command - User adm logged successfully
+2018-05-16 22:09:57.196 Command - User misha logged successfully
+2018-05-16 22:12:30.306 Command - User adm logged successfully
+2018-05-16 22:14:01.502 Command - User misha logged successfully
+2018-05-16 22:14:30.698 Command - User misha logged successfully
+2018-05-16 22:14:41.893 Command - User adm logged successfully
+2018-05-16 23:32:28.457 Command - User adm logged successfully
+2018-05-16 23:33:51.157 Command - User adm logged successfully
+2018-05-16 23:35:11.161 Command - User adm logged successfully
+2018-05-16 23:37:42.478 Command - User adm logged successfully
+2018-05-16 23:44:36.974 Command - User adm logged successfully
+2018-05-16 23:45:44.146 Command - User adm logged successfully
+2018-05-17 00:24:34.245 Command - User adm logged successfully

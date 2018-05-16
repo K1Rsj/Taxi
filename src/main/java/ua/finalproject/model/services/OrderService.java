@@ -1,5 +1,7 @@
 package ua.finalproject.model.services;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import ua.finalproject.dao.CarDao;
 import ua.finalproject.dao.CarTypeDao;
 import ua.finalproject.dao.OrderDao;
@@ -20,6 +22,10 @@ import java.util.List;
 import java.util.Optional;
 
 public class OrderService {
+
+    private static final Logger logger = LogManager.getLogger(OrderService.class);
+
+
     public Order makeOrder(String login, String departureStreet, String destinationStreet, String type) throws Exception {
         Connection connection = ConnectionPoolHolder.getConnection();
         try (CarDao carDao = DaoFactory.getInstance().createCarDao(connection);
@@ -48,12 +54,13 @@ public class OrderService {
                 throw new NoFreeCarWithSuchTypeException();
             }
         } catch (SQLException e) {
+            logger.error("Make order error", e.getMessage());
             connection.rollback();
             return null;
         }
     }
 
-    public void confirmOrder(Order order) throws Exception {
+    public void confirmOrder(Order order) {
         Connection connection = ConnectionPoolHolder.getConnection();
         try (CarDao carDao = DaoFactory.getInstance().createCarDao(connection);
              OrderDao orderDao = DaoFactory.getInstance().createOrderDao(connection);
@@ -65,15 +72,18 @@ public class OrderService {
             userDao.updateMoneySpent(order.getUser().getId(), moneySpent);
             carDao.updateCarState(order.getCar().getId(), Car.State.FREE.toString().toLowerCase());
             connection.commit();
-        } catch (SQLException e) {
-            connection.rollback();
+        } catch (Exception e) {
+            logger.error("Confirm order error", e.getMessage());
+            SQLExceptionRollbackErrorHandle(connection);
         }
     }
 
-    public void cancelOrder(Order order) throws Exception {
+    public void cancelOrder(Order order){
         Connection connection = ConnectionPoolHolder.getConnection();
         try (CarDao carDao = DaoFactory.getInstance().createCarDao(connection)) {
             carDao.updateCarState(order.getCar().getId(), Car.State.FREE.toString().toLowerCase());
+        } catch (Exception e) {
+            logger.error("Cancel order error", e.getMessage());
         }
     }
 
@@ -82,8 +92,16 @@ public class OrderService {
         try (OrderDao orderDao = DaoFactory.getInstance().createOrderDao(connection)) {
             return orderDao.findOrdersByUserLogin(login);
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.error("Get all user's orders error", e.getMessage());
         }
         return Optional.empty();
+    }
+
+    private void SQLExceptionRollbackErrorHandle(Connection connection) {
+        try {
+            connection.rollback();
+        } catch (SQLException e1) {
+            logger.error("Confirm order connection rollback error", e1.getMessage());
+        }
     }
 }

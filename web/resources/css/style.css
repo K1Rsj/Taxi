@@ -1,0 +1,65 @@
+body{
+    font-family: 'Kurale', serif;
+    background: url('../../resources/img/main.jpg') no-repeat center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+}
+
+.menu__item{
+    margin: 0 20px;
+    padding-top: 35px;
+    font-size: 22px;
+    color: white;
+}
+
+.menu__item a{
+    color: white;
+}
+
+
+form {
+    display: block;
+}
+
+
+.header a{
+    color: white;
+
+}
+
+.header li {
+    margin: 0 20px;
+    padding-top: 35px;
+    font-size: 22px;
+}
+
+.content {
+    padding-top:200px;
+    text-align: center;
+    font-size: 22px;
+    color: white;
+
+}
+
+.bg-black {
+    background-color: black !important;
+}
+
+.text-black {
+    color: black;
+}
+
+caption {
+    text-align:right;
+}
+
+.features {
+    font-size: 32px;
+}
+
+img {
+    width: 150px;
+    height: 120px;
+}

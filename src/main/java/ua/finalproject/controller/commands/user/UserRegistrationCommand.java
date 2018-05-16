@@ -21,13 +21,13 @@ public class UserRegistrationCommand implements Command {
             } catch (SQLIntegrityConstraintViolationException e) {
                 request.setAttribute("wrongInputMessage", DataValidation.loginOrEmailNotUniqueDetermination(e));
                 logger.info(LogMessageBuilder.INSTANCE.duplicateUserInfo(user.getLogin()));
-                return "/WEB-INF/form/user_registration_page.jsp";
+                return "/WEB-INF/user/user_registration_page.jsp";
             }
             request.setAttribute("informationMessage", "Registration is successful");
             logger.info(LogMessageBuilder.INSTANCE.userRegistrationInfo(user.getLogin()));
             return "/WEB-INF/index.jsp";
         } else {
-            return "/WEB-INF/form/user_registration_page.jsp";
+            return "/WEB-INF/user/user_registration_page.jsp";
         }
     }
 

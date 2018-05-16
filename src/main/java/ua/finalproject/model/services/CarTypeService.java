@@ -1,6 +1,7 @@
 package ua.finalproject.model.services;
 
-import ua.finalproject.dao.CarDao;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import ua.finalproject.dao.CarTypeDao;
 import ua.finalproject.dao.connectionPool.ConnectionPoolHolder;
 import ua.finalproject.dao.factory.DaoFactory;
@@ -12,13 +13,17 @@ import java.util.List;
 import java.util.Optional;
 
 public class CarTypeService {
+
+    private static final Logger logger = LogManager.getLogger(CarTypeService.class);
+
+
     public void updateDiscount(String type, Integer discount) {
         Connection connection = ConnectionPoolHolder.getConnection();
         try (CarTypeDao carType = DaoFactory.getInstance().createCarTypeDao(connection)) {
             Integer typeId = UtilDao.parseTypeString(type);
             carType.updateDiscount(typeId, discount);
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.error("Update discount error", e.getMessage());
         }
     }
 
@@ -27,7 +32,7 @@ public class CarTypeService {
         try (CarTypeDao carTypeDao = DaoFactory.getInstance().createCarTypeDao(connection)) {
             return carTypeDao.findAll();
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.error("Show all car types error", e.getMessage());
         }
         return Optional.empty();
     }

@@ -41,6 +41,7 @@ public class LoginCommand implements Command {
         request.getSession().setAttribute("userLogin", login);
         request.getSession().setAttribute("role", user.getRole());
         logger.info(LogMessageBuilder.INSTANCE.userLogInInfo(login));
+        request.setAttribute("informationMessage", "Hello " + user.getFirstName() + " " + user.getSecondName());
         return ControllerUtil.getUserIndexPage(user.getRole());
     }
 }

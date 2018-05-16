@@ -8,7 +8,6 @@ import ua.finalproject.model.services.CarService;
 import ua.finalproject.util.LogMessageBuilder;
 
 import javax.servlet.http.HttpServletRequest;
-import java.sql.SQLException;
 import java.sql.SQLIntegrityConstraintViolationException;
 
 public class AddCarCommand implements Command {
@@ -23,10 +22,6 @@ public class AddCarCommand implements Command {
             } catch (SQLIntegrityConstraintViolationException e) {
                 request.setAttribute("informationMessage", "Car with this number is already exist");
                 logger.info(LogMessageBuilder.INSTANCE.duplicateCarNumberInfo(car.getNumber()));
-                return "/WEB-INF/admin/add_car_page.jsp";
-            } catch (SQLException e) {
-                request.setAttribute("informationMessage","Add car error");
-                logger.error("Add car error", e.getMessage());
                 return "/WEB-INF/admin/add_car_page.jsp";
             }
             request.setAttribute("informationMessage", "Car added successfully");

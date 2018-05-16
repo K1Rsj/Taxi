@@ -1,6 +1,7 @@
 package ua.finalproject.controller.commands.order;
 
 import ua.finalproject.controller.commands.Command;
+import ua.finalproject.controller.util.ControllerUtil;
 import ua.finalproject.model.entities.impl.Order;
 import ua.finalproject.model.services.OrderService;
 
@@ -14,7 +15,7 @@ public class MyOrdersCommand implements Command {
         OrderService orderService = new OrderService();
         Optional<List<Order>> orders = orderService.getAllUserOrders((String)request.getSession().getAttribute("userLogin"));
         if (orders.isPresent()) {
-            request.setAttribute("orders", orders.get());
+            request.setAttribute("orders", ControllerUtil.getSubListForPagination(request,orders.get()));
             return "/WEB-INF/user/my_orders.jsp";
         }
         request.setAttribute("message", "There are no cars");
