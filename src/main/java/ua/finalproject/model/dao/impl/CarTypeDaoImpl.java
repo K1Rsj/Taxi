@@ -1,7 +1,7 @@
-package ua.finalproject.dao.impl;
+package ua.finalproject.model.dao.impl;
 
-import ua.finalproject.dao.CarTypeDao;
-import ua.finalproject.dao.mapper.CarTypeMapper;
+import ua.finalproject.model.dao.CarTypeDao;
+import ua.finalproject.model.dao.mapper.CarTypeMapper;
 import ua.finalproject.model.entities.impl.CarType;
 import ua.finalproject.util.LogMessageBuilder;
 

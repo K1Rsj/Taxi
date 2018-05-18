@@ -1,4 +1,4 @@
-package ua.finalproject.dao.mapper;
+package ua.finalproject.model.dao.mapper;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;

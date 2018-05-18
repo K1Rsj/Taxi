@@ -9,17 +9,17 @@
 
     <c:set var="count" value="${requestScope.firstIndex}" scope="page"/>
     <table class="table table-striped bg-white text-black">
-        <caption class="text-white">All users</caption>
+        <caption class="text-white"><fmt:message key="all.users"/></caption>
         <thead>
         <tr>
             <th scope="col">#</th>
-            <th scope="col">Login</th>
-            <th scope="col">Email</th>
-            <th scope="col">First name</th>
-            <th scope="col">Second name</th>
-            <th scope="col">Phone number</th>
-            <th scope="col">Role</th>
-            <th scope="col">Delete user</th>
+            <th scope="col"><fmt:message key="login"/></th>
+            <th scope="col"><fmt:message key="email"/></th>
+            <th scope="col"><fmt:message key="first.name"/></th>
+            <th scope="col"><fmt:message key="second.name"/></th>
+            <th scope="col"><fmt:message key="phone.number"/></th>
+            <th scope="col"><fmt:message key="role"/></th>
+            <th scope="col"><fmt:message key="delete"/></th>
         </tr>
         </thead>
         <tbody>

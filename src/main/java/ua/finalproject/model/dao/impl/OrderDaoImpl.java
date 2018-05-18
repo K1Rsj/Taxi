@@ -1,7 +1,7 @@
-package ua.finalproject.dao.impl;
+package ua.finalproject.model.dao.impl;
 
-import ua.finalproject.dao.OrderDao;
-import ua.finalproject.dao.mapper.OrderMapper;
+import ua.finalproject.model.dao.OrderDao;
+import ua.finalproject.model.dao.mapper.OrderMapper;
 import ua.finalproject.model.entities.impl.Order;
 import ua.finalproject.util.LogMessageBuilder;
 

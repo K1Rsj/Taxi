@@ -4,13 +4,13 @@
     <div class="col-md-12">
         <div class="row text-center">
             <div class="features text-white col-md-4 ml-auto">
-                <p>We offer to you very comfortable cars and experienced qualified drivers</p>
+                <fmt:message key="about.us.1"/>
             </div>
             <div class="features text-white col-md-4">
-                <p>Also very cheap prices and loyalty program for regular customers</p>
+                <fmt:message key="about.us.2"/>
             </div>
             <div class="features text-white col-md-4">
-                <p>Once you try and you will never chose other taxi service</p>
+                <fmt:message key="about.us.3"/>
             </div>
         </div>
     </div>

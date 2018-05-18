@@ -1,7 +1,8 @@
-package ua.finalproject.dao.impl;
+package ua.finalproject.model.dao.impl;
 
-import ua.finalproject.dao.CarDao;
-import ua.finalproject.dao.mapper.CarMapper;
+import ua.finalproject.constants.DbQueries;
+import ua.finalproject.model.dao.CarDao;
+import ua.finalproject.model.dao.mapper.CarMapper;
 import ua.finalproject.model.entities.impl.Car;
 import ua.finalproject.util.LogMessageBuilder;
 
@@ -22,8 +23,7 @@ public class CarDaoImpl implements CarDao {
     public void create(Car car) throws SQLIntegrityConstraintViolationException {
         CarMapper carMapper = new CarMapper();
         try (PreparedStatement preparedStatement = connection
-                .prepareStatement("INSERT INTO CARS(model, number, driver, car_type_id) " +
-                        "VALUES (?,?,?,?) ")) {
+                .prepareStatement(DbQueries.INSERT_INTO_CARS)) {
             carMapper.setValuesForQuery(car, preparedStatement);
             preparedStatement.executeUpdate();
         } catch (SQLIntegrityConstraintViolationException e) {
@@ -36,7 +36,7 @@ public class CarDaoImpl implements CarDao {
     @Override
     public Optional<Car> findById(Integer id) {
         CarMapper carMapper = new CarMapper();
-        try (PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM CARS WHERE id_car = ?")) {
+        try (PreparedStatement preparedStatement = connection.prepareStatement(DbQueries.SELECT_FROM_CARS_BY_ID)) {
             preparedStatement.setInt(1, id);
             ResultSet resultSet = preparedStatement.executeQuery();
             if (resultSet.next()) {
@@ -52,8 +52,7 @@ public class CarDaoImpl implements CarDao {
     public Optional<List<Car>> findAll() {
         List<Car> allCars = new ArrayList<>();
         CarMapper carMapper = new CarMapper();
-        try (PreparedStatement preparedStatement = connection.prepareStatement("SELECT *" +
-                "  FROM CARS LEFT JOIN car_type on car_type_id = id_car_type");
+        try (PreparedStatement preparedStatement = connection.prepareStatement(DbQueries.SELECT_FROM_CARS_LEFT_JOIN_CAR_TYPE);
              ResultSet resultSet = preparedStatement.executeQuery()) {
             while (resultSet.next()) {
                 allCars.add(carMapper.extractFromResultSet(resultSet));
@@ -68,7 +67,7 @@ public class CarDaoImpl implements CarDao {
     @Override
     public void delete(Integer id) {
         try (PreparedStatement preparedStatement = connection
-                .prepareStatement("DELETE FROM CARS WHERE id_car = ?")) {
+                .prepareStatement(DbQueries.DELETE_FROM_CARS_BY_ID)) {
             preparedStatement.setInt(1, id);
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
@@ -79,8 +78,7 @@ public class CarDaoImpl implements CarDao {
     @Override
     public Optional<Car> getFreeCarByTypeId(Integer typeId) {
         CarMapper carMapper = new CarMapper();
-        try (PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM CARS LEFT JOIN " +
-                "car_type on car_type_id = id_car_type WHERE car_type_id = ? AND state = 'free'")) {
+        try (PreparedStatement preparedStatement = connection.prepareStatement(DbQueries.SELECT_FROM_CARS_LEFT_JOIN_CAR_TYPE_BY_ID)) {
             preparedStatement.setInt(1, typeId);
             ResultSet resultSet = preparedStatement.executeQuery();
             if (resultSet.next()) {
@@ -94,7 +92,7 @@ public class CarDaoImpl implements CarDao {
 
     @Override
     public void updateCarState(Integer carId, String carState) {
-        try (PreparedStatement preparedStatement = connection.prepareStatement("UPDATE cars set state = ? where id_car = ?")) {
+        try (PreparedStatement preparedStatement = connection.prepareStatement(DbQueries.UPDATE_CAR_STATE_BY_ID)) {
             preparedStatement.setString(1, carState);
             preparedStatement.setInt(2, carId);
             preparedStatement.executeUpdate();

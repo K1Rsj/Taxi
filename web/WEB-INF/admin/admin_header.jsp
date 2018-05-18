@@ -13,31 +13,31 @@
             <div class="collapse navbar-collapse" id="navbarResponsive">
                 <ul class="navbar-nav ml-auto">
                     <li class="nav-item">
-                        <a href="${pageContext.request.contextPath}/taxi/index">Home</a>
+                        <a href="${pageContext.request.contextPath}/taxi/index"><fmt:message key="home"/></a>
                     </li>
                     <li class="nav-item text-center" >
-                        <a href="${pageContext.request.contextPath}/taxi/add_discount_page">Add discount</a>
+                        <a href="${pageContext.request.contextPath}/taxi/add_discount_page"><fmt:message key="add.discount"/></a>
                     </li>
                     <li class="nav-item text-center" >
-                        <a href="${pageContext.request.contextPath}/taxi/all_cars">Show all cars</a>
+                        <a href="${pageContext.request.contextPath}/taxi/all_cars"><fmt:message key="show.all.cars"/></a>
                     </li>
                     <li class="nav-item text-center">
-                        <a href="${pageContext.request.contextPath}/taxi/add_car_page">Add new car</a>
+                        <a href="${pageContext.request.contextPath}/taxi/add_car_page"><fmt:message key="add.car"/></a>
                     </li>
                     <li class="nav-item text-center">
-                        <a href="${pageContext.request.contextPath}/taxi/all_users">Show all users</a>
+                        <a href="${pageContext.request.contextPath}/taxi/all_users"><fmt:message key="show.all.users"/></a>
                     </li>
                     <li class="nav-item text-center">
-                        <a href="${pageContext.request.contextPath}/taxi/all_car_types">View all car types and prices</a>
+                        <a href="${pageContext.request.contextPath}/taxi/all_car_types"><fmt:message key="types.and.prices"/></a>
                     </li>
                     <li class="nav-item text-center">
-                        <a href="${pageContext.request.contextPath}/taxi/logout">Log Out</a>
+                        <a href="${pageContext.request.contextPath}/taxi/logout"><fmt:message key="log.out"/></a>
                     </li>
                     <li class="nav-item text-center">
                             <form>
                                 <label for="language"></label><select class="nav-select" id="language" name="language" onchange="submit()">
-                                    <option value="en_US" ${language == 'en_US' ? 'selected' : ''}>lol</option>
-                                    <option value="ru_RU" ${language == 'ru_RU' ? 'selected' : ''}>kek</option>
+                                    <option value="en_US" ${language == 'en_US' ? 'selected' : ''}>English</option>
+                                    <option value="uk_UA" ${language == 'uk_UA' ? 'selected' : ''}>Українська</option>
                                 </select>
                             </form>
                     </li>

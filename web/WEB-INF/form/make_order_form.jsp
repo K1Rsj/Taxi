@@ -7,7 +7,7 @@
     </c:if>
     <div class="row">
         <div class="col-md-12">
-            <h2 class="text-center text-white mb-4">Make your order</h2>
+            <h2 class="text-center text-white mb-4"><fmt:message key="make.your.order"/></h2>
             <div class="row text-center">
                 <div class="col-md-5 ml-auto mr-auto">
                     <div class="card rounded-0">
@@ -16,17 +16,17 @@
                         <div class="card-body">
                             <form class="form" method="post" action="${pageContext.request.contextPath}/taxi/make_order">
                                 <div class="form-group">
-                                    <label for="departure">Departure street</label>
+                                    <label for="departure"><fmt:message key="departure.street"/></label>
                                     <input type="text" class="form-control form-control-lg rounded-0" name="departure" id="departure">
                                 </div>
 
                                 <div class="form-group">
-                                    <label for="destination">Destination street</label>
+                                    <label for="destination"><fmt:message key="destination.street"/></label>
                                     <input type="text" class="form-control form-control-lg rounded-0" name="destination" id="destination">
                                 </div>
 
                                 <div class="form-group">
-                                    <label for="type">Car type</label>
+                                    <label for="type"><fmt:message key="car.type"/></label>
                                     <select class="form-control form-control-lg rounded-0" name="type" id="type">
                                         <option selected value="standard">Standard</option>
                                         <option value="comfort">Comfort</option>
@@ -34,7 +34,7 @@
                                         <option value="premium">Premium</option>
                                     </select>
                                 </div>
-                                <button type="submit" class="btn btn-success btn-lg float-right" id="btnLogin">Confirm</button>
+                                <button type="submit" class="btn btn-success btn-lg float-right" id="btnLogin"><fmt:message key="confirm"/></button>
                             </form>
                         </div>
                     </div>

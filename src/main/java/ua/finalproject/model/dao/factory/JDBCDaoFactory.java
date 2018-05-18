@@ -1,13 +1,13 @@
-package ua.finalproject.dao.factory;
+package ua.finalproject.model.dao.factory;
 
-import ua.finalproject.dao.CarDao;
-import ua.finalproject.dao.CarTypeDao;
-import ua.finalproject.dao.OrderDao;
-import ua.finalproject.dao.UserDao;
-import ua.finalproject.dao.impl.CarDaoImpl;
-import ua.finalproject.dao.impl.CarTypeDaoImpl;
-import ua.finalproject.dao.impl.OrderDaoImpl;
-import ua.finalproject.dao.impl.UserDaoImpl;
+import ua.finalproject.model.dao.CarDao;
+import ua.finalproject.model.dao.CarTypeDao;
+import ua.finalproject.model.dao.OrderDao;
+import ua.finalproject.model.dao.UserDao;
+import ua.finalproject.model.dao.impl.CarDaoImpl;
+import ua.finalproject.model.dao.impl.CarTypeDaoImpl;
+import ua.finalproject.model.dao.impl.OrderDaoImpl;
+import ua.finalproject.model.dao.impl.UserDaoImpl;
 
 import java.sql.Connection;
 

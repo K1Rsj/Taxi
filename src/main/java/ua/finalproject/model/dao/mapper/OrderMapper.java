@@ -1,4 +1,4 @@
-package ua.finalproject.dao.mapper;
+package ua.finalproject.model.dao.mapper;
 
 import ua.finalproject.model.entities.impl.Car;
 import ua.finalproject.model.entities.impl.CarType;

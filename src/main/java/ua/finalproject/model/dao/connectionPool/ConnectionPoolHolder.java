@@ -1,9 +1,9 @@
-package ua.finalproject.dao.connectionPool;
+package ua.finalproject.model.dao.connectionPool;
 
 import org.apache.commons.dbcp.BasicDataSource;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import ua.finalproject.constants.DbConfig;
+import ua.finalproject.constants.db.DbConfig;
 import ua.finalproject.util.PropertyManager;
 
 import javax.sql.DataSource;

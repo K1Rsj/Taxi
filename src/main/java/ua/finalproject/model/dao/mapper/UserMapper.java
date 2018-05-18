@@ -1,7 +1,7 @@
-package ua.finalproject.dao.mapper;
+package ua.finalproject.model.dao.mapper;
 
 
-import ua.finalproject.dao.util.UtilDao;
+import ua.finalproject.model.dao.util.UtilDao;
 import ua.finalproject.model.entities.impl.User;
 
 import java.sql.PreparedStatement;

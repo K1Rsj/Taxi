@@ -1,7 +1,7 @@
-package ua.finalproject.dao.impl;
+package ua.finalproject.model.dao.impl;
 
-import ua.finalproject.dao.UserDao;
-import ua.finalproject.dao.mapper.UserMapper;
+import ua.finalproject.model.dao.UserDao;
+import ua.finalproject.model.dao.mapper.UserMapper;
 import ua.finalproject.model.entities.impl.User;
 import ua.finalproject.util.LogMessageBuilder;
 

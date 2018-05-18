@@ -9,15 +9,15 @@
 
     <c:set var="count" value="${requestScope.firstIndex}" scope="page"/>
     <table class="table table-striped bg-white text-black">
-        <caption class="text-white">All cars</caption>
+        <caption class="text-white"><fmt:message key="all.cars"/></caption>
         <thead>
         <tr>
             <th scope="col">#</th>
-            <th scope="col">Model</th>
-            <th scope="col">Number</th>
-            <th scope="col">State</th>
-            <th scope="col">Driver</th>
-            <th scope="col">Type</th>
+            <th scope="col"><fmt:message key="model"/></th>
+            <th scope="col"><fmt:message key="number"/></th>
+            <th scope="col"><fmt:message key="state"/></th>
+            <th scope="col"><fmt:message key="driver"/></th>
+            <th scope="col"><fmt:message key="type"/></th>
         </tr>
         </thead>
         <tbody>

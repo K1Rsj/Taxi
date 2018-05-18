@@ -2,10 +2,10 @@ package ua.finalproject.model.services;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import ua.finalproject.dao.CarTypeDao;
-import ua.finalproject.dao.connectionPool.ConnectionPoolHolder;
-import ua.finalproject.dao.factory.DaoFactory;
-import ua.finalproject.dao.util.UtilDao;
+import ua.finalproject.model.dao.CarTypeDao;
+import ua.finalproject.model.dao.connectionPool.ConnectionPoolHolder;
+import ua.finalproject.model.dao.factory.DaoFactory;
+import ua.finalproject.model.dao.util.UtilDao;
 import ua.finalproject.model.entities.impl.CarType;
 
 import java.sql.Connection;

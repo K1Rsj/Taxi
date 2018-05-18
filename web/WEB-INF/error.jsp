@@ -7,7 +7,7 @@
 </c:if>
 </div>
 <div class="alert text-white text-center">
-    <p>Oops something went wrong</p>
+    <p><fmt:message key="something.went.wrong"/></p>
     <a class="btn btn-default" href="${pageContext.request.contextPath}/taxi/index" role="button" ></a>
 </div>
 <jsp:include page="components/footer.jsp"/>

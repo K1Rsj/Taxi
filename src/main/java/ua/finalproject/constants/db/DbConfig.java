@@ -1,4 +1,4 @@
-package ua.finalproject.constants;
+package ua.finalproject.constants.db;
 
 /**
  * Keys for db.properties

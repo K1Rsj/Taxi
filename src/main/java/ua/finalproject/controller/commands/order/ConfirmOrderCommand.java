@@ -17,6 +17,7 @@ public class ConfirmOrderCommand implements Command {
         Optional<Order> order = Optional.ofNullable((Order) request.getSession().getAttribute("order"));
         if (order.isPresent()) {
             orderService.confirmOrder(order.get());
+            request.setAttribute("orderInformationMessage", "Have a good trip");
             request.getSession().removeAttribute("order");
             logger.info(LogMessageBuilder.INSTANCE.confirmOrderInfo(order.get().getUser().getFirstName(),
                     order.get().getUser().getSecondName()));

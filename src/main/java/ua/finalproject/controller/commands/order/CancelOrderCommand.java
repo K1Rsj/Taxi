@@ -17,6 +17,7 @@ public class CancelOrderCommand implements Command {
         Optional<Order> order = Optional.ofNullable((Order) request.getSession().getAttribute("order"));
         if (order.isPresent()) {
             orderService.cancelOrder(order.get());
+            request.setAttribute("orderInformationMessage", "Sorry that something did not suit you");
             request.getSession().removeAttribute("order");
             logger.info(LogMessageBuilder.INSTANCE.cancelOrderInfo(order.get().getUser().getFirstName(),
                     order.get().getUser().getSecondName()));

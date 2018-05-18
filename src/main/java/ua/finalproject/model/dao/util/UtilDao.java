@@ -1,4 +1,4 @@
-package ua.finalproject.dao.util;
+package ua.finalproject.model.dao.util;
 
 import ua.finalproject.model.entities.impl.Car;
 import ua.finalproject.model.entities.impl.User;

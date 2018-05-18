@@ -1,3 +1,4 @@
+<%@ taglib prefix="mytags" uri="https://mytags.com.ua" %>
 <%@ include file="../components/addition.jsp"%>
 <jsp:include page="../components/head.jsp"/>
 
@@ -10,14 +11,14 @@
 
 
     <table class="table table-striped bg-white text-black">
-        <caption class="text-white">Car types</caption>
+        <caption class="text-white"><fmt:message key="car.type"/></caption>
         <thead>
         <tr>
             <th scope="col">#</th>
-            <th scope="col">Type</th>
-            <th scope="col">Starting price</th>
-            <th scope="col">Price per kilometer</th>
-            <th scope="col">Discount</th>
+            <th scope="col"><fmt:message key="type"/></th>
+            <th scope="col"><fmt:message key="starting.price"/></th>
+            <th scope="col"><fmt:message key="price.per.km"/></th>
+            <th scope="col"><fmt:message key="discount.value"/></th>
         </tr>
         </thead>
         <tbody>
@@ -26,8 +27,8 @@
             <tr>
                 <td><c:out value="${count}" /></td>
                 <td><c:out value="${type.type}" /></td>
-                <td><c:out value="${type.startingPrice/100} hrivnas" /></td>
-                <td><c:out value="${type.pricePerKilometer/100} hrivnas" /></td>
+                <td><mytags:formatMoney money="${type.startingPrice}"/> <fmt:message key="hryvnia"/></td>
+                <td><mytags:formatMoney money="${type.pricePerKilometer}"/> <fmt:message key="hryvnia"/></td>
                 <td><c:out value="${type.discount}%" /></td>
             </tr>
         </c:forEach>

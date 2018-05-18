@@ -12,23 +12,23 @@
             <div class="collapse navbar-collapse" id="navbarResponsive">
                 <ul class="navbar-nav ml-auto">
                     <li class="nav-item">
-                        <a href="${pageContext.request.contextPath}/taxi/index">Home</a>
+                        <a href="${pageContext.request.contextPath}/taxi/index"><fmt:message key="home"/></a>
                     </li>
                     <li class="nav-item text-center">
-                        <a href="${pageContext.request.contextPath}/taxi/all_car_types">View all car types and prices</a>
+                        <a href="${pageContext.request.contextPath}/taxi/all_car_types"><fmt:message key="types.and.prices"/></a>
                     </li>
                     <li class="nav-item text-center" >
-                        <a href="${pageContext.request.contextPath}/taxi/user_registration_page">Registration</a>
+                        <a href="${pageContext.request.contextPath}/taxi/user_registration_page"><fmt:message key="registration"/></a>
                     </li>
                     <li class="nav-item text-center">
-                        <a href="${pageContext.request.contextPath}/taxi/logout">Log Out</a>
+                        <a href="${pageContext.request.contextPath}/taxi/logout"><fmt:message key="log.out"/></a>
                     </li>
                     <li class="nav-item text-center">
-                        <p class="text-white">Language</p>
+                        <p class="text-white"><fmt:message key="language"/></p>
                         <form>
                             <label for="language"></label><select class="nav-select" id="language" name="language" onchange="submit()">
-                            <option value="en_US" ${language == 'en_US' ? 'selected' : ''}>lol</option>
-                            <option value="ru_RU" ${language == 'ru_RU' ? 'selected' : ''}>kek</option>
+                            <option value="en_US" ${language == 'en_US' ? 'selected' : ''}>English</option>
+                            <option value="uk_UA" ${language == 'uk_UA' ? 'selected' : ''}>Українська</option>
                         </select>
                         </form>
                     </li>

@@ -13,10 +13,6 @@
         <url-pattern>/taxi/*</url-pattern>
     </servlet-mapping>
 
-    <welcome-file-list>
-        <welcome-file>/WEB-INF/index.jsp</welcome-file>
-    </welcome-file-list>
-
     <listener>
         <listener-class>
             ua.finalproject.controller.listeners.SessionListener
@@ -67,8 +63,30 @@
         <url-pattern>/taxi/my_discount</url-pattern>
     </filter-mapping>
 
+    <welcome-file-list>
+        <welcome-file>taxi/index</welcome-file>
+    </welcome-file-list>
+
+    <jsp-config>
+        <taglib>
+            <taglib-uri>https://mytags.com.ua</taglib-uri>
+            <taglib-location>/WEB-INF/moneyFormatter.tld</taglib-location>
+        </taglib>
+
+        <jsp-property-group>
+            <url-pattern>*.jsp</url-pattern>
+            <page-encoding>UTF-8</page-encoding>
+        </jsp-property-group>
+    </jsp-config>
+
+
     <!--<error-page>-->
         <!--<exception-type>java.lang.Exception</exception-type>-->
+        <!--<location>/WEB-INF/error.jsp</location>-->
+    <!--</error-page>-->
+
+    <!--<error-page>-->
+        <!--<error-code>500</error-code>-->
         <!--<location>/WEB-INF/error.jsp</location>-->
     <!--</error-page>-->
 </web-app>

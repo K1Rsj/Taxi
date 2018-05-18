@@ -1,3 +1,4 @@
+<%@ taglib prefix="mytags" uri="https://mytags.com.ua" %>
 <%@ include file="../components/addition.jsp"%>
 <jsp:include page="../components/head.jsp"/>
 
@@ -13,19 +14,19 @@
     <c:if test="${not empty sessionScope.order}">
 
     <table class="table table-striped bg-white text-black">
-        <caption class="text-white">Current order</caption>
+        <caption class="text-white"><fmt:message key="current.order"/></caption>
         <thead>
         <tr>
-            <th scope="col">Full name</th>
-            <th scope="col">Your car is</th>
-            <th scope="col">Your trip costs</th>
+            <th scope="col"><fmt:message key="full.name"/></th>
+            <th scope="col"><fmt:message key="your.car.is"/></th>
+            <th scope="col"><fmt:message key="your.trip.costs"/></th>
         </tr>
         </thead>
         <tbody>
         <tr>
             <td><c:out value="${sessionScope.order.user.firstName} ${sessionScope.order.user.secondName}"/></td>
             <td><c:out value="${sessionScope.order.car.model} ${sessionScope.order.car.number}"/></td>
-            <td><c:out value="${sessionScope.order.price/100} hrivnas" /></td>
+            <td><mytags:formatMoney money="${sessionScope.order.price}"/> <fmt:message key="hryvnia"/></td>
         </tr>
         <tr>
         </tr>

@@ -1,3 +1,4 @@
+<%@ taglib prefix="mytags" uri="https://mytags.com.ua" %>
 <%@ include file="../components/addition.jsp"%>
 <jsp:include page="../components/head.jsp"/>
 
@@ -10,14 +11,14 @@
 
 
     <table class="table table-striped bg-white text-black">
-        <caption class="text-white">Your orders</caption>
+        <caption class="text-white"><fmt:message key="your.orders"/></caption>
         <thead>
         <tr>
             <th scope="col">#</th>
-            <th scope="col">Departure street</th>
-            <th scope="col">Destination street</th>
-            <th scope="col">Price</th>
-            <th scope="col">Car model</th>
+            <th scope="col"><fmt:message key="departure.street"/></th>
+            <th scope="col"><fmt:message key="destination.street"/></th>
+            <th scope="col"><fmt:message key="price"/></th>
+            <th scope="col"><fmt:message key="model"/></th>
         </tr>
         </thead>
         <tbody>
@@ -27,7 +28,7 @@
                 <td><c:out value="${count}" /></td>
                 <td><c:out value="${order.departureStreet}" /></td>
                 <td><c:out value="${order.destinationStreet}" /></td>
-                <td><c:out value="${order.price/100}"/></td>
+                <td><mytags:formatMoney money="${order.price}"/> <fmt:message key="hryvnia"/></td>
                 <td><c:out value="${order.car.model}" /></td>
             </tr>
         </c:forEach>
