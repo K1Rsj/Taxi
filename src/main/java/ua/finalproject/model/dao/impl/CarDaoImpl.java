@@ -1,6 +1,8 @@
 package ua.finalproject.model.dao.impl;
 
-import ua.finalproject.constants.DbQueries;
+import ua.finalproject.constants.db.DbQueries;
+import ua.finalproject.constants.db.TableNames;
+import ua.finalproject.constants.messages.LogMessages;
 import ua.finalproject.model.dao.CarDao;
 import ua.finalproject.model.dao.mapper.CarMapper;
 import ua.finalproject.model.entities.impl.Car;
@@ -29,7 +31,8 @@ public class CarDaoImpl implements CarDao {
         } catch (SQLIntegrityConstraintViolationException e) {
             throw new SQLIntegrityConstraintViolationException(e);
         } catch (SQLException e) {
-            logger.error(LogMessageBuilder.INSTANCE.createEntryError("cars"), e.getMessage());
+            logger.error(LogMessageBuilder.INSTANCE.createEntryError(TableNames.CARS), e.getMessage());
+            throw new RuntimeException(e);
         }
     }
 
@@ -43,7 +46,8 @@ public class CarDaoImpl implements CarDao {
                 return Optional.of(carMapper.extractFromResultSet(resultSet));
             }
         } catch (SQLException e) {
-            logger.error(LogMessageBuilder.INSTANCE.findByIdError("cars"), e.getMessage());
+            logger.error(LogMessageBuilder.INSTANCE.findByIdError(TableNames.CARS), e.getMessage());
+            throw new RuntimeException(e);
         }
         return Optional.empty();
     }
@@ -59,9 +63,9 @@ public class CarDaoImpl implements CarDao {
             }
             return Optional.of(allCars);
         } catch (SQLException e) {
-            logger.error(LogMessageBuilder.INSTANCE.findAllError("cars"), e.getMessage());
+            logger.error(LogMessageBuilder.INSTANCE.findAllError(TableNames.CARS), e.getMessage());
+            throw new RuntimeException(e);
         }
-        return Optional.empty();
     }
 
     @Override
@@ -71,7 +75,8 @@ public class CarDaoImpl implements CarDao {
             preparedStatement.setInt(1, id);
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
-            logger.error(LogMessageBuilder.INSTANCE.deleteEntryError("cars", id), e.getMessage());
+            logger.error(LogMessageBuilder.INSTANCE.deleteEntryError(TableNames.CARS, id), e.getMessage());
+            throw new RuntimeException(e);
         }
     }
 
@@ -85,7 +90,8 @@ public class CarDaoImpl implements CarDao {
                 return Optional.of(carMapper.extractFromResultSet(resultSet));
             }
         } catch (SQLException e) {
-            logger.error("Get free car by type error", e.getMessage());
+            logger.error(LogMessages.GET_FREE_CAR_BY_TYPE_ERROR, e.getMessage());
+            throw new RuntimeException(e);
         }
         return Optional.empty();
     }
@@ -97,7 +103,8 @@ public class CarDaoImpl implements CarDao {
             preparedStatement.setInt(2, carId);
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
-            logger.error("Update car state error", e.getMessage());
+            logger.error(LogMessages.UPDATE_CAR_STATE_ERROR, e.getMessage());
+            throw new RuntimeException(e);
         }
     }
 
@@ -106,7 +113,8 @@ public class CarDaoImpl implements CarDao {
         try {
             connection.close();
         } catch (SQLException e) {
-            logger.error("Connection close error", e.getMessage());
+            logger.error(LogMessages.CONNECTION_CLOSE_ERROR, e.getMessage());
+            throw new RuntimeException(e);
         }
     }
 }

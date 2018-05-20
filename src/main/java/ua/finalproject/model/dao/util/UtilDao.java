@@ -7,20 +7,16 @@ public class UtilDao {
     public static User.Role parseUserRole(String role) {
         if (role.equalsIgnoreCase(String.valueOf(User.Role.ADMIN))) {
             return User.Role.ADMIN;
-        } else if (role.equalsIgnoreCase(String.valueOf(User.Role.USER))) {
-            return User.Role.USER;
         } else {
-            throw new RuntimeException("Incorrect user role");
+            return User.Role.USER;
         }
     }
 
     public static Car.State parseCarState(String state) {
         if (state.equalsIgnoreCase(String.valueOf(Car.State.FREE))) {
             return Car.State.FREE;
-        } else if (state.equalsIgnoreCase(String.valueOf(Car.State.BUSY))) {
-            return Car.State.BUSY;
         } else {
-            throw new RuntimeException("Incorrect car state");
+            return Car.State.BUSY;
         }
     }
 
@@ -31,11 +27,8 @@ public class UtilDao {
             return 2;
         } else if (type.equals("minibus")) {
             return 3;
-        } else if (type.equals("premium")) {
-            return 4;
         } else {
-            throw new RuntimeException("Incorrect car type");
-
+            return 4;
         }
     }
 }

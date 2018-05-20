@@ -31,6 +31,11 @@
     </filter-mapping>
 
     <filter-mapping>
+        <filter-name>LanguageFilter</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
+
+    <filter-mapping>
         <filter-name>PublicPagesFilter</filter-name>
         <url-pattern>/taxi/index</url-pattern>
         <url-pattern>/taxi/login</url-pattern>

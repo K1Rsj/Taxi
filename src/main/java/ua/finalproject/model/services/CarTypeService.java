@@ -2,6 +2,7 @@ package ua.finalproject.model.services;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import ua.finalproject.constants.messages.LogMessages;
 import ua.finalproject.model.dao.CarTypeDao;
 import ua.finalproject.model.dao.connectionPool.ConnectionPoolHolder;
 import ua.finalproject.model.dao.factory.DaoFactory;
@@ -23,7 +24,7 @@ public class CarTypeService {
             Integer typeId = UtilDao.parseTypeString(type);
             carType.updateDiscount(typeId, discount);
         } catch (Exception e) {
-            logger.error("Update discount error", e.getMessage());
+            logger.error(LogMessages.AUTO_CLOSABLE_RESOURCE_ERROR_IN_UPDATE_DISCOUNT, e.getMessage());
         }
     }
 
@@ -32,7 +33,7 @@ public class CarTypeService {
         try (CarTypeDao carTypeDao = DaoFactory.getInstance().createCarTypeDao(connection)) {
             return carTypeDao.findAll();
         } catch (Exception e) {
-            logger.error("Show all car types error", e.getMessage());
+            logger.error(LogMessages.AUTO_CLOSABLE_RESOURCE_ERROR_IN_SHOW_ALL_CAR_TYPES, e.getMessage());
         }
         return Optional.empty();
     }

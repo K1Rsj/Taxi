@@ -2,6 +2,7 @@ package ua.finalproject.model.services;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import ua.finalproject.constants.messages.LogMessages;
 import ua.finalproject.model.dao.OrderDao;
 import ua.finalproject.model.dao.UserDao;
 import ua.finalproject.model.dao.connectionPool.ConnectionPoolHolder;
@@ -26,7 +27,7 @@ public class UserService {
         } catch (SQLIntegrityConstraintViolationException e) {
             throw new SQLIntegrityConstraintViolationException(e);
         } catch (Exception e) {
-            logger.error("User registration error");
+            logger.error(LogMessages.AUTO_CLOSABLE_RESOURCE_ERROR_IN_REGISTER_USER);
         }
     }
 
@@ -35,7 +36,7 @@ public class UserService {
         try (UserDao userDao = DaoFactory.getInstance().createUserDao(connection)) {
             return userDao.findByLogin(login);
         } catch (Exception e) {
-            logger.error("Find user by login error", e.getMessage());
+            logger.error(LogMessages.AUTO_CLOSABLE_RESOURCE_ERROR_IN_FIND_USER_BY_LOGIN, e.getMessage());
         }
         return Optional.empty();
     }
@@ -46,7 +47,7 @@ public class UserService {
         try (UserDao userDao = DaoFactory.getInstance().createUserDao(connection)) {
             discount = OrderPriceGenerator.getDiscountBasedOnMoneySpent(userDao.findByLogin(login).get().getMoneySpent());
         } catch (Exception e) {
-            logger.error("Get user discount error", e.getMessage());
+            logger.error(LogMessages.AUTO_CLOSABLE_RESOURCE_ERROR_IN_GET_USER_DISCOUNT, e.getMessage());
         }
         return discount;
     }
@@ -56,7 +57,7 @@ public class UserService {
         try (UserDao userDao = DaoFactory.getInstance().createUserDao(connection)) {
             return userDao.findAll();
         } catch (Exception e) {
-            logger.error("Show all users error", e.getMessage());
+            logger.error(LogMessages.AUTO_CLOSABLE_RESOURCE_ERROR_IN_SHOW_ALL_USERS, e.getMessage());
         }
         return Optional.empty();
     }
@@ -69,9 +70,12 @@ public class UserService {
             orderDao.delete(id);
             userDao.delete(id);
             connection.commit();
-        } catch (Exception e) {
-            logger.error("Delete user by id error", e.getMessage());
+        } catch (SQLException e) {
+            logger.error(LogMessages.DELETE_USER_BY_ID_ERROR, e.getMessage());
             SQLExceptionRollbackErrorHandle(connection);
+            throw new RuntimeException(e);
+        } catch (Exception e) {
+            logger.error(LogMessages.AUTO_CLOSABLE_RESOURCE_ERROR_IN_DELETE_USER_BY_ID, e.getMessage());
         }
     }
 
@@ -79,7 +83,8 @@ public class UserService {
         try {
             connection.rollback();
         } catch (SQLException e1) {
-            logger.error("Delete user by id connection rollback error", e1.getMessage());
+            logger.error(LogMessages.DELETE_USER_BY_ID_CONNECTION_ROLLBACK_ERROR, e1.getMessage());
+            throw new RuntimeException(e1);
         }
     }
 }

@@ -33,8 +33,8 @@
         </tbody>
     </table>
         <div>
-            <a href="${pageContext.request.contextPath}/taxi/confirm_order" class="btn btn-success" role="button">Confirm order</a>
-            <a href="${pageContext.request.contextPath}/taxi/cancel_order" class="btn btn-danger" role="button">Cancel order</a>
+            <a href="${pageContext.request.contextPath}/taxi/confirm_order" class="btn btn-success" role="button"><fmt:message key="confirm.order"/></a>
+            <a href="${pageContext.request.contextPath}/taxi/cancel_order" class="btn btn-danger" role="button"><fmt:message key="cancel.order"/></a>
         </div>
 </c:if>
 </div>

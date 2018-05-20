@@ -206,3 +206,83 @@
 2018-05-18 23:48:01.071 Command - User misha logged successfully
 2018-05-18 23:48:11.157 Command - User:'Михаил Тестовый make order for car АА1251НМ
 2018-05-18 23:48:24.446 Command - User:'Михаил Тестовый cancelled order
+2018-05-19 17:25:24.710 Command - User adm logged successfully
+2018-05-19 17:25:40.679 Command - User adm logged successfully
+2018-05-19 17:47:15.655 Command - User adm logged successfully
+2018-05-19 17:54:01.179 Command - User adm logged successfully
+2018-05-19 18:08:46.225 Command - User adm logged successfully
+2018-05-19 18:08:55.182 Command - User misha logged successfully
+2018-05-19 18:08:55.703 Command - User misha tried to log in to an account that is already in use
+2018-05-19 18:09:52.394 Command - User adm logged successfully
+2018-05-19 18:10:00.786 Command - User misha logged successfully
+2018-05-19 18:16:55.387 Command - User misha logged successfully
+2018-05-19 18:17:17.398 Command - User misha logged successfully
+2018-05-19 18:18:31.006 Command - User adm logged successfully
+2018-05-19 18:18:37.768 Command - User misha logged successfully
+2018-05-19 18:20:44.130 Command - User adm logged successfully
+2018-05-19 18:20:51.728 Command - User misha logged successfully
+2018-05-19 18:25:24.632 Command - User misha logged successfully
+2018-05-19 18:27:39.678 Command - User misha logged successfully
+2018-05-19 18:32:40.768 Command - User misha logged successfully
+2018-05-19 18:36:23.596 Command - User adm logged successfully
+2018-05-19 18:36:29.658 Command - User misha logged successfully
+2018-05-19 18:39:54.319 Command - User adm logged successfully
+2018-05-19 19:26:03.076 Command - User adm logged successfully
+2018-05-19 19:26:08.371 Command - User adm logged successfully
+2018-05-19 19:26:15.103 Command - User misha logged successfully
+2018-05-19 19:26:35.944 Command - User adm logged successfully
+2018-05-19 19:32:14.809 Command - User adm logged successfully
+2018-05-19 19:45:04.692 Command - User adm logged successfully
+2018-05-19 19:45:46.544 Command - User misha logged successfully
+2018-05-19 19:46:52.679 Command - User adm logged successfully
+2018-05-19 19:47:17.080 Command - User adm logged successfully
+2018-05-19 19:47:23.788 Command - User adm logged successfully
+2018-05-19 19:47:28.479 Command - User misha tried to log in to an account that is already in use
+2018-05-19 19:47:52.828 Command - User adm logged successfully
+2018-05-19 19:48:27.380 Command - User adm logged successfully
+2018-05-19 19:48:33.531 Command - User adm logged successfully
+2018-05-19 19:52:50.749 Command - User adm logged successfully
+2018-05-19 19:52:56.278 Command - User adm logged successfully
+2018-05-19 19:56:08.284 Command - User adm logged successfully
+2018-05-19 19:56:15.858 Command - User adm logged successfully
+2018-05-19 19:57:13.988 Command - User adm logged successfully
+2018-05-19 20:06:01.807 Command - User adm logged successfully
+2018-05-19 20:07:23.657 Command - User adm logged successfully
+2018-05-19 20:07:27.944 Command - User adm logged successfully
+2018-05-19 20:07:35.238 Command - User adm logged successfully
+2018-05-19 20:12:58.030 Command - User adm logged successfully
+2018-05-19 20:21:57.958 Command - User adm logged successfully
+2018-05-19 20:37:37.098 Command - User adm logged successfully
+2018-05-19 20:52:10.612 Command - User adm logged successfully
+2018-05-19 23:29:08.860 Command - User adm logged successfully
+2018-05-19 23:29:17.335 Command - User adm logged successfully
+2018-05-20 12:18:25.742 ConnectionPoolHolder - Connection error
+2018-05-20 13:10:28.803 Command - User misha logged successfully
+2018-05-20 13:10:42.778 OrderService - Auto-closable resource error in make order
+2018-05-20 13:10:42.779 Command - Make order error
+2018-05-20 13:39:10.226 Command - User misha logged successfully
+2018-05-20 13:39:19.065 Command - No free car such type yet
+2018-05-20 14:06:30.890 Command - User adm logged successfully
+2018-05-20 14:08:42.825 Command - User adm logged successfully
+2018-05-20 14:11:02.650 Command - User adm logged successfully
+2018-05-20 14:13:18.977 Command - User adm logged successfully
+2018-05-20 14:13:56.459 Command - Invalid attempt of login user:'adm'
+2018-05-20 14:13:59.482 Command - User adm logged successfully
+2018-05-20 14:19:06.610 Command - Added new discount:'5'% for car type: standard
+2018-05-20 14:52:02.270 Command - User adm logged successfully
+2018-05-20 15:36:04.834 Command - User adm logged successfully
+2018-05-20 15:36:39.847 Command - User adm logged successfully
+2018-05-20 16:50:04.553 Command - User misha logged successfully
+2018-05-20 16:50:11.933 Command - На даний момент немає авто такого типу
+2018-05-20 16:50:28.634 Command - At the moment there is no car of this type
+2018-05-21 00:05:09.834 Command - User adm logged successfully
+2018-05-21 00:05:45.641 Command - User misha logged successfully
+2018-05-21 00:30:55.574 Command - User misha logged successfully
+2018-05-21 00:31:26.366 Command - Invalid attempt of login user:'sdga'
+2018-05-21 00:31:33.120 Command - Invalid attempt of login user:'asf'
+2018-05-21 00:31:38.239 Command - Invalid attempt of login user:'fasf'
+2018-05-21 00:31:48.340 Command - User adm logged successfully
+2018-05-21 00:53:32.756 Command - Invalid attempt of login user:'aga'
+2018-05-21 00:53:38.552 Command - User misha logged successfully
+2018-05-21 00:53:45.690 Command - User:'Михаил Тестовый make order for car АА1251НМ
+2018-05-21 00:54:06.772 Command - User:'Михаил Тестовый cancelled order

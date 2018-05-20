@@ -1,6 +1,7 @@
 package ua.finalproject.model.dao.mapper;
 
 
+import ua.finalproject.constants.db.TableColumnNames;
 import ua.finalproject.model.dao.util.UtilDao;
 import ua.finalproject.model.entities.impl.User;
 
@@ -12,15 +13,15 @@ public class UserMapper implements ObjectMapper<User> {
 
     @Override
     public User extractFromResultSet(ResultSet resultSet) throws SQLException {
-        Integer id = resultSet.getInt("id_user");
-        String login = resultSet.getString("login");
-        String password = resultSet.getString("password");
-        String email = resultSet.getString("email");
-        String firstName = resultSet.getString("first_name");
-        String secondName = resultSet.getString("second_name");
-        String phoneNumber = resultSet.getString("phone_number");
-        Long moneySpent = resultSet.getLong("money_spent");
-        User.Role role = UtilDao.parseUserRole(resultSet.getString("role"));
+        Integer id = resultSet.getInt(TableColumnNames.ID_USER);
+        String login = resultSet.getString(TableColumnNames.LOGIN);
+        String password = resultSet.getString(TableColumnNames.PASSWORD);
+        String email = resultSet.getString(TableColumnNames.EMAIL);
+        String firstName = resultSet.getString(TableColumnNames.FIRST_NAME);
+        String secondName = resultSet.getString(TableColumnNames.SECOND_NAME);
+        String phoneNumber = resultSet.getString(TableColumnNames.PHONE_NUMBER);
+        Long moneySpent = resultSet.getLong(TableColumnNames.MONEY_SPENT);
+        User.Role role = UtilDao.parseUserRole(resultSet.getString(TableColumnNames.ROLE));
 
         return User.builder()
                 .id(id)

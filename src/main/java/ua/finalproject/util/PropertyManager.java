@@ -1,9 +1,11 @@
 package ua.finalproject.util;
 
+import ua.finalproject.constants.GlobalConstants;
+
 import java.util.ResourceBundle;
 
 public enum PropertyManager {
-    CONFIG("db");
+    CONFIG(GlobalConstants.DB);
 
     private ResourceBundle resource;
 

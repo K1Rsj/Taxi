@@ -1,5 +1,11 @@
 package ua.finalproject.controller.commands.order;
 
+import ua.finalproject.constants.jsp.JSPPages;
+import ua.finalproject.constants.jsp.RequestAttributes;
+import ua.finalproject.constants.jsp.RequestParameters;
+import ua.finalproject.constants.messages.ExceptionMessages;
+import ua.finalproject.constants.messages.LogMessages;
+import ua.finalproject.constants.messages.ValidationMessages;
 import ua.finalproject.controller.commands.Command;
 import ua.finalproject.controller.util.DataValidation;
 import ua.finalproject.model.entities.impl.Order;
@@ -13,33 +19,30 @@ import java.util.Optional;
 public class MakeOrderCommand implements Command {
     @Override
     public String execute(HttpServletRequest request) {
-        if (!Optional.ofNullable(request.getSession().getAttribute("order")).isPresent()) {
+        if (!Optional.ofNullable(request.getSession().getAttribute(RequestAttributes.ORDER)).isPresent()) {
             OrderService orderService = new OrderService();
-            String login = (String) request.getSession().getAttribute("userLogin");
+            String login = (String) request.getSession().getAttribute(RequestAttributes.USER_LOGIN);
 
-            String departureStreet = request.getParameter("departure");
-            String destinationStreet = request.getParameter("destination");
-            String type = request.getParameter("type");
+            String departureStreet = request.getParameter(RequestParameters.DEPARTURE_STREET);
+            String destinationStreet = request.getParameter(RequestParameters.DESTINATION_STREET);
+            String type = request.getParameter(RequestParameters.TYPE);
             if (!DataValidation.orderDataValidation(departureStreet, destinationStreet)) {
-                request.setAttribute("orderInformationMessage", "Wrong street format");
-                return "/WEB-INF/user/make_order_page.jsp";
+                request.setAttribute(RequestAttributes.ORDER_INFORMATION_MESSAGE, bundleManager.getString(ValidationMessages.WRONG_STREET_FORMAT));
+                return JSPPages.MAKE_ORDER_PAGE;
             }
             try {
                 Order order = orderService.makeOrder(login, departureStreet, destinationStreet, type);
-                request.getSession().setAttribute("order", order);
+                request.getSession().setAttribute(RequestAttributes.ORDER, order);
                 logger.info(LogMessageBuilder.INSTANCE.makeOrderInfo(order.getUser().getFirstName(),
                         order.getUser().getSecondName(), order.getCar().getNumber()));
             } catch (NoFreeCarWithSuchTypeException e) {
-                request.setAttribute("orderInformationMessage", e.getMessage());
-                logger.info(e.getMessage());
-            } catch (Exception e) {
-                request.setAttribute("orderInformationMessage", "Order error");
-                logger.error("Make order error", e.getMessage());
+                request.setAttribute(RequestAttributes.ORDER_INFORMATION_MESSAGE, e.getMessage());
+                logger.info(LogMessages.NO_FREE_CAR_SUCH_TYPE);
             }
         }
         else {
-            request.setAttribute("orderInformationMessage", "You only can have one order");
+            request.setAttribute(RequestAttributes.ORDER_INFORMATION_MESSAGE, bundleManager.getString(ExceptionMessages.YOU_CAN_ONLY_HAVE_ONE_ORDER_AT_TIME));
         }
-        return "/WEB-INF/user/user_foundation.jsp";
+        return JSPPages.USER_FOUNDATION_PAGE;
     }
 }

@@ -1,5 +1,8 @@
 package ua.finalproject.model.dao.impl;
 
+import ua.finalproject.constants.db.DbQueries;
+import ua.finalproject.constants.db.TableNames;
+import ua.finalproject.constants.messages.LogMessages;
 import ua.finalproject.model.dao.CarTypeDao;
 import ua.finalproject.model.dao.mapper.CarTypeMapper;
 import ua.finalproject.model.entities.impl.CarType;
@@ -26,26 +29,27 @@ public class CarTypeDaoImpl implements CarTypeDao {
     public void create(CarType carType) {
         CarTypeMapper carTypeMapper = new CarTypeMapper();
         try (PreparedStatement preparedStatement = connection
-                .prepareStatement("INSERT INTO car_type(type, starting_price, price_per_km, discount) " +
-                        "VALUES (?,?,?,?) ")) {
+                .prepareStatement(DbQueries.INSERT_INTO_CAR_TYPE)) {
             carTypeMapper.setValuesForQuery(carType, preparedStatement);
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
-            logger.error(LogMessageBuilder.INSTANCE.createEntryError("car_type"), e.getMessage());
+            logger.error(LogMessageBuilder.INSTANCE.createEntryError(TableNames.CAR_TYPE), e.getMessage());
+            throw new RuntimeException(e);
         }
     }
 
     @Override
     public Optional<CarType> findById(Integer id) {
         CarTypeMapper carTypeMapper = new CarTypeMapper();
-        try (PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM car_type WHERE id_car_type = ?")) {
+        try (PreparedStatement preparedStatement = connection.prepareStatement(DbQueries.SELECT_FROM_CAR_TYPE_BY_ID)) {
             preparedStatement.setInt(1, id);
             ResultSet resultSet = preparedStatement.executeQuery();
             if (resultSet.next()) {
                 return Optional.of(carTypeMapper.extractFromResultSet(resultSet));
             }
         } catch (SQLException e) {
-            logger.error(LogMessageBuilder.INSTANCE.findByIdError("car_type"), e.getMessage());
+            logger.error(LogMessageBuilder.INSTANCE.findByIdError(TableNames.CAR_TYPE), e.getMessage());
+            throw new RuntimeException(e);
         }
         return Optional.empty();
     }
@@ -54,39 +58,39 @@ public class CarTypeDaoImpl implements CarTypeDao {
     public Optional<List<CarType>> findAll() {
         List<CarType> allCarTypes = new ArrayList<>();
         CarTypeMapper carTypeMapper = new CarTypeMapper();
-        try (PreparedStatement preparedStatement = connection.prepareStatement("SELECT *" +
-                "  FROM car_type");
+        try (PreparedStatement preparedStatement = connection.prepareStatement(DbQueries.SELECT_ALL_FROM_CAR_TYPE);
              ResultSet resultSet = preparedStatement.executeQuery()) {
             while (resultSet.next()) {
                 allCarTypes.add(carTypeMapper.extractFromResultSet(resultSet));
             }
             return Optional.of(allCarTypes);
         } catch (SQLException e) {
-            logger.error(LogMessageBuilder.INSTANCE.findAllError("car_type"), e.getMessage());
+            logger.error(LogMessageBuilder.INSTANCE.findAllError(TableNames.CAR_TYPE), e.getMessage());
+            throw new RuntimeException(e);
         }
-        return Optional.empty();
     }
 
     @Override
     public void delete(Integer id) {
         try (PreparedStatement preparedStatement = connection
-                .prepareStatement("DELETE FROM car_type WHERE id_car_type = ?")) {
+                .prepareStatement(DbQueries.DELETE_FROM_CAR_TYPE_BY_ID)) {
             preparedStatement.setInt(1, id);
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
-            logger.error(LogMessageBuilder.INSTANCE.deleteEntryError("car_type", id), e.getMessage());
+            logger.error(LogMessageBuilder.INSTANCE.deleteEntryError(TableNames.CAR_TYPE, id), e.getMessage());
+            throw new RuntimeException(e);
         }
     }
 
     @Override
     public void updateDiscount(Integer id, Integer discount) {
-        try (PreparedStatement preparedStatement = connection.prepareStatement("UPDATE car_type" +
-                " SET discount = ? WHERE id_car_type = ?")) {
+        try (PreparedStatement preparedStatement = connection.prepareStatement(DbQueries.UPDATE_CAR_TYPE_SET_DISCOUNT)) {
             preparedStatement.setInt(1, discount);
             preparedStatement.setInt(2, id);
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
-            logger.error("Update discount error", e.getMessage());
+            logger.error(LogMessages.UPDATE_DISCOUNT_ERROR, e.getMessage());
+            throw new RuntimeException(e);
         }
     }
 
@@ -95,7 +99,8 @@ public class CarTypeDaoImpl implements CarTypeDao {
         try {
             connection.close();
         } catch (SQLException e) {
-            logger.error("Connection close error", e.getMessage());
+            logger.error(LogMessages.CONNECTION_CLOSE_ERROR, e.getMessage());
+            throw new RuntimeException(e);
         }
     }
 }

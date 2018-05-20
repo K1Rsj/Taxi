@@ -1,5 +1,10 @@
 package ua.finalproject.controller.commands.discount;
 
+import ua.finalproject.constants.jsp.JSPPages;
+import ua.finalproject.constants.jsp.RequestAttributes;
+import ua.finalproject.constants.jsp.RequestParameters;
+import ua.finalproject.constants.messages.ExceptionMessages;
+import ua.finalproject.constants.messages.Messages;
 import ua.finalproject.controller.commands.Command;
 import ua.finalproject.controller.util.DataValidation;
 import ua.finalproject.model.services.CarTypeService;
@@ -10,17 +15,17 @@ import javax.servlet.http.HttpServletRequest;
 public class AddDiscountCommand implements Command {
     @Override
     public String execute(HttpServletRequest request) {
-        String type = request.getParameter("type");
-        Integer discount = Integer.parseInt(request.getParameter("discount"));
+        String type = request.getParameter(RequestParameters.TYPE);
+        Integer discount = Integer.parseInt(request.getParameter(RequestParameters.DISCOUNT));
         if (DataValidation.checkDiscountAmount(discount)) {
             CarTypeService carTypeService = new CarTypeService();
             carTypeService.updateDiscount(type, discount);
-            request.setAttribute("informationMessage", "Discount added successfully");
+            request.setAttribute(RequestAttributes.INFORMATION_MESSAGE, bundleManager.getString(Messages.DISCOUNT_SUCCESSFULLY_ADDED));
             logger.info(LogMessageBuilder.INSTANCE.newDiscountInfo(type, discount));
-            return "/WEB-INF/admin/admin_foundation.jsp";
+            return JSPPages.ADMIN_FOUNDATION_PAGE;
         } else {
-            request.setAttribute("informationMessage", "Wrong amount of discount");
-            return "/WEB-INF/admin/add_discount_page.jsp";
+            request.setAttribute(RequestAttributes.INFORMATION_MESSAGE, bundleManager.getString(ExceptionMessages.WRONG_DISCOUNT_AMOUNT));
+            return JSPPages.ADD_DISCOUNT_PAGE;
         }
     }
 }

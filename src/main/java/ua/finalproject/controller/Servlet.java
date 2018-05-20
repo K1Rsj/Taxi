@@ -1,7 +1,8 @@
 package ua.finalproject.controller;
 
+import ua.finalproject.constants.GlobalConstants;
+import ua.finalproject.constants.command.CommandNames;
 import ua.finalproject.controller.commands.Command;
-import ua.finalproject.controller.commands.ExceptionCommand;
 import ua.finalproject.controller.commands.car.AddCarCommand;
 import ua.finalproject.controller.commands.car.AllCarsCommand;
 import ua.finalproject.controller.commands.car_type.AllCarTypesCommand;
@@ -29,26 +30,25 @@ public class Servlet extends HttpServlet {
     private Map<String, Command> commands = new HashMap<>();
 
     public void init(){
-        commands.put("login", new LoginCommand());
-        commands.put("logout", new LogOutCommand());
-        commands.put("user_registration_page", new UserRegistrationPageCommand());
-        commands.put("user_registration", new UserRegistrationCommand());
-        commands.put("exception" , new ExceptionCommand());
-        commands.put("index", new IndexPageCommand());
-        commands.put("all_cars", new AllCarsCommand());
-        commands.put("make_order_page", new MakeOrderPageCommand());
-        commands.put("make_order", new MakeOrderCommand());
-        commands.put("cancel_order", new CancelOrderCommand());
-        commands.put("confirm_order", new ConfirmOrderCommand());
-        commands.put("add_discount_page", new AddDiscountPageCommand());
-        commands.put("add_discount", new AddDiscountCommand());
-        commands.put("my_orders", new MyOrdersCommand());
-        commands.put("my_discount", new MyDiscountCommand());
-        commands.put("add_car_page", new AddCarPageCommand());
-        commands.put("add_car", new AddCarCommand());
-        commands.put("all_car_types", new AllCarTypesCommand());
-        commands.put("all_users", new AllUsersCommand());
-        commands.put("delete_user", new DeleteUserCommand());
+        commands.put(CommandNames.LOGIN, new LoginCommand());
+        commands.put(CommandNames.LOGOUT, new LogOutCommand());
+        commands.put(CommandNames.USER_REGISTRATION_PAGE, new UserRegistrationPageCommand());
+        commands.put(CommandNames.USER_REGISTRATION, new UserRegistrationCommand());
+        commands.put(CommandNames.INDEX, new IndexPageCommand());
+        commands.put(CommandNames.ALL_CARS, new AllCarsCommand());
+        commands.put(CommandNames.MAKE_ORDER_PAGE, new MakeOrderPageCommand());
+        commands.put(CommandNames.MAKE_ORDER, new MakeOrderCommand());
+        commands.put(CommandNames.CANCEL_ORDER, new CancelOrderCommand());
+        commands.put(CommandNames.CONFIRM_ORDER, new ConfirmOrderCommand());
+        commands.put(CommandNames.ADD_DISCOUNT_PAGE, new AddDiscountPageCommand());
+        commands.put(CommandNames.ADD_DISCOUNT, new AddDiscountCommand());
+        commands.put(CommandNames.MY_ORDERS, new MyOrdersCommand());
+        commands.put(CommandNames.MY_DISCOUNT, new MyDiscountCommand());
+        commands.put(CommandNames.ADD_CAR_PAGE, new AddCarPageCommand());
+        commands.put(CommandNames.ADD_CAR, new AddCarCommand());
+        commands.put(CommandNames.ALL_CAR_TYPES, new AllCarTypesCommand());
+        commands.put(CommandNames.ALL_USERS, new AllUsersCommand());
+        commands.put(CommandNames.DELETE_USER, new DeleteUserCommand());
     }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -64,15 +64,15 @@ public class Servlet extends HttpServlet {
 
         String path = request.getRequestURI();
         System.out.println(path);
-        path = path.replaceAll(".*/taxi/" , "");
+        path = path.replaceAll(GlobalConstants.EVERYTHING_BEFORE_TAXI_AND_TAXI, GlobalConstants.EMPTY_STRING);
         System.out.println(path);
         Command command = commands.getOrDefault(path ,
-                (HttpServletRequest r) -> ControllerUtil.getUserIndexPage((User.Role)request.getSession().getAttribute("role")));
+                (HttpServletRequest r) -> ControllerUtil.getUserIndexPage((User.Role)request.getSession().getAttribute(GlobalConstants.ROLE)));
         String page = command.execute(request);
         System.out.println(page);
 
-        if(page.contains("redirect")){
-            response.sendRedirect(page.replace("redirect", ""));
+        if(page.contains(GlobalConstants.REDIRECT)){
+            response.sendRedirect(page.replace(GlobalConstants.REDIRECT, GlobalConstants.EMPTY_STRING));
         }else {
             request.getRequestDispatcher(page).forward(request, response);
         }

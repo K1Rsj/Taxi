@@ -1,5 +1,10 @@
 package ua.finalproject.controller.commands.car;
 
+import ua.finalproject.constants.jsp.JSPPages;
+import ua.finalproject.constants.jsp.RequestAttributes;
+import ua.finalproject.constants.jsp.RequestParameters;
+import ua.finalproject.constants.messages.ExceptionMessages;
+import ua.finalproject.constants.messages.Messages;
 import ua.finalproject.controller.commands.Command;
 import ua.finalproject.controller.util.CreateEntityFromRequest;
 import ua.finalproject.controller.util.DataValidation;
@@ -16,20 +21,20 @@ public class AddCarCommand implements Command {
         if (DataValidation.carDataValidation(request)) {
             CarService carService = new CarService();
             Car car = CreateEntityFromRequest.getCarFromRequest(request);
-            String type = request.getParameter("type");
+            String type = request.getParameter(RequestParameters.TYPE);
             try {
                 carService.addCar(car, type);
             } catch (SQLIntegrityConstraintViolationException e) {
-                request.setAttribute("informationMessage", "Car with this number is already exist");
+                request.setAttribute(RequestAttributes.INFORMATION_MESSAGE, bundleManager.getString(ExceptionMessages.CAR_WITH_THIS_NUMBER_ALREADY_EXISTS));
                 logger.info(LogMessageBuilder.INSTANCE.duplicateCarNumberInfo(car.getNumber()));
-                return "/WEB-INF/admin/add_car_page.jsp";
+                return JSPPages.ADD_CAR_PAGE;
             }
-            request.setAttribute("informationMessage", "Car added successfully");
+            request.setAttribute(RequestAttributes.INFORMATION_MESSAGE, bundleManager.getString(Messages.CAR_SUCCESSFULLY_ADDED));
             logger.info(LogMessageBuilder.INSTANCE.newCarInfo(car.getNumber()));
-            return "/WEB-INF/admin/admin_foundation.jsp";
+            return JSPPages.ADMIN_FOUNDATION_PAGE;
         }
         else {
-            return "/WEB-INF/admin/add_car_page.jsp";
+            return JSPPages.ADD_CAR_PAGE;
         }
     }
 }

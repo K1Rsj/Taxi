@@ -1,5 +1,6 @@
 package ua.finalproject.model.dao.mapper;
 
+import ua.finalproject.constants.db.TableColumnNames;
 import ua.finalproject.model.entities.impl.Car;
 import ua.finalproject.model.entities.impl.CarType;
 import ua.finalproject.model.entities.impl.Order;
@@ -15,13 +16,13 @@ public class OrderMapper implements ObjectMapper<Order> {
         CarMapper carMapper = new CarMapper();
         UserMapper userMapper = new UserMapper();
         CarTypeMapper carTypeMapper = new CarTypeMapper();
-        Integer id = resultSet.getInt("id_order");
-        String departureStreet = resultSet.getString("departure_street");
-        String destinationStreet = resultSet.getString("destination_street");
+        Integer id = resultSet.getInt(TableColumnNames.ID_ORDER);
+        String departureStreet = resultSet.getString(TableColumnNames.DEPARTURE_STREET);
+        String destinationStreet = resultSet.getString(TableColumnNames.DESTINATION_STREET);
         Car car = carMapper.extractFromResultSet(resultSet);
         User user = userMapper.extractFromResultSet(resultSet);
         CarType carType = carTypeMapper.extractFromResultSet(resultSet);
-        Long price = resultSet.getLong("price");
+        Long price = resultSet.getLong(TableColumnNames.PRICE);
 
         return new Order.OrderBuilder()
                 .setId(id)

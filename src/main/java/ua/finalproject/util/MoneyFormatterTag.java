@@ -1,5 +1,7 @@
 package ua.finalproject.util;
 
+import ua.finalproject.constants.GlobalConstants;
+
 import javax.servlet.jsp.tagext.SimpleTagSupport;
 import java.io.IOException;
 
@@ -19,6 +21,6 @@ public class MoneyFormatterTag extends SimpleTagSupport {
     public void doTag() throws IOException {
         Double result;
         result = (double) money / 100;
-        getJspContext().getOut().write(String.valueOf(result).replace(".0", ""));
+        getJspContext().getOut().write(String.valueOf(result).replace(GlobalConstants.POINT_ZERO, GlobalConstants.EMPTY_STRING));
     }
 }

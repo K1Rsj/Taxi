@@ -4,6 +4,7 @@ import org.apache.commons.dbcp.BasicDataSource;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import ua.finalproject.constants.db.DbConfig;
+import ua.finalproject.constants.messages.LogMessages;
 import ua.finalproject.util.PropertyManager;
 
 import javax.sql.DataSource;
@@ -39,11 +40,11 @@ public class ConnectionPoolHolder {
         try {
             return getConnectionPool().getConnection();
         } catch (SQLException e) {
-            logger.error("Connection error", e.getMessage());
+            logger.error(LogMessages.DB_CONNECTION_ERROR, e.getMessage());
             throw new RuntimeException(e);
 
         } catch (ClassNotFoundException e) {
-            logger.error("Can't load driver class", e.getMessage());
+            logger.error(LogMessages.LOAD_DRIVER_CLASS_ERROR, e.getMessage());
             throw new RuntimeException(e);
 
         }

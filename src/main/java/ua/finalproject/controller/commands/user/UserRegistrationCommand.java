@@ -1,5 +1,8 @@
 package ua.finalproject.controller.commands.user;
 
+import ua.finalproject.constants.jsp.JSPPages;
+import ua.finalproject.constants.jsp.RequestAttributes;
+import ua.finalproject.constants.messages.Messages;
 import ua.finalproject.controller.commands.Command;
 import ua.finalproject.controller.util.CreateEntityFromRequest;
 import ua.finalproject.controller.util.DataValidation;
@@ -19,15 +22,15 @@ public class UserRegistrationCommand implements Command {
             try {
                 userService.registerUser(user);
             } catch (SQLIntegrityConstraintViolationException e) {
-                request.setAttribute("wrongInputMessage", DataValidation.loginOrEmailNotUniqueDetermination(e));
+                request.setAttribute(RequestAttributes.WRONG_INPUT_MESSAGE, DataValidation.loginOrEmailNotUniqueDetermination(e));
                 logger.info(LogMessageBuilder.INSTANCE.duplicateUserInfo(user.getLogin()));
-                return "/WEB-INF/user/user_registration_page.jsp";
+                return JSPPages.USER_REGISTRATION_PAGE;
             }
-            request.setAttribute("informationMessage", "Registration is successful");
+            request.setAttribute(RequestAttributes.INFORMATION_MESSAGE, bundleManager.getString(Messages.SUCCESSFUL_REGISTRATION));
             logger.info(LogMessageBuilder.INSTANCE.userRegistrationInfo(user.getLogin()));
-            return "/WEB-INF/index.jsp";
+            return JSPPages.INDEX_PAGE;
         } else {
-            return "/WEB-INF/user/user_registration_page.jsp";
+            return JSPPages.USER_REGISTRATION_PAGE;
         }
     }
 

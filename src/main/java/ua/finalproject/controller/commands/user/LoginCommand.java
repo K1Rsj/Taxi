@@ -1,5 +1,12 @@
 package ua.finalproject.controller.commands.user;
 
+import ua.finalproject.constants.GlobalConstants;
+import ua.finalproject.constants.jsp.JSPPages;
+import ua.finalproject.constants.jsp.RequestAttributes;
+import ua.finalproject.constants.jsp.RequestParameters;
+import ua.finalproject.constants.messages.ExceptionMessages;
+import ua.finalproject.constants.messages.Messages;
+import ua.finalproject.constants.messages.ValidationMessages;
 import ua.finalproject.controller.commands.Command;
 import ua.finalproject.controller.util.ContextUtil;
 import ua.finalproject.controller.util.ControllerUtil;
@@ -15,33 +22,34 @@ public class LoginCommand implements Command {
     @Override
     public String execute(HttpServletRequest request) {
         UserService userService = new UserService();
-        String login = request.getParameter("login");
-        String pass = request.getParameter("password");
-        System.out.println("login=" + login + "  " + "password=" + pass);
+        String login = request.getParameter(RequestParameters.LOGIN);
+        String pass = request.getParameter(RequestParameters.PASSWORD);
 
         if (DataValidation.validationOfLoginAndPassword(login, pass)) {
-            request.setAttribute("informationMessage", "Login or password is missed");
-            return "/WEB-INF/index.jsp";
+            request.setAttribute(RequestAttributes.INFORMATION_MESSAGE, bundleManager.getString(ValidationMessages.LOGIN_OR_PASSWORD_IS_MISSED));
+            return JSPPages.INDEX_PAGE;
         }
 
         Optional<User> userOptional = userService.findUserByLogin(login);
         if (!userOptional.isPresent() || !userOptional.get().getPassword().equals(pass)) {
-            request.setAttribute("informationMessage", "Wrong login or password");
+            request.setAttribute(RequestAttributes.INFORMATION_MESSAGE, bundleManager.getString(ValidationMessages.WRONG_LOGIN_OR_PASSWORD));
             logger.info(LogMessageBuilder.INSTANCE.invalidAttemptOfLogInInfo(login));
-            return "/WEB-INF/index.jsp";
+            return JSPPages.INDEX_PAGE;
         }
         User user = userOptional.get();
 
         if (ContextUtil.checkUserAlreadyIsLogged(request.getSession(), login)) {
-            request.setAttribute("informationMessage", "User is already logged");
+            request.setAttribute(RequestAttributes.INFORMATION_MESSAGE, bundleManager.getString(ExceptionMessages.USER_ALREADY_LOGGED));
             logger.info(LogMessageBuilder.INSTANCE.userAlreadyLoggedInfo(login));
-            return "/WEB-INF/index.jsp";
+            return JSPPages.INDEX_PAGE;
         }
 
-        request.getSession().setAttribute("userLogin", login);
-        request.getSession().setAttribute("role", user.getRole());
+        request.getSession().setAttribute(RequestAttributes.USER_LOGIN, login);
+        request.getSession().setAttribute(RequestAttributes.ROLE, user.getRole());
         logger.info(LogMessageBuilder.INSTANCE.userLogInInfo(login));
-        request.setAttribute("informationMessage", "Hello " + user.getFirstName() + " " + user.getSecondName());
+        request.setAttribute(RequestAttributes.INFORMATION_MESSAGE,
+                bundleManager.getString(Messages.HELLO)+ GlobalConstants.WHITE_SPACE +
+                        user.getFirstName() + GlobalConstants.WHITE_SPACE + user.getSecondName());
         return ControllerUtil.getUserIndexPage(user.getRole());
     }
 }

@@ -1,13 +1,7 @@
 <%@ include file="components/addition.jsp"%>
 <jsp:include page="components/head.jsp"/>
-
-<div>
-<c:if test="${not empty requestScope.errorMessage}">
-    <div class="alert alert-info text-center text-white" >${requestScope.errorMessage}</div>
-</c:if>
-</div>
 <div class="alert text-white text-center">
-    <p><fmt:message key="something.went.wrong"/></p>
-    <a class="btn btn-default" href="${pageContext.request.contextPath}/taxi/index" role="button" ></a>
+    <div class="alert alert-danger text-center error" ><fmt:message key="something.went.wrong"/></div>
+    <a href="${pageContext.request.contextPath}/taxi/index" class="btn btn-danger" role="button"><fmt:message key="home"/></a>
 </div>
 <jsp:include page="components/footer.jsp"/>

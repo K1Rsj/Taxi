@@ -3,7 +3,7 @@
 <jsp:include page="user_header.jsp"/>
 
 <div class="content container">
-    <c:out value="Your discount is ${requestScope.discount}%" />
+    <fmt:message key="your.discount"/><c:out value=" ${requestScope.discount}%"/>
 </div>
 <jsp:include page="../components/footer.jsp"/>
 

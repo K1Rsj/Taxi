@@ -2,6 +2,7 @@ package ua.finalproject.model.services;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import ua.finalproject.constants.messages.LogMessages;
 import ua.finalproject.model.dao.CarDao;
 import ua.finalproject.model.dao.CarTypeDao;
 import ua.finalproject.model.dao.OrderDao;
@@ -26,7 +27,7 @@ public class OrderService {
     private static final Logger logger = LogManager.getLogger(OrderService.class);
 
 
-    public Order makeOrder(String login, String departureStreet, String destinationStreet, String type) throws Exception {
+    public Order makeOrder(String login, String departureStreet, String destinationStreet, String type) throws NoFreeCarWithSuchTypeException {
         Connection connection = ConnectionPoolHolder.getConnection();
         try (CarDao carDao = DaoFactory.getInstance().createCarDao(connection);
              UserDao userDao = DaoFactory.getInstance().createUserDao(connection);
@@ -53,10 +54,15 @@ public class OrderService {
             } else {
                 throw new NoFreeCarWithSuchTypeException();
             }
+        } catch (NoFreeCarWithSuchTypeException e) {
+            throw new NoFreeCarWithSuchTypeException();
         } catch (SQLException e) {
-            logger.error("Make order error", e.getMessage());
-            connection.rollback();
-            return null;
+            logger.error(LogMessages.MAKE_ORDER_ERROR, e.getMessage());
+            SQLExceptionRollbackErrorHandle(connection);
+            throw new RuntimeException(e);
+        } catch (Exception e) {
+            logger.error(LogMessages.AUTO_CLOSABLE_RESOURCE_ERROR_IN_MAKE_ORDER, e.getMessage());
+            throw new RuntimeException(e);
         }
     }
 
@@ -72,18 +78,21 @@ public class OrderService {
             userDao.updateMoneySpent(order.getUser().getId(), moneySpent);
             carDao.updateCarState(order.getCar().getId(), Car.State.FREE.toString().toLowerCase());
             connection.commit();
-        } catch (Exception e) {
-            logger.error("Confirm order error", e.getMessage());
+        } catch (SQLException e) {
+            logger.error(LogMessages.CONFIRM_ORDER_ERROR, e.getMessage());
             SQLExceptionRollbackErrorHandle(connection);
+            throw new RuntimeException(e);
+        } catch (Exception e) {
+            logger.error(LogMessages.AUTO_CLOSABLE_RESOURCE_ERROR_IN_CONFIRM_ORDER, e.getMessage());
         }
     }
 
-    public void cancelOrder(Order order){
+    public void cancelOrder(Order order) {
         Connection connection = ConnectionPoolHolder.getConnection();
         try (CarDao carDao = DaoFactory.getInstance().createCarDao(connection)) {
             carDao.updateCarState(order.getCar().getId(), Car.State.FREE.toString().toLowerCase());
         } catch (Exception e) {
-            logger.error("Cancel order error", e.getMessage());
+            logger.error(LogMessages.AUTO_CLOSABLE_RESOURCE_ERROR_IN_CANCEL_ORDER, e.getMessage());
         }
     }
 
@@ -92,7 +101,7 @@ public class OrderService {
         try (OrderDao orderDao = DaoFactory.getInstance().createOrderDao(connection)) {
             return orderDao.findOrdersByUserLogin(login);
         } catch (Exception e) {
-            logger.error("Get all user's orders error", e.getMessage());
+            logger.error(LogMessages.AUTO_CLOSABLE_RESOURCE_ERROR_IN_GET_ALL_USERS_ORDERS, e.getMessage());
         }
         return Optional.empty();
     }
@@ -101,7 +110,8 @@ public class OrderService {
         try {
             connection.rollback();
         } catch (SQLException e1) {
-            logger.error("Confirm order connection rollback error", e1.getMessage());
+            logger.error(LogMessages.ODDER_CONNECTION_ROLLBACK_ERROR, e1.getMessage());
+            throw new RuntimeException(e1);
         }
     }
 }

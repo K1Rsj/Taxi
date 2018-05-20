@@ -2,6 +2,7 @@ package ua.finalproject.model.services;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import ua.finalproject.constants.messages.LogMessages;
 import ua.finalproject.model.dao.CarDao;
 import ua.finalproject.model.dao.CarTypeDao;
 import ua.finalproject.model.dao.connectionPool.ConnectionPoolHolder;
@@ -27,7 +28,7 @@ public class CarService {
         try (CarDao carDao = DaoFactory.getInstance().createCarDao(connection)) {
             return carDao.findAll();
         } catch (Exception e) {
-            logger.error("Show all cars error", e.getMessage());
+            logger.error(LogMessages.AUTO_CLOSABLE_RESOURCE_ERROR_IN_SHOW_ALL_CARS, e.getMessage());
         }
         return Optional.empty();
     }
@@ -37,7 +38,7 @@ public class CarService {
         try (CarDao carDao = DaoFactory.getInstance().createCarDao(connection)) {
             carDao.updateCarState(order.getCar().getId(), Car.State.FREE.toString().toLowerCase());
         } catch (Exception e) {
-            logger.error("Change car state from busy to free error", e.getMessage());
+            logger.error(LogMessages.AUTO_CLOSABLE_RESOURCE_ERROR_IN_CHANGE_CAR_STATE, e.getMessage());
         }
     }
 
@@ -57,9 +58,12 @@ public class CarService {
             connection.commit();
         } catch (SQLIntegrityConstraintViolationException e) {
             throw new SQLIntegrityConstraintViolationException(e);
-        } catch (Exception e) {
-            logger.error("Add car error", e.getMessage());
+        } catch (SQLException e) {
+            logger.error(LogMessages.ADD_CAR_ERROR, e.getMessage());
             SQLExceptionRollbackErrorHandle(connection);
+            throw new RuntimeException(e);
+        } catch (Exception e) {
+            logger.error(LogMessages.AUTO_CLOSABLE_RESOURCE_ERROR_IN_ADD_CAR);
         }
     }
 
@@ -67,7 +71,8 @@ public class CarService {
         try {
             connection.rollback();
         } catch (SQLException e1) {
-            logger.error("Add car connection rollback error", e1.getMessage());
+            logger.error(LogMessages.ADD_CAR_CONNECTION_ROLLBACK_ERROR, e1.getMessage());
+            throw new RuntimeException(e1);
         }
     }
 }

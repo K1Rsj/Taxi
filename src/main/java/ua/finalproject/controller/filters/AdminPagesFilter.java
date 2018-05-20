@@ -1,5 +1,8 @@
 package ua.finalproject.controller.filters;
 
+import ua.finalproject.constants.filter.FilterNames;
+import ua.finalproject.constants.jsp.JSPPages;
+import ua.finalproject.constants.jsp.RequestAttributes;
 import ua.finalproject.model.entities.impl.User;
 
 import javax.servlet.*;
@@ -8,7 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 import java.util.Optional;
 
-@WebFilter(filterName = "AdminPagesFilter")
+@WebFilter(filterName = FilterNames.ADMIN_PAGES_FILTER)
 
 public class AdminPagesFilter implements Filter {
     @Override
@@ -20,13 +23,13 @@ public class AdminPagesFilter implements Filter {
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
 
         HttpServletRequest request = (HttpServletRequest) servletRequest;
-        Optional<User.Role> role = Optional.ofNullable((User.Role) request.getSession().getAttribute("role"));
+        Optional<User.Role> role = Optional.ofNullable((User.Role) request.getSession().getAttribute(RequestAttributes.ROLE));
         if (role.isPresent() && role.equals(Optional.of(User.Role.USER))) {
-            request.getRequestDispatcher("/WEB-INF/user/user_foundation.jsp").forward(servletRequest, servletResponse);
+            request.getRequestDispatcher(JSPPages.USER_FOUNDATION_PAGE).forward(servletRequest, servletResponse);
         } else if (role.isPresent() && role.equals(Optional.of(User.Role.ADMIN))) {
             filterChain.doFilter(servletRequest, servletResponse);
         } else {
-            request.getRequestDispatcher("/WEB-INF/index.jsp").forward(servletRequest, servletResponse);
+            request.getRequestDispatcher(JSPPages.INDEX_PAGE).forward(servletRequest, servletResponse);
         }
     }
 
