@@ -52,6 +52,9 @@ public class CarType implements Entity<Integer> {
         this.discount = discount;
     }
 
+    /**
+     * Car type builder
+     */
     public static final class CarTypeBuilder implements EntityBuilder<CarType> {
 
         private Integer id;

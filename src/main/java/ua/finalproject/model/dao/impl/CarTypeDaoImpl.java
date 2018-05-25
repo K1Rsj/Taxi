@@ -8,23 +8,29 @@ import ua.finalproject.model.dao.mapper.CarTypeMapper;
 import ua.finalproject.model.entities.impl.CarType;
 import ua.finalproject.util.LogMessageBuilder;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+/**
+ * Implementation for car type dao
+ */
 public class CarTypeDaoImpl implements CarTypeDao {
 
-
+    /**
+     * @see Connection
+     */
     private Connection connection;
 
     public CarTypeDaoImpl(Connection connection) {
         this.connection = connection;
     }
 
+    /**
+     * Adds car type to DB
+     * @param carType car type that will be added to DB
+     */
     @Override
     public void create(CarType carType) {
         CarTypeMapper carTypeMapper = new CarTypeMapper();
@@ -38,6 +44,11 @@ public class CarTypeDaoImpl implements CarTypeDao {
         }
     }
 
+    /**
+     * Finds car type by id
+     * @param id id of car type
+     * @return car type that matches id
+     */
     @Override
     public Optional<CarType> findById(Integer id) {
         CarTypeMapper carTypeMapper = new CarTypeMapper();
@@ -54,6 +65,10 @@ public class CarTypeDaoImpl implements CarTypeDao {
         return Optional.empty();
     }
 
+    /**
+     * Finds all car types
+     * @return list of all car types
+     */
     @Override
     public Optional<List<CarType>> findAll() {
         List<CarType> allCarTypes = new ArrayList<>();
@@ -70,6 +85,10 @@ public class CarTypeDaoImpl implements CarTypeDao {
         }
     }
 
+    /**
+     * Deletes car type by id
+     * @param id id of car type
+     */
     @Override
     public void delete(Integer id) {
         try (PreparedStatement preparedStatement = connection
@@ -82,6 +101,11 @@ public class CarTypeDaoImpl implements CarTypeDao {
         }
     }
 
+    /**
+     * Updates car type's discount
+     * @param id of car type
+     * @param discount of car type
+     */
     @Override
     public void updateDiscount(Integer id, Integer discount) {
         try (PreparedStatement preparedStatement = connection.prepareStatement(DbQueries.UPDATE_CAR_TYPE_SET_DISCOUNT)) {
@@ -94,6 +118,9 @@ public class CarTypeDaoImpl implements CarTypeDao {
         }
     }
 
+    /**
+     * Auto-closing the connection
+     */
     @Override
     public void close() {
         try {

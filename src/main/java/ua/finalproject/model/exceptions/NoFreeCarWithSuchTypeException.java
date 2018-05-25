@@ -3,6 +3,9 @@ package ua.finalproject.model.exceptions;
 import ua.finalproject.constants.messages.ExceptionMessages;
 import ua.finalproject.util.BundleManager;
 
+/**
+ * Throw this exception when there is no free car of some type
+ */
 public class NoFreeCarWithSuchTypeException extends Exception {
 
     @Override

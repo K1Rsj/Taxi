@@ -12,13 +12,28 @@ import ua.finalproject.util.LogMessageBuilder;
 
 import javax.servlet.http.HttpServletRequest;
 
+/**
+ * Command for adding discount for car type
+ */
 public class AddDiscountCommand implements Command {
+
+    private CarTypeService carTypeService;
+
+    public AddDiscountCommand(CarTypeService carTypeService) {
+        this.carTypeService = carTypeService;
+    }
+
+    /**
+     *
+     * @param request request from user
+     * @return path to admin foundation page if validation was successful
+     * or else return path to add discount page
+     */
     @Override
     public String execute(HttpServletRequest request) {
         String type = request.getParameter(RequestParameters.TYPE);
         Integer discount = Integer.parseInt(request.getParameter(RequestParameters.DISCOUNT));
         if (DataValidation.checkDiscountAmount(discount)) {
-            CarTypeService carTypeService = new CarTypeService();
             carTypeService.updateDiscount(type, discount);
             request.setAttribute(RequestAttributes.INFORMATION_MESSAGE, bundleManager.getString(Messages.DISCOUNT_SUCCESSFULLY_ADDED));
             logger.info(LogMessageBuilder.INSTANCE.newDiscountInfo(type, discount));

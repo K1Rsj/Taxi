@@ -4,6 +4,12 @@ import ua.finalproject.model.entities.impl.Car;
 import ua.finalproject.model.entities.impl.User;
 
 public class UtilDao {
+
+    /**
+     * Parses user's role from string to enum value
+     * @param role user's role
+     * @return user role from enum
+     */
     public static User.Role parseUserRole(String role) {
         if (role.equalsIgnoreCase(String.valueOf(User.Role.ADMIN))) {
             return User.Role.ADMIN;
@@ -12,6 +18,11 @@ public class UtilDao {
         }
     }
 
+    /**
+     * Parses car's state from string to enum value
+     * @param state car's state
+     * @return car state from enum
+     */
     public static Car.State parseCarState(String state) {
         if (state.equalsIgnoreCase(String.valueOf(Car.State.FREE))) {
             return Car.State.FREE;
@@ -20,6 +31,11 @@ public class UtilDao {
         }
     }
 
+    /**
+     * Parses car's type name from string to id
+     * @param type car's type
+     * @return id of car's type
+     */
     public static Integer parseTypeString(String type) {
         if (type.equals("standard")) {
             return 1;

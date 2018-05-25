@@ -18,8 +18,19 @@ import java.util.Optional;
 
 public class UserService {
 
+    /**
+     * Logger for user service class
+     *
+     * @see LogManager
+     */
     private static final Logger logger = LogManager.getLogger(UserService.class);
 
+    /**
+     * Adds user to DB.
+     * @param user user
+     * @throws SQLIntegrityConstraintViolationException if user's login or email already
+     * exists in DB
+     */
     public void registerUser(User user) throws SQLIntegrityConstraintViolationException {
         Connection connection = ConnectionPoolHolder.getConnection();
         try (UserDao userDao = DaoFactory.getInstance().createUserDao(connection)) {
@@ -31,6 +42,11 @@ public class UserService {
         }
     }
 
+    /**
+     * Finds user by login
+     * @param login user's login
+     * @return user
+     */
     public Optional<User> findUserByLogin(String login) {
         Connection connection = ConnectionPoolHolder.getConnection();
         try (UserDao userDao = DaoFactory.getInstance().createUserDao(connection)) {
@@ -41,6 +57,11 @@ public class UserService {
         return Optional.empty();
     }
 
+    /**
+     * Gets user's discount
+     * @param login user's login
+     * @return user's discount
+     */
     public Integer getUserDiscount(String login) {
         Connection connection = ConnectionPoolHolder.getConnection();
         Integer discount = 0;
@@ -52,6 +73,10 @@ public class UserService {
         return discount;
     }
 
+    /**
+     * Shows all users
+     * @return list of all users
+     */
     public Optional<List<User>> showAllUsers() {
         Connection connection = ConnectionPoolHolder.getConnection();
         try (UserDao userDao = DaoFactory.getInstance().createUserDao(connection)) {
@@ -62,6 +87,10 @@ public class UserService {
         return Optional.empty();
     }
 
+    /**
+     * Deletes user by id
+     * @param id user's id
+     */
     public void deleteUserById(Integer id) {
         Connection connection = ConnectionPoolHolder.getConnection();
         try (UserDao userDao = DaoFactory.getInstance().createUserDao(connection);
@@ -79,6 +108,10 @@ public class UserService {
         }
     }
 
+    /**
+     * Handles rollback error
+     * @param connection connection
+     */
     private void SQLExceptionRollbackErrorHandle(Connection connection) {
         try {
             connection.rollback();

@@ -7,6 +7,9 @@ import ua.finalproject.model.dao.UserDao;
 
 import java.sql.Connection;
 
+/**
+ * Abstract factory for dao
+ */
 public abstract class DaoFactory {
     private static volatile DaoFactory daoFactory;
 
@@ -15,6 +18,10 @@ public abstract class DaoFactory {
     public abstract OrderDao createOrderDao(Connection connection);
     public abstract CarTypeDao createCarTypeDao(Connection connection);
 
+    /**
+     *
+     * @return Dao factory
+     */
     public static DaoFactory getInstance(){
         if( daoFactory == null ){
             synchronized (DaoFactory.class){

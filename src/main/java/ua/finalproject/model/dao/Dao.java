@@ -9,14 +9,37 @@ import java.util.Optional;
 
 public interface Dao<T, ID> extends AutoCloseable {
 
+    /**
+     * Logger for Dao classes
+     *
+     * @see LogManager
+     */
     Logger logger = LogManager.getLogger(Dao.class);
 
+    /**
+     * Adds entity to DB
+     * @param entity entity that will be added to DB
+     * @throws SQLIntegrityConstraintViolationException if entity value already exists in DB
+     */
     void create(T entity) throws SQLIntegrityConstraintViolationException;
 
+    /**
+     * Finds entity by id
+     * @param id id of entity
+     * @return entity that matches id
+     */
     Optional<T> findById(ID id);
 
+    /**
+     * Finds all entities
+     * @return list of all entities
+     */
     Optional<List<T>> findAll();
 
+    /**
+     * Deletes entity by id
+     * @param id id of entity
+     */
     void delete(ID id);
 
 }

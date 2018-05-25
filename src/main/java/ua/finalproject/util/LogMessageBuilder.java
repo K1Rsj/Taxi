@@ -1,6 +1,10 @@
 package ua.finalproject.util;
 
+/**
+ * Message builder for logger
+ */
 public enum LogMessageBuilder {
+
     INSTANCE;
 
     public String userLogInInfo(String login) {
@@ -27,12 +31,12 @@ public enum LogMessageBuilder {
         return "Added new discount:'" + discount + "'% for car type: " + type;
     }
 
-    public String cancelOrderInfo(String name, String secondName) {
-        return "User:'" + name + " " + secondName + " cancelled order";
+    public String cancelOrderInfo(String login) {
+        return "User: " + login + " cancelled order";
     }
 
-    public String confirmOrderInfo(String name, String secondName) {
-        return "User:'" + name + " " + secondName + " confirmed order";
+    public String confirmOrderInfo(String login) {
+        return "User: " + login + " confirmed order";
     }
 
     public String makeOrderInfo(String name, String secondName, String carNumber) {

@@ -1,5 +1,8 @@
 package ua.finalproject.constants.jsp;
 
+/**
+ * Path to JSP pages
+ */
 public interface JSPPages {
 
     String ADD_CAR_PAGE = "/WEB-INF/admin/add_car_page.jsp";

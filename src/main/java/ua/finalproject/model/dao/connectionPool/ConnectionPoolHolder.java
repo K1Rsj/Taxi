@@ -13,10 +13,21 @@ import java.sql.SQLException;
 
 public class ConnectionPoolHolder {
 
+    /**
+     * @see DataSource
+     */
     private static volatile DataSource jdbcConnectionPool;
+
+    /**
+     * @see LogManager
+     */
     private static final Logger logger = LogManager.getLogger(ConnectionPoolHolder.class);
 
-
+    /**
+     *
+     * @return DataSource
+     * @throws ClassNotFoundException if can't load the driver
+     */
     private static DataSource getConnectionPool() throws ClassNotFoundException {
         if(jdbcConnectionPool == null){
             synchronized (ConnectionPoolHolder.class){
@@ -36,6 +47,11 @@ public class ConnectionPoolHolder {
         return jdbcConnectionPool;
     }
 
+    /**
+     *
+     * @return connection from data source
+     * @see Connection
+     */
     public static Connection getConnection(){
         try {
             return getConnectionPool().getConnection();

@@ -11,10 +11,18 @@ import ua.finalproject.util.BundleManager;
 import javax.servlet.http.HttpServletRequest;
 import java.sql.SQLIntegrityConstraintViolationException;
 
+/**
+ * Validates input data
+ */
 public class DataValidation {
 
     private static BundleManager bundleManager = BundleManager.INSTANCE;
 
+    /**
+     * Validates user's input data
+     * @param request user's request
+     * @return <code>true</code> if input data format is correct
+     */
     public static boolean userDataValidation(HttpServletRequest request) {
         String login = request.getParameter(RequestParameters.LOGIN);
         String password = request.getParameter(RequestParameters.PASSWORD);
@@ -54,6 +62,11 @@ public class DataValidation {
         }
     }
 
+    /**
+     * Determines what input data in not unique
+     * @param e exception that indicates that entered data not unique
+     * @return input field that is not unique
+     */
     public static String loginOrEmailNotUniqueDetermination(SQLIntegrityConstraintViolationException e) {
         if (e.getMessage().contains(GlobalConstants.LOGIN)) {
             return bundleManager.getString(ExceptionMessages.NOT_UNIQUE_LOGIN);
@@ -62,10 +75,22 @@ public class DataValidation {
         }
     }
 
+    /**
+     * Validates user's login and password input data
+     * @param login user's login
+     * @param pass user's password
+     * @return <code>true</code> if input data format is incorrect
+     */
     public static boolean validationOfLoginAndPassword(String login, String pass) {
         return login == null || login.equals(GlobalConstants.EMPTY_STRING) || pass == null || pass.equals(GlobalConstants.EMPTY_STRING);
     }
 
+    /**
+     * Validates user's order input data
+     * @param departureStreet departure street
+     * @param destinationStreet destination street
+     * @return <code>true</code> if input data format is correct
+     */
     public static boolean orderDataValidation(String departureStreet, String destinationStreet) {
         if (departureStreet == null || !departureStreet.matches(bundleManager.getString(RegexContainer.REGEX_STREET))) {
             return false;
@@ -73,10 +98,20 @@ public class DataValidation {
             return destinationStreet != null && destinationStreet.matches(bundleManager.getString(RegexContainer.REGEX_STREET));
     }
 
+    /**
+     * Validates user's discount input data
+     * @param discount amount of discount
+     * @return <code>true</code> if input discount amount is correct
+     */
     public static boolean checkDiscountAmount(Integer discount) {
         return discount < 16 && discount > 0;
     }
 
+    /**
+     * Validates user's input data
+     * @param request user's request
+     * @return <code>true</code> if input data format is correct
+     */
     public static boolean carDataValidation(HttpServletRequest request) {
         String model = request.getParameter(RequestParameters.MODEL);
         String number = request.getParameter(RequestParameters.NUMBER);

@@ -11,6 +11,9 @@ import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 import java.util.Optional;
 
+/**
+ * Filter for commands that only guest users can execute
+ */
 @WebFilter(filterName = FilterNames.PUBLIC_PAGES_FILTER)
 public class PublicPagesFilter implements Filter {
 
@@ -19,6 +22,15 @@ public class PublicPagesFilter implements Filter {
 
     }
 
+    /**
+     * If someone than guest execute public commands he will
+     * be redirected to his index page.
+     * @param servletRequest request
+     * @param servletResponse response
+     * @param filterChain filter chain
+     * @throws IOException io exception
+     * @throws ServletException servlet exception
+     */
     @Override
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain)
             throws IOException, ServletException {

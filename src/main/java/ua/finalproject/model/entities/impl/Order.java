@@ -70,6 +70,9 @@ public class Order implements Entity<Integer> {
         this.price = price;
     }
 
+    /**
+     * Order builder
+     */
     public static final class OrderBuilder implements EntityBuilder<Order> {
 
         private Integer id;

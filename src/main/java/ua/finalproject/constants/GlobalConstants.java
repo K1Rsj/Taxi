@@ -1,6 +1,10 @@
 package ua.finalproject.constants;
 
+/**
+ * Constants for all application
+ */
 public interface GlobalConstants {
+
     String EVERYTHING_BEFORE_TAXI_AND_TAXI = ".*/taxi/";
     String EMPTY_STRING = "";
     String REDIRECT = "redirect";

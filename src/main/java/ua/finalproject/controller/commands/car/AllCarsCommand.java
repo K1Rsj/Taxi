@@ -11,10 +11,24 @@ import ua.finalproject.model.services.CarService;
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
+/**
+ * Command for getting all cars from DB
+ */
 public class AllCarsCommand implements Command {
+
+    private CarService carService;
+
+    public AllCarsCommand(CarService carService) {
+        this.carService = carService;
+    }
+
+    /**
+     *
+     * @param request request from user
+     * @return path to all cars page
+     */
     @Override
     public String execute(HttpServletRequest request) {
-        CarService carService = new CarService();
         List<Car> allCars = carService.showAllCars().get();
         if (allCars.isEmpty()) {
             request.setAttribute(RequestAttributes.MESSAGE, bundleManager.getString(Messages.THERE_ARE_NO_CARS_IN_DB));

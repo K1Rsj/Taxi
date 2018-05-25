@@ -11,14 +11,25 @@ import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 import java.util.Optional;
 
+/**
+ * Filter for commands that only user can execute
+ */
 @WebFilter(filterName = FilterNames.USER_PAGES_FILTER)
-
 public class UserPagesFilter implements Filter {
     @Override
     public void init(FilterConfig filterConfig) {
 
     }
 
+    /**
+     * If someone than user execute user's commands he will
+     * be redirected to his index page.
+     * @param servletRequest request
+     * @param servletResponse response
+     * @param filterChain filter chain
+     * @throws IOException io exception
+     * @throws ServletException servlet exception
+     */
     @Override
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
 

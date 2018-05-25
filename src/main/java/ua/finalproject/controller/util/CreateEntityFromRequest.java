@@ -8,6 +8,11 @@ import javax.servlet.http.HttpServletRequest;
 
 public class CreateEntityFromRequest {
 
+    /**
+     *
+     * @param request request from user
+     * @return user created from request
+     */
     public static User getUserFromRequest(HttpServletRequest request) {
         String login = request.getParameter(RequestParameters.LOGIN);
         String password = request.getParameter(RequestParameters.PASSWORD);
@@ -25,6 +30,11 @@ public class CreateEntityFromRequest {
                 .build();
     }
 
+    /**
+     *
+     * @param request request from user
+     * @return car created from request
+     */
     public static Car getCarFromRequest(HttpServletRequest request) {
         String model = request.getParameter(RequestParameters.MODEL);
         String number = request.getParameter(RequestParameters.NUMBER);

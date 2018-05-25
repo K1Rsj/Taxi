@@ -11,10 +11,24 @@ import ua.finalproject.model.services.UserService;
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
+/**
+ * Command for getting all users
+ */
 public class AllUsersCommand implements Command {
+
+    private UserService userService;
+
+    public AllUsersCommand(UserService userService) {
+        this.userService = userService;
+    }
+
+    /**
+     *
+     * @param request request from user
+     * @return path to all users page
+     */
     @Override
     public String execute(HttpServletRequest request) {
-        UserService userService = new UserService();
         List<User> allUsers = userService.showAllUsers().get();
         if (allUsers.isEmpty()) {
             request.setAttribute(RequestAttributes.MESSAGE, bundleManager.getString(Messages.THERE_ARE_NO_USERS_IN_DB));

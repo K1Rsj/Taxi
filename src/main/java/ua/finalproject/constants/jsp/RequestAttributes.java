@@ -1,6 +1,10 @@
 package ua.finalproject.constants.jsp;
 
+/**
+ * All attributes for jsp pages
+ */
 public interface RequestAttributes {
+
     String INFORMATION_MESSAGE = "informationMessage";
     String MESSAGE = "message";
     String CARS = "cars";

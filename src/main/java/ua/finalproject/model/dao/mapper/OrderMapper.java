@@ -11,6 +11,13 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class OrderMapper implements ObjectMapper<Order> {
+
+    /**
+     * Extracts order from result set
+     * @param resultSet result set
+     * @return order from result set
+     * @throws SQLException if something wrong with DB
+     */
     @Override
     public Order extractFromResultSet(ResultSet resultSet) throws SQLException {
         CarMapper carMapper = new CarMapper();
@@ -35,6 +42,12 @@ public class OrderMapper implements ObjectMapper<Order> {
                 .build();
     }
 
+    /**
+     * Creating query from order
+     * @param order order
+     * @param preparedStatement prepared statement
+     * @throws SQLException if something wrong with BD
+     */
     @Override
     public void setValuesForQuery(Order order, PreparedStatement preparedStatement) throws SQLException {
         preparedStatement.setString(1, order.getDepartureStreet());

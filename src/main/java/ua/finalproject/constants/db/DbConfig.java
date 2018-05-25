@@ -4,6 +4,7 @@ package ua.finalproject.constants.db;
  * Keys for db.properties
  */
 public interface DbConfig {
+
     String DB_URL = "db.url";
     String DB_DRIVER = "db.driver";
     String DB_USER = "db.user";

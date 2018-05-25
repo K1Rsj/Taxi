@@ -2,6 +2,9 @@ package ua.finalproject.constants.command;
 
 public interface CommandNames {
 
+    /**
+     * Command names
+     */
     String LOGIN = "login";
     String LOGOUT = "logout";
     String USER_REGISTRATION_PAGE = "user_registration_page";

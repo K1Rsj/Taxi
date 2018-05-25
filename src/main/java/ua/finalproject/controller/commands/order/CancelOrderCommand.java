@@ -1,5 +1,6 @@
 package ua.finalproject.controller.commands.order;
 
+import ua.finalproject.constants.jsp.JSPPages;
 import ua.finalproject.constants.jsp.RequestAttributes;
 import ua.finalproject.constants.messages.Messages;
 import ua.finalproject.controller.commands.Command;
@@ -12,18 +13,31 @@ import ua.finalproject.util.LogMessageBuilder;
 import javax.servlet.http.HttpServletRequest;
 import java.util.Optional;
 
+/**
+ * Command for cancelling order
+ */
 public class CancelOrderCommand implements Command {
+
+    private OrderService orderService;
+
+    public CancelOrderCommand(OrderService orderService) {
+        this.orderService = orderService;
+    }
+
+    /**
+     *
+     * @param request request from user
+     * @return path to user foundation page
+     */
     @Override
     public String execute(HttpServletRequest request) {
-        OrderService orderService = new OrderService();
         Optional<Order> order = Optional.ofNullable((Order) request.getSession().getAttribute(RequestAttributes.ORDER));
         if (order.isPresent()) {
             orderService.cancelOrder(order.get());
             request.setAttribute(RequestAttributes.ORDER_INFORMATION_MESSAGE, bundleManager.getString(Messages.WE_ARE_DISAPPOINTED));
             request.getSession().removeAttribute(RequestAttributes.ORDER);
-            logger.info(LogMessageBuilder.INSTANCE.cancelOrderInfo(order.get().getUser().getFirstName(),
-                    order.get().getUser().getSecondName()));
+            logger.info(LogMessageBuilder.INSTANCE.cancelOrderInfo((String)request.getSession().getAttribute(RequestAttributes.USER_LOGIN)));
         }
-        return ControllerUtil.getUserIndexPage((User.Role) request.getSession().getAttribute(RequestAttributes.ROLE));
+        return JSPPages.USER_FOUNDATION_PAGE;
     }
 }

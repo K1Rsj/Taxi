@@ -19,6 +19,9 @@ public class User implements Entity<Integer> {
     private Long moneySpent;
     private Role role;
 
+    /**
+     * User roles
+     */
     public enum Role {
         USER, ADMIN
     }

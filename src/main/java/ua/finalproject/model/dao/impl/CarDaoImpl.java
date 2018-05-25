@@ -13,14 +13,25 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+/**
+ * Implementation for car dao
+ */
 public class CarDaoImpl implements CarDao {
 
+    /**
+     * @see Connection
+     */
     private Connection connection;
 
     public CarDaoImpl(Connection connection) {
         this.connection = connection;
     }
 
+    /**
+     * Adds car to DB
+     * @param car car that will be added to DB
+     * @throws SQLIntegrityConstraintViolationException if car number already exists in DB
+     */
     @Override
     public void create(Car car) throws SQLIntegrityConstraintViolationException {
         CarMapper carMapper = new CarMapper();
@@ -36,6 +47,11 @@ public class CarDaoImpl implements CarDao {
         }
     }
 
+    /**
+     * Finds car by id
+     * @param id id of car
+     * @return car that matches id
+     */
     @Override
     public Optional<Car> findById(Integer id) {
         CarMapper carMapper = new CarMapper();
@@ -52,6 +68,10 @@ public class CarDaoImpl implements CarDao {
         return Optional.empty();
     }
 
+    /**
+     * Finds all cars
+     * @return list of all cars
+     */
     @Override
     public Optional<List<Car>> findAll() {
         List<Car> allCars = new ArrayList<>();
@@ -68,6 +88,10 @@ public class CarDaoImpl implements CarDao {
         }
     }
 
+    /**
+     * Deletes car by id
+     * @param id id of car
+     */
     @Override
     public void delete(Integer id) {
         try (PreparedStatement preparedStatement = connection
@@ -80,6 +104,11 @@ public class CarDaoImpl implements CarDao {
         }
     }
 
+    /**
+     * Gets free car by the car type id
+     * @param typeId id of the car type
+     * @return car that is free and matches the car type
+     */
     @Override
     public Optional<Car> getFreeCarByTypeId(Integer typeId) {
         CarMapper carMapper = new CarMapper();
@@ -96,6 +125,11 @@ public class CarDaoImpl implements CarDao {
         return Optional.empty();
     }
 
+    /**
+     * Updates car state
+     * @param carId id of the car
+     * @param carState new car state
+     */
     @Override
     public void updateCarState(Integer carId, String carState) {
         try (PreparedStatement preparedStatement = connection.prepareStatement(DbQueries.UPDATE_CAR_STATE_BY_ID)) {
@@ -108,6 +142,9 @@ public class CarDaoImpl implements CarDao {
         }
     }
 
+    /**
+     * Auto-closing the connection
+     */
     @Override
     public void close(){
         try {

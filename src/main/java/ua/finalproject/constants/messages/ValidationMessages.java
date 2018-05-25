@@ -1,6 +1,10 @@
 package ua.finalproject.constants.messages;
 
+/**
+ * Validation messages for jsp pages
+ */
 public interface ValidationMessages {
+
     String LOGIN_OR_PASSWORD_IS_MISSED = "empty.login.password";
     String WRONG_LOGIN_OR_PASSWORD = "wrong.login.password";
     String WRONG_STREET_FORMAT = "wrong.street.format";

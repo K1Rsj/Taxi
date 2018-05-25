@@ -8,6 +8,13 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class CarTypeMapper implements ObjectMapper<CarType> {
+
+    /**
+     * Extracts car type from result set
+     * @param resultSet result set
+     * @return car type from result set
+     * @throws SQLException if something wrong with DB
+     */
     @Override
     public CarType extractFromResultSet(ResultSet resultSet) throws SQLException {
         Integer id = resultSet.getInt(TableColumnNames.ID_CAR_TYPE);
@@ -25,6 +32,12 @@ public class CarTypeMapper implements ObjectMapper<CarType> {
                 .build();
     }
 
+    /**
+     * Creating query from car type
+     * @param carType car type
+     * @param preparedStatement prepared statement
+     * @throws SQLException if something wrong with BD
+     */
     @Override
     public void setValuesForQuery(CarType carType, PreparedStatement preparedStatement) throws SQLException {
         preparedStatement.setString(1, carType.getType());

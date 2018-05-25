@@ -1,6 +1,10 @@
 package ua.finalproject.constants.regex;
 
+/**
+ * Container with all regexp for validation input data
+ */
 public interface RegexContainer {
+
     /**
      * User validation
      */
@@ -10,12 +14,14 @@ public interface RegexContainer {
     String REGEX_FIRST_NAME = "first.name.regexp";
     String REGEX_SECOND_NAME = "second.name.regexp";
     String REGEX_PHONE_NUMBER = "phone.number.regexp";
+
     /**
      * Car validation
      */
     String REGEX_MODEL = "model.regexp";
     String REGEX_NUMBER = "number.regexp";
     String REGEX_DRIVER_NAME = "driver.name.regexp";
+
     /**
      * Address validation
      */

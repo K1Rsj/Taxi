@@ -1,6 +1,10 @@
 package ua.finalproject.constants.db;
 
+/**
+ * DB queries for taxi DB
+ */
 public interface DbQueries {
+
     String INSERT_INTO_CARS = "INSERT INTO CARS(model, number, driver, car_type_id) VALUES (?,?,?,?) ";
     String SELECT_FROM_CARS_BY_ID = "SELECT * FROM CARS WHERE id_car = ?";
     String SELECT_FROM_CARS_LEFT_JOIN_CAR_TYPE = "SELECT * FROM CARS LEFT JOIN car_type on car_type_id = id_car_type";

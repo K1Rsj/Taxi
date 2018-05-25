@@ -5,6 +5,9 @@ import ua.finalproject.constants.GlobalConstants;
 import javax.servlet.jsp.tagext.SimpleTagSupport;
 import java.io.IOException;
 
+/**
+ * Formats the money
+ */
 public class MoneyFormatterTag extends SimpleTagSupport {
 
     private Long money;
@@ -17,6 +20,10 @@ public class MoneyFormatterTag extends SimpleTagSupport {
         this.money = money;
     }
 
+    /**
+     * Formats the money
+     * @throws IOException if something wrong with output stream
+     */
     @Override
     public void doTag() throws IOException {
         Double result;

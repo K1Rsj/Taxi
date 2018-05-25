@@ -15,11 +15,26 @@ import ua.finalproject.util.LogMessageBuilder;
 import javax.servlet.http.HttpServletRequest;
 import java.sql.SQLIntegrityConstraintViolationException;
 
+/**
+ * Command for adding car to taxi DB
+ */
 public class AddCarCommand implements Command {
+
+    private CarService carService;
+
+    public AddCarCommand(CarService carService) {
+        this.carService = carService;
+    }
+
+    /**
+     *
+     * @param request request from user
+     * @return path to admin foundation page if validation was successful
+     * or else return path to add car page
+     */
     @Override
     public String execute(HttpServletRequest request) {
         if (DataValidation.carDataValidation(request)) {
-            CarService carService = new CarService();
             Car car = CreateEntityFromRequest.getCarFromRequest(request);
             String type = request.getParameter(RequestParameters.TYPE);
             try {

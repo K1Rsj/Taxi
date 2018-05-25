@@ -10,6 +10,13 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class CarMapper implements ObjectMapper<Car> {
+
+    /**
+     * Extracts car from result set
+     * @param resultSet result set
+     * @return car from result set
+     * @throws SQLException if something wrong with DB
+     */
     @Override
     public Car extractFromResultSet(ResultSet resultSet) throws SQLException {
         CarTypeMapper carTypeMapper = new CarTypeMapper();
@@ -30,6 +37,12 @@ public class CarMapper implements ObjectMapper<Car> {
                 .build();
     }
 
+    /**
+     * Creating query from car
+     * @param car car
+     * @param preparedStatement prepared statement
+     * @throws SQLException if something wrong with BD
+     */
     @Override
     public void setValuesForQuery(Car car, PreparedStatement preparedStatement) throws SQLException {
         preparedStatement.setString(1, car.getModel());

@@ -12,7 +12,9 @@ public class Car implements Entity<Integer> {
     private String driver;
     private CarType carType;
 
-
+    /**
+     * Car states
+     */
     public enum State {
         FREE, BUSY
     }
@@ -67,6 +69,9 @@ public class Car implements Entity<Integer> {
         this.carType = carType;
     }
 
+    /**
+     * Car builder
+     */
     public static final class CarBuilder implements EntityBuilder<Car> {
 
         private Integer id;

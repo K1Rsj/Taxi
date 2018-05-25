@@ -1,6 +1,10 @@
 package ua.finalproject.constants.messages;
 
+/**
+ * Messages for jsp pages
+ */
 public interface Messages {
+
     String HELLO = "hello";
     String CAR_SUCCESSFULLY_ADDED = "car.add.success";
     String THERE_ARE_NO_CARS_IN_DB = "no.cars";

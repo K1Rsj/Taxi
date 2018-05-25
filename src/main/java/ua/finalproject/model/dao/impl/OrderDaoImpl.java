@@ -16,14 +16,24 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+/**
+ * Implementation for order dao
+ */
 public class OrderDaoImpl implements OrderDao {
 
+    /**
+     * @see Connection
+     */
     private Connection connection;
 
     public OrderDaoImpl(Connection connection) {
         this.connection = connection;
     }
 
+    /**
+     * Adds order to DB
+     * @param order order that will be added to DB
+     */
     @Override
     public void create(Order order) {
         OrderMapper orderMapper = new OrderMapper();
@@ -37,6 +47,11 @@ public class OrderDaoImpl implements OrderDao {
         }
     }
 
+    /**
+     * Finds order by id
+     * @param id id of order
+     * @return order that matches id
+     */
     @Override
     public Optional<Order> findById(Integer id) {
         OrderMapper orderMapper = new OrderMapper();
@@ -53,6 +68,10 @@ public class OrderDaoImpl implements OrderDao {
         return Optional.empty();
     }
 
+    /**
+     * Finds all orders
+     * @return list of all orders
+     */
     @Override
     public Optional<List<Order>> findAll() {
         List<Order> orders = new ArrayList<>();
@@ -69,6 +88,10 @@ public class OrderDaoImpl implements OrderDao {
         }
     }
 
+    /**
+     * Deletes order by id
+     * @param id id of order
+     */
     @Override
     public void delete(Integer id) {
         try (PreparedStatement preparedStatement = connection
@@ -81,6 +104,11 @@ public class OrderDaoImpl implements OrderDao {
         }
     }
 
+    /**
+     * Finds all user's orders
+     * @param login user's login
+     * @return list of all user's orders
+     */
     @Override
     public Optional<List<Order>> findOrdersByUserLogin(String login) {
         List<Order> userOrders = new ArrayList<>();
@@ -98,6 +126,9 @@ public class OrderDaoImpl implements OrderDao {
         }
     }
 
+    /**
+     * Auto-closing the connection
+     */
     @Override
     public void close() {
         try {

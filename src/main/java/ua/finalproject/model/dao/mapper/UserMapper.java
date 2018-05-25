@@ -11,6 +11,13 @@ import java.sql.SQLException;
 
 public class UserMapper implements ObjectMapper<User> {
 
+
+    /**
+     * Extracts user from result set
+     * @param resultSet result set
+     * @return user from result set
+     * @throws SQLException if something wrong with DB
+     */
     @Override
     public User extractFromResultSet(ResultSet resultSet) throws SQLException {
         Integer id = resultSet.getInt(TableColumnNames.ID_USER);
@@ -36,6 +43,12 @@ public class UserMapper implements ObjectMapper<User> {
                 .build();
     }
 
+    /**
+     * Creating query from user
+     * @param user user
+     * @param preparedStatement prepared statement
+     * @throws SQLException if something wrong with BD
+     */
     @Override
     public void setValuesForQuery(User user, PreparedStatement preparedStatement) throws SQLException {
         preparedStatement.setString(1, user.getLogin());

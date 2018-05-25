@@ -11,7 +11,22 @@ import ua.finalproject.model.services.CarService;
 
 import javax.servlet.http.HttpServletRequest;
 
+/**
+ * Command for logging out of the system
+ */
 public class LogOutCommand implements Command {
+
+    private CarService carService;
+
+    public LogOutCommand(CarService carService) {
+        this.carService = carService;
+    }
+
+    /**
+     * Checks if user is logged in and removes session's attributes
+     * @param request request from user
+     * @return redirects to index page
+     */
     @Override
     public String execute(HttpServletRequest request) {
         String login = (String) request.getSession().getAttribute(RequestAttributes.USER_LOGIN);
@@ -19,7 +34,6 @@ public class LogOutCommand implements Command {
             return JSPPages.INDEX_PAGE;
         }
         ContextUtil.deleteLoggedUserFromContext(request.getSession());
-        CarService carService = new CarService();
         ControllerUtil.ChangeCarStateToFree(request.getSession(), carService);
         request.getSession().removeAttribute(RequestAttributes.ORDER);
         request.getSession().removeAttribute(RequestAttributes.USER_LOGIN);

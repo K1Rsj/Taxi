@@ -1,6 +1,10 @@
 package ua.finalproject.constants.messages;
 
+/**
+ * Messages for logger
+ */
 public interface LogMessages {
+
     String GET_FREE_CAR_BY_TYPE_ERROR = "Get free car by type error";
     String UPDATE_CAR_STATE_ERROR = "Update car state error";
     String CONNECTION_CLOSE_ERROR = "Connection close error";
@@ -13,8 +17,6 @@ public interface LogMessages {
     String ADD_CAR_ERROR = "Add car error";
     String AUTO_CLOSABLE_RESOURCE_ERROR_IN_ADD_CAR = "Auto-closable resource error in add car";
     String ADD_CAR_CONNECTION_ROLLBACK_ERROR = "Add car connection rollback error";
-    String AUTO_CLOSABLE_RESOURCE_ERROR_IN_UPDATE_DISCOUNT = "Auto-closable resource error in update discount";
-    String AUTO_CLOSABLE_RESOURCE_ERROR_IN_SHOW_ALL_CAR_TYPES = "Auto-closable resource error in show all car types";
     String MAKE_ORDER_ERROR = "Make order error";
     String AUTO_CLOSABLE_RESOURCE_ERROR_IN_MAKE_ORDER = "Auto-closable resource error in make order";
     String CONFIRM_ORDER_ERROR = "Confirm order error";

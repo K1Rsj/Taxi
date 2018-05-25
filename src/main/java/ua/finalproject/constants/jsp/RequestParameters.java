@@ -1,6 +1,10 @@
 package ua.finalproject.constants.jsp;
 
+/**
+ * All parameters from jsp pages
+ */
 public interface RequestParameters {
+
     String TYPE = "type";
     String DISCOUNT = "discount";
     String DEPARTURE_STREET = "departure";

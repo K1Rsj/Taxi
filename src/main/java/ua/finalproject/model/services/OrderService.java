@@ -24,9 +24,22 @@ import java.util.Optional;
 
 public class OrderService {
 
+    /**
+     * Logger for order service class
+     *
+     * @see LogManager
+     */
     private static final Logger logger = LogManager.getLogger(OrderService.class);
 
-
+    /**
+     * Makes order for client. Search free car by type and set it state to busy.
+     * @param login user's login
+     * @param departureStreet departure street
+     * @param destinationStreet destination street
+     * @param type car's type
+     * @return user's order
+     * @throws NoFreeCarWithSuchTypeException if there is no free car with some type
+     */
     public Order makeOrder(String login, String departureStreet, String destinationStreet, String type) throws NoFreeCarWithSuchTypeException {
         Connection connection = ConnectionPoolHolder.getConnection();
         try (CarDao carDao = DaoFactory.getInstance().createCarDao(connection);
@@ -66,6 +79,11 @@ public class OrderService {
         }
     }
 
+    /**
+     * Confirms user's order. Adds order to DB and than update user's spent money and change
+     * car state from busy to free.
+     * @param order user's order
+     */
     public void confirmOrder(Order order) {
         Connection connection = ConnectionPoolHolder.getConnection();
         try (CarDao carDao = DaoFactory.getInstance().createCarDao(connection);
@@ -87,6 +105,10 @@ public class OrderService {
         }
     }
 
+    /**
+     * Cancels user's order. Changes car state from busy to free.
+     * @param order user's order
+     */
     public void cancelOrder(Order order) {
         Connection connection = ConnectionPoolHolder.getConnection();
         try (CarDao carDao = DaoFactory.getInstance().createCarDao(connection)) {
@@ -96,6 +118,11 @@ public class OrderService {
         }
     }
 
+    /**
+     * Finds all order by user
+     * @param login user's login
+     * @return list of all user's orders
+     */
     public Optional<List<Order>> getAllUserOrders(String login) {
         Connection connection = ConnectionPoolHolder.getConnection();
         try (OrderDao orderDao = DaoFactory.getInstance().createOrderDao(connection)) {
@@ -106,6 +133,10 @@ public class OrderService {
         return Optional.empty();
     }
 
+    /**
+     * Handles rollback error
+     * @param connection connection
+     */
     private void SQLExceptionRollbackErrorHandle(Connection connection) {
         try {
             connection.rollback();

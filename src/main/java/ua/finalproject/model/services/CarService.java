@@ -20,9 +20,17 @@ import java.util.Optional;
 
 public class CarService {
 
+    /**
+     * Logger for car service class
+     *
+     * @see LogManager
+     */
     private static final Logger logger = LogManager.getLogger(CarService.class);
 
-
+    /**
+     * Shows all cars
+     * @return list of all cars
+     */
     public Optional<List<Car>> showAllCars() {
         Connection connection = ConnectionPoolHolder.getConnection();
         try (CarDao carDao = DaoFactory.getInstance().createCarDao(connection)) {
@@ -33,6 +41,10 @@ public class CarService {
         return Optional.empty();
     }
 
+    /**
+     * Changes car state from busy to free
+     * @param order user's order
+     */
     public void changeCarStateFromBusyToFree(Order order) {
         Connection connection = ConnectionPoolHolder.getConnection();
         try (CarDao carDao = DaoFactory.getInstance().createCarDao(connection)) {
@@ -42,6 +54,12 @@ public class CarService {
         }
     }
 
+    /**
+     * Adds car to DB
+     * @param carFromRequest car from request
+     * @param type car type
+     * @throws SQLIntegrityConstraintViolationException if number already exists in DB
+     */
     public void addCar(Car carFromRequest, String type) throws SQLIntegrityConstraintViolationException {
         Connection connection = ConnectionPoolHolder.getConnection();
         try (CarDao carDao = DaoFactory.getInstance().createCarDao(connection);
@@ -67,6 +85,10 @@ public class CarService {
         }
     }
 
+    /**
+     * Handles rollback error
+     * @param connection connection
+     */
     private void SQLExceptionRollbackErrorHandle(Connection connection) {
         try {
             connection.rollback();

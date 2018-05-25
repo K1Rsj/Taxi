@@ -14,6 +14,12 @@ import java.util.Objects;
 import java.util.Optional;
 
 public class ControllerUtil {
+
+    /**
+     * Gets user's index page depending on user's role
+     * @param role user's role
+     * @return path to jsp page
+     */
     public static String getUserIndexPage(User.Role role) {
         if (role == User.Role.ADMIN) {
             return JSPPages.ADMIN_FOUNDATION_PAGE;
@@ -24,11 +30,22 @@ public class ControllerUtil {
         return JSPPages.INDEX_PAGE;
     }
 
+    /**
+     * Chenges car's state if user user make order and didn't accept or cancel it
+     * @param session user's session
+     * @param carService car service
+     */
     public static void ChangeCarStateToFree(HttpSession session, CarService carService) {
         Optional<Order> order = Optional.ofNullable((Order) session.getAttribute(RequestAttributes.ORDER));
         order.ifPresent(carService::changeCarStateFromBusyToFree);
     }
 
+    /**
+     * Makes sub list from list for pagination
+     * @param request request from user
+     * @param list list
+     * @return sub list for pagination depending on current page
+     */
     public static List getSubListForPagination(HttpServletRequest request,
                                                List list) {
 

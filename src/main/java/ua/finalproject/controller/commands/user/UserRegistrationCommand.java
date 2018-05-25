@@ -13,12 +13,29 @@ import ua.finalproject.util.LogMessageBuilder;
 import javax.servlet.http.HttpServletRequest;
 import java.sql.SQLIntegrityConstraintViolationException;
 
+/**
+ * Command for registration new user
+ * @see DataValidation
+ * @see CreateEntityFromRequest
+ */
 public class UserRegistrationCommand implements Command {
+
+    private UserService userService;
+
+    public UserRegistrationCommand(UserService userService) {
+        this.userService = userService;
+    }
+
+    /**
+     *
+     * @param request request from user
+     * @return path to index page if validation was successful
+     * or else return path to user registration page
+     */
     @Override
     public String execute(HttpServletRequest request) {
         if (DataValidation.userDataValidation(request)) {
             User user = CreateEntityFromRequest.getUserFromRequest(request);
-            UserService userService = new UserService();
             try {
                 userService.registerUser(user);
             } catch (SQLIntegrityConstraintViolationException e) {

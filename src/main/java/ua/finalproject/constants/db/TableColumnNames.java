@@ -1,11 +1,13 @@
 package ua.finalproject.constants.db;
 
+/**
+ * Name for columns in taxi DB
+ */
 public interface TableColumnNames {
 
     /**
      * Column names from users table
      */
-
     String ID_USER = "id_user";
     String LOGIN = "login";
     String PASSWORD = "password";
@@ -19,7 +21,6 @@ public interface TableColumnNames {
     /**
      * Column names from orders table
      */
-
     String ID_ORDER = "id_order";
     String DEPARTURE_STREET = "departure_street";
     String DESTINATION_STREET = "destination_street";
@@ -28,7 +29,6 @@ public interface TableColumnNames {
     /**
      * Column names from car_type table
      */
-
     String ID_CAR_TYPE = "id_car_type";
     String TYPE = "type";
     String STARTING_PRICE = "starting_price";

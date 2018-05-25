@@ -18,10 +18,27 @@ import ua.finalproject.util.LogMessageBuilder;
 import javax.servlet.http.HttpServletRequest;
 import java.util.Optional;
 
+/**
+ * Command for logging into the system
+ */
 public class LoginCommand implements Command {
+
+    private UserService userService;
+
+    public LoginCommand(UserService userService) {
+        this.userService = userService;
+    }
+
+    /**
+     * Checks if user exist in DB.
+     * If user exist sets session user's role and login attributes.
+     * Adds user to servlet context if he doesn't already logged into the system.
+     * @param request request from user
+     * @return path to index page depends on user's role
+     */
     @Override
     public String execute(HttpServletRequest request) {
-        UserService userService = new UserService();
+        userService = new UserService();
         String login = request.getParameter(RequestParameters.LOGIN);
         String pass = request.getParameter(RequestParameters.PASSWORD);
 
