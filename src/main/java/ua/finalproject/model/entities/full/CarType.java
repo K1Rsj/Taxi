@@ -1,4 +1,4 @@
-package ua.finalproject.model.entities.impl;
+package ua.finalproject.model.entities.full;
 
 import ua.finalproject.model.entities.Entity;
 import ua.finalproject.model.entities.EntityBuilder;

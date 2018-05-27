@@ -3,7 +3,7 @@ package ua.finalproject.controller.filters;
 import ua.finalproject.constants.filter.FilterNames;
 import ua.finalproject.constants.jsp.JSPPages;
 import ua.finalproject.constants.jsp.RequestAttributes;
-import ua.finalproject.model.entities.impl.User;
+import ua.finalproject.model.entities.full.User;
 
 import javax.servlet.*;
 import javax.servlet.annotation.WebFilter;

@@ -8,7 +8,7 @@ import ua.finalproject.constants.messages.Messages;
 import ua.finalproject.controller.commands.Command;
 import ua.finalproject.controller.util.CreateEntityFromRequest;
 import ua.finalproject.controller.util.DataValidation;
-import ua.finalproject.model.entities.impl.Car;
+import ua.finalproject.model.entities.full.Car;
 import ua.finalproject.model.services.CarService;
 import ua.finalproject.util.LogMessageBuilder;
 

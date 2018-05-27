@@ -1,6 +1,6 @@
 package ua.finalproject.model.dao;
 
-import ua.finalproject.model.entities.impl.Order;
+import ua.finalproject.model.entities.full.Order;
 
 import java.util.List;
 import java.util.Optional;

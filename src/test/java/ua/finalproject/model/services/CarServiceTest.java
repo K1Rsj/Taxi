@@ -5,7 +5,7 @@ import org.junit.Test;
 import ua.finalproject.model.dao.CarDao;
 import ua.finalproject.model.dao.connectionPool.ConnectionPoolHolder;
 import ua.finalproject.model.dao.impl.CarDaoImpl;
-import ua.finalproject.model.entities.impl.Car;
+import ua.finalproject.model.entities.full.Car;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;

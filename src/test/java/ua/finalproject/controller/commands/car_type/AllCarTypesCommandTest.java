@@ -5,7 +5,7 @@ import org.junit.Test;
 import ua.finalproject.constants.jsp.JSPPages;
 import ua.finalproject.constants.jsp.RequestAttributes;
 import ua.finalproject.constants.messages.Messages;
-import ua.finalproject.model.entities.impl.CarType;
+import ua.finalproject.model.entities.full.CarType;
 import ua.finalproject.model.services.CarTypeService;
 import ua.finalproject.util.BundleManager;
 

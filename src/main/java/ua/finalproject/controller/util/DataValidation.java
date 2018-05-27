@@ -104,7 +104,7 @@ public class DataValidation {
      * @return <code>true</code> if input discount amount is correct
      */
     public static boolean checkDiscountAmount(Integer discount) {
-        return discount < 16 && discount > 0;
+        return discount < 16 && discount >= 0;
     }
 
     /**

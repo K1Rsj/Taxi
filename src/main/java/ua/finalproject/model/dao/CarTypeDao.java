@@ -1,6 +1,6 @@
 package ua.finalproject.model.dao;
 
-import ua.finalproject.model.entities.impl.CarType;
+import ua.finalproject.model.entities.full.CarType;
 
 public interface CarTypeDao extends Dao<CarType, Integer> {
 

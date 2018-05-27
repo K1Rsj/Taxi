@@ -5,7 +5,7 @@ import ua.finalproject.constants.jsp.RequestAttributes;
 import ua.finalproject.constants.messages.Messages;
 import ua.finalproject.controller.commands.Command;
 import ua.finalproject.controller.util.ControllerUtil;
-import ua.finalproject.model.entities.impl.Order;
+import ua.finalproject.model.entities.full.Order;
 import ua.finalproject.model.services.OrderService;
 
 import javax.servlet.http.HttpServletRequest;

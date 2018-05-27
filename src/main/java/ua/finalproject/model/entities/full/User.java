@@ -1,4 +1,4 @@
-package ua.finalproject.model.entities.impl;
+package ua.finalproject.model.entities.full;
 
 import lombok.Getter;
 import lombok.Setter;

@@ -11,7 +11,7 @@ public interface DbQueries {
     String DELETE_FROM_CARS_BY_ID = "DELETE FROM CARS WHERE id_car = ?";
     String SELECT_FROM_CARS_LEFT_JOIN_CAR_TYPE_BY_ID = "SELECT * FROM CARS LEFT JOIN " +
             "car_type on car_type_id = id_car_type WHERE car_type_id = ? AND state = 'free'";
-    String UPDATE_CAR_STATE_BY_ID = "UPDATE cars set state = ? where id_car = ?";
+    String UPDATE_CAR_STATE_BY_ID = "UPDATE cars set state = ? where id_cars = ?";
     String INSERT_INTO_CAR_TYPE = "INSERT INTO car_type(type, starting_price, price_per_km, discount) " +
             "VALUES (?,?,?,?) ";
     String SELECT_FROM_CAR_TYPE_BY_ID = "SELECT * FROM car_type WHERE id_car_type = ?";
@@ -36,5 +36,5 @@ public interface DbQueries {
     String DELETE_FROM_USERS_BY_ID = "DELETE FROM USERS WHERE id_user = ?";
     String SELECT_FROM_USERS_BY_LOGIN = "SELECT * FROM USERS WHERE LOGIN = ?";
     String UPDATE_USER_MONEY_SPENT = "UPDATE USERS SET money_spent = ?" +
-            " where id_user = ?";
+            " where id_users = ?";
 }

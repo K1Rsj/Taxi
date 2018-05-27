@@ -6,7 +6,7 @@ import ua.finalproject.constants.messages.Messages;
 import ua.finalproject.controller.commands.Command;
 import ua.finalproject.controller.util.CreateEntityFromRequest;
 import ua.finalproject.controller.util.DataValidation;
-import ua.finalproject.model.entities.impl.User;
+import ua.finalproject.model.entities.full.User;
 import ua.finalproject.model.services.UserService;
 import ua.finalproject.util.LogMessageBuilder;
 

@@ -1,6 +1,6 @@
 package ua.finalproject.model.util;
 
-import ua.finalproject.model.entities.impl.CarType;
+import ua.finalproject.model.entities.full.CarType;
 
 /**
  * Generates price for order

@@ -42,4 +42,20 @@ public interface Dao<T, ID> extends AutoCloseable {
      */
     void delete(ID id);
 
+    /**
+     * Deletes entry from data source by parameter
+     * @param parameterName name of parameter
+     * @param parameterValue value of parameter
+     */
+    void deleteByParameter(String parameterName, String parameterValue);
+
+    /**
+     * Finds foreign key in table
+     * @param tableName name of table
+     * @param entityId entity id
+     * @param idName id name
+     * @return foreign key
+     */
+    Integer findForeignKeyInTable(String tableName, String entityId, String idName);
+
 }

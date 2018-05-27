@@ -7,7 +7,7 @@ import ua.finalproject.model.dao.OrderDao;
 import ua.finalproject.model.dao.UserDao;
 import ua.finalproject.model.dao.connectionPool.ConnectionPoolHolder;
 import ua.finalproject.model.dao.factory.DaoFactory;
-import ua.finalproject.model.entities.impl.User;
+import ua.finalproject.model.entities.full.User;
 import ua.finalproject.model.util.OrderPriceGenerator;
 
 import java.sql.Connection;

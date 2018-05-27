@@ -2,7 +2,7 @@ package ua.finalproject.controller.util;
 
 import org.junit.Test;
 import ua.finalproject.constants.jsp.JSPPages;
-import ua.finalproject.model.entities.impl.User;
+import ua.finalproject.model.entities.full.User;
 
 import static org.junit.Assert.*;
 

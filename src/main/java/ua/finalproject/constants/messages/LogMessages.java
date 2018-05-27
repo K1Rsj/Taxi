@@ -34,4 +34,11 @@ public interface LogMessages {
     String DB_CONNECTION_ERROR = "Connection error";
     String LOAD_DRIVER_CLASS_ERROR = "Load driver class error";
     String NO_FREE_CAR_SUCH_TYPE = "No free car with such type";
+    String AUTO_CLOSABLE_RESOURCE_ERROR_IN_GET_CAR_TYPE = "Auto-closable resource error in get car type";
+    String AUTO_CLOSABLE_RESOURCE_ERROR_IN_GET_USER = "Auto-closable resource error in get user";
+    String AUTO_CLOSABLE_RESOURCE_ERROR_IN_GET_CAR = "Auto-closable resource error in get car";
+    String FIND_OTHER_ID_FROM_TABLE_ERROR = "Find other id from table error";
+    String FIND_BY_QUERY_ERROR = "Find by query error";
+    String FIND_ALL_BY_QUERY_ERROR = "Find all by query error";
+    String EXECUTE_QUERY_ERROR = "Execute query error";
 }

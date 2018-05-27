@@ -1,8 +1,8 @@
 package ua.finalproject.controller.util;
 
 import ua.finalproject.constants.jsp.RequestParameters;
-import ua.finalproject.model.entities.impl.Car;
-import ua.finalproject.model.entities.impl.User;
+import ua.finalproject.model.entities.full.Car;
+import ua.finalproject.model.entities.full.User;
 
 import javax.servlet.http.HttpServletRequest;
 

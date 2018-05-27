@@ -10,10 +10,10 @@ import ua.finalproject.model.dao.UserDao;
 import ua.finalproject.model.dao.connectionPool.ConnectionPoolHolder;
 import ua.finalproject.model.dao.factory.DaoFactory;
 import ua.finalproject.model.dao.util.UtilDao;
-import ua.finalproject.model.entities.impl.Car;
-import ua.finalproject.model.entities.impl.CarType;
-import ua.finalproject.model.entities.impl.Order;
-import ua.finalproject.model.entities.impl.User;
+import ua.finalproject.model.entities.full.Car;
+import ua.finalproject.model.entities.full.CarType;
+import ua.finalproject.model.entities.full.Order;
+import ua.finalproject.model.entities.full.User;
 import ua.finalproject.model.exceptions.NoFreeCarWithSuchTypeException;
 import ua.finalproject.model.util.OrderPriceGenerator;
 

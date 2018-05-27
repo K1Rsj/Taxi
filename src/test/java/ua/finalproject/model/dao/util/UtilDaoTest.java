@@ -1,8 +1,8 @@
 package ua.finalproject.model.dao.util;
 
 import org.junit.Test;
-import ua.finalproject.model.entities.impl.Car;
-import ua.finalproject.model.entities.impl.User;
+import ua.finalproject.model.entities.full.Car;
+import ua.finalproject.model.entities.full.User;
 
 import static org.junit.Assert.*;
 

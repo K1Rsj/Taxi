@@ -5,8 +5,8 @@ import org.junit.Test;
 import ua.finalproject.constants.jsp.JSPPages;
 import ua.finalproject.constants.jsp.RequestAttributes;
 import ua.finalproject.constants.messages.Messages;
-import ua.finalproject.model.entities.impl.Order;
-import ua.finalproject.model.entities.impl.User;
+import ua.finalproject.model.entities.full.Order;
+import ua.finalproject.model.entities.full.User;
 import ua.finalproject.model.services.OrderService;
 import ua.finalproject.util.BundleManager;
 

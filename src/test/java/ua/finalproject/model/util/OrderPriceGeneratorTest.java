@@ -1,7 +1,7 @@
 package ua.finalproject.model.util;
 
 import org.junit.Test;
-import ua.finalproject.model.entities.impl.CarType;
+import ua.finalproject.model.entities.full.CarType;
 
 import static org.junit.Assert.*;
 

@@ -17,7 +17,7 @@ import ua.finalproject.controller.commands.user.*;
 import ua.finalproject.controller.util.ControllerUtil;
 import ua.finalproject.model.dao.connectionPool.ConnectionPoolHolder;
 import ua.finalproject.model.dao.factory.DaoFactory;
-import ua.finalproject.model.entities.impl.User;
+import ua.finalproject.model.entities.full.User;
 import ua.finalproject.model.services.CarService;
 import ua.finalproject.model.services.CarTypeService;
 import ua.finalproject.model.services.OrderService;

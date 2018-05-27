@@ -3,7 +3,7 @@ package ua.finalproject.model.services;
 import org.junit.Before;
 import org.junit.Test;
 import ua.finalproject.model.dao.CarTypeDao;
-import ua.finalproject.model.entities.impl.CarType;
+import ua.finalproject.model.entities.full.CarType;
 
 
 import java.util.ArrayList;

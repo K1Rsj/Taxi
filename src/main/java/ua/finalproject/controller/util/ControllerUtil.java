@@ -3,8 +3,8 @@ package ua.finalproject.controller.util;
 import ua.finalproject.constants.jsp.JSPPages;
 import ua.finalproject.constants.jsp.RequestAttributes;
 import ua.finalproject.constants.jsp.RequestParameters;
-import ua.finalproject.model.entities.impl.Order;
-import ua.finalproject.model.entities.impl.User;
+import ua.finalproject.model.entities.full.Order;
+import ua.finalproject.model.entities.full.User;
 import ua.finalproject.model.services.CarService;
 
 import javax.servlet.http.HttpServletRequest;

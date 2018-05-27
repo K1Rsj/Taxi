@@ -1,7 +1,8 @@
-package ua.finalproject.model.entities.impl;
+package ua.finalproject.model.entities.full;
 
 import ua.finalproject.model.entities.Entity;
 import ua.finalproject.model.entities.EntityBuilder;
+import ua.finalproject.model.entities.lazy.CarLazy;
 
 public class Car implements Entity<Integer> {
 
@@ -122,6 +123,16 @@ public class Car implements Entity<Integer> {
             car.setDriver(driver);
             car.setCarType(carType);
             return car;
+        }
+
+        public CarLazy buildLazy() {
+            CarLazy carLazy = new CarLazy();
+            carLazy.setId(id);
+            carLazy.setModel(model);
+            carLazy.setNumber(number);
+            carLazy.setState(state);
+            carLazy.setDriver(driver);
+            return carLazy;
         }
     }
 }

@@ -1,6 +1,6 @@
 package ua.finalproject.model.dao;
 
-import ua.finalproject.model.entities.impl.Car;
+import ua.finalproject.model.entities.full.Car;
 
 import java.util.Optional;
 

@@ -11,7 +11,7 @@ import ua.finalproject.controller.commands.Command;
 import ua.finalproject.controller.util.ContextUtil;
 import ua.finalproject.controller.util.ControllerUtil;
 import ua.finalproject.controller.util.DataValidation;
-import ua.finalproject.model.entities.impl.User;
+import ua.finalproject.model.entities.full.User;
 import ua.finalproject.model.services.UserService;
 import ua.finalproject.util.LogMessageBuilder;
 

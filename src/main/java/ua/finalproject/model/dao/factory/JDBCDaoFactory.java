@@ -1,5 +1,6 @@
 package ua.finalproject.model.dao.factory;
 
+import ua.finalproject.constants.db.TableNames;
 import ua.finalproject.model.dao.CarDao;
 import ua.finalproject.model.dao.CarTypeDao;
 import ua.finalproject.model.dao.OrderDao;
@@ -27,7 +28,7 @@ public class JDBCDaoFactory extends DaoFactory {
      */
     @Override
     public UserDao createUserDao(Connection connection) {
-        return new UserDaoImpl(connection);
+        return new UserDaoImpl(TableNames.USERS, connection);
     }
 
     /**
@@ -37,7 +38,7 @@ public class JDBCDaoFactory extends DaoFactory {
      */
     @Override
     public CarDao createCarDao(Connection connection) {
-        return new CarDaoImpl(connection);
+        return new CarDaoImpl(TableNames.CARS, connection);
     }
 
     /**
@@ -47,7 +48,7 @@ public class JDBCDaoFactory extends DaoFactory {
      */
     @Override
     public OrderDao createOrderDao(Connection connection) {
-        return new OrderDaoImpl(connection);
+        return new OrderDaoImpl(TableNames.ORDERS, connection);
     }
 
     /**
@@ -57,7 +58,7 @@ public class JDBCDaoFactory extends DaoFactory {
      */
     @Override
     public CarTypeDao createCarTypeDao(Connection connection) {
-        return new CarTypeDaoImpl(connection);
+        return new CarTypeDaoImpl(TableNames.CAR_TYPE, connection);
     }
 
 

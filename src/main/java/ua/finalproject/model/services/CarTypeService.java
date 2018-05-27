@@ -2,7 +2,7 @@ package ua.finalproject.model.services;
 
 import ua.finalproject.model.dao.CarTypeDao;
 import ua.finalproject.model.dao.util.UtilDao;
-import ua.finalproject.model.entities.impl.CarType;
+import ua.finalproject.model.entities.full.CarType;
 
 import java.util.List;
 import java.util.Optional;

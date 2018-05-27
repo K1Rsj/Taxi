@@ -1,6 +1,6 @@
 package ua.finalproject.model.dao;
 
-import ua.finalproject.model.entities.impl.User;
+import ua.finalproject.model.entities.full.User;
 
 import java.util.Optional;
 

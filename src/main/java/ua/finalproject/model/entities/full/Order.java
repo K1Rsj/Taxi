@@ -1,7 +1,8 @@
-package ua.finalproject.model.entities.impl;
+package ua.finalproject.model.entities.full;
 
 import ua.finalproject.model.entities.Entity;
 import ua.finalproject.model.entities.EntityBuilder;
+import ua.finalproject.model.entities.lazy.OrderLazy;
 
 public class Order implements Entity<Integer> {
 
@@ -130,6 +131,15 @@ public class Order implements Entity<Integer> {
             order.setCarType(type);
             order.setPrice(price);
             return order;
+        }
+
+        public OrderLazy buildLazy() {
+            OrderLazy orderLazy = new OrderLazy();
+            orderLazy.setId(id);
+            orderLazy.setDepartureStreet(departureStreet);
+            orderLazy.setDestinationStreet(destinationStreet);
+            orderLazy.setPrice(price);
+            return orderLazy;
         }
     }
 }

@@ -8,7 +8,7 @@ public interface TableColumnNames {
     /**
      * Column names from users table
      */
-    String ID_USER = "id_user";
+    String ID_USER = "id_users";
     String LOGIN = "login";
     String PASSWORD = "password";
     String EMAIL = "email";
@@ -21,10 +21,12 @@ public interface TableColumnNames {
     /**
      * Column names from orders table
      */
-    String ID_ORDER = "id_order";
+    String ID_ORDER = "id_orders";
     String DEPARTURE_STREET = "departure_street";
     String DESTINATION_STREET = "destination_street";
     String PRICE = "price";
+    String USERS_ID = "users_id";
+    String CARS_ID = "cars_id";
 
     /**
      * Column names from car_type table
@@ -39,9 +41,10 @@ public interface TableColumnNames {
      * Column names from cars table
      */
 
-    String ID_CAR = "id_car";
+    String ID_CAR = "id_cars";
     String MODEL = "model";
     String NUMBER = "number";
     String STATE = "state";
     String DRIVER = "driver";
+    String CAR_TYPE_ID = "car_type_id";
 }

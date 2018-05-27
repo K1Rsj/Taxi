@@ -5,7 +5,7 @@ import ua.finalproject.constants.jsp.RequestAttributes;
 import ua.finalproject.constants.messages.Messages;
 import ua.finalproject.controller.commands.Command;
 import ua.finalproject.controller.util.ControllerUtil;
-import ua.finalproject.model.entities.impl.User;
+import ua.finalproject.model.entities.full.User;
 import ua.finalproject.model.services.UserService;
 
 import javax.servlet.http.HttpServletRequest;

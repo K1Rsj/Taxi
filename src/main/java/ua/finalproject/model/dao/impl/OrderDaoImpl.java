@@ -1,33 +1,51 @@
 package ua.finalproject.model.dao.impl;
 
 import ua.finalproject.constants.db.DbQueries;
+import ua.finalproject.constants.db.TableColumnNames;
 import ua.finalproject.constants.db.TableNames;
-import ua.finalproject.constants.messages.LogMessages;
+import ua.finalproject.model.dao.AbstractDao;
 import ua.finalproject.model.dao.OrderDao;
-import ua.finalproject.model.dao.mapper.OrderMapper;
-import ua.finalproject.model.entities.impl.Order;
+import ua.finalproject.model.dao.util.QueryContainer;
+import ua.finalproject.model.entities.full.Order;
+import ua.finalproject.model.entities.lazy.OrderLazy;
 import ua.finalproject.util.LogMessageBuilder;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
 /**
  * Implementation for order dao
  */
-public class OrderDaoImpl implements OrderDao {
+public class OrderDaoImpl extends AbstractDao<Order> implements OrderDao {
+
+    public OrderDaoImpl(String tableName, Connection connection) {
+        super(tableName, connection);
+    }
 
     /**
-     * @see Connection
+     * Extracts order from result set
+     * @param resultSet result set
+     * @return order from result set
+     * @throws SQLException if something wrong with DB
      */
-    private Connection connection;
+    @Override
+    public Order extractFromResultSet(ResultSet resultSet) throws SQLException {
 
-    public OrderDaoImpl(Connection connection) {
-        this.connection = connection;
+        Integer id = resultSet.getInt(TableColumnNames.ID_ORDER);
+        String departureStreet = resultSet.getString(TableColumnNames.DEPARTURE_STREET);
+        String destinationStreet = resultSet.getString(TableColumnNames.DESTINATION_STREET);
+        Long price = resultSet.getLong(TableColumnNames.PRICE);
+
+        return new OrderLazy.OrderBuilder()
+                .setId(id)
+                .setDepartureStreet(departureStreet)
+                .setDestinationStreet(destinationStreet)
+                .setPrice(price)
+                .buildLazy();
     }
 
     /**
@@ -36,70 +54,17 @@ public class OrderDaoImpl implements OrderDao {
      */
     @Override
     public void create(Order order) {
-        OrderMapper orderMapper = new OrderMapper();
         try (PreparedStatement preparedStatement = connection
                 .prepareStatement(DbQueries.INSERT_INTO_ORDERS)) {
-            orderMapper.setValuesForQuery(order, preparedStatement);
+            preparedStatement.setString(1, order.getDepartureStreet());
+            preparedStatement.setString(2, order.getDestinationStreet());
+            preparedStatement.setInt(3, order.getCar().getId());
+            preparedStatement.setInt(4, order.getUser().getId());
+            preparedStatement.setInt(5, order.getCarType().getId());
+            preparedStatement.setLong(6, order.getPrice());
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
             logger.error(LogMessageBuilder.INSTANCE.createEntryError(TableNames.ORDERS), e.getMessage());
-            throw new RuntimeException(e);
-        }
-    }
-
-    /**
-     * Finds order by id
-     * @param id id of order
-     * @return order that matches id
-     */
-    @Override
-    public Optional<Order> findById(Integer id) {
-        OrderMapper orderMapper = new OrderMapper();
-        try (PreparedStatement preparedStatement = connection.prepareStatement(DbQueries.SELECT_FROM_ORDERS_BY_ID)) {
-            preparedStatement.setInt(1, id);
-            ResultSet resultSet = preparedStatement.executeQuery();
-            if (resultSet.next()) {
-                return Optional.of(orderMapper.extractFromResultSet(resultSet));
-            }
-        } catch (SQLException e) {
-            logger.error(LogMessageBuilder.INSTANCE.findByIdError(TableNames.ORDERS), e.getMessage());
-            throw new RuntimeException(e);
-        }
-        return Optional.empty();
-    }
-
-    /**
-     * Finds all orders
-     * @return list of all orders
-     */
-    @Override
-    public Optional<List<Order>> findAll() {
-        List<Order> orders = new ArrayList<>();
-        OrderMapper orderMapper = new OrderMapper();
-        try (PreparedStatement ps = connection.prepareStatement(DbQueries.SELECT_ALL_FROM_JOIN_ALL_TABLES);
-             ResultSet resultSet = ps.executeQuery()) {
-            while (resultSet.next()) {
-                orders.add(orderMapper.extractFromResultSet(resultSet));
-            }
-            return Optional.of(orders);
-        } catch (SQLException e) {
-            logger.error(LogMessageBuilder.INSTANCE.findAllError(TableNames.ORDERS), e.getMessage());
-            throw new RuntimeException(e);
-        }
-    }
-
-    /**
-     * Deletes order by id
-     * @param id id of order
-     */
-    @Override
-    public void delete(Integer id) {
-        try (PreparedStatement preparedStatement = connection
-                .prepareStatement(DbQueries.DELETE_FROM_ORDERS_BY_ID)) {
-            preparedStatement.setInt(1, id);
-            preparedStatement.executeUpdate();
-        } catch (SQLException e) {
-            logger.error(LogMessageBuilder.INSTANCE.deleteEntryError(TableNames.ORDERS, id), e.getMessage());
             throw new RuntimeException(e);
         }
     }
@@ -111,31 +76,6 @@ public class OrderDaoImpl implements OrderDao {
      */
     @Override
     public Optional<List<Order>> findOrdersByUserLogin(String login) {
-        List<Order> userOrders = new ArrayList<>();
-        OrderMapper orderMapper = new OrderMapper();
-        try (PreparedStatement preparedStatement = connection.prepareStatement(DbQueries.SELECT_FROM_JOIN_ALL_TABLES_BY_ID)) {
-            preparedStatement.setString(1, login);
-            ResultSet resultSet = preparedStatement.executeQuery();
-            while (resultSet.next()) {
-                userOrders.add(orderMapper.extractFromResultSet(resultSet));
-            }
-            return Optional.of(userOrders);
-        } catch (SQLException e) {
-            logger.error(LogMessages.FIND_USER_ORDERS_ERROR, e.getMessage());
-            throw new RuntimeException(e);
-        }
-    }
-
-    /**
-     * Auto-closing the connection
-     */
-    @Override
-    public void close() {
-        try {
-            connection.close();
-        } catch (SQLException e) {
-            logger.error(LogMessages.CONNECTION_CLOSE_ERROR, e.getMessage());
-            throw new RuntimeException(e);
-        }
+        return Optional.of(findAllByQuery(QueryContainer.INSTANCE.findOrdersByUserLogin(login)));
     }
 }

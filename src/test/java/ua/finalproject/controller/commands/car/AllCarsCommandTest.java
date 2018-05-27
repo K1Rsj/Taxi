@@ -4,15 +4,10 @@ import org.junit.Before;
 import org.junit.Test;
 import ua.finalproject.constants.jsp.JSPPages;
 import ua.finalproject.constants.jsp.RequestAttributes;
-import ua.finalproject.constants.jsp.RequestParameters;
-import ua.finalproject.constants.messages.Messages;
 import ua.finalproject.controller.util.ControllerUtil;
-import ua.finalproject.model.entities.impl.Car;
 import ua.finalproject.model.services.CarService;
-import ua.finalproject.util.BundleManager;
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 

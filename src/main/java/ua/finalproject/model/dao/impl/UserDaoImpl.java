@@ -1,30 +1,57 @@
 package ua.finalproject.model.dao.impl;
 
 import ua.finalproject.constants.db.DbQueries;
+import ua.finalproject.constants.db.TableColumnNames;
 import ua.finalproject.constants.db.TableNames;
 import ua.finalproject.constants.messages.LogMessages;
+import ua.finalproject.model.dao.AbstractDao;
 import ua.finalproject.model.dao.UserDao;
-import ua.finalproject.model.dao.mapper.UserMapper;
-import ua.finalproject.model.entities.impl.User;
+import ua.finalproject.model.dao.util.QueryContainer;
+import ua.finalproject.model.dao.util.UtilDao;
+import ua.finalproject.model.entities.full.User;
 import ua.finalproject.util.LogMessageBuilder;
 
 import java.sql.*;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Optional;
 
 /**
  * Implementation for user dao
  */
-public class UserDaoImpl implements UserDao {
+public class UserDaoImpl extends AbstractDao<User> implements UserDao {
+
+    public UserDaoImpl(String tableName, Connection connection) {
+        super(tableName, connection);
+    }
 
     /**
-     * @see Connection
+     * Extracts user from result set
+     * @param resultSet result set
+     * @return user from result set
+     * @throws SQLException if something went wrong in DB
      */
-    private Connection connection;
+    @Override
+    public User extractFromResultSet(ResultSet resultSet) throws SQLException {
+        Integer id = resultSet.getInt(TableColumnNames.ID_USER);
+        String login = resultSet.getString(TableColumnNames.LOGIN);
+        String password = resultSet.getString(TableColumnNames.PASSWORD);
+        String email = resultSet.getString(TableColumnNames.EMAIL);
+        String firstName = resultSet.getString(TableColumnNames.FIRST_NAME);
+        String secondName = resultSet.getString(TableColumnNames.SECOND_NAME);
+        String phoneNumber = resultSet.getString(TableColumnNames.PHONE_NUMBER);
+        Long moneySpent = resultSet.getLong(TableColumnNames.MONEY_SPENT);
+        User.Role role = UtilDao.parseUserRole(resultSet.getString(TableColumnNames.ROLE));
 
-    public UserDaoImpl(Connection connection) {
-        this.connection = connection;
+        return User.builder()
+                .id(id)
+                .login(login)
+                .password(password)
+                .email(email)
+                .firstName(firstName)
+                .secondName(secondName)
+                .phoneNumber(phoneNumber)
+                .moneySpent(moneySpent)
+                .role(role)
+                .build();
     }
 
     /**
@@ -34,72 +61,19 @@ public class UserDaoImpl implements UserDao {
      */
     @Override
     public void create(User user) throws SQLIntegrityConstraintViolationException {
-        UserMapper userMapper = new UserMapper();
         try (PreparedStatement preparedStatement = connection
                 .prepareStatement(DbQueries.INSERT_INTO_USERS)) {
-            userMapper.setValuesForQuery(user, preparedStatement);
+            preparedStatement.setString(1, user.getLogin());
+            preparedStatement.setString(2, user.getPassword());
+            preparedStatement.setString(3, user.getEmail());
+            preparedStatement.setString(4, user.getFirstName());
+            preparedStatement.setString(5, user.getSecondName());
+            preparedStatement.setString(6, user.getPhoneNumber());
             preparedStatement.executeUpdate();
         } catch (SQLIntegrityConstraintViolationException e) {
             throw new SQLIntegrityConstraintViolationException(e);
         } catch (SQLException e) {
             logger.error(LogMessageBuilder.INSTANCE.createEntryError(TableNames.USERS), e.getMessage());
-            throw new RuntimeException(e);
-        }
-    }
-
-    /**
-     * Finds user by id
-     * @param id id of user
-     * @return user that matches id
-     */
-    @Override
-    public Optional<User> findById(Integer id) {
-        UserMapper userMapper = new UserMapper();
-        try (PreparedStatement preparedStatement = connection.prepareStatement(DbQueries.SELECT_FROM_USERS_BY_ID)) {
-            preparedStatement.setInt(1, id);
-            ResultSet resultSet = preparedStatement.executeQuery();
-            if (resultSet.next()) {
-                return Optional.of(userMapper.extractFromResultSet(resultSet));
-            }
-        } catch (SQLException e) {
-            logger.error(LogMessageBuilder.INSTANCE.findByIdError(TableNames.USERS), e.getMessage());
-            throw new RuntimeException(e);
-        }
-        return Optional.empty();
-    }
-
-    /**
-     * Finds all users
-     * @return list of all users
-     */
-    @Override
-    public Optional<List<User>> findAll() {
-        List<User> allUsers = new ArrayList<>();
-        UserMapper userMapper = new UserMapper();
-        try (PreparedStatement preparedStatement = connection.prepareStatement(DbQueries.SELECT_ALL_FROM_USERS);
-             ResultSet resultSet = preparedStatement.executeQuery()) {
-            while (resultSet.next()) {
-                allUsers.add(userMapper.extractFromResultSet(resultSet));
-            }
-            return Optional.of(allUsers);
-        } catch (SQLException e) {
-            logger.error(LogMessageBuilder.INSTANCE.findAllError(TableNames.USERS), e.getMessage());
-            throw new RuntimeException(e);
-        }
-    }
-
-    /**
-     * Deletes user by id
-     * @param id id of user
-     */
-    @Override
-    public void delete(Integer id) {
-        try (PreparedStatement preparedStatement = connection
-                .prepareStatement(DbQueries.DELETE_FROM_USERS_BY_ID)) {
-            preparedStatement.setInt(1, id);
-            preparedStatement.executeUpdate();
-        } catch (SQLException e) {
-            logger.error(LogMessageBuilder.INSTANCE.deleteEntryError(TableNames.USERS, id), e.getMessage());
             throw new RuntimeException(e);
         }
     }
@@ -111,18 +85,7 @@ public class UserDaoImpl implements UserDao {
      */
     @Override
     public Optional<User> findByLogin(String login) {
-        UserMapper userMapper = new UserMapper();
-        try (PreparedStatement preparedStatement = connection.prepareStatement(DbQueries.SELECT_FROM_USERS_BY_LOGIN)) {
-            preparedStatement.setString(1, login);
-            ResultSet resultSet = preparedStatement.executeQuery();
-            if (resultSet.next()) {
-                return Optional.of(userMapper.extractFromResultSet(resultSet));
-            }
-        } catch (SQLException e) {
-            logger.error(LogMessages.FIND_BY_LOGIN_ERROR, e.getMessage());
-            throw new RuntimeException(e);
-        }
-        return Optional.empty();
+        return Optional.of(findOneByQuery(QueryContainer.INSTANCE.findUserByLogin(login)));
     }
 
     /**
@@ -138,19 +101,6 @@ public class UserDaoImpl implements UserDao {
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
             logger.error(LogMessages.UPDATE_USER_MONEY_SPENT_ERROR, e.getMessage());
-            throw new RuntimeException(e);
-        }
-    }
-
-    /**
-     * Auto-closing the connection
-     */
-    @Override
-    public void close() {
-        try {
-            connection.close();
-        } catch (SQLException e) {
-            logger.error(LogMessages.CONNECTION_CLOSE_ERROR, e.getMessage());
             throw new RuntimeException(e);
         }
     }

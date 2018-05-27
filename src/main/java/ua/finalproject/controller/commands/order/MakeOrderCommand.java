@@ -8,7 +8,7 @@ import ua.finalproject.constants.messages.LogMessages;
 import ua.finalproject.constants.messages.ValidationMessages;
 import ua.finalproject.controller.commands.Command;
 import ua.finalproject.controller.util.DataValidation;
-import ua.finalproject.model.entities.impl.Order;
+import ua.finalproject.model.entities.full.Order;
 import ua.finalproject.model.exceptions.NoFreeCarWithSuchTypeException;
 import ua.finalproject.model.services.OrderService;
 import ua.finalproject.util.LogMessageBuilder;

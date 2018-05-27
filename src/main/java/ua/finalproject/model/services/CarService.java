@@ -8,9 +8,9 @@ import ua.finalproject.model.dao.CarTypeDao;
 import ua.finalproject.model.dao.connectionPool.ConnectionPoolHolder;
 import ua.finalproject.model.dao.factory.DaoFactory;
 import ua.finalproject.model.dao.util.UtilDao;
-import ua.finalproject.model.entities.impl.Car;
-import ua.finalproject.model.entities.impl.CarType;
-import ua.finalproject.model.entities.impl.Order;
+import ua.finalproject.model.entities.full.Car;
+import ua.finalproject.model.entities.full.CarType;
+import ua.finalproject.model.entities.full.Order;
 
 import java.sql.Connection;
 import java.sql.SQLException;
@@ -81,7 +81,7 @@ public class CarService {
             SQLExceptionRollbackErrorHandle(connection);
             throw new RuntimeException(e);
         } catch (Exception e) {
-            logger.error(LogMessages.AUTO_CLOSABLE_RESOURCE_ERROR_IN_ADD_CAR);
+            logger.error(LogMessages.AUTO_CLOSABLE_RESOURCE_ERROR_IN_ADD_CAR, e.getMessage());
         }
     }
 

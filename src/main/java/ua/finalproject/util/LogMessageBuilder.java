@@ -55,16 +55,12 @@ public enum LogMessageBuilder {
         return "Create entry in table " + tableName + " error";
     }
 
-    public String findByIdError(String tableName) {
-        return "Find from table " + tableName + " by id error";
-    }
-
-    public String findAllError(String tableName) {
-        return "Find all entries from " + tableName + " error";
-    }
-
     public String deleteEntryError(String tableName, Integer id) {
         return "Delete entry from " + tableName + " with " + id + " error";
+    }
+
+    public String deleteEntryByParameterError(String tableName, String parameterName) {
+        return "Delete entry from " + tableName + " with " + parameterName + " error";
     }
 }
 
