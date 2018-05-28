@@ -1,5 +1,5 @@
 <%@ taglib prefix="mytags" uri="https://mytags.com.ua" %>
-<%@ include file="../components/addition.jsp"%>
+<%@ include file="../components/addition.jsp" %>
 <jsp:include page="../components/head.jsp"/>
 
 
@@ -25,11 +25,13 @@
         <c:forEach items="${requestScope.carTypes}" var="type">
             <c:set var="count" value="${pageScope.count + 1}" scope="page"/>
             <tr>
-                <td><c:out value="${count}" /></td>
-                <td><c:out value="${type.type}" /></td>
-                <td><mytags:formatMoney money="${type.startingPrice}"/> <fmt:message key="hryvnia"/></td>
-                <td><mytags:formatMoney money="${type.pricePerKilometer}"/> <fmt:message key="hryvnia"/></td>
-                <td><c:out value="${type.discount}%" /></td>
+                <td><c:out value="${count}"/></td>
+                <td><c:out value="${type.type}"/></td>
+                <td><mytags:formatMoney money="${type.startingPrice}"/> <fmt:message
+                        key="hryvnia"/></td>
+                <td><mytags:formatMoney money="${type.pricePerKilometer}"/> <fmt:message
+                        key="hryvnia"/></td>
+                <td><c:out value="${type.discount}%"/></td>
             </tr>
         </c:forEach>
         </tbody>

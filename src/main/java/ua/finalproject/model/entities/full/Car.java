@@ -13,14 +13,6 @@ public class Car implements Entity<Integer> {
     private String driver;
     private CarType carType;
 
-    /**
-     * Car states
-     */
-    public enum State {
-        FREE, BUSY
-    }
-
-
     @Override
     public Integer getId() {
         return id;
@@ -68,6 +60,13 @@ public class Car implements Entity<Integer> {
 
     public void setCarType(CarType carType) {
         this.carType = carType;
+    }
+
+    /**
+     * Car states
+     */
+    public enum State {
+        FREE, BUSY
     }
 
     /**

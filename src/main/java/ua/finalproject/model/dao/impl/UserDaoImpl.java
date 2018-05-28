@@ -25,6 +25,7 @@ public class UserDaoImpl extends AbstractDao<User> implements UserDao {
 
     /**
      * Extracts user from result set
+     *
      * @param resultSet result set
      * @return user from result set
      * @throws SQLException if something went wrong in DB
@@ -56,8 +57,10 @@ public class UserDaoImpl extends AbstractDao<User> implements UserDao {
 
     /**
      * Adds user to DB
+     *
      * @param user that will be added to DB
-     * @throws SQLIntegrityConstraintViolationException if user's login or email already exists in DB
+     * @throws SQLIntegrityConstraintViolationException if user's login or email already
+     *                                                  exists in DB
      */
     @Override
     public void create(User user) throws SQLIntegrityConstraintViolationException {
@@ -73,13 +76,15 @@ public class UserDaoImpl extends AbstractDao<User> implements UserDao {
         } catch (SQLIntegrityConstraintViolationException e) {
             throw new SQLIntegrityConstraintViolationException(e);
         } catch (SQLException e) {
-            logger.error(LogMessageBuilder.INSTANCE.createEntryError(TableNames.USERS), e.getMessage());
+            logger.error(LogMessageBuilder.INSTANCE.createEntryError(TableNames.USERS), e
+                    .getMessage());
             throw new RuntimeException(e);
         }
     }
 
     /**
      * Finds user by login
+     *
      * @param login user's login
      * @return user that matches login
      */
@@ -90,12 +95,14 @@ public class UserDaoImpl extends AbstractDao<User> implements UserDao {
 
     /**
      * Update user's money spent
-     * @param userId user's id
+     *
+     * @param userId     user's id
      * @param moneySpent user's spent money
      */
     @Override
     public void updateMoneySpent(Integer userId, Long moneySpent) {
-        try (PreparedStatement preparedStatement = connection.prepareStatement(DbQueries.UPDATE_USER_MONEY_SPENT)) {
+        try (PreparedStatement preparedStatement = connection.prepareStatement(DbQueries
+                .UPDATE_USER_MONEY_SPENT)) {
             preparedStatement.setLong(1, moneySpent);
             preparedStatement.setInt(2, userId);
             preparedStatement.executeUpdate();

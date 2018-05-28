@@ -6,7 +6,7 @@ import ua.finalproject.constants.jsp.JSPPages;
 import ua.finalproject.constants.jsp.RequestAttributes;
 import ua.finalproject.constants.jsp.RequestParameters;
 import ua.finalproject.constants.messages.Messages;
-import ua.finalproject.model.services.UserService;
+import ua.finalproject.model.services.impl.UserServiceImpl;
 import ua.finalproject.util.BundleManager;
 
 import javax.servlet.http.HttpServletRequest;
@@ -28,8 +28,8 @@ public class UserRegistrationCommandTest {
 
     @Before
     public void setUp() {
-        UserService userService = mock(UserService.class);
-        userRegistrationCommand = new UserRegistrationCommand(userService);
+        UserServiceImpl userServiceImpl = mock(UserServiceImpl.class);
+        userRegistrationCommand = new UserRegistrationCommand(userServiceImpl);
         request = mock(HttpServletRequest.class);
         login = "zeus";
         email = "zeus@gmail.com";
@@ -51,7 +51,8 @@ public class UserRegistrationCommandTest {
         when(request.getParameter(RequestParameters.SECOND_PASSWORD)).thenReturn(password2);
 
         String page = userRegistrationCommand.execute(request);
-        verify(request).setAttribute(RequestAttributes.INFORMATION_MESSAGE, BundleManager.INSTANCE.getString(Messages.SUCCESSFUL_REGISTRATION));
+        verify(request).setAttribute(RequestAttributes.INFORMATION_MESSAGE, BundleManager
+                .INSTANCE.getString(Messages.SUCCESSFUL_REGISTRATION));
         assertEquals(page, JSPPages.INDEX_PAGE);
     }
 

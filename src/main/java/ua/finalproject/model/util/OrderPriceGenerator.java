@@ -9,16 +9,19 @@ public class OrderPriceGenerator {
 
     /**
      * Calculates order price
-     * @param moneySpent money spent by user
-     * @param departureStreet departure street
+     *
+     * @param moneySpent        money spent by user
+     * @param departureStreet   departure street
      * @param destinationStreet destination street
-     * @param carType car type
+     * @param carType           car type
      * @return order price
      */
-    public static Long getOrderPrice(Long moneySpent, String departureStreet, String destinationStreet, CarType carType) {
+    public static Long getOrderPrice(Long moneySpent, String departureStreet, String
+            destinationStreet, CarType carType) {
         Integer distance = getOrderDistance(departureStreet, destinationStreet);
         Integer discount = getDiscountBasedOnMoneySpent(moneySpent) + carType.getDiscount();
-        Integer orderPrice = (carType.getStartingPrice() + (distance * carType.getPricePerKilometer()));
+        Integer orderPrice = (carType.getStartingPrice() + (distance * carType
+                .getPricePerKilometer()));
         if (discount.equals(0)) {
             return (long) orderPrice;
         }
@@ -28,7 +31,8 @@ public class OrderPriceGenerator {
 
     /**
      * Calculate disctance
-     * @param departureStreet departure street
+     *
+     * @param departureStreet   departure street
      * @param destinationStreet destination street
      * @return trip distance
      */
@@ -38,6 +42,7 @@ public class OrderPriceGenerator {
 
     /**
      * Choses discount depending on money spent by user
+     *
      * @param moneySpent money spent by user
      * @return user discount
      */

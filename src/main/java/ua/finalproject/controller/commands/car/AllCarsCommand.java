@@ -6,7 +6,7 @@ import ua.finalproject.constants.messages.Messages;
 import ua.finalproject.controller.commands.Command;
 import ua.finalproject.controller.util.ControllerUtil;
 import ua.finalproject.model.entities.full.Car;
-import ua.finalproject.model.services.CarService;
+import ua.finalproject.model.services.impl.CarServiceImpl;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
@@ -16,25 +16,26 @@ import java.util.List;
  */
 public class AllCarsCommand implements Command {
 
-    private CarService carService;
+    private CarServiceImpl carServiceImpl;
 
-    public AllCarsCommand(CarService carService) {
-        this.carService = carService;
+    public AllCarsCommand(CarServiceImpl carServiceImpl) {
+        this.carServiceImpl = carServiceImpl;
     }
 
     /**
-     *
      * @param request request from user
      * @return path to all cars page
      */
     @Override
     public String execute(HttpServletRequest request) {
-        List<Car> allCars = carService.showAllCars().get();
+        List<Car> allCars = carServiceImpl.showAllCars().get();
         if (allCars.isEmpty()) {
-            request.setAttribute(RequestAttributes.MESSAGE, bundleManager.getString(Messages.THERE_ARE_NO_CARS_IN_DB));
+            request.setAttribute(RequestAttributes.MESSAGE, bundleManager.getString(Messages
+                    .THERE_ARE_NO_CARS_IN_DB));
             return JSPPages.ALL_CARS_PAGE;
         }
-        request.setAttribute(RequestAttributes.CARS, ControllerUtil.getSubListForPagination(request, allCars));
+        request.setAttribute(RequestAttributes.CARS, ControllerUtil.getSubListForPagination
+                (request, allCars));
         return JSPPages.ALL_CARS_PAGE;
     }
 }

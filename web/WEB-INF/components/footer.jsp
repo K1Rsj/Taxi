@@ -1,4 +1,4 @@
-<%@ include file="addition.jsp"%>
+<%@ include file="addition.jsp" %>
 
 <footer class="py-2 fixed-bottom">
     <div class="container" style="margin-right: 0;">

@@ -7,7 +7,7 @@ import ua.finalproject.constants.messages.ExceptionMessages;
 import ua.finalproject.constants.messages.Messages;
 import ua.finalproject.controller.commands.Command;
 import ua.finalproject.controller.util.DataValidation;
-import ua.finalproject.model.services.CarTypeService;
+import ua.finalproject.model.services.impl.CarTypeServiceImpl;
 import ua.finalproject.util.LogMessageBuilder;
 
 import javax.servlet.http.HttpServletRequest;
@@ -17,14 +17,13 @@ import javax.servlet.http.HttpServletRequest;
  */
 public class AddDiscountCommand implements Command {
 
-    private CarTypeService carTypeService;
+    private CarTypeServiceImpl carTypeServiceImpl;
 
-    public AddDiscountCommand(CarTypeService carTypeService) {
-        this.carTypeService = carTypeService;
+    public AddDiscountCommand(CarTypeServiceImpl carTypeServiceImpl) {
+        this.carTypeServiceImpl = carTypeServiceImpl;
     }
 
     /**
-     *
      * @param request request from user
      * @return path to admin foundation page if validation was successful
      * or else return path to add discount page
@@ -34,12 +33,14 @@ public class AddDiscountCommand implements Command {
         String type = request.getParameter(RequestParameters.TYPE);
         Integer discount = Integer.parseInt(request.getParameter(RequestParameters.DISCOUNT));
         if (DataValidation.checkDiscountAmount(discount)) {
-            carTypeService.updateDiscount(type, discount);
-            request.setAttribute(RequestAttributes.INFORMATION_MESSAGE, bundleManager.getString(Messages.DISCOUNT_SUCCESSFULLY_ADDED));
+            carTypeServiceImpl.updateDiscount(type, discount);
+            request.setAttribute(RequestAttributes.INFORMATION_MESSAGE, bundleManager
+                    .getString(Messages.DISCOUNT_SUCCESSFULLY_ADDED));
             logger.info(LogMessageBuilder.INSTANCE.newDiscountInfo(type, discount));
             return JSPPages.ADMIN_FOUNDATION_PAGE;
         } else {
-            request.setAttribute(RequestAttributes.INFORMATION_MESSAGE, bundleManager.getString(ExceptionMessages.WRONG_DISCOUNT_AMOUNT));
+            request.setAttribute(RequestAttributes.INFORMATION_MESSAGE, bundleManager
+                    .getString(ExceptionMessages.WRONG_DISCOUNT_AMOUNT));
             return JSPPages.ADD_DISCOUNT_PAGE;
         }
     }

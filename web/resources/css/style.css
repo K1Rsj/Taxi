@@ -1,4 +1,4 @@
-body{
+body {
     font-family: 'Kurale', serif;
     background: url('../../resources/img/main.jpg') no-repeat center center fixed;
     -webkit-background-size: cover;
@@ -7,24 +7,22 @@ body{
     background-size: cover;
 }
 
-.menu__item{
+.menu__item {
     margin: 0 20px;
     padding-top: 35px;
     font-size: 22px;
     color: white;
 }
 
-.menu__item a{
+.menu__item a {
     color: white;
 }
-
 
 form {
     display: block;
 }
 
-
-.header a{
+.header a {
     color: white;
 
 }
@@ -36,7 +34,7 @@ form {
 }
 
 .content {
-    padding-top:200px;
+    padding-top: 200px;
     text-align: center;
     font-size: 22px;
     color: white;
@@ -52,7 +50,7 @@ form {
 }
 
 caption {
-    text-align:right;
+    text-align: right;
 }
 
 .features {

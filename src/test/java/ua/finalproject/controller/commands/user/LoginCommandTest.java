@@ -6,7 +6,7 @@ import ua.finalproject.constants.jsp.JSPPages;
 import ua.finalproject.constants.jsp.RequestAttributes;
 import ua.finalproject.constants.jsp.RequestParameters;
 import ua.finalproject.model.entities.full.User;
-import ua.finalproject.model.services.UserService;
+import ua.finalproject.model.services.impl.UserServiceImpl;
 
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
@@ -23,7 +23,7 @@ import static org.mockito.Mockito.when;
 public class LoginCommandTest {
 
     private LoginCommand loginCommand;
-    private UserService userService;
+    private UserServiceImpl userServiceImpl;
     private HttpServletRequest request;
     private HttpSession session;
     private User user;
@@ -35,8 +35,8 @@ public class LoginCommandTest {
 
     @Before
     public void setUp() {
-        userService = mock(UserService.class);
-        loginCommand = new LoginCommand(userService);
+        userServiceImpl = mock(UserServiceImpl.class);
+        loginCommand = new LoginCommand(userServiceImpl);
         user = mock(User.class);
         request = mock(HttpServletRequest.class);
         session = mock(HttpSession.class);
@@ -53,8 +53,9 @@ public class LoginCommandTest {
         when(request.getSession()).thenReturn(session);
         when(session.getAttribute(RequestAttributes.USER_LOGIN)).thenReturn(login);
         when(session.getServletContext()).thenReturn(servletContext);
-        when(servletContext.getAttribute(RequestAttributes.LOGGED_USERS)).thenReturn(loggedUsers);
-        when(userService.findUserByLogin(login)).thenReturn(Optional.of(user));
+        when(servletContext.getAttribute(RequestAttributes.LOGGED_USERS)).thenReturn
+                (loggedUsers);
+        when(userServiceImpl.findUserByLogin(login)).thenReturn(Optional.of(user));
         when(request.getParameter(RequestParameters.LOGIN)).thenReturn(login);
         when(request.getParameter(RequestParameters.PASSWORD)).thenReturn(password);
         when(user.getRole()).thenReturn(role);

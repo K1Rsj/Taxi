@@ -28,6 +28,7 @@ public class OrderDaoImpl extends AbstractDao<Order> implements OrderDao {
 
     /**
      * Extracts order from result set
+     *
      * @param resultSet result set
      * @return order from result set
      * @throws SQLException if something wrong with DB
@@ -50,6 +51,7 @@ public class OrderDaoImpl extends AbstractDao<Order> implements OrderDao {
 
     /**
      * Adds order to DB
+     *
      * @param order order that will be added to DB
      */
     @Override
@@ -64,18 +66,21 @@ public class OrderDaoImpl extends AbstractDao<Order> implements OrderDao {
             preparedStatement.setLong(6, order.getPrice());
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
-            logger.error(LogMessageBuilder.INSTANCE.createEntryError(TableNames.ORDERS), e.getMessage());
+            logger.error(LogMessageBuilder.INSTANCE.createEntryError(TableNames.ORDERS), e
+                    .getMessage());
             throw new RuntimeException(e);
         }
     }
 
     /**
      * Finds all user's orders
+     *
      * @param login user's login
      * @return list of all user's orders
      */
     @Override
     public Optional<List<Order>> findOrdersByUserLogin(String login) {
-        return Optional.of(findAllByQuery(QueryContainer.INSTANCE.findOrdersByUserLogin(login)));
+        return Optional.of(findAllByQuery(QueryContainer.INSTANCE.findOrdersByUserLogin
+                (login)));
     }
 }

@@ -14,6 +14,7 @@ import java.sql.Connection;
 
 /**
  * JDBC Dao factory
+ *
  * @see UserDaoImpl
  * @see CarDaoImpl
  * @see OrderDaoImpl
@@ -22,7 +23,6 @@ import java.sql.Connection;
 public class JDBCDaoFactory extends DaoFactory {
 
     /**
-     *
      * @param connection connection
      * @return implementation of user dao
      */
@@ -32,7 +32,6 @@ public class JDBCDaoFactory extends DaoFactory {
     }
 
     /**
-     *
      * @param connection connection
      * @return implementation of car dao
      */
@@ -42,7 +41,6 @@ public class JDBCDaoFactory extends DaoFactory {
     }
 
     /**
-     *
      * @param connection connection
      * @return implementation of order dao
      */
@@ -52,7 +50,6 @@ public class JDBCDaoFactory extends DaoFactory {
     }
 
     /**
-     *
      * @param connection connection
      * @return implementation of car type dao
      */

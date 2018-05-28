@@ -7,7 +7,7 @@ import ua.finalproject.controller.commands.Command;
 import ua.finalproject.controller.util.CreateEntityFromRequest;
 import ua.finalproject.controller.util.DataValidation;
 import ua.finalproject.model.entities.full.User;
-import ua.finalproject.model.services.UserService;
+import ua.finalproject.model.services.impl.UserServiceImpl;
 import ua.finalproject.util.LogMessageBuilder;
 
 import javax.servlet.http.HttpServletRequest;
@@ -15,19 +15,19 @@ import java.sql.SQLIntegrityConstraintViolationException;
 
 /**
  * Command for registration new user
+ *
  * @see DataValidation
  * @see CreateEntityFromRequest
  */
 public class UserRegistrationCommand implements Command {
 
-    private UserService userService;
+    private UserServiceImpl userServiceImpl;
 
-    public UserRegistrationCommand(UserService userService) {
-        this.userService = userService;
+    public UserRegistrationCommand(UserServiceImpl userServiceImpl) {
+        this.userServiceImpl = userServiceImpl;
     }
 
     /**
-     *
      * @param request request from user
      * @return path to index page if validation was successful
      * or else return path to user registration page
@@ -37,13 +37,15 @@ public class UserRegistrationCommand implements Command {
         if (DataValidation.userDataValidation(request)) {
             User user = CreateEntityFromRequest.getUserFromRequest(request);
             try {
-                userService.registerUser(user);
+                userServiceImpl.registerUser(user);
             } catch (SQLIntegrityConstraintViolationException e) {
-                request.setAttribute(RequestAttributes.WRONG_INPUT_MESSAGE, DataValidation.loginOrEmailNotUniqueDetermination(e));
+                request.setAttribute(RequestAttributes.WRONG_INPUT_MESSAGE, DataValidation
+                        .loginOrEmailNotUniqueDetermination(e));
                 logger.info(LogMessageBuilder.INSTANCE.duplicateUserInfo(user.getLogin()));
                 return JSPPages.USER_REGISTRATION_PAGE;
             }
-            request.setAttribute(RequestAttributes.INFORMATION_MESSAGE, bundleManager.getString(Messages.SUCCESSFUL_REGISTRATION));
+            request.setAttribute(RequestAttributes.INFORMATION_MESSAGE, bundleManager
+                    .getString(Messages.SUCCESSFUL_REGISTRATION));
             logger.info(LogMessageBuilder.INSTANCE.userRegistrationInfo(user.getLogin()));
             return JSPPages.INDEX_PAGE;
         } else {

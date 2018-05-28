@@ -11,7 +11,6 @@ import javax.servlet.http.HttpServletRequest;
 public class AddCarPageCommand implements Command {
 
     /**
-     *
      * @param request request from user
      * @return path to add car page
      */

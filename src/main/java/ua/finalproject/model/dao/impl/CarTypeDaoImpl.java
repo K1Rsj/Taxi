@@ -22,6 +22,7 @@ public class CarTypeDaoImpl extends AbstractDao<CarType> implements CarTypeDao {
 
     /**
      * Extracts car type from result set
+     *
      * @param resultSet result set
      * @return car type from result set
      * @throws SQLException if something went wrong in DB
@@ -45,6 +46,7 @@ public class CarTypeDaoImpl extends AbstractDao<CarType> implements CarTypeDao {
 
     /**
      * Adds car type to DB
+     *
      * @param carType car type that will be added to DB
      */
     @Override
@@ -57,19 +59,22 @@ public class CarTypeDaoImpl extends AbstractDao<CarType> implements CarTypeDao {
             preparedStatement.setInt(4, carType.getDiscount());
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
-            logger.error(LogMessageBuilder.INSTANCE.createEntryError(TableNames.CAR_TYPE), e.getMessage());
+            logger.error(LogMessageBuilder.INSTANCE.createEntryError(TableNames.CAR_TYPE), e
+                    .getMessage());
             throw new RuntimeException(e);
         }
     }
 
     /**
      * Updates car type's discount
-     * @param id of car type
+     *
+     * @param id       of car type
      * @param discount of car type
      */
     @Override
     public void updateDiscount(Integer id, Integer discount) {
-        try (PreparedStatement preparedStatement = connection.prepareStatement(DbQueries.UPDATE_CAR_TYPE_SET_DISCOUNT)) {
+        try (PreparedStatement preparedStatement = connection.prepareStatement(DbQueries
+                .UPDATE_CAR_TYPE_SET_DISCOUNT)) {
             preparedStatement.setInt(1, discount);
             preparedStatement.setInt(2, id);
             preparedStatement.executeUpdate();

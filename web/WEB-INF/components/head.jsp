@@ -1,4 +1,4 @@
-<%@ include file="addition.jsp"%>
+<%@ include file="addition.jsp" %>
 
 <!DOCTYPE html>
 

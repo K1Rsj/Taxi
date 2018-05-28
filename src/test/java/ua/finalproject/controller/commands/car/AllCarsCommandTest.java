@@ -5,7 +5,7 @@ import org.junit.Test;
 import ua.finalproject.constants.jsp.JSPPages;
 import ua.finalproject.constants.jsp.RequestAttributes;
 import ua.finalproject.controller.util.ControllerUtil;
-import ua.finalproject.model.services.CarService;
+import ua.finalproject.model.services.impl.CarServiceImpl;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
@@ -17,20 +17,20 @@ import static org.mockito.Mockito.*;
 public class AllCarsCommandTest {
 
     private AllCarsCommand allCarsCommand;
-    private CarService carService;
+    private CarServiceImpl carServiceImpl;
     private HttpServletRequest request;
 
     @Before
     public void setUp() {
-        carService = mock(CarService.class);
-        allCarsCommand = new AllCarsCommand(carService);
+        carServiceImpl = mock(CarServiceImpl.class);
+        allCarsCommand = new AllCarsCommand(carServiceImpl);
         request = mock(HttpServletRequest.class);
     }
 
     @Test
     public void execute() {
         List cars = mock(List.class);
-        when(carService.showAllCars()).thenReturn(Optional.of(cars));
+        when(carServiceImpl.showAllCars()).thenReturn(Optional.of(cars));
         when(ControllerUtil.getSubListForPagination(request, cars)).thenReturn(cars);
         String page = allCarsCommand.execute(request);
         verify(request).setAttribute(RequestAttributes.CARS, cars);

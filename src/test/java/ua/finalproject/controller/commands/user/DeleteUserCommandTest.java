@@ -4,7 +4,7 @@ import org.junit.Before;
 import org.junit.Test;
 import ua.finalproject.constants.GlobalConstants;
 import ua.finalproject.constants.jsp.RequestParameters;
-import ua.finalproject.model.services.UserService;
+import ua.finalproject.model.services.impl.UserServiceImpl;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -18,8 +18,8 @@ public class DeleteUserCommandTest {
 
     @Before
     public void setUp() {
-        UserService userService = mock(UserService.class);
-        deleteUserCommand = new DeleteUserCommand(userService);
+        UserServiceImpl userServiceImpl = mock(UserServiceImpl.class);
+        deleteUserCommand = new DeleteUserCommand(userServiceImpl);
         request = mock(HttpServletRequest.class);
     }
 

@@ -3,7 +3,7 @@ package ua.finalproject.controller.commands.user;
 import ua.finalproject.constants.GlobalConstants;
 import ua.finalproject.constants.jsp.RequestParameters;
 import ua.finalproject.controller.commands.Command;
-import ua.finalproject.model.services.UserService;
+import ua.finalproject.model.services.impl.UserServiceImpl;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -12,21 +12,20 @@ import javax.servlet.http.HttpServletRequest;
  */
 public class DeleteUserCommand implements Command {
 
-    private UserService userService;
+    private UserServiceImpl userServiceImpl;
 
-    public DeleteUserCommand(UserService userService) {
-        this.userService = userService;
+    public DeleteUserCommand(UserServiceImpl userServiceImpl) {
+        this.userServiceImpl = userServiceImpl;
     }
 
     /**
-     *
      * @param request request from user
      * @return all users command
      */
     @Override
     public String execute(HttpServletRequest request) {
         Integer userId = Integer.parseInt(request.getParameter(RequestParameters.ID));
-        userService.deleteUserById(userId);
+        userServiceImpl.deleteUserById(userId);
         return GlobalConstants.ALL_USERS;
     }
 }

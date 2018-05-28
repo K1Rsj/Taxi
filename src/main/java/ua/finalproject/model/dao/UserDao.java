@@ -8,6 +8,7 @@ public interface UserDao extends Dao<User, Integer> {
 
     /**
      * Finds user by login
+     *
      * @param login user's login
      * @return user that matches login
      */
@@ -15,7 +16,8 @@ public interface UserDao extends Dao<User, Integer> {
 
     /**
      * Update user's money spent
-     * @param userId user's id
+     *
+     * @param userId     user's id
      * @param moneySpent user's spent money
      */
     void updateMoneySpent(Integer userId, Long moneySpent);

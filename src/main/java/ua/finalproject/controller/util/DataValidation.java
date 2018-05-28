@@ -20,6 +20,7 @@ public class DataValidation {
 
     /**
      * Validates user's input data
+     *
      * @param request user's request
      * @return <code>true</code> if input data format is correct
      */
@@ -31,31 +32,44 @@ public class DataValidation {
         String secondName = request.getParameter(RequestParameters.SECOND_NAME);
         String phoneNumber = request.getParameter(RequestParameters.PHONE_NUMBER);
 
-        if (login == null || !login.matches(bundleManager.getString(RegexContainer.REGEX_LOGIN))) {
-            request.setAttribute(RequestAttributes.WRONG_INPUT_MESSAGE, bundleManager.getString(ValidationMessages.WRONG_LOGIN_FORMAT));
+        if (login == null || !login.matches(bundleManager.getString(RegexContainer
+                .REGEX_LOGIN))) {
+            request.setAttribute(RequestAttributes.WRONG_INPUT_MESSAGE, bundleManager
+                    .getString(ValidationMessages.WRONG_LOGIN_FORMAT));
             return false;
-        } else if (password == null || !password.matches(bundleManager.getString(RegexContainer.REGEX_PASSWORD))) {
-            request.setAttribute(RequestAttributes.WRONG_INPUT_MESSAGE, bundleManager.getString(ValidationMessages.WRONG_PASSWORD_FORMAT));
-            return false;
-
-        } else if (email == null || !email.matches(bundleManager.getString(RegexContainer.REGEX_EMAIL))) {
-            request.setAttribute(RequestAttributes.WRONG_INPUT_MESSAGE, bundleManager.getString(ValidationMessages.WRONG_EMAIL_FORMAT));
-            return false;
-
-        } else if (firstName == null || !firstName.matches(bundleManager.getString(RegexContainer.REGEX_FIRST_NAME))) {
-            request.setAttribute(RequestAttributes.WRONG_INPUT_MESSAGE, bundleManager.getString(ValidationMessages.WRONG_FIRST_NAME_FORMAT));
+        } else if (password == null || !password.matches(bundleManager.getString
+                (RegexContainer.REGEX_PASSWORD))) {
+            request.setAttribute(RequestAttributes.WRONG_INPUT_MESSAGE, bundleManager
+                    .getString(ValidationMessages.WRONG_PASSWORD_FORMAT));
             return false;
 
-        } else if (secondName == null || !secondName.matches(bundleManager.getString(RegexContainer.REGEX_SECOND_NAME))) {
-            request.setAttribute(RequestAttributes.WRONG_INPUT_MESSAGE, bundleManager.getString(ValidationMessages.WRONG_SECOND_NAME_FORMAT));
+        } else if (email == null || !email.matches(bundleManager.getString(RegexContainer
+                .REGEX_EMAIL))) {
+            request.setAttribute(RequestAttributes.WRONG_INPUT_MESSAGE, bundleManager
+                    .getString(ValidationMessages.WRONG_EMAIL_FORMAT));
             return false;
 
-        } else if (phoneNumber == null || !phoneNumber.matches(bundleManager.getString(RegexContainer.REGEX_PHONE_NUMBER))) {
-            request.setAttribute(RequestAttributes.WRONG_INPUT_MESSAGE, bundleManager.getString(ValidationMessages.WRONG_PHONE_NUMBER_FORMAT));
+        } else if (firstName == null || !firstName.matches(bundleManager.getString
+                (RegexContainer.REGEX_FIRST_NAME))) {
+            request.setAttribute(RequestAttributes.WRONG_INPUT_MESSAGE, bundleManager
+                    .getString(ValidationMessages.WRONG_FIRST_NAME_FORMAT));
+            return false;
+
+        } else if (secondName == null || !secondName.matches(bundleManager.getString
+                (RegexContainer.REGEX_SECOND_NAME))) {
+            request.setAttribute(RequestAttributes.WRONG_INPUT_MESSAGE, bundleManager
+                    .getString(ValidationMessages.WRONG_SECOND_NAME_FORMAT));
+            return false;
+
+        } else if (phoneNumber == null || !phoneNumber.matches(bundleManager.getString
+                (RegexContainer.REGEX_PHONE_NUMBER))) {
+            request.setAttribute(RequestAttributes.WRONG_INPUT_MESSAGE, bundleManager
+                    .getString(ValidationMessages.WRONG_PHONE_NUMBER_FORMAT));
             return false;
 
         } else if (!password.equals(request.getParameter(RequestParameters.SECOND_PASSWORD))) {
-            request.setAttribute(RequestAttributes.WRONG_INPUT_MESSAGE, bundleManager.getString(ValidationMessages.DIFFERENT_PASSWORDS));
+            request.setAttribute(RequestAttributes.WRONG_INPUT_MESSAGE, bundleManager
+                    .getString(ValidationMessages.DIFFERENT_PASSWORDS));
             return false;
         } else {
             return true;
@@ -64,10 +78,12 @@ public class DataValidation {
 
     /**
      * Determines what input data in not unique
+     *
      * @param e exception that indicates that entered data not unique
      * @return input field that is not unique
      */
-    public static String loginOrEmailNotUniqueDetermination(SQLIntegrityConstraintViolationException e) {
+    public static String loginOrEmailNotUniqueDetermination
+    (SQLIntegrityConstraintViolationException e) {
         if (e.getMessage().contains(GlobalConstants.LOGIN)) {
             return bundleManager.getString(ExceptionMessages.NOT_UNIQUE_LOGIN);
         } else {
@@ -77,29 +93,36 @@ public class DataValidation {
 
     /**
      * Validates user's login and password input data
+     *
      * @param login user's login
-     * @param pass user's password
+     * @param pass  user's password
      * @return <code>true</code> if input data format is incorrect
      */
     public static boolean validationOfLoginAndPassword(String login, String pass) {
-        return login == null || login.equals(GlobalConstants.EMPTY_STRING) || pass == null || pass.equals(GlobalConstants.EMPTY_STRING);
+        return login == null || login.equals(GlobalConstants.EMPTY_STRING) || pass == null
+                || pass.equals(GlobalConstants.EMPTY_STRING);
     }
 
     /**
      * Validates user's order input data
-     * @param departureStreet departure street
+     *
+     * @param departureStreet   departure street
      * @param destinationStreet destination street
      * @return <code>true</code> if input data format is correct
      */
-    public static boolean orderDataValidation(String departureStreet, String destinationStreet) {
-        if (departureStreet == null || !departureStreet.matches(bundleManager.getString(RegexContainer.REGEX_STREET))) {
+    public static boolean orderDataValidation(String departureStreet, String
+            destinationStreet) {
+        if (departureStreet == null || !departureStreet.matches(bundleManager.getString
+                (RegexContainer.REGEX_STREET))) {
             return false;
         } else
-            return destinationStreet != null && destinationStreet.matches(bundleManager.getString(RegexContainer.REGEX_STREET));
+            return destinationStreet != null && destinationStreet.matches(bundleManager
+                    .getString(RegexContainer.REGEX_STREET));
     }
 
     /**
      * Validates user's discount input data
+     *
      * @param discount amount of discount
      * @return <code>true</code> if input discount amount is correct
      */
@@ -109,6 +132,7 @@ public class DataValidation {
 
     /**
      * Validates user's input data
+     *
      * @param request user's request
      * @return <code>true</code> if input data format is correct
      */
@@ -116,14 +140,20 @@ public class DataValidation {
         String model = request.getParameter(RequestParameters.MODEL);
         String number = request.getParameter(RequestParameters.NUMBER);
         String driver = request.getParameter(RequestParameters.DRIVER);
-        if (model == null || !model.matches(bundleManager.getString(RegexContainer.REGEX_MODEL))) {
-            request.setAttribute(RequestAttributes.INFORMATION_MESSAGE, bundleManager.getString(ValidationMessages.WRONG_MODEL_FORMAT));
+        if (model == null || !model.matches(bundleManager.getString(RegexContainer
+                .REGEX_MODEL))) {
+            request.setAttribute(RequestAttributes.INFORMATION_MESSAGE, bundleManager
+                    .getString(ValidationMessages.WRONG_MODEL_FORMAT));
             return false;
-        } else if (number == null || !number.matches(bundleManager.getString(RegexContainer.REGEX_NUMBER))) {
-            request.setAttribute(RequestAttributes.INFORMATION_MESSAGE, bundleManager.getString(ValidationMessages.WRONG_NUMBER_FORMAT));
+        } else if (number == null || !number.matches(bundleManager.getString(RegexContainer
+                .REGEX_NUMBER))) {
+            request.setAttribute(RequestAttributes.INFORMATION_MESSAGE, bundleManager
+                    .getString(ValidationMessages.WRONG_NUMBER_FORMAT));
             return false;
-        } else if (driver == null || !driver.matches(bundleManager.getString(RegexContainer.REGEX_DRIVER_NAME))) {
-            request.setAttribute(RequestAttributes.INFORMATION_MESSAGE, bundleManager.getString(ValidationMessages.WRONG_DRIVER_NAME_FORMAT));
+        } else if (driver == null || !driver.matches(bundleManager.getString(RegexContainer
+                .REGEX_DRIVER_NAME))) {
+            request.setAttribute(RequestAttributes.INFORMATION_MESSAGE, bundleManager
+                    .getString(ValidationMessages.WRONG_DRIVER_NAME_FORMAT));
             return false;
         } else {
             return true;

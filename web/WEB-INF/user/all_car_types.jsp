@@ -1,4 +1,4 @@
-<%@ include file="../components/addition.jsp"%>
+<%@ include file="../components/addition.jsp" %>
 <jsp:include page="../components/head.jsp"/>
 
 <c:if test="${empty sessionScope.role}">

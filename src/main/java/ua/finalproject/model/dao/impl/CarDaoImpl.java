@@ -26,6 +26,7 @@ public class CarDaoImpl extends AbstractDao<Car> implements CarDao {
 
     /**
      * Extracts car from result set
+     *
      * @param resultSet result set
      * @return car from result set
      * @throws SQLException if something went wrong in DB
@@ -49,6 +50,7 @@ public class CarDaoImpl extends AbstractDao<Car> implements CarDao {
 
     /**
      * Adds car to DB
+     *
      * @param car car that will be added to DB
      * @throws SQLIntegrityConstraintViolationException if car number already exists in DB
      */
@@ -64,28 +66,33 @@ public class CarDaoImpl extends AbstractDao<Car> implements CarDao {
         } catch (SQLIntegrityConstraintViolationException e) {
             throw new SQLIntegrityConstraintViolationException(e);
         } catch (SQLException e) {
-            logger.error(LogMessageBuilder.INSTANCE.createEntryError(TableNames.CARS), e.getMessage());
+            logger.error(LogMessageBuilder.INSTANCE.createEntryError(TableNames.CARS), e
+                    .getMessage());
             throw new RuntimeException(e);
         }
     }
+
     /**
      * Gets free car by the car type id
+     *
      * @param typeId id of the car type
      * @return car that is free and matches the car type
      */
     @Override
     public Optional<Car> getFreeCarByTypeId(Integer typeId) {
-            return Optional.of(findOneByQuery(QueryContainer.INSTANCE.findFreeCarByType(typeId)));
+        return Optional.of(findOneByQuery(QueryContainer.INSTANCE.findFreeCarByType(typeId)));
     }
 
     /**
      * Updates car state
-     * @param carId id of the car
+     *
+     * @param carId    id of the car
      * @param carState new car state
      */
     @Override
     public void updateCarState(Integer carId, String carState) {
-        try (PreparedStatement preparedStatement = connection.prepareStatement(DbQueries.UPDATE_CAR_STATE_BY_ID)) {
+        try (PreparedStatement preparedStatement = connection.prepareStatement(DbQueries
+                .UPDATE_CAR_STATE_BY_ID)) {
             preparedStatement.setString(1, carState);
             preparedStatement.setInt(2, carId);
             preparedStatement.executeUpdate();

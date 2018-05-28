@@ -399,3 +399,23 @@
 2018-05-27 20:46:02.397 Command - User misha logged successfully
 2018-05-27 20:48:29.531 Command - User misha logged successfully
 2018-05-27 20:48:43.369 Command - User adm logged successfully
+2018-05-27 22:11:38.642 Command - User adm logged successfully
+2018-05-28 22:34:58.142 ConnectionPoolHolder - Connection error
+2018-05-28 22:35:01.683 ConnectionPoolHolder - Connection error
+2018-05-28 22:35:05.267 ConnectionPoolHolder - Connection error
+2018-05-28 22:35:14.829 ConnectionPoolHolder - Connection error
+2018-05-28 22:38:51.943 Command - User adm logged successfully
+2018-05-28 23:38:41.875 Command - User adm logged successfully
+2018-05-28 23:38:47.834 Command - Added new discount:'5'% for car type: minibus
+2018-05-28 23:39:17.598 Command - User misha logged successfully
+2018-05-28 23:39:30.289 Command - User:'Михаил Тестовый make order for car АА1251НМ
+2018-05-28 23:40:01.147 Command - User: misha cancelled order
+2018-05-28 23:43:56.168 Command - User adm logged successfully
+2018-05-28 23:45:36.717 Command - User misha logged successfully
+2018-05-29 00:03:04.358 Command - User adm logged successfully
+2018-05-29 00:05:41.117 Command - User adm logged successfully
+2018-05-29 00:10:35.527 Service - Auto-closable resource error in find user by login
+2018-05-29 00:10:35.535 Command - Invalid attempt of login user:'dhdfh'
+2018-05-29 00:12:08.359 Command - User adm logged successfully
+2018-05-29 00:13:43.045 Service - Auto-closable resource error in find user by login
+2018-05-29 00:13:43.057 Command - Invalid attempt of login user:'dfhs'

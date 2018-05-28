@@ -2,13 +2,10 @@ package ua.finalproject.controller.util;
 
 import org.junit.Test;
 import ua.finalproject.constants.jsp.RequestParameters;
-import ua.finalproject.controller.commands.user.UserRegistrationCommand;
-import ua.finalproject.model.services.UserService;
 
 import javax.servlet.http.HttpServletRequest;
 
 import static org.junit.Assert.*;
-import static org.mockito.ArgumentMatchers.booleanThat;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
@@ -50,7 +47,8 @@ public class DataValidationTest {
     public void orderDataValidation() {
         String destinationStreet = "Sherbakova 5";
         String departureStreet = "Avtozavodskaya 10";
-        boolean result = DataValidation.orderDataValidation(departureStreet, destinationStreet);
+        boolean result = DataValidation.orderDataValidation(departureStreet,
+                destinationStreet);
         assertTrue(result);
 
     }

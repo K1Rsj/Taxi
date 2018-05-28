@@ -6,7 +6,7 @@ import ua.finalproject.constants.jsp.JSPPages;
 import ua.finalproject.constants.jsp.RequestAttributes;
 import ua.finalproject.constants.jsp.RequestParameters;
 import ua.finalproject.constants.messages.Messages;
-import ua.finalproject.model.services.CarService;
+import ua.finalproject.model.services.impl.CarServiceImpl;
 import ua.finalproject.util.BundleManager;
 
 import javax.servlet.http.HttpServletRequest;
@@ -17,7 +17,7 @@ import static org.mockito.Mockito.*;
 public class AddCarCommandTest {
 
     private AddCarCommand addCarCommand;
-    private CarService carService;
+    private CarServiceImpl carServiceImpl;
     private HttpServletRequest request;
     private String model;
     private String number;
@@ -26,8 +26,8 @@ public class AddCarCommandTest {
 
     @Before
     public void setUp() {
-        carService = mock(CarService.class);
-        addCarCommand = new AddCarCommand(carService);
+        carServiceImpl = mock(CarServiceImpl.class);
+        addCarCommand = new AddCarCommand(carServiceImpl);
         request = mock(HttpServletRequest.class);
         model = "Peugeot 208";
         number = "АА7686АА";

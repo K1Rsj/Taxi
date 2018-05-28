@@ -10,7 +10,8 @@ public class NoFreeCarWithSuchTypeException extends Exception {
 
     @Override
     public String getMessage() {
-        return BundleManager.INSTANCE.getString(ExceptionMessages.AT_THE_MOMENT_THERE_IS_NO_CAR_OF_THIS_TYPE);
+        return BundleManager.INSTANCE.getString(ExceptionMessages
+                .AT_THE_MOMENT_THERE_IS_NO_CAR_OF_THIS_TYPE);
     }
 
 }

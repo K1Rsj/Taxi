@@ -22,12 +22,14 @@ public class MoneyFormatterTag extends SimpleTagSupport {
 
     /**
      * Formats the money
+     *
      * @throws IOException if something wrong with output stream
      */
     @Override
     public void doTag() throws IOException {
         Double result;
         result = (double) money / 100;
-        getJspContext().getOut().write(String.valueOf(result).replace(GlobalConstants.POINT_ZERO, GlobalConstants.EMPTY_STRING));
+        getJspContext().getOut().write(String.valueOf(result).replace(GlobalConstants
+                .POINT_ZERO, GlobalConstants.EMPTY_STRING));
     }
 }

@@ -7,7 +7,7 @@ import ua.finalproject.constants.jsp.RequestAttributes;
 import ua.finalproject.constants.messages.Messages;
 import ua.finalproject.model.entities.full.Order;
 import ua.finalproject.model.entities.full.User;
-import ua.finalproject.model.services.OrderService;
+import ua.finalproject.model.services.impl.OrderServiceImpl;
 import ua.finalproject.util.BundleManager;
 
 import javax.servlet.http.HttpServletRequest;
@@ -21,7 +21,7 @@ import static org.mockito.Mockito.verify;
 public class ConfirmOrderCommandTest {
 
     private ConfirmOrderCommand confirmOrderCommand;
-    private OrderService orderService;
+    private OrderServiceImpl orderServiceImpl;
     private HttpServletRequest request;
     private HttpSession session;
     private Order order;
@@ -30,8 +30,8 @@ public class ConfirmOrderCommandTest {
 
     @Before
     public void setUp() {
-        orderService = mock(OrderService.class);
-        confirmOrderCommand = new ConfirmOrderCommand(orderService);
+        orderServiceImpl = mock(OrderServiceImpl.class);
+        confirmOrderCommand = new ConfirmOrderCommand(orderServiceImpl);
         request = mock(HttpServletRequest.class);
         session = mock(HttpSession.class);
         order = mock(Order.class);
@@ -44,8 +44,9 @@ public class ConfirmOrderCommandTest {
         when(request.getSession().getAttribute(RequestAttributes.ORDER)).thenReturn(order);
         when(request.getSession().getAttribute(RequestAttributes.ROLE)).thenReturn(role);
         String page = confirmOrderCommand.execute(request);
-        verify(request).setAttribute(RequestAttributes.ORDER_INFORMATION_MESSAGE, BundleManager.INSTANCE.getString(Messages.HAVE_A_GOOD_TRIP));
-        verify(orderService).confirmOrder(order);
+        verify(request).setAttribute(RequestAttributes.ORDER_INFORMATION_MESSAGE,
+                BundleManager.INSTANCE.getString(Messages.HAVE_A_GOOD_TRIP));
+        verify(orderServiceImpl).confirmOrder(order);
         verify(session).removeAttribute(RequestAttributes.ORDER);
         assertNotNull(page);
         assertEquals(page, JSPPages.USER_FOUNDATION_PAGE);

@@ -4,7 +4,7 @@ import org.junit.Before;
 import org.junit.Test;
 import ua.finalproject.constants.jsp.JSPPages;
 import ua.finalproject.constants.jsp.RequestAttributes;
-import ua.finalproject.model.services.UserService;
+import ua.finalproject.model.services.impl.UserServiceImpl;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -17,7 +17,7 @@ import static org.mockito.Mockito.when;
 public class MyDiscountCommandTest {
 
     private MyDiscountCommand myDiscountCommand;
-    private UserService userService;
+    private UserServiceImpl userServiceImpl;
     private HttpServletRequest request;
     private HttpSession session;
     private Integer discount;
@@ -25,8 +25,8 @@ public class MyDiscountCommandTest {
 
     @Before
     public void setUp() {
-        userService = mock(UserService.class);
-        myDiscountCommand = new MyDiscountCommand(userService);
+        userServiceImpl = mock(UserServiceImpl.class);
+        myDiscountCommand = new MyDiscountCommand(userServiceImpl);
         request = mock(HttpServletRequest.class);
         session = mock(HttpSession.class);
         discount = 9;
@@ -36,12 +36,13 @@ public class MyDiscountCommandTest {
     @Test
     public void execute() {
         when(request.getSession()).thenReturn(session);
-        when(request.getSession().getAttribute(RequestAttributes.USER_LOGIN)).thenReturn(login);
-        when(userService.getUserDiscount(login)).thenReturn(discount);
+        when(request.getSession().getAttribute(RequestAttributes.USER_LOGIN)).thenReturn
+                (login);
+        when(userServiceImpl.getUserDiscount(login)).thenReturn(discount);
         String page = myDiscountCommand.execute(request);
         verify(request).setAttribute(RequestAttributes.DISCOUNT, discount);
         assertNotNull(page);
         assertEquals(page, JSPPages.MY_DISCOUNT_PAGE);
-        assertEquals(userService.getUserDiscount(login), discount);
+        assertEquals(userServiceImpl.getUserDiscount(login), discount);
     }
 }

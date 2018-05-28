@@ -24,6 +24,7 @@ public interface Command {
 
     /**
      * Do some logic depends on command and returns path to jsp page
+     *
      * @param request request from user
      * @return path to jsp page
      */

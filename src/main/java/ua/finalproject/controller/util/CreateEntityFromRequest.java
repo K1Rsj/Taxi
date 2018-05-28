@@ -9,7 +9,6 @@ import javax.servlet.http.HttpServletRequest;
 public class CreateEntityFromRequest {
 
     /**
-     *
      * @param request request from user
      * @return user created from request
      */
@@ -31,7 +30,6 @@ public class CreateEntityFromRequest {
     }
 
     /**
-     *
      * @param request request from user
      * @return car created from request
      */

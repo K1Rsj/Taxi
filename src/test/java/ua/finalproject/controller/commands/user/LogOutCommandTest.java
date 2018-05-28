@@ -5,7 +5,7 @@ import org.junit.Test;
 import ua.finalproject.constants.GlobalConstants;
 import ua.finalproject.constants.jsp.JSPPages;
 import ua.finalproject.constants.jsp.RequestAttributes;
-import ua.finalproject.model.services.CarService;
+import ua.finalproject.model.services.impl.CarServiceImpl;
 
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
@@ -25,8 +25,8 @@ public class LogOutCommandTest {
 
     @Before
     public void setUp() {
-        CarService carService = mock(CarService.class);
-        logOutCommand = new LogOutCommand(carService);
+        CarServiceImpl carServiceImpl = mock(CarServiceImpl.class);
+        logOutCommand = new LogOutCommand(carServiceImpl);
         request = mock(HttpServletRequest.class);
         session = mock(HttpSession.class);
         login = "mishasa";
@@ -35,7 +35,8 @@ public class LogOutCommandTest {
     @Test
     public void executeWithoutLogin() {
         when(request.getSession()).thenReturn(session);
-        when(session.getAttribute(RequestAttributes.USER_LOGIN)).thenReturn(GlobalConstants.EMPTY_STRING);
+        when(session.getAttribute(RequestAttributes.USER_LOGIN)).thenReturn(GlobalConstants
+                .EMPTY_STRING);
         String page = logOutCommand.execute(request);
         assertNotNull(page);
         assertEquals(page, JSPPages.INDEX_PAGE);
@@ -47,9 +48,11 @@ public class LogOutCommandTest {
         HashSet<String> loggedUsers = new HashSet<>();
         loggedUsers.add(login);
         when(request.getSession()).thenReturn(session);
-        when(request.getSession().getAttribute(RequestAttributes.USER_LOGIN)).thenReturn(login);
+        when(request.getSession().getAttribute(RequestAttributes.USER_LOGIN)).thenReturn
+                (login);
         when(request.getSession().getServletContext()).thenReturn(servletContext);
-        when(servletContext.getAttribute(RequestAttributes.LOGGED_USERS)).thenReturn(loggedUsers);
+        when(servletContext.getAttribute(RequestAttributes.LOGGED_USERS)).thenReturn
+                (loggedUsers);
         String page = logOutCommand.execute(request);
         verify(session).removeAttribute(RequestAttributes.ORDER);
         verify(session).removeAttribute(RequestAttributes.USER_LOGIN);

@@ -11,7 +11,6 @@ import javax.servlet.http.HttpServletRequest;
 public class UserRegistrationPageCommand implements Command {
 
     /**
-     *
      * @param request request from user
      * @return path to user registration page
      */

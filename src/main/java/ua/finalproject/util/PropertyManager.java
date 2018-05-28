@@ -20,7 +20,6 @@ public enum PropertyManager {
     }
 
     /**
-     *
      * @param key key
      * @return message from resource by key
      */

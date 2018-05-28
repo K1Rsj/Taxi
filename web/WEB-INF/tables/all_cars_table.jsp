@@ -1,4 +1,4 @@
-<%@ include file="../components/addition.jsp"%>
+<%@ include file="../components/addition.jsp" %>
 <jsp:include page="../components/head.jsp"/>
 
 <div class="content container">
@@ -24,7 +24,7 @@
         <c:forEach items="${requestScope.cars}" var="car">
             <c:set var="count" value="${count + 1}" scope="page"/>
             <tr>
-                <td><c:out value="${count}" /></td>
+                <td><c:out value="${count}"/></td>
                 <td><c:out value="${car.model}"/></td>
                 <td><c:out value="${car.number}"/></td>
                 <td><c:out value="${car.state}"/></td>
@@ -42,7 +42,8 @@
             <c:set var="pageCounter" value="${pageScope.pageCounter + 1}" scope="page"/>
             <form action="${pageContext.request.contextPath}/taxi/all_cars" method="post">
                 <input type="hidden" value="${pageCounter}" name="currentPage">
-                <input style="margin: 2px" type="submit" class="btn btn btn-info btn-lg" value="${pageCounter}">
+                <input style="margin: 2px" type="submit" class="btn btn btn-info btn-lg"
+                       value="${pageCounter}">
             </form>
 
         </c:forEach>

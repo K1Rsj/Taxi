@@ -18,11 +18,13 @@ public class CarLazy extends Car implements Lazy {
         if (super.getCarType() == null) {
             Connection connection = ConnectionPoolHolder.getConnection();
             try (CarTypeDao carTypeDao = daoFactory.createCarTypeDao(connection)) {
-                Integer carTypeId = carTypeDao.findForeignKeyInTable(TableNames.CARS, super.getId().toString(),
+                Integer carTypeId = carTypeDao.findForeignKeyInTable(TableNames.CARS, super
+                                .getId().toString(),
                         TableColumnNames.CAR_TYPE_ID);
                 return carTypeDao.findById(carTypeId).get();
             } catch (Exception e) {
-                logger.error(LogMessages.AUTO_CLOSABLE_RESOURCE_ERROR_IN_GET_CAR_TYPE, e.getMessage());
+                logger.error(LogMessages.AUTO_CLOSABLE_RESOURCE_ERROR_IN_GET_CAR_TYPE, e
+                        .getMessage());
             }
         }
         return null;

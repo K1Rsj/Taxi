@@ -1,4 +1,4 @@
-<%@ include file="../components/addition.jsp"%>
+<%@ include file="../components/addition.jsp" %>
 <jsp:include page="../components/head.jsp"/>
 
 <div class="content container">
@@ -26,19 +26,22 @@
         <c:forEach items="${requestScope.users}" var="user">
             <c:set var="count" value="${count + 1}" scope="page"/>
             <tr>
-                <td><c:out value="${count}" /></td>
-                <td><c:out value="${user.login}" /></td>
-                <td><c:out value="${user.email}" /></td>
-                <td><c:out value="${user.firstName}" /></td>
-                <td><c:out value="${user.secondName}" /></td>
-                <td><c:out value="${user.phoneNumber}" /></td>
-                <td><c:out value="${user.role}" /></td>
-                <td><form method="post" action="${pageContext.request.contextPath}/taxi/delete_user">
-                    <label>
-                        <input type="hidden" name="id" value="${user.id}">
-                    </label>
-                    <input class="btn btn-danger" type="submit" value="Delete" name="delete">
-                </form>
+                <td><c:out value="${count}"/></td>
+                <td><c:out value="${user.login}"/></td>
+                <td><c:out value="${user.email}"/></td>
+                <td><c:out value="${user.firstName}"/></td>
+                <td><c:out value="${user.secondName}"/></td>
+                <td><c:out value="${user.phoneNumber}"/></td>
+                <td><c:out value="${user.role}"/></td>
+                <td>
+                    <form method="post"
+                          action="${pageContext.request.contextPath}/taxi/delete_user">
+                        <label>
+                            <input type="hidden" name="id" value="${user.id}">
+                        </label>
+                        <input class="btn btn-danger" type="submit" value="Delete"
+                               name="delete">
+                    </form>
             </tr>
         </c:forEach>
         </tbody>
@@ -51,7 +54,8 @@
             <c:set var="pageCounter" value="${pageScope.pageCounter + 1}" scope="page"/>
             <form action="${pageContext.request.contextPath}/taxi/all_users" method="post">
                 <input type="hidden" value="${pageCounter}" name="currentPage">
-                <input style="margin: 2px" type="submit" class="btn btn btn-info btn-lg" value="${pageCounter}">
+                <input style="margin: 2px" type="submit" class="btn btn btn-info btn-lg"
+                       value="${pageCounter}">
             </form>
 
         </c:forEach>

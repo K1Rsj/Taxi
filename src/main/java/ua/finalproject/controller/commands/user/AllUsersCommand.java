@@ -6,7 +6,7 @@ import ua.finalproject.constants.messages.Messages;
 import ua.finalproject.controller.commands.Command;
 import ua.finalproject.controller.util.ControllerUtil;
 import ua.finalproject.model.entities.full.User;
-import ua.finalproject.model.services.UserService;
+import ua.finalproject.model.services.impl.UserServiceImpl;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
@@ -16,25 +16,26 @@ import java.util.List;
  */
 public class AllUsersCommand implements Command {
 
-    private UserService userService;
+    private UserServiceImpl userServiceImpl;
 
-    public AllUsersCommand(UserService userService) {
-        this.userService = userService;
+    public AllUsersCommand(UserServiceImpl userServiceImpl) {
+        this.userServiceImpl = userServiceImpl;
     }
 
     /**
-     *
      * @param request request from user
      * @return path to all users page
      */
     @Override
     public String execute(HttpServletRequest request) {
-        List<User> allUsers = userService.showAllUsers().get();
+        List<User> allUsers = userServiceImpl.showAllUsers().get();
         if (allUsers.isEmpty()) {
-            request.setAttribute(RequestAttributes.MESSAGE, bundleManager.getString(Messages.THERE_ARE_NO_USERS_IN_DB));
+            request.setAttribute(RequestAttributes.MESSAGE, bundleManager.getString(Messages
+                    .THERE_ARE_NO_USERS_IN_DB));
             return JSPPages.ALL_USERS_PAGE;
         }
-        request.setAttribute(RequestAttributes.USERS, ControllerUtil.getSubListForPagination(request, allUsers));
+        request.setAttribute(RequestAttributes.USERS, ControllerUtil.getSubListForPagination
+                (request, allUsers));
         return JSPPages.ALL_USERS_PAGE;
     }
 }

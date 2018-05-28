@@ -6,7 +6,7 @@ import ua.finalproject.constants.jsp.JSPPages;
 import ua.finalproject.constants.jsp.RequestAttributes;
 import ua.finalproject.constants.messages.Messages;
 import ua.finalproject.model.entities.full.CarType;
-import ua.finalproject.model.services.CarTypeService;
+import ua.finalproject.model.services.impl.CarTypeServiceImpl;
 import ua.finalproject.util.BundleManager;
 
 import javax.servlet.http.HttpServletRequest;
@@ -20,20 +20,20 @@ import static org.mockito.Mockito.*;
 public class AllCarTypesCommandTest {
 
     private AllCarTypesCommand allCarTypesCommand;
-    private CarTypeService carTypeService;
+    private CarTypeServiceImpl carTypeServiceImpl;
     private HttpServletRequest request;
 
     @Before
     public void setUp() {
-        carTypeService = mock(CarTypeService.class);
-        allCarTypesCommand = new AllCarTypesCommand(carTypeService);
+        carTypeServiceImpl = mock(CarTypeServiceImpl.class);
+        allCarTypesCommand = new AllCarTypesCommand(carTypeServiceImpl);
         request = mock(HttpServletRequest.class);
     }
 
     @Test
     public void execute() {
         List carTypes = mock(List.class);
-        when(carTypeService.showAllCarTypes()).thenReturn(Optional.of(carTypes));
+        when(carTypeServiceImpl.showAllCarTypes()).thenReturn(Optional.of(carTypes));
         String page = allCarTypesCommand.execute(request);
         verify(request).setAttribute(RequestAttributes.CAR_TYPES, carTypes);
         assertNotNull(page);
@@ -43,9 +43,10 @@ public class AllCarTypesCommandTest {
     @Test
     public void executeWithEmptyList() {
         List<CarType> carTypes = new ArrayList<>();
-        when(carTypeService.showAllCarTypes()).thenReturn(Optional.of(carTypes));
+        when(carTypeServiceImpl.showAllCarTypes()).thenReturn(Optional.of(carTypes));
         String page = allCarTypesCommand.execute(request);
-        verify(request).setAttribute(RequestAttributes.MESSAGE, BundleManager.INSTANCE.getString(Messages.THERE_ARE_NO_CAR_TYPES_IN_DB));
+        verify(request).setAttribute(RequestAttributes.MESSAGE, BundleManager.INSTANCE
+                .getString(Messages.THERE_ARE_NO_CAR_TYPES_IN_DB));
         assertNotNull(page);
         assertEquals(page, JSPPages.ALL_CAR_TYPES_PAGE);
     }

@@ -5,7 +5,7 @@ import ua.finalproject.constants.jsp.RequestAttributes;
 import ua.finalproject.constants.jsp.RequestParameters;
 import ua.finalproject.model.entities.full.Order;
 import ua.finalproject.model.entities.full.User;
-import ua.finalproject.model.services.CarService;
+import ua.finalproject.model.services.impl.CarServiceImpl;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -17,6 +17,7 @@ public class ControllerUtil {
 
     /**
      * Gets user's index page depending on user's role
+     *
      * @param role user's role
      * @return path to jsp page
      */
@@ -32,18 +33,21 @@ public class ControllerUtil {
 
     /**
      * Chenges car's state if user user make order and didn't accept or cancel it
-     * @param session user's session
-     * @param carService car service
+     *
+     * @param session    user's session
+     * @param carServiceImpl car service
      */
-    public static void ChangeCarStateToFree(HttpSession session, CarService carService) {
-        Optional<Order> order = Optional.ofNullable((Order) session.getAttribute(RequestAttributes.ORDER));
-        order.ifPresent(carService::changeCarStateFromBusyToFree);
+    public static void ChangeCarStateToFree(HttpSession session, CarServiceImpl carServiceImpl) {
+        Optional<Order> order = Optional.ofNullable((Order) session.getAttribute
+                (RequestAttributes.ORDER));
+        order.ifPresent(carServiceImpl::changeCarStateFromBusyToFree);
     }
 
     /**
      * Makes sub list from list for pagination
+     *
      * @param request request from user
-     * @param list list
+     * @param list    list
      * @return sub list for pagination depending on current page
      */
     public static List getSubListForPagination(HttpServletRequest request,

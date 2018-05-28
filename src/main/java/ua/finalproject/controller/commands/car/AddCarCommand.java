@@ -9,7 +9,7 @@ import ua.finalproject.controller.commands.Command;
 import ua.finalproject.controller.util.CreateEntityFromRequest;
 import ua.finalproject.controller.util.DataValidation;
 import ua.finalproject.model.entities.full.Car;
-import ua.finalproject.model.services.CarService;
+import ua.finalproject.model.services.impl.CarServiceImpl;
 import ua.finalproject.util.LogMessageBuilder;
 
 import javax.servlet.http.HttpServletRequest;
@@ -20,14 +20,13 @@ import java.sql.SQLIntegrityConstraintViolationException;
  */
 public class AddCarCommand implements Command {
 
-    private CarService carService;
+    private CarServiceImpl carServiceImpl;
 
-    public AddCarCommand(CarService carService) {
-        this.carService = carService;
+    public AddCarCommand(CarServiceImpl carServiceImpl) {
+        this.carServiceImpl = carServiceImpl;
     }
 
     /**
-     *
      * @param request request from user
      * @return path to admin foundation page if validation was successful
      * or else return path to add car page
@@ -38,17 +37,19 @@ public class AddCarCommand implements Command {
             Car car = CreateEntityFromRequest.getCarFromRequest(request);
             String type = request.getParameter(RequestParameters.TYPE);
             try {
-                carService.addCar(car, type);
+                carServiceImpl.addCar(car, type);
             } catch (SQLIntegrityConstraintViolationException e) {
-                request.setAttribute(RequestAttributes.INFORMATION_MESSAGE, bundleManager.getString(ExceptionMessages.CAR_WITH_THIS_NUMBER_ALREADY_EXISTS));
-                logger.info(LogMessageBuilder.INSTANCE.duplicateCarNumberInfo(car.getNumber()));
+                request.setAttribute(RequestAttributes.INFORMATION_MESSAGE, bundleManager
+                        .getString(ExceptionMessages.CAR_WITH_THIS_NUMBER_ALREADY_EXISTS));
+                logger.info(LogMessageBuilder.INSTANCE.duplicateCarNumberInfo(car.getNumber
+                        ()));
                 return JSPPages.ADD_CAR_PAGE;
             }
-            request.setAttribute(RequestAttributes.INFORMATION_MESSAGE, bundleManager.getString(Messages.CAR_SUCCESSFULLY_ADDED));
+            request.setAttribute(RequestAttributes.INFORMATION_MESSAGE, bundleManager
+                    .getString(Messages.CAR_SUCCESSFULLY_ADDED));
             logger.info(LogMessageBuilder.INSTANCE.newCarInfo(car.getNumber()));
             return JSPPages.ADMIN_FOUNDATION_PAGE;
-        }
-        else {
+        } else {
             return JSPPages.ADD_CAR_PAGE;
         }
     }

@@ -12,14 +12,13 @@ public enum BundleManager {
     INSTANCE;
 
     /**
-     * @see ResourceBundle
-     */
-    private ResourceBundle resourceBundle;
-
-    /**
      * name of resource bundle
      */
     private final String RESOURCE_BUNDLE_NAME = GlobalConstants.MESSAGES;
+    /**
+     * @see ResourceBundle
+     */
+    private ResourceBundle resourceBundle;
 
     BundleManager() {
         resourceBundle = ResourceBundle.getBundle(RESOURCE_BUNDLE_NAME, Locale.getDefault());
@@ -27,21 +26,21 @@ public enum BundleManager {
 
     /**
      * change resource bundle locale
+     *
      * @param locale locale
      */
-    public void changeLocale(Locale locale){
-        if(locale.toString().contains(GlobalConstants.UK)) {
+    public void changeLocale(Locale locale) {
+        if (locale.toString().contains(GlobalConstants.UK)) {
             locale = new Locale(GlobalConstants.UK, GlobalConstants.UA);
         }
         resourceBundle = ResourceBundle.getBundle(RESOURCE_BUNDLE_NAME, locale);
     }
 
     /**
-     *
      * @param key key
      * @return string from resource by key
      */
-    public String getString(String key){
+    public String getString(String key) {
         return resourceBundle.getString(key);
     }
 

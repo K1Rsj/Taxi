@@ -23,14 +23,16 @@ public class LanguageFilter implements Filter {
     /**
      * Getting language attribute from user's session and
      * change bundle's locale
-     * @param servletRequest request
+     *
+     * @param servletRequest  request
      * @param servletResponse response
-     * @param filterChain filter chain
-     * @throws IOException io exception
+     * @param filterChain     filter chain
+     * @throws IOException      io exception
      * @throws ServletException servlet exception
      */
     @Override
-    public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws ServletException, IOException {
+    public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse,
+                         FilterChain filterChain) throws ServletException, IOException {
         HttpServletRequest request = (HttpServletRequest) servletRequest;
         Locale locale;
         try {
@@ -39,7 +41,8 @@ public class LanguageFilter implements Filter {
             filterChain.doFilter(request, servletResponse);
 
         } catch (ClassCastException e) {
-            locale = new Locale((String) request.getSession().getAttribute(RequestAttributes.LANGUAGE));
+            locale = new Locale((String) request.getSession().getAttribute(RequestAttributes
+                    .LANGUAGE));
             BundleManager.INSTANCE.changeLocale(locale);
             filterChain.doFilter(request, servletResponse);
         }

@@ -7,6 +7,7 @@ public class UtilDao {
 
     /**
      * Parses user's role from string to enum value
+     *
      * @param role user's role
      * @return user role from enum
      */
@@ -20,6 +21,7 @@ public class UtilDao {
 
     /**
      * Parses car's state from string to enum value
+     *
      * @param state car's state
      * @return car state from enum
      */
@@ -33,6 +35,7 @@ public class UtilDao {
 
     /**
      * Parses car's type name from string to id
+     *
      * @param type car's type
      * @return id of car's type
      */

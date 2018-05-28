@@ -6,6 +6,7 @@ import ua.finalproject.model.dao.CarDao;
 import ua.finalproject.model.dao.connectionPool.ConnectionPoolHolder;
 import ua.finalproject.model.dao.impl.CarDaoImpl;
 import ua.finalproject.model.entities.full.Car;
+import ua.finalproject.model.services.impl.CarServiceImpl;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -17,9 +18,9 @@ import java.util.Optional;
 import static org.junit.Assert.*;
 import static org.mockito.Mockito.*;
 
-public class CarServiceTest {
+public class CarServiceImplTest {
 
-    private CarService carService;
+    private CarServiceImpl carServiceImpl;
     private Connection connection;
     private CarDao carDao;
     private PreparedStatement preparedStatement;
@@ -34,21 +35,22 @@ public class CarServiceTest {
         resultSet = mock(ResultSet.class);
 
         carDao = mock(CarDaoImpl.class);
-        carService = mock(CarService.class);
+        carServiceImpl = mock(CarServiceImpl.class);
         cars = new ArrayList<>();
     }
 
     @Test
     public void showAllCars() {
-//        when(connection.prepareStatement(DbQueries.SELECT_FROM_CARS_LEFT_JOIN_CAR_TYPE)).thenReturn(preparedStatement);
+//        when(connection.prepareStatement(DbQueries.SELECT_FROM_CARS_LEFT_JOIN_CAR_TYPE))
+// .thenReturn(preparedStatement);
 //        when(preparedStatement.executeQuery()).thenReturn(resultSet);
 //        when(resultSet.next()).thenReturn(false);
         //when(DaoFactory.getInstance().createCarDao(connection)).thenReturn(carDao);
         //when(carDao.findAll()).thenReturn(Optional.of(cars));
-        when(carService.showAllCars()).thenReturn(Optional.of(cars));
-        List<Car> carsTest = carService.showAllCars().get();
+        when(carServiceImpl.showAllCars()).thenReturn(Optional.of(cars));
+        List<Car> carsTest = carServiceImpl.showAllCars().get();
         assertEquals(cars, carsTest);
-        //verify(carService).showAllCars();
+        //verify(carServiceImpl).showAllUsers();
     }
 
     @Test

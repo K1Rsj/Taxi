@@ -7,7 +7,7 @@ import ua.finalproject.constants.jsp.RequestAttributes;
 import ua.finalproject.controller.commands.Command;
 import ua.finalproject.controller.util.ContextUtil;
 import ua.finalproject.controller.util.ControllerUtil;
-import ua.finalproject.model.services.CarService;
+import ua.finalproject.model.services.impl.CarServiceImpl;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -16,25 +16,27 @@ import javax.servlet.http.HttpServletRequest;
  */
 public class LogOutCommand implements Command {
 
-    private CarService carService;
+    private CarServiceImpl carServiceImpl;
 
-    public LogOutCommand(CarService carService) {
-        this.carService = carService;
+    public LogOutCommand(CarServiceImpl carServiceImpl) {
+        this.carServiceImpl = carServiceImpl;
     }
 
     /**
      * Checks if user is logged in and removes session's attributes
+     *
      * @param request request from user
      * @return redirects to index page
      */
     @Override
     public String execute(HttpServletRequest request) {
-        String login = (String) request.getSession().getAttribute(RequestAttributes.USER_LOGIN);
-        if(Strings.isNullOrEmpty(login) ) {
+        String login = (String) request.getSession().getAttribute(RequestAttributes
+                .USER_LOGIN);
+        if (Strings.isNullOrEmpty(login)) {
             return JSPPages.INDEX_PAGE;
         }
         ContextUtil.deleteLoggedUserFromContext(request.getSession());
-        ControllerUtil.ChangeCarStateToFree(request.getSession(), carService);
+        ControllerUtil.ChangeCarStateToFree(request.getSession(), carServiceImpl);
         request.getSession().removeAttribute(RequestAttributes.ORDER);
         request.getSession().removeAttribute(RequestAttributes.USER_LOGIN);
         request.getSession().removeAttribute(RequestAttributes.ROLE);

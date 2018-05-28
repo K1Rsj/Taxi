@@ -4,6 +4,7 @@ import org.junit.Before;
 import org.junit.Test;
 import ua.finalproject.model.dao.CarTypeDao;
 import ua.finalproject.model.entities.full.CarType;
+import ua.finalproject.model.services.impl.CarTypeServiceImpl;
 
 
 import java.util.ArrayList;
@@ -13,9 +14,9 @@ import java.util.Optional;
 import static org.junit.Assert.*;
 import static org.mockito.Mockito.*;
 
-public class CarTypeServiceTest {
+public class CarTypeServiceImplTest {
 
-    private CarTypeService carTypeService;
+    private CarTypeServiceImpl carTypeServiceImpl;
     private CarTypeDao carTypeDao;
     private List<CarType> carTypes;
 
@@ -23,7 +24,7 @@ public class CarTypeServiceTest {
     public void setUp() {
 
         carTypeDao = mock(CarTypeDao.class);
-        carTypeService = new CarTypeService(carTypeDao);
+        //carTypeServiceImpl = new CarTypeServiceImpl(carTypeDao);
         carTypes = new ArrayList<>();
     }
 
@@ -40,10 +41,9 @@ public class CarTypeServiceTest {
     @Test
     public void showAllCarTypes() {
         when(carTypeDao.findAll()).thenReturn(Optional.of(carTypes));
-        List<CarType> carTypesTest = carTypeService.showAllCarTypes().get();
+        List<CarType> carTypesTest = carTypeServiceImpl.showAllCarTypes().get();
         verify(carTypeDao).findAll();
         assertEquals(carTypes, carTypesTest);
-
 
 
     }
