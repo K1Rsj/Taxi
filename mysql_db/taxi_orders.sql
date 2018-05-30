@@ -35,8 +35,8 @@ CREATE TABLE `orders` (
   KEY `fk_orders_car_type1_idx` (`car_type_id`),
   KEY `fk_orders_cars1_idx` (`cars_id`),
   CONSTRAINT `fk_orders_car_type1` FOREIGN KEY (`car_type_id`) REFERENCES `car_type` (`id_car_type`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  CONSTRAINT `fk_orders_cars1` FOREIGN KEY (`cars_id`) REFERENCES `cars` (`id_car`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  CONSTRAINT `fk_orders_users1` FOREIGN KEY (`users_id`) REFERENCES `users` (`id_user`) ON DELETE NO ACTION ON UPDATE NO ACTION
+  CONSTRAINT `fk_orders_cars1` FOREIGN KEY (`cars_id`) REFERENCES `cars` (`id_cars`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `fk_orders_users1` FOREIGN KEY (`users_id`) REFERENCES `users` (`id_users`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 

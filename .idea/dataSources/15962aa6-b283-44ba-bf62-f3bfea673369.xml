@@ -967,7 +967,7 @@
       <ColNames>id_car_type</ColNames>
       <Primary>1</Primary>
     </key>
-    <column id="242" parent="233" name="id_car">
+    <column id="242" parent="233" name="id_cars">
       <Position>1</Position>
       <DataType>int(11)|0s</DataType>
       <NotNull>1</NotNull>
@@ -990,6 +990,7 @@
       <Position>4</Position>
       <DataType>varchar(45)|0s</DataType>
       <NotNull>1</NotNull>
+      <DefaultExpression>&apos;free&apos;</DefaultExpression>
       <ColumnKind>normal</ColumnKind>
     </column>
     <column id="246" parent="233" name="driver">
@@ -1013,7 +1014,7 @@
     </index>
     <key id="250" parent="233" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
-      <ColNames>id_car
+      <ColNames>id_cars
 car_type_id</ColNames>
       <Primary>1</Primary>
     </key>
@@ -1027,7 +1028,7 @@ car_type_id</ColNames>
       <RefTableName>car_type</RefTableName>
       <RefColNames>id_car_type</RefColNames>
     </foreign-key>
-    <column id="253" parent="234" name="id_order">
+    <column id="253" parent="234" name="id_orders">
       <Position>1</Position>
       <DataType>int(11)|0s</DataType>
       <NotNull>1</NotNull>
@@ -1081,7 +1082,7 @@ car_type_id</ColNames>
     </index>
     <key id="263" parent="234" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
-      <ColNames>id_order
+      <ColNames>id_orders
 users_id
 car_type_id
 cars_id</ColNames>
@@ -1091,7 +1092,7 @@ cars_id</ColNames>
       <ColNames>users_id</ColNames>
       <RefSchemaName>taxi</RefSchemaName>
       <RefTableName>users</RefTableName>
-      <RefColNames>id_user</RefColNames>
+      <RefColNames>id_users</RefColNames>
     </foreign-key>
     <foreign-key id="265" parent="234" name="fk_orders_car_type1">
       <ColNames>car_type_id</ColNames>
@@ -1103,9 +1104,9 @@ cars_id</ColNames>
       <ColNames>cars_id</ColNames>
       <RefSchemaName>taxi</RefSchemaName>
       <RefTableName>cars</RefTableName>
-      <RefColNames>id_car</RefColNames>
+      <RefColNames>id_cars</RefColNames>
     </foreign-key>
-    <column id="267" parent="235" name="id_user">
+    <column id="267" parent="235" name="id_users">
       <Position>1</Position>
       <DataType>int(11)|0s</DataType>
       <NotNull>1</NotNull>
@@ -1172,7 +1173,7 @@ cars_id</ColNames>
     </index>
     <key id="278" parent="235" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
-      <ColNames>id_user</ColNames>
+      <ColNames>id_users</ColNames>
       <Primary>1</Primary>
     </key>
     <key id="279" parent="235" name="login_UNIQUE">
