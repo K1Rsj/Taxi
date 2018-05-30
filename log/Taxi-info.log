@@ -419,3 +419,39 @@
 2018-05-29 00:12:08.359 Command - User adm logged successfully
 2018-05-29 00:13:43.045 Service - Auto-closable resource error in find user by login
 2018-05-29 00:13:43.057 Command - Invalid attempt of login user:'dfhs'
+2018-05-29 01:01:43.349 Command - User adm logged successfully
+2018-05-30 15:03:32.571 Command - User adm logged successfully
+2018-05-30 15:07:47.807 Command - User adm logged successfully
+2018-05-30 15:52:31.819 Command - User adm logged successfully
+2018-05-30 16:05:43.272 Service - Auto-closable resource error in find user by login
+2018-05-30 16:05:43.272 Command - Invalid attempt of login user:'wqtq'
+2018-05-30 16:08:47.248 Command - Invalid attempt of login user:'asg'
+2018-05-30 16:14:39.958 Command - Invalid attempt of login user:'asg'
+2018-05-30 16:14:52.715 Command - Invalid attempt of login user:'ashashash'
+2018-05-30 16:15:08.976 Command - User adm logged successfully
+2018-05-30 16:22:05.501 Command - User adm logged successfully
+2018-05-30 16:25:39.654 Command - User adm logged successfully
+2018-05-30 16:30:33.794 Command - User adm logged successfully
+2018-05-30 16:31:49.557 Command - User adm logged successfully
+2018-05-30 16:33:07.361 Command - User adm logged successfully
+2018-05-30 16:34:17.830 Command - User adm logged successfully
+2018-05-30 16:42:48.909 Command - User adm logged successfully
+2018-05-30 16:53:36.463 Command - User adm logged successfully
+2018-05-30 17:04:19.102 Command - User adm logged successfully
+2018-05-30 17:05:46.524 Command - User adm logged successfully
+2018-05-30 17:07:15.936 Command - User adm logged successfully
+2018-05-30 17:19:24.735 Command - User adm logged successfully
+2018-05-30 17:20:30.969 Command - User adm logged successfully
+2018-05-30 17:23:26.046 Command - User adm logged successfully
+2018-05-30 17:24:26.522 Command - User adm logged successfully
+2018-05-30 17:32:02.232 Command - User adm logged successfully
+2018-05-30 17:33:18.145 Command - Invalid attempt of login user:'adm'
+2018-05-30 17:33:21.261 Command - User adm logged successfully
+2018-05-30 17:34:20.604 Command - User adm logged successfully
+2018-05-30 17:40:18.582 Command - User adm logged successfully
+2018-05-30 17:47:45.796 Command - User adm logged successfully
+2018-05-30 17:50:56.904 Command - User adm logged successfully
+2018-05-30 17:51:47.100 Command - User adm logged successfully
+2018-05-30 17:54:07.321 Command - User misha logged successfully
+2018-05-30 17:56:28.845 Command - User misha logged successfully
+2018-05-30 17:57:34.996 Command - User misha logged successfully

@@ -43,7 +43,7 @@ public abstract class AbstractDao<T extends Entity<Integer>> implements Dao<T, I
     @Override
     public Optional<T> findById(Integer id) {
         String query = QueryContainer.INSTANCE.findFromTableById(tableName, id);
-        return Optional.of(findOneByQuery(query));
+        return findOneByQuery(query);
     }
 
     /**
@@ -54,7 +54,7 @@ public abstract class AbstractDao<T extends Entity<Integer>> implements Dao<T, I
     @Override
     public Optional<List<T>> findAll() {
         String query = QueryContainer.INSTANCE.findAllFromTable(tableName);
-        return Optional.of(findAllByQuery(query));
+        return findAllByQuery(query);
     }
 
     /**
@@ -122,13 +122,13 @@ public abstract class AbstractDao<T extends Entity<Integer>> implements Dao<T, I
      * @param query query
      * @return entry
      */
-    protected T findOneByQuery(String query) {
+    protected Optional<T> findOneByQuery(String query) {
         try (PreparedStatement ps = connection.prepareStatement(query)) {
             try (ResultSet resultSet = ps.executeQuery()) {
                 if (resultSet.next()) {
-                    return extractFromResultSet(resultSet);
+                    return Optional.of(extractFromResultSet(resultSet));
                 } else {
-                    return null;
+                    return Optional.empty();
                 }
             }
         } catch (SQLException e) {
@@ -143,14 +143,14 @@ public abstract class AbstractDao<T extends Entity<Integer>> implements Dao<T, I
      * @param query query
      * @return list of entries
      */
-    protected List<T> findAllByQuery(String query) {
+    protected Optional<List<T>> findAllByQuery(String query) {
         List<T> resultList = new ArrayList<>();
         try (PreparedStatement ps = connection.prepareStatement(query);
              ResultSet resultSet = ps.executeQuery()) {
             while (resultSet.next()) {
                 resultList.add(extractFromResultSet(resultSet));
             }
-            return resultList;
+            return Optional.of(resultList);
         } catch (SQLException e) {
             logger.error(LogMessages.FIND_ALL_BY_QUERY_ERROR);
             throw new RuntimeException(e);

@@ -8,7 +8,8 @@ Sulima Denys
 Maksym Liashenko
 
 # How to run project:
-1. Istall maven https://maven.apache.org/download.cgi
-2. Download Apache Tomcat https://tomcat.apache.org/download-80.cgi
-3. Deploy project on Tomcat
-4. Open browser and follow the link http://localhost:8080/
+1. Install maven https://maven.apache.org/download.cgi
+2. Import db from project package mysql_db into MySQL.
+3. Download Apache Tomcat https://tomcat.apache.org/download-80.cgi
+4. Deploy project on Tomcat
+5. Open browser and follow the link http://localhost:8080/

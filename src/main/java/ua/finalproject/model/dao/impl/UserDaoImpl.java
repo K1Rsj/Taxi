@@ -90,7 +90,7 @@ public class UserDaoImpl extends AbstractDao<User> implements UserDao {
      */
     @Override
     public Optional<User> findByLogin(String login) {
-        return Optional.of(findOneByQuery(QueryContainer.INSTANCE.findUserByLogin(login)));
+        return findOneByQuery(QueryContainer.INSTANCE.findUserByLogin(login));
     }
 
     /**

@@ -80,7 +80,7 @@ public class OrderDaoImpl extends AbstractDao<Order> implements OrderDao {
      */
     @Override
     public Optional<List<Order>> findOrdersByUserLogin(String login) {
-        return Optional.of(findAllByQuery(QueryContainer.INSTANCE.findOrdersByUserLogin
-                (login)));
+        return findAllByQuery(QueryContainer.INSTANCE.findOrdersByUserLogin
+                (login));
     }
 }

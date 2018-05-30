@@ -80,7 +80,7 @@ public class CarDaoImpl extends AbstractDao<Car> implements CarDao {
      */
     @Override
     public Optional<Car> getFreeCarByTypeId(Integer typeId) {
-        return Optional.of(findOneByQuery(QueryContainer.INSTANCE.findFreeCarByType(typeId)));
+        return findOneByQuery(QueryContainer.INSTANCE.findFreeCarByType(typeId));
     }
 
     /**
