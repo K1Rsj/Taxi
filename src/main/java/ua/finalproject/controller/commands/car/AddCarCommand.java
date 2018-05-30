@@ -39,15 +39,20 @@ public class AddCarCommand implements Command {
             try {
                 carServiceImpl.addCar(car, type);
             } catch (SQLIntegrityConstraintViolationException e) {
-                request.setAttribute(RequestAttributes.INFORMATION_MESSAGE, bundleManager
-                        .getString(ExceptionMessages.CAR_WITH_THIS_NUMBER_ALREADY_EXISTS));
-                logger.info(LogMessageBuilder.INSTANCE.duplicateCarNumberInfo(car.getNumber
-                        ()));
+                request.setAttribute(RequestAttributes
+                        .INFORMATION_MESSAGE, bundleManager
+                        .getString(ExceptionMessages
+                                .CAR_WITH_THIS_NUMBER_ALREADY_EXISTS));
+                logger.info(LogMessageBuilder.INSTANCE
+                        .duplicateCarNumberInfo(car.getNumber
+                                ()));
                 return JSPPages.ADD_CAR_PAGE;
             }
-            request.setAttribute(RequestAttributes.INFORMATION_MESSAGE, bundleManager
-                    .getString(Messages.CAR_SUCCESSFULLY_ADDED));
-            logger.info(LogMessageBuilder.INSTANCE.newCarInfo(car.getNumber()));
+            request.setAttribute(RequestAttributes.INFORMATION_MESSAGE,
+                    bundleManager
+                            .getString(Messages.CAR_SUCCESSFULLY_ADDED));
+            logger.info(LogMessageBuilder.INSTANCE.newCarInfo(car
+                    .getNumber()));
             return JSPPages.ADMIN_FOUNDATION_PAGE;
         } else {
             return JSPPages.ADD_CAR_PAGE;

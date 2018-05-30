@@ -24,8 +24,9 @@ public class MyDiscountCommand implements Command {
      */
     @Override
     public String execute(HttpServletRequest request) {
-        Integer discount = userServiceImpl.getUserDiscount((String) request.getSession()
-                .getAttribute(RequestAttributes.USER_LOGIN));
+        Integer discount = userServiceImpl.getUserDiscount((String)
+                request.getSession()
+                        .getAttribute(RequestAttributes.USER_LOGIN));
         request.setAttribute(RequestAttributes.DISCOUNT, discount);
         return JSPPages.MY_DISCOUNT_PAGE;
     }

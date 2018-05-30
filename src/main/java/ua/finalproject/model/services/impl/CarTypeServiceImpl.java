@@ -17,7 +17,8 @@ public class CarTypeServiceImpl implements CarTypeService {
     }
 
     private static class CarTypeServiceImplHolder {
-        static final CarTypeServiceImpl instance = new CarTypeServiceImpl();
+        static final CarTypeServiceImpl instance = new
+                CarTypeServiceImpl();
     }
 
     public static CarTypeServiceImpl getInstance() {
@@ -33,11 +34,13 @@ public class CarTypeServiceImpl implements CarTypeService {
     @Override
     public void updateDiscount(String type, Integer discount) {
         Connection connection = ConnectionPoolHolder.getConnection();
-        try (CarTypeDao carTypeDao = daoFactory.createCarTypeDao(connection)) {
+        try (CarTypeDao carTypeDao = daoFactory.createCarTypeDao
+                (connection)) {
             Integer typeId = UtilDao.parseTypeString(type);
             carTypeDao.updateDiscount(typeId, discount);
         } catch (Exception e) {
-            logger.error(LogMessages.AUTO_CLOSABLE_RESOURCE_ERROR_IN_UPDATE_DISCOUNT, e
+            logger.error(LogMessages
+                    .AUTO_CLOSABLE_RESOURCE_ERROR_IN_UPDATE_DISCOUNT, e
                     .getMessage());
         }
     }
@@ -50,10 +53,12 @@ public class CarTypeServiceImpl implements CarTypeService {
     @Override
     public Optional<List<CarType>> showAllCarTypes() {
         Connection connection = ConnectionPoolHolder.getConnection();
-        try (CarTypeDao carTypeDao = daoFactory.createCarTypeDao(connection)) {
+        try (CarTypeDao carTypeDao = daoFactory.createCarTypeDao
+                (connection)) {
             return carTypeDao.findAll();
         } catch (Exception e) {
-            logger.error(LogMessages.AUTO_CLOSABLE_RESOURCE_ERROR_IN_SHOW_ALL_CAR_TYPES, e
+            logger.error(LogMessages
+                    .AUTO_CLOSABLE_RESOURCE_ERROR_IN_SHOW_ALL_CAR_TYPES, e
                     .getMessage());
         }
         return Optional.empty();

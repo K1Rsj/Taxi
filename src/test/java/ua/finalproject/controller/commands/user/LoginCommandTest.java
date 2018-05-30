@@ -51,13 +51,18 @@ public class LoginCommandTest {
     @Test
     public void execute() {
         when(request.getSession()).thenReturn(session);
-        when(session.getAttribute(RequestAttributes.USER_LOGIN)).thenReturn(login);
+        when(session.getAttribute(RequestAttributes.USER_LOGIN))
+                .thenReturn(login);
         when(session.getServletContext()).thenReturn(servletContext);
-        when(servletContext.getAttribute(RequestAttributes.LOGGED_USERS)).thenReturn
+        when(servletContext.getAttribute(RequestAttributes.LOGGED_USERS)
+        ).thenReturn
                 (loggedUsers);
-        when(userServiceImpl.findUserByLogin(login)).thenReturn(Optional.of(user));
-        when(request.getParameter(RequestParameters.LOGIN)).thenReturn(login);
-        when(request.getParameter(RequestParameters.PASSWORD)).thenReturn(password);
+        when(userServiceImpl.findUserByLogin(login)).thenReturn(Optional
+                .of(user));
+        when(request.getParameter(RequestParameters.LOGIN)).thenReturn
+                (login);
+        when(request.getParameter(RequestParameters.PASSWORD))
+                .thenReturn(password);
         when(user.getRole()).thenReturn(role);
         when(user.getPassword()).thenReturn(password);
         String page = loginCommand.execute(request);

@@ -455,3 +455,29 @@
 2018-05-30 17:54:07.321 Command - User misha logged successfully
 2018-05-30 17:56:28.845 Command - User misha logged successfully
 2018-05-30 17:57:34.996 Command - User misha logged successfully
+2018-05-30 20:02:26.594 Command - Invalid attempt of login user:'vxz'
+2018-05-30 20:04:19.547 Command - User test logged successfully
+2018-05-30 20:04:51.078 Lazy - Auto-closable resource error in get car
+2018-05-30 20:07:11.911 Lazy - Auto-closable resource error in get car
+2018-05-30 21:26:31.486 Command - User heaven logged successfully
+2018-05-30 21:26:35.200 Dao - Find all by query error
+2018-05-30 21:26:35.281 Service - Auto-closable resource error in get all user's orders
+2018-05-30 21:28:39.767 Command - User heaven logged successfully
+2018-05-30 21:29:55.120 Command - No free car with such type
+2018-05-30 21:30:14.490 Command - User:'Ирина Герасименко make order for car АА9843НМ
+2018-05-30 21:30:26.323 Command - User: heaven cancelled order
+2018-05-30 21:30:52.919 Command - User:'Ирина Герасименко make order for car АА8878НМ
+2018-05-30 21:31:00.770 Command - User: heaven confirmed order
+2018-05-30 21:33:30.886 Command - User k1rs logged successfully
+2018-05-30 21:33:48.747 Command - Added new discount:'15'% for car type: premium
+2018-05-30 21:40:27.990 Command - Added new car:'АА5123АА'
+2018-05-30 21:52:06.329 Command - User k1rs logged successfully
+2018-05-30 21:58:33.782 Command - User k1rs logged successfully
+2018-05-30 22:00:06.033 Command - User k1rs tried to log in to an account that is already in use
+2018-05-30 22:00:33.229 Command - User k1rs tried to log in to an account that is already in use
+2018-05-30 22:01:38.623 Command - User k1rs logged successfully
+2018-05-30 22:02:25.361 Command - User misha logged successfully
+2018-05-30 22:03:35.117 Command - User k1rs logged successfully
+2018-05-30 22:04:58.152 Command - User k1rs logged successfully
+2018-05-30 22:05:22.775 Command - User k1rs tried to log in to an account that is already in use
+2018-05-30 22:11:01.593 Command - User k1rs logged successfully

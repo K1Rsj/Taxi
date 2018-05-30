@@ -31,16 +31,22 @@ public class AddDiscountCommand implements Command {
     @Override
     public String execute(HttpServletRequest request) {
         String type = request.getParameter(RequestParameters.TYPE);
-        Integer discount = Integer.parseInt(request.getParameter(RequestParameters.DISCOUNT));
+        Integer discount = Integer.parseInt(request.getParameter
+                (RequestParameters.DISCOUNT));
         if (DataValidation.checkDiscountAmount(discount)) {
             carTypeServiceImpl.updateDiscount(type, discount);
-            request.setAttribute(RequestAttributes.INFORMATION_MESSAGE, bundleManager
-                    .getString(Messages.DISCOUNT_SUCCESSFULLY_ADDED));
-            logger.info(LogMessageBuilder.INSTANCE.newDiscountInfo(type, discount));
+            request.setAttribute(RequestAttributes.INFORMATION_MESSAGE,
+                    bundleManager
+                            .getString(Messages
+                                    .DISCOUNT_SUCCESSFULLY_ADDED));
+            logger.info(LogMessageBuilder.INSTANCE.newDiscountInfo(type,
+                    discount));
             return JSPPages.ADMIN_FOUNDATION_PAGE;
         } else {
-            request.setAttribute(RequestAttributes.INFORMATION_MESSAGE, bundleManager
-                    .getString(ExceptionMessages.WRONG_DISCOUNT_AMOUNT));
+            request.setAttribute(RequestAttributes.INFORMATION_MESSAGE,
+                    bundleManager
+                            .getString(ExceptionMessages
+                                    .WRONG_DISCOUNT_AMOUNT));
             return JSPPages.ADD_DISCOUNT_PAGE;
         }
     }

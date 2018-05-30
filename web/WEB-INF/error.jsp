@@ -6,4 +6,3 @@
     <a href="${pageContext.request.contextPath}/taxi/index" class="btn btn-danger"
        role="button"><fmt:message key="home"/></a>
 </div>
-<jsp:include page="components/footer.jsp"/>

@@ -21,7 +21,8 @@ public enum BundleManager {
     private ResourceBundle resourceBundle;
 
     BundleManager() {
-        resourceBundle = ResourceBundle.getBundle(RESOURCE_BUNDLE_NAME, Locale.getDefault());
+        resourceBundle = ResourceBundle.getBundle(RESOURCE_BUNDLE_NAME,
+                Locale.getDefault());
     }
 
     /**
@@ -33,7 +34,8 @@ public enum BundleManager {
         if (locale.toString().contains(GlobalConstants.UK)) {
             locale = new Locale(GlobalConstants.UK, GlobalConstants.UA);
         }
-        resourceBundle = ResourceBundle.getBundle(RESOURCE_BUNDLE_NAME, locale);
+        resourceBundle = ResourceBundle.getBundle(RESOURCE_BUNDLE_NAME,
+                locale);
     }
 
     /**

@@ -35,18 +35,23 @@ public class UserRegistrationCommand implements Command {
     @Override
     public String execute(HttpServletRequest request) {
         if (DataValidation.userDataValidation(request)) {
-            User user = CreateEntityFromRequest.getUserFromRequest(request);
+            User user = CreateEntityFromRequest.getUserFromRequest
+                    (request);
             try {
                 userServiceImpl.registerUser(user);
             } catch (SQLIntegrityConstraintViolationException e) {
-                request.setAttribute(RequestAttributes.WRONG_INPUT_MESSAGE, DataValidation
+                request.setAttribute(RequestAttributes
+                        .WRONG_INPUT_MESSAGE, DataValidation
                         .loginOrEmailNotUniqueDetermination(e));
-                logger.info(LogMessageBuilder.INSTANCE.duplicateUserInfo(user.getLogin()));
+                logger.info(LogMessageBuilder.INSTANCE.duplicateUserInfo
+                        (user.getLogin()));
                 return JSPPages.USER_REGISTRATION_PAGE;
             }
-            request.setAttribute(RequestAttributes.INFORMATION_MESSAGE, bundleManager
-                    .getString(Messages.SUCCESSFUL_REGISTRATION));
-            logger.info(LogMessageBuilder.INSTANCE.userRegistrationInfo(user.getLogin()));
+            request.setAttribute(RequestAttributes.INFORMATION_MESSAGE,
+                    bundleManager
+                            .getString(Messages.SUCCESSFUL_REGISTRATION));
+            logger.info(LogMessageBuilder.INSTANCE.userRegistrationInfo
+                    (user.getLogin()));
             return JSPPages.INDEX_PAGE;
         } else {
             return JSPPages.USER_REGISTRATION_PAGE;

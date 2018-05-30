@@ -17,8 +17,9 @@ public class OrderPriceGeneratorTest {
         carType.setPricePerKilometer(500);
         carType.setStartingPrice(3000);
 
-        Long actualOrderPrice = OrderPriceGenerator.getOrderPrice(moneySpent,
-                departureStreet, destinationStreet, carType);
+        Long actualOrderPrice = OrderPriceGenerator.getOrderPrice
+                (moneySpent,
+                        departureStreet, destinationStreet, carType);
         Long orderPrice = 15300L;
         assertEquals(orderPrice, actualOrderPrice);
     }
@@ -29,7 +30,8 @@ public class OrderPriceGeneratorTest {
         Integer discount = 5;
         Long moneySpent = 125671L;
 
-        Integer actualDiscount = OrderPriceGenerator.getDiscountBasedOnMoneySpent(moneySpent);
+        Integer actualDiscount = OrderPriceGenerator
+                .getDiscountBasedOnMoneySpent(moneySpent);
         assertEquals(discount, actualDiscount);
 
     }

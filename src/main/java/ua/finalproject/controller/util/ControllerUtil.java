@@ -32,14 +32,18 @@ public class ControllerUtil {
     }
 
     /**
-     * Chenges car's state if user user make order and didn't accept or cancel it
+     * Chenges car's state if user user make order and didn't accept or
+     * cancel it
      *
-     * @param session    user's session
+     * @param session        user's session
      * @param carServiceImpl car service
      */
-    public static void ChangeCarStateToFree(HttpSession session, CarServiceImpl carServiceImpl) {
-        Optional<Order> order = Optional.ofNullable((Order) session.getAttribute
-                (RequestAttributes.ORDER));
+    public static void ChangeCarStateToFree(HttpSession session,
+                                            CarServiceImpl
+                                                    carServiceImpl) {
+        Optional<Order> order = Optional.ofNullable((Order) session
+                .getAttribute
+                        (RequestAttributes.ORDER));
         order.ifPresent(carServiceImpl::changeCarStateFromBusyToFree);
     }
 
@@ -70,7 +74,8 @@ public class ControllerUtil {
         if (lastIndex > list.size()) {
             lastIndex = list.size();
         }
-        request.setAttribute(RequestAttributes.NUMBER_OF_PAGES, numberOfPages);
+        request.setAttribute(RequestAttributes.NUMBER_OF_PAGES,
+                numberOfPages);
         request.setAttribute(RequestAttributes.FIRST_INDEX, firstIndex);
 
         return list.subList(firstIndex, lastIndex);

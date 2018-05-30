@@ -24,7 +24,8 @@ public class AddDiscountCommandTest {
 
     @Before
     public void setUp() {
-        CarTypeServiceImpl carTypeServiceImpl = mock(CarTypeServiceImpl.class);
+        CarTypeServiceImpl carTypeServiceImpl = mock(CarTypeServiceImpl
+                .class);
         addDiscountCommand = new AddDiscountCommand(carTypeServiceImpl);
         request = mock(HttpServletRequest.class);
         discount = 10;
@@ -34,11 +35,14 @@ public class AddDiscountCommandTest {
     @Test
     public void execute() {
 
-        when(request.getParameter(RequestParameters.DISCOUNT)).thenReturn(String.valueOf
-                (discount));
-        when(request.getParameter(RequestParameters.TYPE)).thenReturn(type);
+        when(request.getParameter(RequestParameters.DISCOUNT))
+                .thenReturn(String.valueOf
+                        (discount));
+        when(request.getParameter(RequestParameters.TYPE)).thenReturn
+                (type);
         String page = addDiscountCommand.execute(request);
-        verify(request).setAttribute(RequestAttributes.INFORMATION_MESSAGE, BundleManager
+        verify(request).setAttribute(RequestAttributes
+                .INFORMATION_MESSAGE, BundleManager
                 .INSTANCE.getString(Messages.DISCOUNT_SUCCESSFULLY_ADDED));
         assertEquals(page, JSPPages.ADMIN_FOUNDATION_PAGE);
     }

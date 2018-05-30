@@ -2,18 +2,15 @@
 
 <header id="header" class="header">
     <nav class="navbar navbar-expand-lg bg-black fixed-top">
-        <div class="container">
-            <div class="col-lg-3 ">
                 <img src="${pageContext.request.contextPath}/resources/img/logo.png" alt="Taxi"
                      class="logo">
-            </div>
             <button class="navbar-toggler" type="button" data-toggle="collapse"
                     data-target="#navbarResponsive"
                     aria-controls="navbarResponsive" aria-expanded="false"
                     aria-label="Toggle navigation">
             </button>
             <div class="collapse navbar-collapse" id="navbarResponsive">
-                <ul class="navbar-nav ml-auto">
+                <ul class="navbar-nav ml-auto mr-auto">
                     <li class="nav-item">
                         <a href="${pageContext.request.contextPath}/taxi/index"><fmt:message
                                 key="home"/></a>
@@ -47,6 +44,5 @@
                     </li>
                 </ul>
             </div>
-        </div>
     </nav>
 </header>

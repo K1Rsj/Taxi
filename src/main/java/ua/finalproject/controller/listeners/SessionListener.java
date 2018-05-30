@@ -19,21 +19,25 @@ public class SessionListener implements HttpSessionListener {
      */
     @Override
     public void sessionCreated(HttpSessionEvent httpSessionEvent) {
-        httpSessionEvent.getSession().setAttribute(RequestAttributes.LANGUAGE, Locale
+        httpSessionEvent.getSession().setAttribute(RequestAttributes
+                .LANGUAGE, Locale
                 .getDefault());
     }
 
     /**
      * Deletes user from context's logged users attribute.
-     * Sets car state to free if user make order and didn't accept it or cancel
+     * Sets car state to free if user make order and didn't accept it or
+     * cancel
      *
      * @param httpSessionEvent session event
      */
     @Override
     public void sessionDestroyed(HttpSessionEvent httpSessionEvent) {
-        ContextUtil.deleteLoggedUserFromContext(httpSessionEvent.getSession());
+        ContextUtil.deleteLoggedUserFromContext(httpSessionEvent
+                .getSession());
         CarServiceImpl carServiceImpl = ServiceFactory.getInstance()
                 .createCarService();
-        ControllerUtil.ChangeCarStateToFree(httpSessionEvent.getSession(), carServiceImpl);
+        ControllerUtil.ChangeCarStateToFree(httpSessionEvent.getSession(),
+                carServiceImpl);
     }
 }

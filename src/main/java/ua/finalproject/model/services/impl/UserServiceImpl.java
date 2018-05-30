@@ -31,18 +31,21 @@ public class UserServiceImpl implements UserService {
      * Adds user to DB.
      *
      * @param user user
-     * @throws SQLIntegrityConstraintViolationException if user's login or email already
+     * @throws SQLIntegrityConstraintViolationException if user's login
+     *                                                  or email already
      *                                                  exists in DB
      */
     @Override
-    public void registerUser(User user) throws SQLIntegrityConstraintViolationException {
+    public void registerUser(User user) throws
+            SQLIntegrityConstraintViolationException {
         Connection connection = ConnectionPoolHolder.getConnection();
         try (UserDao userDao = daoFactory.createUserDao(connection)) {
             userDao.create(user);
         } catch (SQLIntegrityConstraintViolationException e) {
             throw new SQLIntegrityConstraintViolationException(e);
         } catch (Exception e) {
-            logger.error(LogMessages.AUTO_CLOSABLE_RESOURCE_ERROR_IN_REGISTER_USER);
+            logger.error(LogMessages
+                    .AUTO_CLOSABLE_RESOURCE_ERROR_IN_REGISTER_USER);
         }
     }
 
@@ -58,7 +61,8 @@ public class UserServiceImpl implements UserService {
         try (UserDao userDao = daoFactory.createUserDao(connection)) {
             return userDao.findByLogin(login);
         } catch (Exception e) {
-            logger.error(LogMessages.AUTO_CLOSABLE_RESOURCE_ERROR_IN_FIND_USER_BY_LOGIN, e
+            logger.error(LogMessages
+                    .AUTO_CLOSABLE_RESOURCE_ERROR_IN_FIND_USER_BY_LOGIN, e
                     .getMessage());
         }
         return Optional.empty();
@@ -75,10 +79,12 @@ public class UserServiceImpl implements UserService {
         Connection connection = ConnectionPoolHolder.getConnection();
         Integer discount = 0;
         try (UserDao userDao = daoFactory.createUserDao(connection)) {
-            discount = OrderPriceGenerator.getDiscountBasedOnMoneySpent(userDao.findByLogin
-                    (login).get().getMoneySpent());
+            discount = OrderPriceGenerator.getDiscountBasedOnMoneySpent
+                    (userDao.findByLogin
+                            (login).get().getMoneySpent());
         } catch (Exception e) {
-            logger.error(LogMessages.AUTO_CLOSABLE_RESOURCE_ERROR_IN_GET_USER_DISCOUNT, e
+            logger.error(LogMessages
+                    .AUTO_CLOSABLE_RESOURCE_ERROR_IN_GET_USER_DISCOUNT, e
                     .getMessage());
         }
         return discount;
@@ -95,7 +101,8 @@ public class UserServiceImpl implements UserService {
         try (UserDao userDao = daoFactory.createUserDao(connection)) {
             return userDao.findAll();
         } catch (Exception e) {
-            logger.error(LogMessages.AUTO_CLOSABLE_RESOURCE_ERROR_IN_SHOW_ALL_USERS, e
+            logger.error(LogMessages
+                    .AUTO_CLOSABLE_RESOURCE_ERROR_IN_SHOW_ALL_USERS, e
                     .getMessage());
         }
         return Optional.empty();
@@ -116,11 +123,13 @@ public class UserServiceImpl implements UserService {
             userDao.delete(id);
             connection.commit();
         } catch (SQLException e) {
-            logger.error(LogMessages.DELETE_USER_BY_ID_ERROR, e.getMessage());
+            logger.error(LogMessages.DELETE_USER_BY_ID_ERROR, e
+                    .getMessage());
             SQLExceptionRollbackErrorHandle(connection);
             throw new RuntimeException(e);
         } catch (Exception e) {
-            logger.error(LogMessages.AUTO_CLOSABLE_RESOURCE_ERROR_IN_DELETE_USER_BY_ID, e
+            logger.error(LogMessages
+                    .AUTO_CLOSABLE_RESOURCE_ERROR_IN_DELETE_USER_BY_ID, e
                     .getMessage());
         }
     }
@@ -134,7 +143,8 @@ public class UserServiceImpl implements UserService {
         try {
             connection.rollback();
         } catch (SQLException e1) {
-            logger.error(LogMessages.DELETE_USER_BY_ID_CONNECTION_ROLLBACK_ERROR,
+            logger.error(LogMessages
+                            .DELETE_USER_BY_ID_CONNECTION_ROLLBACK_ERROR,
                     e1.getMessage());
             throw new RuntimeException(e1);
         }

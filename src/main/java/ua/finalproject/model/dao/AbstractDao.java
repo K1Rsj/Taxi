@@ -18,7 +18,8 @@ import java.util.Optional;
  *
  * @param <T>
  */
-public abstract class AbstractDao<T extends Entity<Integer>> implements Dao<T, Integer> {
+public abstract class AbstractDao<T extends Entity<Integer>> implements
+        Dao<T, Integer> {
 
     /**
      * @see Connection
@@ -42,7 +43,8 @@ public abstract class AbstractDao<T extends Entity<Integer>> implements Dao<T, I
      */
     @Override
     public Optional<T> findById(Integer id) {
-        String query = QueryContainer.INSTANCE.findFromTableById(tableName, id);
+        String query = QueryContainer.INSTANCE.findFromTableById
+                (tableName, id);
         return findOneByQuery(query);
     }
 
@@ -64,11 +66,14 @@ public abstract class AbstractDao<T extends Entity<Integer>> implements Dao<T, I
      */
     @Override
     public void delete(Integer id) {
-        String query = QueryContainer.INSTANCE.deleteFromTableById(tableName, id);
-        try (PreparedStatement statement = connection.prepareStatement(query)) {
+        String query = QueryContainer.INSTANCE.deleteFromTableById
+                (tableName, id);
+        try (PreparedStatement statement = connection.prepareStatement
+                (query)) {
             statement.executeUpdate();
         } catch (SQLException e) {
-            logger.error(LogMessageBuilder.INSTANCE.deleteEntryError(tableName, id), e
+            logger.error(LogMessageBuilder.INSTANCE.deleteEntryError
+                    (tableName, id), e
                     .getMessage());
             throw new RuntimeException(e);
         }
@@ -80,14 +85,18 @@ public abstract class AbstractDao<T extends Entity<Integer>> implements Dao<T, I
      * @param parameterName  name of parameter
      * @param parameterValue parameter value
      */
-    public void deleteByParameter(String parameterName, String parameterValue) {
-        String query = QueryContainer.INSTANCE.deleteFromTableByParameter(tableName,
-                parameterName, parameterValue);
-        try (PreparedStatement statement = connection.prepareStatement(query)) {
+    public void deleteByParameter(String parameterName, String
+            parameterValue) {
+        String query = QueryContainer.INSTANCE
+                .deleteFromTableByParameter(tableName,
+                        parameterName, parameterValue);
+        try (PreparedStatement statement = connection.prepareStatement
+                (query)) {
             statement.executeUpdate();
         } catch (SQLException e) {
-            logger.error(LogMessageBuilder.INSTANCE.deleteEntryByParameterError(tableName,
-                    parameterName), e.getMessage());
+            logger.error(LogMessageBuilder.INSTANCE
+                    .deleteEntryByParameterError(tableName,
+                            parameterName), e.getMessage());
             throw new RuntimeException(e);
         }
     }
@@ -99,9 +108,11 @@ public abstract class AbstractDao<T extends Entity<Integer>> implements Dao<T, I
      * @return id name
      */
     @Override
-    public Integer findForeignKeyInTable(String tableName, String entityId, String idName) {
-        String query = QueryContainer.INSTANCE.findForeignKeyIdFromTable(tableName,
-                entityId, idName);
+    public Integer findForeignKeyInTable(String tableName, String
+            entityId, String idName) {
+        String query = QueryContainer.INSTANCE.findForeignKeyIdFromTable
+                (tableName,
+                        entityId, idName);
         try (PreparedStatement ps = connection.prepareStatement(query)) {
             try (ResultSet resultSet = ps.executeQuery()) {
                 if (resultSet.next()) {
@@ -111,7 +122,8 @@ public abstract class AbstractDao<T extends Entity<Integer>> implements Dao<T, I
                 }
             }
         } catch (SQLException e) {
-            logger.error(LogMessages.FIND_OTHER_ID_FROM_TABLE_ERROR, e.getMessage());
+            logger.error(LogMessages.FIND_OTHER_ID_FROM_TABLE_ERROR, e
+                    .getMessage());
             throw new RuntimeException(e);
         }
     }
@@ -165,7 +177,8 @@ public abstract class AbstractDao<T extends Entity<Integer>> implements Dao<T, I
         try {
             connection.close();
         } catch (SQLException e) {
-            logger.error(LogMessages.CONNECTION_CLOSE_ERROR, e.getMessage());
+            logger.error(LogMessages.CONNECTION_CLOSE_ERROR, e
+                    .getMessage());
             throw new RuntimeException(e);
         }
     }
@@ -177,5 +190,6 @@ public abstract class AbstractDao<T extends Entity<Integer>> implements Dao<T, I
      * @return entity from result set
      * @throws SQLException if something went wrong in DB
      */
-    protected abstract T extractFromResultSet(ResultSet resultSet) throws SQLException;
+    protected abstract T extractFromResultSet(ResultSet resultSet)
+            throws SQLException;
 }

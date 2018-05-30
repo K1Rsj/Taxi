@@ -16,9 +16,12 @@ public class CreateEntityFromRequest {
         String login = request.getParameter(RequestParameters.LOGIN);
         String password = request.getParameter(RequestParameters.PASSWORD);
         String email = request.getParameter(RequestParameters.EMAIL);
-        String firstName = request.getParameter(RequestParameters.FIRST_NAME);
-        String secondName = request.getParameter(RequestParameters.SECOND_NAME);
-        String phoneNumber = request.getParameter(RequestParameters.PHONE_NUMBER);
+        String firstName = request.getParameter(RequestParameters
+                .FIRST_NAME);
+        String secondName = request.getParameter(RequestParameters
+                .SECOND_NAME);
+        String phoneNumber = request.getParameter(RequestParameters
+                .PHONE_NUMBER);
         return User.builder()
                 .login(login)
                 .password(password)

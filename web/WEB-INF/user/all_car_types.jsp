@@ -12,6 +12,4 @@
 </c:if>
 
 <jsp:include page="../tables/all_car_types_table.jsp"/>
-<jsp:include page="../components/footer.jsp"/>
-
 

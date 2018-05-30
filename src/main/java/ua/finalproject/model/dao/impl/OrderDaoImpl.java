@@ -34,11 +34,14 @@ public class OrderDaoImpl extends AbstractDao<Order> implements OrderDao {
      * @throws SQLException if something wrong with DB
      */
     @Override
-    public Order extractFromResultSet(ResultSet resultSet) throws SQLException {
+    public Order extractFromResultSet(ResultSet resultSet) throws
+            SQLException {
 
         Integer id = resultSet.getInt(TableColumnNames.ID_ORDER);
-        String departureStreet = resultSet.getString(TableColumnNames.DEPARTURE_STREET);
-        String destinationStreet = resultSet.getString(TableColumnNames.DESTINATION_STREET);
+        String departureStreet = resultSet.getString(TableColumnNames
+                .DEPARTURE_STREET);
+        String destinationStreet = resultSet.getString(TableColumnNames
+                .DESTINATION_STREET);
         Long price = resultSet.getLong(TableColumnNames.PRICE);
 
         return new OrderLazy.OrderBuilder()
@@ -66,7 +69,8 @@ public class OrderDaoImpl extends AbstractDao<Order> implements OrderDao {
             preparedStatement.setLong(6, order.getPrice());
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
-            logger.error(LogMessageBuilder.INSTANCE.createEntryError(TableNames.ORDERS), e
+            logger.error(LogMessageBuilder.INSTANCE.createEntryError
+                    (TableNames.ORDERS), e
                     .getMessage());
             throw new RuntimeException(e);
         }
@@ -75,12 +79,12 @@ public class OrderDaoImpl extends AbstractDao<Order> implements OrderDao {
     /**
      * Finds all user's orders
      *
-     * @param login user's login
+     * @param id user's id
      * @return list of all user's orders
      */
     @Override
-    public Optional<List<Order>> findOrdersByUserLogin(String login) {
-        return findAllByQuery(QueryContainer.INSTANCE.findOrdersByUserLogin
-                (login));
+    public Optional<List<Order>> findOrdersByUserId(Integer id) {
+        return findAllByQuery(QueryContainer.INSTANCE.
+                findOrdersByUserId(id));
     }
 }

@@ -41,11 +41,15 @@ public class ConfirmOrderCommandTest {
     @Test
     public void execute() {
         when(request.getSession()).thenReturn(session);
-        when(request.getSession().getAttribute(RequestAttributes.ORDER)).thenReturn(order);
-        when(request.getSession().getAttribute(RequestAttributes.ROLE)).thenReturn(role);
+        when(request.getSession().getAttribute(RequestAttributes.ORDER))
+                .thenReturn(order);
+        when(request.getSession().getAttribute(RequestAttributes.ROLE))
+                .thenReturn(role);
         String page = confirmOrderCommand.execute(request);
-        verify(request).setAttribute(RequestAttributes.ORDER_INFORMATION_MESSAGE,
-                BundleManager.INSTANCE.getString(Messages.HAVE_A_GOOD_TRIP));
+        verify(request).setAttribute(RequestAttributes
+                        .ORDER_INFORMATION_MESSAGE,
+                BundleManager.INSTANCE.getString(Messages
+                        .HAVE_A_GOOD_TRIP));
         verify(orderServiceImpl).confirmOrder(order);
         verify(session).removeAttribute(RequestAttributes.ORDER);
         assertNotNull(page);

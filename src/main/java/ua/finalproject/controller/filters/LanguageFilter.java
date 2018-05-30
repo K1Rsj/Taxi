@@ -31,18 +31,22 @@ public class LanguageFilter implements Filter {
      * @throws ServletException servlet exception
      */
     @Override
-    public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse,
-                         FilterChain filterChain) throws ServletException, IOException {
+    public void doFilter(ServletRequest servletRequest, ServletResponse
+            servletResponse,
+                         FilterChain filterChain) throws
+            ServletException, IOException {
         HttpServletRequest request = (HttpServletRequest) servletRequest;
         Locale locale;
         try {
-            locale = (Locale) request.getSession().getAttribute(RequestAttributes.LANGUAGE);
+            locale = (Locale) request.getSession().getAttribute
+                    (RequestAttributes.LANGUAGE);
             BundleManager.INSTANCE.changeLocale(locale);
             filterChain.doFilter(request, servletResponse);
 
         } catch (ClassCastException e) {
-            locale = new Locale((String) request.getSession().getAttribute(RequestAttributes
-                    .LANGUAGE));
+            locale = new Locale((String) request.getSession()
+                    .getAttribute(RequestAttributes
+                            .LANGUAGE));
             BundleManager.INSTANCE.changeLocale(locale);
             filterChain.doFilter(request, servletResponse);
         }

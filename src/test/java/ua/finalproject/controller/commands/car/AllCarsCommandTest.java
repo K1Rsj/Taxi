@@ -31,7 +31,8 @@ public class AllCarsCommandTest {
     public void execute() {
         List cars = mock(List.class);
         when(carServiceImpl.showAllCars()).thenReturn(Optional.of(cars));
-        when(ControllerUtil.getSubListForPagination(request, cars)).thenReturn(cars);
+        when(ControllerUtil.getSubListForPagination(request, cars))
+                .thenReturn(cars);
         String page = allCarsCommand.execute(request);
         verify(request).setAttribute(RequestAttributes.CARS, cars);
         assertEquals(page, JSPPages.ALL_CARS_PAGE);

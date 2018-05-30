@@ -55,7 +55,8 @@ public class CarType implements Entity<Integer> {
     /**
      * Car type builder
      */
-    public static final class CarTypeBuilder implements EntityBuilder<CarType> {
+    public static final class CarTypeBuilder implements
+            EntityBuilder<CarType> {
 
         private Integer id;
         private String type;

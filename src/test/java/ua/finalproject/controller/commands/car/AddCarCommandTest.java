@@ -38,13 +38,18 @@ public class AddCarCommandTest {
     @Test
     public void execute() {
 
-        when(request.getParameter(RequestParameters.MODEL)).thenReturn(model);
-        when(request.getParameter(RequestParameters.NUMBER)).thenReturn(number);
-        when(request.getParameter(RequestParameters.DRIVER)).thenReturn(driver);
-        when(request.getParameter(RequestParameters.TYPE)).thenReturn(carType);
+        when(request.getParameter(RequestParameters.MODEL)).thenReturn
+                (model);
+        when(request.getParameter(RequestParameters.NUMBER)).thenReturn
+                (number);
+        when(request.getParameter(RequestParameters.DRIVER)).thenReturn
+                (driver);
+        when(request.getParameter(RequestParameters.TYPE)).thenReturn
+                (carType);
         String page = addCarCommand.execute(request);
         verify(request).setAttribute(RequestAttributes.INFORMATION_MESSAGE,
-                BundleManager.INSTANCE.getString(Messages.CAR_SUCCESSFULLY_ADDED));
+                BundleManager.INSTANCE.getString(Messages
+                        .CAR_SUCCESSFULLY_ADDED));
         assertEquals(page, JSPPages.ADMIN_FOUNDATION_PAGE);
     }
 

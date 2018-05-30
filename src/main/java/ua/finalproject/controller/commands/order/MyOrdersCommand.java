@@ -28,11 +28,13 @@ public class MyOrdersCommand implements Command {
      */
     @Override
     public String execute(HttpServletRequest request) {
-        List<Order> orders = orderServiceImpl.getAllUserOrders((String) request.getSession()
-                .getAttribute(RequestAttributes.USER_LOGIN)).get();
+        List<Order> orders = orderServiceImpl.getAllUserOrders((String)
+                request.getSession()
+                        .getAttribute(RequestAttributes.USER_LOGIN)).get();
         if (orders.isEmpty()) {
-            request.setAttribute(RequestAttributes.MESSAGE, bundleManager.getString(Messages
-                    .THERE_ARE_NO_ORDERS));
+            request.setAttribute(RequestAttributes.MESSAGE,
+                    bundleManager.getString(Messages
+                            .THERE_ARE_NO_ORDERS));
             return JSPPages.MY_ORDERS_PAGE;
         }
         request.setAttribute(RequestAttributes.ORDERS, ControllerUtil

@@ -12,7 +12,8 @@ public enum LogMessageBuilder {
     }
 
     public String userAlreadyLoggedInfo(String login) {
-        return "User " + login + " tried to log in to an account that is already in use";
+        return "User " + login + " tried to log in to an account that is" +
+                " already in use";
     }
 
     public String invalidAttemptOfLogInInfo(String login) {
@@ -28,7 +29,8 @@ public enum LogMessageBuilder {
     }
 
     public String newDiscountInfo(String type, Integer discount) {
-        return "Added new discount:'" + discount + "'% for car type: " + type;
+        return "Added new discount:'" + discount + "'% for car type: " +
+                type;
     }
 
     public String cancelOrderInfo(String login) {
@@ -39,8 +41,10 @@ public enum LogMessageBuilder {
         return "User: " + login + " confirmed order";
     }
 
-    public String makeOrderInfo(String name, String secondName, String carNumber) {
-        return "User:'" + name + " " + secondName + " make order for car " + carNumber;
+    public String makeOrderInfo(String name, String secondName, String
+            carNumber) {
+        return "User:'" + name + " " + secondName + " make order for car" +
+                " " + carNumber;
     }
 
     public String duplicateUserInfo(String login) {
@@ -59,8 +63,10 @@ public enum LogMessageBuilder {
         return "Delete entry from " + tableName + " with " + id + " error";
     }
 
-    public String deleteEntryByParameterError(String tableName, String parameterName) {
-        return "Delete entry from " + tableName + " with " + parameterName + " error";
+    public String deleteEntryByParameterError(String tableName, String
+            parameterName) {
+        return "Delete entry from " + tableName + " with " +
+                parameterName + " error";
     }
 }
 

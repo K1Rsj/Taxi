@@ -5,5 +5,3 @@
 <div class="content container">
     <fmt:message key="your.discount"/><c:out value=" ${requestScope.discount}%"/>
 </div>
-<jsp:include page="../components/footer.jsp"/>
-

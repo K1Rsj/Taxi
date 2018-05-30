@@ -31,16 +31,21 @@ public class UserDaoImpl extends AbstractDao<User> implements UserDao {
      * @throws SQLException if something went wrong in DB
      */
     @Override
-    public User extractFromResultSet(ResultSet resultSet) throws SQLException {
+    public User extractFromResultSet(ResultSet resultSet) throws
+            SQLException {
         Integer id = resultSet.getInt(TableColumnNames.ID_USER);
         String login = resultSet.getString(TableColumnNames.LOGIN);
         String password = resultSet.getString(TableColumnNames.PASSWORD);
         String email = resultSet.getString(TableColumnNames.EMAIL);
-        String firstName = resultSet.getString(TableColumnNames.FIRST_NAME);
-        String secondName = resultSet.getString(TableColumnNames.SECOND_NAME);
-        String phoneNumber = resultSet.getString(TableColumnNames.PHONE_NUMBER);
+        String firstName = resultSet.getString(TableColumnNames
+                .FIRST_NAME);
+        String secondName = resultSet.getString(TableColumnNames
+                .SECOND_NAME);
+        String phoneNumber = resultSet.getString(TableColumnNames
+                .PHONE_NUMBER);
         Long moneySpent = resultSet.getLong(TableColumnNames.MONEY_SPENT);
-        User.Role role = UtilDao.parseUserRole(resultSet.getString(TableColumnNames.ROLE));
+        User.Role role = UtilDao.parseUserRole(resultSet.getString
+                (TableColumnNames.ROLE));
 
         return User.builder()
                 .id(id)
@@ -59,11 +64,13 @@ public class UserDaoImpl extends AbstractDao<User> implements UserDao {
      * Adds user to DB
      *
      * @param user that will be added to DB
-     * @throws SQLIntegrityConstraintViolationException if user's login or email already
+     * @throws SQLIntegrityConstraintViolationException if user's login
+     *                                                  or email already
      *                                                  exists in DB
      */
     @Override
-    public void create(User user) throws SQLIntegrityConstraintViolationException {
+    public void create(User user) throws
+            SQLIntegrityConstraintViolationException {
         try (PreparedStatement preparedStatement = connection
                 .prepareStatement(DbQueries.INSERT_INTO_USERS)) {
             preparedStatement.setString(1, user.getLogin());
@@ -76,7 +83,8 @@ public class UserDaoImpl extends AbstractDao<User> implements UserDao {
         } catch (SQLIntegrityConstraintViolationException e) {
             throw new SQLIntegrityConstraintViolationException(e);
         } catch (SQLException e) {
-            logger.error(LogMessageBuilder.INSTANCE.createEntryError(TableNames.USERS), e
+            logger.error(LogMessageBuilder.INSTANCE.createEntryError
+                    (TableNames.USERS), e
                     .getMessage());
             throw new RuntimeException(e);
         }
@@ -90,7 +98,8 @@ public class UserDaoImpl extends AbstractDao<User> implements UserDao {
      */
     @Override
     public Optional<User> findByLogin(String login) {
-        return findOneByQuery(QueryContainer.INSTANCE.findUserByLogin(login));
+        return findOneByQuery(QueryContainer.INSTANCE.findUserByLogin
+                (login));
     }
 
     /**
@@ -101,13 +110,15 @@ public class UserDaoImpl extends AbstractDao<User> implements UserDao {
      */
     @Override
     public void updateMoneySpent(Integer userId, Long moneySpent) {
-        try (PreparedStatement preparedStatement = connection.prepareStatement(DbQueries
-                .UPDATE_USER_MONEY_SPENT)) {
+        try (PreparedStatement preparedStatement = connection
+                .prepareStatement(DbQueries
+                        .UPDATE_USER_MONEY_SPENT)) {
             preparedStatement.setLong(1, moneySpent);
             preparedStatement.setInt(2, userId);
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
-            logger.error(LogMessages.UPDATE_USER_MONEY_SPENT_ERROR, e.getMessage());
+            logger.error(LogMessages.UPDATE_USER_MONEY_SPENT_ERROR, e
+                    .getMessage());
             throw new RuntimeException(e);
         }
     }

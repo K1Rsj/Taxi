@@ -27,10 +27,12 @@ public class AllCarTypesCommand implements Command {
      */
     @Override
     public String execute(HttpServletRequest request) {
-        List<CarType> carTypes = carTypeServiceImpl.showAllCarTypes().get();
+        List<CarType> carTypes = carTypeServiceImpl.showAllCarTypes()
+                .get();
         if (carTypes.isEmpty()) {
-            request.setAttribute(RequestAttributes.MESSAGE, bundleManager.getString(Messages
-                    .THERE_ARE_NO_CAR_TYPES_IN_DB));
+            request.setAttribute(RequestAttributes.MESSAGE,
+                    bundleManager.getString(Messages
+                            .THERE_ARE_NO_CAR_TYPES_IN_DB));
             return JSPPages.ALL_CAR_TYPES_PAGE;
         }
         request.setAttribute(RequestAttributes.CAR_TYPES, carTypes);

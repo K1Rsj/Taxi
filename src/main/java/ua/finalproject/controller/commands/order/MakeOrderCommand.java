@@ -34,36 +34,51 @@ public class MakeOrderCommand implements Command {
      */
     @Override
     public String execute(HttpServletRequest request) {
-        if (!Optional.ofNullable(request.getSession().getAttribute(RequestAttributes.ORDER))
+        if (!Optional.ofNullable(request.getSession().getAttribute
+                (RequestAttributes.ORDER))
                 .isPresent()) {
-            String login = (String) request.getSession().getAttribute(RequestAttributes
-                    .USER_LOGIN);
+            String login = (String) request.getSession().getAttribute
+                    (RequestAttributes
+                            .USER_LOGIN);
 
-            String departureStreet = request.getParameter(RequestParameters.DEPARTURE_STREET);
-            String destinationStreet = request.getParameter(RequestParameters
-                    .DESTINATION_STREET);
+            String departureStreet = request.getParameter
+                    (RequestParameters.DEPARTURE_STREET);
+            String destinationStreet = request.getParameter
+                    (RequestParameters
+                            .DESTINATION_STREET);
             String type = request.getParameter(RequestParameters.TYPE);
-            if (!DataValidation.orderDataValidation(departureStreet, destinationStreet)) {
-                request.setAttribute(RequestAttributes.ORDER_INFORMATION_MESSAGE,
-                        bundleManager.getString(ValidationMessages.WRONG_STREET_FORMAT));
+            if (!DataValidation.orderDataValidation(departureStreet,
+                    destinationStreet)) {
+                request.setAttribute(RequestAttributes
+                                .ORDER_INFORMATION_MESSAGE,
+                        bundleManager.getString(ValidationMessages
+                                .WRONG_STREET_FORMAT));
                 return JSPPages.MAKE_ORDER_PAGE;
             }
             try {
-                Order order = orderServiceImpl.makeOrder(login, departureStreet,
+                Order order = orderServiceImpl.makeOrder(login,
+                        departureStreet,
                         destinationStreet, type);
-                request.getSession().setAttribute(RequestAttributes.ORDER, order);
-                logger.info(LogMessageBuilder.INSTANCE.makeOrderInfo(order.getUser()
-                                .getFirstName(),
-                        order.getUser().getSecondName(), order.getCar().getNumber()));
+                request.getSession().setAttribute(RequestAttributes
+                        .ORDER, order);
+                logger.info(LogMessageBuilder.INSTANCE.makeOrderInfo
+                        (order.getUser()
+                                        .getFirstName(),
+                                order.getUser().getSecondName(), order
+                                        .getCar()
+                                        .getNumber()));
 
             } catch (NoFreeCarWithSuchTypeException e) {
-                request.setAttribute(RequestAttributes.ORDER_INFORMATION_MESSAGE, e
+                request.setAttribute(RequestAttributes
+                        .ORDER_INFORMATION_MESSAGE, e
                         .getMessage());
                 logger.info(LogMessages.NO_FREE_CAR_SUCH_TYPE);
             }
         } else {
-            request.setAttribute(RequestAttributes.ORDER_INFORMATION_MESSAGE, bundleManager
-                    .getString(ExceptionMessages.YOU_CAN_ONLY_HAVE_ONE_ORDER_AT_TIME));
+            request.setAttribute(RequestAttributes
+                    .ORDER_INFORMATION_MESSAGE, bundleManager
+                    .getString(ExceptionMessages
+                            .YOU_CAN_ONLY_HAVE_ONE_ORDER_AT_TIME));
         }
         return JSPPages.USER_FOUNDATION_PAGE;
     }

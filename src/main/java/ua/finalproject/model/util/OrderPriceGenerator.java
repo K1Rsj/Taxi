@@ -16,12 +16,17 @@ public class OrderPriceGenerator {
      * @param carType           car type
      * @return order price
      */
-    public static Long getOrderPrice(Long moneySpent, String departureStreet, String
-            destinationStreet, CarType carType) {
-        Integer distance = getOrderDistance(departureStreet, destinationStreet);
-        Integer discount = getDiscountBasedOnMoneySpent(moneySpent) + carType.getDiscount();
-        Integer orderPrice = (carType.getStartingPrice() + (distance * carType
-                .getPricePerKilometer()));
+    public static Long getOrderPrice(Long moneySpent, String
+            departureStreet, String
+                                             destinationStreet, CarType
+            carType) {
+        Integer distance = getOrderDistance(departureStreet,
+                destinationStreet);
+        Integer discount = getDiscountBasedOnMoneySpent(moneySpent) +
+                carType.getDiscount();
+        Integer orderPrice = (carType.getStartingPrice() + (distance *
+                carType
+                        .getPricePerKilometer()));
         if (discount.equals(0)) {
             return (long) orderPrice;
         }
@@ -36,7 +41,8 @@ public class OrderPriceGenerator {
      * @param destinationStreet destination street
      * @return trip distance
      */
-    private static Integer getOrderDistance(String departureStreet, String destinationStreet) {
+    private static Integer getOrderDistance(String departureStreet,
+                                            String destinationStreet) {
         return departureStreet.length() + destinationStreet.length();
     }
 

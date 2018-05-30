@@ -16,9 +16,11 @@ public class ContextListener implements ServletContextListener {
      * @param servletContextEvent context event
      */
     @Override
-    public void contextInitialized(ServletContextEvent servletContextEvent) {
-        servletContextEvent.getServletContext().setAttribute(RequestAttributes.LOGGED_USERS,
-                new HashSet<String>());
+    public void contextInitialized(ServletContextEvent
+                                           servletContextEvent) {
+        servletContextEvent.getServletContext().setAttribute
+                (RequestAttributes.LOGGED_USERS,
+                        new HashSet<String>());
         Locale.setDefault(Locale.US);
     }
 

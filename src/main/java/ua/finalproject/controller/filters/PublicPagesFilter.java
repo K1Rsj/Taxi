@@ -33,19 +33,25 @@ public class PublicPagesFilter implements Filter {
      * @throws ServletException servlet exception
      */
     @Override
-    public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse,
+    public void doFilter(ServletRequest servletRequest, ServletResponse
+            servletResponse,
                          FilterChain filterChain)
             throws IOException, ServletException {
 
         HttpServletRequest request = (HttpServletRequest) servletRequest;
-        Optional<User.Role> role = Optional.ofNullable((User.Role) request.getSession()
-                .getAttribute(RequestAttributes.ROLE));
-        if (role.isPresent() && role.equals(Optional.of(User.Role.ADMIN))) {
-            request.getRequestDispatcher(JSPPages.ADMIN_FOUNDATION_PAGE).forward
-                    (servletRequest, servletResponse);
-        } else if (role.isPresent() && role.equals(Optional.of(User.Role.USER))) {
-            request.getRequestDispatcher(JSPPages.USER_FOUNDATION_PAGE).forward
-                    (servletRequest, servletResponse);
+        Optional<User.Role> role = Optional.ofNullable((User.Role)
+                request.getSession()
+                        .getAttribute(RequestAttributes.ROLE));
+        if (role.isPresent() && role.equals(Optional.of(User.Role.ADMIN)
+        )) {
+            request.getRequestDispatcher(JSPPages.ADMIN_FOUNDATION_PAGE)
+                    .forward
+                            (servletRequest, servletResponse);
+        } else if (role.isPresent() && role.equals(Optional.of(User.Role
+                .USER))) {
+            request.getRequestDispatcher(JSPPages.USER_FOUNDATION_PAGE)
+                    .forward
+                            (servletRequest, servletResponse);
         } else {
             filterChain.doFilter(servletRequest, servletResponse);
         }

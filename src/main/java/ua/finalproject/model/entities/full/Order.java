@@ -74,7 +74,8 @@ public class Order implements Entity<Integer> {
     /**
      * Order builder
      */
-    public static final class OrderBuilder implements EntityBuilder<Order> {
+    public static final class OrderBuilder implements
+            EntityBuilder<Order> {
 
         private Integer id;
         private String departureStreet;

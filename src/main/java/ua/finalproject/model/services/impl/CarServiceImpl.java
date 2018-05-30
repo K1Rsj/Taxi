@@ -40,7 +40,8 @@ public class CarServiceImpl implements CarService {
         try (CarDao carDao = daoFactory.createCarDao(connection)) {
             return carDao.findAll();
         } catch (Exception e) {
-            logger.error(LogMessages.AUTO_CLOSABLE_RESOURCE_ERROR_IN_SHOW_ALL_CARS, e
+            logger.error(LogMessages
+                    .AUTO_CLOSABLE_RESOURCE_ERROR_IN_SHOW_ALL_CARS, e
                     .getMessage());
         }
         return Optional.empty();
@@ -55,10 +56,12 @@ public class CarServiceImpl implements CarService {
     public void changeCarStateFromBusyToFree(Order order) {
         Connection connection = ConnectionPoolHolder.getConnection();
         try (CarDao carDao = daoFactory.createCarDao(connection)) {
-            carDao.updateCarState(order.getCar().getId(), Car.State.FREE.toString()
+            carDao.updateCarState(order.getCar().getId(), Car.State.FREE
+                    .toString()
                     .toLowerCase());
         } catch (Exception e) {
-            logger.error(LogMessages.AUTO_CLOSABLE_RESOURCE_ERROR_IN_CHANGE_CAR_STATE, e
+            logger.error(LogMessages
+                    .AUTO_CLOSABLE_RESOURCE_ERROR_IN_CHANGE_CAR_STATE, e
                     .getMessage());
         }
     }
@@ -68,16 +71,20 @@ public class CarServiceImpl implements CarService {
      *
      * @param carFromRequest car from request
      * @param type           car type
-     * @throws SQLIntegrityConstraintViolationException if number already exists in DB
+     * @throws SQLIntegrityConstraintViolationException if number
+     *                                                  already exists
+     *                                                  in DB
      */
     @Override
     public void addCar(Car carFromRequest, String type) throws
             SQLIntegrityConstraintViolationException {
         Connection connection = ConnectionPoolHolder.getConnection();
         try (CarDao carDao = daoFactory.createCarDao(connection);
-             CarTypeDao carTypeDao = daoFactory.createCarTypeDao(connection)) {
+             CarTypeDao carTypeDao = daoFactory.createCarTypeDao
+                     (connection)) {
             connection.setAutoCommit(false);
-            Optional<CarType> carType = carTypeDao.findById(UtilDao.parseTypeString(type));
+            Optional<CarType> carType = carTypeDao.findById(UtilDao
+                    .parseTypeString(type));
             Car car = new Car.CarBuilder()
                     .setModel(carFromRequest.getModel())
                     .setNumber(carFromRequest.getNumber())
@@ -93,7 +100,9 @@ public class CarServiceImpl implements CarService {
             SQLExceptionRollbackErrorHandle(connection);
             throw new RuntimeException(e);
         } catch (Exception e) {
-            logger.error(LogMessages.AUTO_CLOSABLE_RESOURCE_ERROR_IN_ADD_CAR, e.getMessage());
+            logger.error(LogMessages
+                    .AUTO_CLOSABLE_RESOURCE_ERROR_IN_ADD_CAR, e
+                    .getMessage());
         }
     }
 
@@ -106,7 +115,8 @@ public class CarServiceImpl implements CarService {
         try {
             connection.rollback();
         } catch (SQLException e1) {
-            logger.error(LogMessages.ADD_CAR_CONNECTION_ROLLBACK_ERROR, e1.getMessage());
+            logger.error(LogMessages.ADD_CAR_CONNECTION_ROLLBACK_ERROR,
+                    e1.getMessage());
             throw new RuntimeException(e1);
         }
     }

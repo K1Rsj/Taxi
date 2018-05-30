@@ -37,7 +37,8 @@ public class MakeOrderCommandTest {
         session = mock(HttpSession.class);
         order = new Order();
         Car car = new Car.CarBuilder().setNumber("AA2121AA").build();
-        User user = User.builder().firstName("Misha").secondName("Ivanov").build();
+        User user = User.builder().firstName("Misha").secondName
+                ("Ivanov").build();
         order.setCar(car);
         order.setUser(user);
         login = "vetal";
@@ -49,36 +50,49 @@ public class MakeOrderCommandTest {
     @Test
     public void execute() throws NoFreeCarWithSuchTypeException {
         when(request.getSession()).thenReturn(session);
-        when(request.getSession().getAttribute(RequestAttributes.USER_LOGIN)).thenReturn
+        when(request.getSession().getAttribute(RequestAttributes
+                .USER_LOGIN)).thenReturn
                 (login);
-        when(request.getParameter(RequestParameters.DEPARTURE_STREET)).thenReturn
-                (departureStreet);
-        when(request.getParameter(RequestParameters.DESTINATION_STREET)).thenReturn
-                (destinationStreet);
-        when(request.getParameter(RequestParameters.TYPE)).thenReturn(type);
-        when(orderServiceImpl.makeOrder(login, departureStreet, destinationStreet, type))
+        when(request.getParameter(RequestParameters.DEPARTURE_STREET))
+                .thenReturn
+                        (departureStreet);
+        when(request.getParameter(RequestParameters.DESTINATION_STREET))
+                .thenReturn
+                        (destinationStreet);
+        when(request.getParameter(RequestParameters.TYPE)).thenReturn
+                (type);
+        when(orderServiceImpl.makeOrder(login, departureStreet,
+                destinationStreet, type))
                 .thenReturn(order);
         String page = makeOrderCommand.execute(request);
-        verify(orderServiceImpl).makeOrder(login, departureStreet, destinationStreet, type);
+        verify(orderServiceImpl).makeOrder(login, departureStreet,
+                destinationStreet, type);
         verify(session).setAttribute(RequestAttributes.ORDER, order);
         assertEquals(page, JSPPages.USER_FOUNDATION_PAGE);
 
     }
 
     @Test
-    public void executeWithException() throws NoFreeCarWithSuchTypeException {
+    public void executeWithException() throws
+            NoFreeCarWithSuchTypeException {
         when(request.getSession()).thenReturn(session);
-        when(request.getSession().getAttribute(RequestAttributes.USER_LOGIN)).thenReturn
+        when(request.getSession().getAttribute(RequestAttributes
+                .USER_LOGIN)).thenReturn
                 (login);
-        when(request.getParameter(RequestParameters.DEPARTURE_STREET)).thenReturn
-                (departureStreet);
-        when(request.getParameter(RequestParameters.DESTINATION_STREET)).thenReturn
-                (destinationStreet);
-        when(request.getParameter(RequestParameters.TYPE)).thenReturn(type);
-        when(orderServiceImpl.makeOrder(login, departureStreet, destinationStreet, type))
+        when(request.getParameter(RequestParameters.DEPARTURE_STREET))
+                .thenReturn
+                        (departureStreet);
+        when(request.getParameter(RequestParameters.DESTINATION_STREET))
+                .thenReturn
+                        (destinationStreet);
+        when(request.getParameter(RequestParameters.TYPE)).thenReturn
+                (type);
+        when(orderServiceImpl.makeOrder(login, departureStreet,
+                destinationStreet, type))
                 .thenThrow(new NoFreeCarWithSuchTypeException());
         String page = makeOrderCommand.execute(request);
-        verify(orderServiceImpl).makeOrder(login, departureStreet, destinationStreet, type);
+        verify(orderServiceImpl).makeOrder(login, departureStreet,
+                destinationStreet, type);
         assertEquals(page, JSPPages.USER_FOUNDATION_PAGE);
 
     }

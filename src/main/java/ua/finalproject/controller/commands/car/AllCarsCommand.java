@@ -30,12 +30,14 @@ public class AllCarsCommand implements Command {
     public String execute(HttpServletRequest request) {
         List<Car> allCars = carServiceImpl.showAllCars().get();
         if (allCars.isEmpty()) {
-            request.setAttribute(RequestAttributes.MESSAGE, bundleManager.getString(Messages
-                    .THERE_ARE_NO_CARS_IN_DB));
+            request.setAttribute(RequestAttributes.MESSAGE,
+                    bundleManager.getString(Messages
+                            .THERE_ARE_NO_CARS_IN_DB));
             return JSPPages.ALL_CARS_PAGE;
         }
-        request.setAttribute(RequestAttributes.CARS, ControllerUtil.getSubListForPagination
-                (request, allCars));
+        request.setAttribute(RequestAttributes.CARS, ControllerUtil
+                .getSubListForPagination
+                        (request, allCars));
         return JSPPages.ALL_CARS_PAGE;
     }
 }

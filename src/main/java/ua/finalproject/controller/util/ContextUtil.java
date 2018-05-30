@@ -15,7 +15,8 @@ public class ContextUtil {
      * @param userLogin user's login
      * @return <code>true</code> if the user is already logged
      */
-    public static boolean checkUserAlreadyIsLogged(HttpSession session, String userLogin) {
+    public static boolean checkUserAlreadyIsLogged(HttpSession session,
+                                                   String userLogin) {
         HashSet<String> loggedUsers = getLoggedUsersFromContext(session);
         if (loggedUsers.stream().anyMatch(userLogin::equals)) {
             return true;
@@ -30,8 +31,9 @@ public class ContextUtil {
      */
     @SuppressWarnings("unchecked")
     private static HashSet<String> getLoggedUsersFromContext(HttpSession session) {
-        return (HashSet<String>) session.getServletContext().getAttribute(RequestAttributes
-                .LOGGED_USERS);
+        return (HashSet<String>) session.getServletContext()
+                .getAttribute(RequestAttributes
+                        .LOGGED_USERS);
     }
 
     /**
@@ -41,8 +43,10 @@ public class ContextUtil {
      * @param userLogin   user's login
      * @param loggedUsers already logged users
      */
-    private static void addLoggedUserToContext(HttpSession session, String userLogin,
-                                               HashSet<String> loggedUsers) {
+    private static void addLoggedUserToContext(HttpSession session,
+                                               String userLogin,
+                                               HashSet<String>
+                                                       loggedUsers) {
         loggedUsers.add(userLogin);
         updateLoggedUsersInContext(session, loggedUsers);
     }
@@ -53,9 +57,11 @@ public class ContextUtil {
      * @param session     user's session
      * @param loggedUsers already logged users
      */
-    private static void updateLoggedUsersInContext(HttpSession session, HashSet<String>
-            loggedUsers) {
-        session.getServletContext().setAttribute(RequestAttributes.LOGGED_USERS, loggedUsers);
+    private static void updateLoggedUsersInContext(HttpSession session,
+                                                   HashSet<String>
+                                                           loggedUsers) {
+        session.getServletContext().setAttribute(RequestAttributes
+                .LOGGED_USERS, loggedUsers);
     }
 
     /**
@@ -65,7 +71,8 @@ public class ContextUtil {
      */
     public static void deleteLoggedUserFromContext(HttpSession session) {
         HashSet<String> loggedUsers = getLoggedUsersFromContext(session);
-        loggedUsers.remove(session.getAttribute(RequestAttributes.USER_LOGIN).toString());
+        loggedUsers.remove(session.getAttribute(RequestAttributes
+                .USER_LOGIN).toString());
         updateLoggedUsersInContext(session, loggedUsers);
     }
 }

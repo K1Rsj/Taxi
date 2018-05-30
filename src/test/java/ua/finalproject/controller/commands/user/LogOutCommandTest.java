@@ -35,8 +35,9 @@ public class LogOutCommandTest {
     @Test
     public void executeWithoutLogin() {
         when(request.getSession()).thenReturn(session);
-        when(session.getAttribute(RequestAttributes.USER_LOGIN)).thenReturn(GlobalConstants
-                .EMPTY_STRING);
+        when(session.getAttribute(RequestAttributes.USER_LOGIN))
+                .thenReturn(GlobalConstants
+                        .EMPTY_STRING);
         String page = logOutCommand.execute(request);
         assertNotNull(page);
         assertEquals(page, JSPPages.INDEX_PAGE);
@@ -48,17 +49,21 @@ public class LogOutCommandTest {
         HashSet<String> loggedUsers = new HashSet<>();
         loggedUsers.add(login);
         when(request.getSession()).thenReturn(session);
-        when(request.getSession().getAttribute(RequestAttributes.USER_LOGIN)).thenReturn
+        when(request.getSession().getAttribute(RequestAttributes
+                .USER_LOGIN)).thenReturn
                 (login);
-        when(request.getSession().getServletContext()).thenReturn(servletContext);
-        when(servletContext.getAttribute(RequestAttributes.LOGGED_USERS)).thenReturn
+        when(request.getSession().getServletContext()).thenReturn
+                (servletContext);
+        when(servletContext.getAttribute(RequestAttributes.LOGGED_USERS)
+        ).thenReturn
                 (loggedUsers);
         String page = logOutCommand.execute(request);
         verify(session).removeAttribute(RequestAttributes.ORDER);
         verify(session).removeAttribute(RequestAttributes.USER_LOGIN);
         verify(session).removeAttribute(RequestAttributes.ROLE);
         assertNotNull(page);
-        assertEquals(page, GlobalConstants.REDIRECT + GlobalConstants.INDEX);
+        assertEquals(page, GlobalConstants.REDIRECT + GlobalConstants
+                .INDEX);
     }
 
 }

@@ -36,7 +36,8 @@ public class MyDiscountCommandTest {
     @Test
     public void execute() {
         when(request.getSession()).thenReturn(session);
-        when(request.getSession().getAttribute(RequestAttributes.USER_LOGIN)).thenReturn
+        when(request.getSession().getAttribute(RequestAttributes
+                .USER_LOGIN)).thenReturn
                 (login);
         when(userServiceImpl.getUserDiscount(login)).thenReturn(discount);
         String page = myDiscountCommand.execute(request);

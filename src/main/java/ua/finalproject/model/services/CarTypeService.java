@@ -8,5 +8,6 @@ import java.util.Optional;
 public interface CarTypeService extends Service {
 
     void updateDiscount(String type, Integer discount);
+
     Optional<List<CarType>> showAllCarTypes();
 }

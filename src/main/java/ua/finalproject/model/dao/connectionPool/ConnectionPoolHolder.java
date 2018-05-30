@@ -16,7 +16,8 @@ public class ConnectionPoolHolder {
     /**
      * @see LogManager
      */
-    private static final Logger logger = LogManager.getLogger(ConnectionPoolHolder.class);
+    private static final Logger logger = LogManager.getLogger
+            (ConnectionPoolHolder.class);
     /**
      * @see DataSource
      */
@@ -26,21 +27,29 @@ public class ConnectionPoolHolder {
      * @return DataSource
      * @throws ClassNotFoundException if can't load the driver
      */
-    private static DataSource getConnectionPool() throws ClassNotFoundException {
+    private static DataSource getConnectionPool() throws
+            ClassNotFoundException {
         if (jdbcConnectionPool == null) {
             synchronized (ConnectionPoolHolder.class) {
                 if (jdbcConnectionPool == null) {
-                    Class.forName(PropertyManager.CONFIG.getString(DbConfig.DB_DRIVER));
+                    Class.forName(PropertyManager.CONFIG.getString
+                            (DbConfig.DB_DRIVER));
                     BasicDataSource ds = new BasicDataSource();
-                    ds.setUrl(PropertyManager.CONFIG.getString(DbConfig.DB_URL));
-                    ds.setUsername(PropertyManager.CONFIG.getString(DbConfig.DB_USER));
-                    ds.setPassword(PropertyManager.CONFIG.getString(DbConfig.DB_PASSWORD));
-                    ds.setMinIdle(Integer.valueOf(PropertyManager.CONFIG.getString(DbConfig
-                            .DB_MIN_IDLE)));
-                    ds.setMaxIdle(Integer.valueOf(PropertyManager.CONFIG.getString(DbConfig
-                            .DB_MAX_IDLE)));
-                    ds.setMaxOpenPreparedStatements(Integer.valueOf(PropertyManager.CONFIG
-                            .getString(DbConfig.DB_MAX_OPEN_PS)));
+                    ds.setUrl(PropertyManager.CONFIG.getString(DbConfig
+                            .DB_URL));
+                    ds.setUsername(PropertyManager.CONFIG.getString
+                            (DbConfig.DB_USER));
+                    ds.setPassword(PropertyManager.CONFIG.getString
+                            (DbConfig.DB_PASSWORD));
+                    ds.setMinIdle(Integer.valueOf(PropertyManager.CONFIG
+                            .getString(DbConfig
+                                    .DB_MIN_IDLE)));
+                    ds.setMaxIdle(Integer.valueOf(PropertyManager.CONFIG
+                            .getString(DbConfig
+                                    .DB_MAX_IDLE)));
+                    ds.setMaxOpenPreparedStatements(Integer.valueOf
+                            (PropertyManager.CONFIG
+                                    .getString(DbConfig.DB_MAX_OPEN_PS)));
                     jdbcConnectionPool = ds;
                 }
             }
@@ -60,7 +69,8 @@ public class ConnectionPoolHolder {
             throw new RuntimeException(e);
 
         } catch (ClassNotFoundException e) {
-            logger.error(LogMessages.LOAD_DRIVER_CLASS_ERROR, e.getMessage());
+            logger.error(LogMessages.LOAD_DRIVER_CLASS_ERROR, e
+                    .getMessage());
             throw new RuntimeException(e);
 
         }

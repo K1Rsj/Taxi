@@ -30,13 +30,15 @@ public class LogOutCommand implements Command {
      */
     @Override
     public String execute(HttpServletRequest request) {
-        String login = (String) request.getSession().getAttribute(RequestAttributes
-                .USER_LOGIN);
+        String login = (String) request.getSession().getAttribute
+                (RequestAttributes
+                        .USER_LOGIN);
         if (Strings.isNullOrEmpty(login)) {
             return JSPPages.INDEX_PAGE;
         }
         ContextUtil.deleteLoggedUserFromContext(request.getSession());
-        ControllerUtil.ChangeCarStateToFree(request.getSession(), carServiceImpl);
+        ControllerUtil.ChangeCarStateToFree(request.getSession(),
+                carServiceImpl);
         request.getSession().removeAttribute(RequestAttributes.ORDER);
         request.getSession().removeAttribute(RequestAttributes.USER_LOGIN);
         request.getSession().removeAttribute(RequestAttributes.ROLE);

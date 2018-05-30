@@ -33,9 +33,11 @@ public class AllCarTypesCommandTest {
     @Test
     public void execute() {
         List carTypes = mock(List.class);
-        when(carTypeServiceImpl.showAllCarTypes()).thenReturn(Optional.of(carTypes));
+        when(carTypeServiceImpl.showAllCarTypes()).thenReturn(Optional
+                .of(carTypes));
         String page = allCarTypesCommand.execute(request);
-        verify(request).setAttribute(RequestAttributes.CAR_TYPES, carTypes);
+        verify(request).setAttribute(RequestAttributes.CAR_TYPES,
+                carTypes);
         assertNotNull(page);
         assertEquals(page, JSPPages.ALL_CAR_TYPES_PAGE);
     }
@@ -43,10 +45,12 @@ public class AllCarTypesCommandTest {
     @Test
     public void executeWithEmptyList() {
         List<CarType> carTypes = new ArrayList<>();
-        when(carTypeServiceImpl.showAllCarTypes()).thenReturn(Optional.of(carTypes));
+        when(carTypeServiceImpl.showAllCarTypes()).thenReturn(Optional
+                .of(carTypes));
         String page = allCarTypesCommand.execute(request);
-        verify(request).setAttribute(RequestAttributes.MESSAGE, BundleManager.INSTANCE
-                .getString(Messages.THERE_ARE_NO_CAR_TYPES_IN_DB));
+        verify(request).setAttribute(RequestAttributes.MESSAGE,
+                BundleManager.INSTANCE
+                        .getString(Messages.THERE_ARE_NO_CAR_TYPES_IN_DB));
         assertNotNull(page);
         assertEquals(page, JSPPages.ALL_CAR_TYPES_PAGE);
     }

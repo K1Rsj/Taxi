@@ -10,7 +10,9 @@ import java.util.Optional;
 public interface CarService extends Service {
 
     Optional<List<Car>> showAllCars();
+
     void changeCarStateFromBusyToFree(Order order);
+
     void addCar(Car carFromRequest, String type) throws
             SQLIntegrityConstraintViolationException;
 }

@@ -27,8 +27,10 @@ public class EncodingFilter implements Filter {
      * @throws ServletException servlet exception
      */
     @Override
-    public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse,
-                         FilterChain filterChain) throws IOException, ServletException {
+    public void doFilter(ServletRequest servletRequest, ServletResponse
+            servletResponse,
+                         FilterChain filterChain) throws IOException,
+            ServletException {
         servletResponse.setContentType(GlobalConstants.TEXT_HTML);
         servletResponse.setCharacterEncoding(GlobalConstants.UTF_8);
         servletRequest.setCharacterEncoding(GlobalConstants.UTF_8);

@@ -15,6 +15,7 @@ public interface JSPPages {
     String USER_FOUNDATION_PAGE = "/WEB-INF/user/user_foundation.jsp";
     String MY_ORDERS_PAGE = "/WEB-INF/user/my_orders.jsp";
     String INDEX_PAGE = "/WEB-INF/index.jsp";
-    String USER_REGISTRATION_PAGE = "/WEB-INF/user/user_registration_page.jsp";
+    String USER_REGISTRATION_PAGE =
+            "/WEB-INF/user/user_registration_page.jsp";
     String ALL_USERS_PAGE = "/WEB-INF/admin/all_users.jsp";
 }

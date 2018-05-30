@@ -24,7 +24,8 @@ public class DeleteUserCommand implements Command {
      */
     @Override
     public String execute(HttpServletRequest request) {
-        Integer userId = Integer.parseInt(request.getParameter(RequestParameters.ID));
+        Integer userId = Integer.parseInt(request.getParameter
+                (RequestParameters.ID));
         userServiceImpl.deleteUserById(userId);
         return GlobalConstants.ALL_USERS;
     }

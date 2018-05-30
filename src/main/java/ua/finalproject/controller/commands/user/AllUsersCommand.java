@@ -30,12 +30,14 @@ public class AllUsersCommand implements Command {
     public String execute(HttpServletRequest request) {
         List<User> allUsers = userServiceImpl.showAllUsers().get();
         if (allUsers.isEmpty()) {
-            request.setAttribute(RequestAttributes.MESSAGE, bundleManager.getString(Messages
-                    .THERE_ARE_NO_USERS_IN_DB));
+            request.setAttribute(RequestAttributes.MESSAGE,
+                    bundleManager.getString(Messages
+                            .THERE_ARE_NO_USERS_IN_DB));
             return JSPPages.ALL_USERS_PAGE;
         }
-        request.setAttribute(RequestAttributes.USERS, ControllerUtil.getSubListForPagination
-                (request, allUsers));
+        request.setAttribute(RequestAttributes.USERS, ControllerUtil
+                .getSubListForPagination
+                        (request, allUsers));
         return JSPPages.ALL_USERS_PAGE;
     }
 }

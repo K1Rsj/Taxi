@@ -20,7 +20,9 @@ public interface Dao<T, ID> extends AutoCloseable {
      * Adds entity to DB
      *
      * @param entity entity that will be added to DB
-     * @throws SQLIntegrityConstraintViolationException if entity value already exists in DB
+     * @throws SQLIntegrityConstraintViolationException if entity value
+     *                                                  already exists
+     *                                                  in DB
      */
     void create(T entity) throws SQLIntegrityConstraintViolationException;
 
@@ -62,6 +64,7 @@ public interface Dao<T, ID> extends AutoCloseable {
      * @param idName    id name
      * @return foreign key
      */
-    Integer findForeignKeyInTable(String tableName, String entityId, String idName);
+    Integer findForeignKeyInTable(String tableName, String entityId,
+                                  String idName);
 
 }

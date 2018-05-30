@@ -14,7 +14,8 @@ import java.sql.*;
 /**
  * Implementation for car type dao
  */
-public class CarTypeDaoImpl extends AbstractDao<CarType> implements CarTypeDao {
+public class CarTypeDaoImpl extends AbstractDao<CarType> implements
+        CarTypeDao {
 
     public CarTypeDaoImpl(String tableName, Connection connection) {
         super(tableName, connection);
@@ -28,11 +29,14 @@ public class CarTypeDaoImpl extends AbstractDao<CarType> implements CarTypeDao {
      * @throws SQLException if something went wrong in DB
      */
     @Override
-    public CarType extractFromResultSet(ResultSet resultSet) throws SQLException {
+    public CarType extractFromResultSet(ResultSet resultSet) throws
+            SQLException {
         Integer id = resultSet.getInt(TableColumnNames.ID_CAR_TYPE);
         String type = resultSet.getString(TableColumnNames.TYPE);
-        Integer startingPrice = resultSet.getInt(TableColumnNames.STARTING_PRICE);
-        Integer pricePerKilometer = resultSet.getInt(TableColumnNames.PRICE_PER_KM);
+        Integer startingPrice = resultSet.getInt(TableColumnNames
+                .STARTING_PRICE);
+        Integer pricePerKilometer = resultSet.getInt(TableColumnNames
+                .PRICE_PER_KM);
         Integer discount = resultSet.getInt(TableColumnNames.DISCOUNT);
 
         return new CarType.CarTypeBuilder()
@@ -59,7 +63,8 @@ public class CarTypeDaoImpl extends AbstractDao<CarType> implements CarTypeDao {
             preparedStatement.setInt(4, carType.getDiscount());
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
-            logger.error(LogMessageBuilder.INSTANCE.createEntryError(TableNames.CAR_TYPE), e
+            logger.error(LogMessageBuilder.INSTANCE.createEntryError
+                    (TableNames.CAR_TYPE), e
                     .getMessage());
             throw new RuntimeException(e);
         }
@@ -73,13 +78,15 @@ public class CarTypeDaoImpl extends AbstractDao<CarType> implements CarTypeDao {
      */
     @Override
     public void updateDiscount(Integer id, Integer discount) {
-        try (PreparedStatement preparedStatement = connection.prepareStatement(DbQueries
-                .UPDATE_CAR_TYPE_SET_DISCOUNT)) {
+        try (PreparedStatement preparedStatement = connection
+                .prepareStatement(DbQueries
+                        .UPDATE_CAR_TYPE_SET_DISCOUNT)) {
             preparedStatement.setInt(1, discount);
             preparedStatement.setInt(2, id);
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
-            logger.error(LogMessages.UPDATE_DISCOUNT_ERROR, e.getMessage());
+            logger.error(LogMessages.UPDATE_DISCOUNT_ERROR, e.getMessage
+                    ());
             throw new RuntimeException(e);
         }
     }

@@ -29,7 +29,8 @@ public class UserRegistrationCommandTest {
     @Before
     public void setUp() {
         UserServiceImpl userServiceImpl = mock(UserServiceImpl.class);
-        userRegistrationCommand = new UserRegistrationCommand(userServiceImpl);
+        userRegistrationCommand = new UserRegistrationCommand
+                (userServiceImpl);
         request = mock(HttpServletRequest.class);
         login = "zeus";
         email = "zeus@gmail.com";
@@ -42,16 +43,24 @@ public class UserRegistrationCommandTest {
 
     @Test
     public void execute() {
-        when(request.getParameter(RequestParameters.LOGIN)).thenReturn(login);
-        when(request.getParameter(RequestParameters.EMAIL)).thenReturn(email);
-        when(request.getParameter(RequestParameters.FIRST_NAME)).thenReturn(firstName);
-        when(request.getParameter(RequestParameters.SECOND_NAME)).thenReturn(secondName);
-        when(request.getParameter(RequestParameters.PHONE_NUMBER)).thenReturn(phoneNumber);
-        when(request.getParameter(RequestParameters.PASSWORD)).thenReturn(password);
-        when(request.getParameter(RequestParameters.SECOND_PASSWORD)).thenReturn(password2);
+        when(request.getParameter(RequestParameters.LOGIN)).thenReturn
+                (login);
+        when(request.getParameter(RequestParameters.EMAIL)).thenReturn
+                (email);
+        when(request.getParameter(RequestParameters.FIRST_NAME))
+                .thenReturn(firstName);
+        when(request.getParameter(RequestParameters.SECOND_NAME))
+                .thenReturn(secondName);
+        when(request.getParameter(RequestParameters.PHONE_NUMBER))
+                .thenReturn(phoneNumber);
+        when(request.getParameter(RequestParameters.PASSWORD))
+                .thenReturn(password);
+        when(request.getParameter(RequestParameters.SECOND_PASSWORD))
+                .thenReturn(password2);
 
         String page = userRegistrationCommand.execute(request);
-        verify(request).setAttribute(RequestAttributes.INFORMATION_MESSAGE, BundleManager
+        verify(request).setAttribute(RequestAttributes
+                .INFORMATION_MESSAGE, BundleManager
                 .INSTANCE.getString(Messages.SUCCESSFUL_REGISTRATION));
         assertEquals(page, JSPPages.INDEX_PAGE);
     }

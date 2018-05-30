@@ -41,11 +41,13 @@ public class CarServiceImplTest {
 
     @Test
     public void showAllCars() {
-//        when(connection.prepareStatement(DbQueries.SELECT_FROM_CARS_LEFT_JOIN_CAR_TYPE))
+//        when(connection.prepareStatement(DbQueries
+// .SELECT_FROM_CARS_LEFT_JOIN_CAR_TYPE))
 // .thenReturn(preparedStatement);
 //        when(preparedStatement.executeQuery()).thenReturn(resultSet);
 //        when(resultSet.next()).thenReturn(false);
-        //when(DaoFactory.getInstance().createCarDao(connection)).thenReturn(carDao);
+        //when(DaoFactory.getInstance().createCarDao(connection))
+        // .thenReturn(carDao);
         //when(carDao.findAll()).thenReturn(Optional.of(cars));
         when(carServiceImpl.showAllCars()).thenReturn(Optional.of(cars));
         List<Car> carsTest = carServiceImpl.showAllCars().get();

@@ -10,8 +10,8 @@ public interface OrderDao extends Dao<Order, Integer> {
     /**
      * Finds all user's orders
      *
-     * @param login user's login
+     * @param id user's id
      * @return list of all user's orders
      */
-    Optional<List<Order>> findOrdersByUserLogin(String login);
+    Optional<List<Order>> findOrdersByUserId(Integer id);
 }

@@ -22,12 +22,14 @@ public class OrderLazy extends Order implements Lazy {
         if (super.getUser() == null) {
             Connection connection = ConnectionPoolHolder.getConnection();
             try (UserDao userDao = daoFactory.createUserDao(connection)) {
-                Integer userId = userDao.findForeignKeyInTable(TableNames.ORDERS, super
-                                .getId().toString(),
-                        TableColumnNames.USERS_ID);
+                Integer userId = userDao.findForeignKeyInTable
+                        (TableNames.ORDERS, super
+                                        .getId().toString(),
+                                TableColumnNames.USERS_ID);
                 return userDao.findById(userId).get();
             } catch (Exception e) {
-                logger.error(LogMessages.AUTO_CLOSABLE_RESOURCE_ERROR_IN_GET_USER, e
+                logger.error(LogMessages
+                        .AUTO_CLOSABLE_RESOURCE_ERROR_IN_GET_USER, e
                         .getMessage());
             }
         }
@@ -39,12 +41,14 @@ public class OrderLazy extends Order implements Lazy {
         if (super.getCar() == null) {
             Connection connection = ConnectionPoolHolder.getConnection();
             try (CarDao carDao = daoFactory.createCarDao(connection)) {
-                Integer carId = carDao.findForeignKeyInTable(TableNames.ORDERS, super.getId
+                Integer carId = carDao.findForeignKeyInTable(TableNames
+                                .ORDERS, super.getId
                                 ().toString(),
                         TableColumnNames.CARS_ID);
                 return carDao.findById(carId).get();
             } catch (Exception e) {
-                logger.error(LogMessages.AUTO_CLOSABLE_RESOURCE_ERROR_IN_GET_CAR, e
+                logger.error(LogMessages
+                        .AUTO_CLOSABLE_RESOURCE_ERROR_IN_GET_CAR, e
                         .getMessage());
             }
         }
@@ -55,13 +59,16 @@ public class OrderLazy extends Order implements Lazy {
     public CarType getCarType() {
         if (super.getCarType() == null) {
             Connection connection = ConnectionPoolHolder.getConnection();
-            try (CarTypeDao carTypeDao = daoFactory.createCarTypeDao(connection)) {
-                Integer carTypeId = carTypeDao.findForeignKeyInTable(TableNames.ORDERS,
-                        super.getId().toString(),
-                        TableColumnNames.CAR_TYPE_ID);
+            try (CarTypeDao carTypeDao = daoFactory.createCarTypeDao
+                    (connection)) {
+                Integer carTypeId = carTypeDao.findForeignKeyInTable
+                        (TableNames.ORDERS,
+                                super.getId().toString(),
+                                TableColumnNames.CAR_TYPE_ID);
                 return carTypeDao.findById(carTypeId).get();
             } catch (Exception e) {
-                logger.error(LogMessages.AUTO_CLOSABLE_RESOURCE_ERROR_IN_GET_CAR_TYPE, e
+                logger.error(LogMessages
+                        .AUTO_CLOSABLE_RESOURCE_ERROR_IN_GET_CAR_TYPE, e
                         .getMessage());
             }
         }

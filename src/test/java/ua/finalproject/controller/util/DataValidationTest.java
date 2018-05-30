@@ -23,13 +23,20 @@ public class DataValidationTest {
         String password = "123456";
         String password2 = "123456";
 
-        when(request.getParameter(RequestParameters.LOGIN)).thenReturn(login);
-        when(request.getParameter(RequestParameters.EMAIL)).thenReturn(email);
-        when(request.getParameter(RequestParameters.FIRST_NAME)).thenReturn(firstName);
-        when(request.getParameter(RequestParameters.SECOND_NAME)).thenReturn(secondName);
-        when(request.getParameter(RequestParameters.PHONE_NUMBER)).thenReturn(phoneNumber);
-        when(request.getParameter(RequestParameters.PASSWORD)).thenReturn(password);
-        when(request.getParameter(RequestParameters.SECOND_PASSWORD)).thenReturn(password2);
+        when(request.getParameter(RequestParameters.LOGIN)).thenReturn
+                (login);
+        when(request.getParameter(RequestParameters.EMAIL)).thenReturn
+                (email);
+        when(request.getParameter(RequestParameters.FIRST_NAME))
+                .thenReturn(firstName);
+        when(request.getParameter(RequestParameters.SECOND_NAME))
+                .thenReturn(secondName);
+        when(request.getParameter(RequestParameters.PHONE_NUMBER))
+                .thenReturn(phoneNumber);
+        when(request.getParameter(RequestParameters.PASSWORD))
+                .thenReturn(password);
+        when(request.getParameter(RequestParameters.SECOND_PASSWORD))
+                .thenReturn(password2);
 
         boolean result = DataValidation.userDataValidation(request);
         assertTrue(result);
@@ -39,7 +46,8 @@ public class DataValidationTest {
     public void validationOfLoginAndPassword() {
         String login = "micro";
         String password = "qwerty";
-        boolean result = DataValidation.validationOfLoginAndPassword(login, password);
+        boolean result = DataValidation.validationOfLoginAndPassword
+                (login, password);
         assertFalse(result);
     }
 
@@ -47,8 +55,9 @@ public class DataValidationTest {
     public void orderDataValidation() {
         String destinationStreet = "Sherbakova 5";
         String departureStreet = "Avtozavodskaya 10";
-        boolean result = DataValidation.orderDataValidation(departureStreet,
-                destinationStreet);
+        boolean result = DataValidation.orderDataValidation
+                (departureStreet,
+                        destinationStreet);
         assertTrue(result);
 
     }

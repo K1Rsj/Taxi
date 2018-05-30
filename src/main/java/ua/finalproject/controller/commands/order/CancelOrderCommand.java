@@ -28,15 +28,19 @@ public class CancelOrderCommand implements Command {
      */
     @Override
     public String execute(HttpServletRequest request) {
-        Optional<Order> order = Optional.ofNullable((Order) request.getSession()
+        Optional<Order> order = Optional.ofNullable((Order) request
+                .getSession()
                 .getAttribute(RequestAttributes.ORDER));
         if (order.isPresent()) {
             orderServiceImpl.cancelOrder(order.get());
-            request.setAttribute(RequestAttributes.ORDER_INFORMATION_MESSAGE, bundleManager
+            request.setAttribute(RequestAttributes
+                    .ORDER_INFORMATION_MESSAGE, bundleManager
                     .getString(Messages.WE_ARE_DISAPPOINTED));
             request.getSession().removeAttribute(RequestAttributes.ORDER);
-            logger.info(LogMessageBuilder.INSTANCE.cancelOrderInfo((String) request
-                    .getSession().getAttribute(RequestAttributes.USER_LOGIN)));
+            logger.info(LogMessageBuilder.INSTANCE.cancelOrderInfo(
+                    (String) request
+                            .getSession().getAttribute(RequestAttributes
+                                    .USER_LOGIN)));
         }
         return JSPPages.USER_FOUNDATION_PAGE;
     }

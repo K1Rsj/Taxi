@@ -26,7 +26,8 @@ public class DeleteUserCommandTest {
     @Test
     public void execute() {
         String userID = "11";
-        when(request.getParameter(RequestParameters.ID)).thenReturn(userID);
+        when(request.getParameter(RequestParameters.ID)).thenReturn
+                (userID);
         String page = deleteUserCommand.execute(request);
         assertEquals(page, GlobalConstants.ALL_USERS);
     }

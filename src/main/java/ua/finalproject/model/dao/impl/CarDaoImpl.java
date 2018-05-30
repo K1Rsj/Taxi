@@ -32,11 +32,13 @@ public class CarDaoImpl extends AbstractDao<Car> implements CarDao {
      * @throws SQLException if something went wrong in DB
      */
     @Override
-    public Car extractFromResultSet(ResultSet resultSet) throws SQLException {
+    public Car extractFromResultSet(ResultSet resultSet) throws
+            SQLException {
         Integer id = resultSet.getInt(TableColumnNames.ID_CAR);
         String model = resultSet.getString(TableColumnNames.MODEL);
         String number = resultSet.getString(TableColumnNames.NUMBER);
-        Car.State state = UtilDao.parseCarState(resultSet.getString(TableColumnNames.STATE));
+        Car.State state = UtilDao.parseCarState(resultSet.getString
+                (TableColumnNames.STATE));
         String driver = resultSet.getString(TableColumnNames.DRIVER);
 
         return new CarLazy.CarBuilder()
@@ -52,10 +54,13 @@ public class CarDaoImpl extends AbstractDao<Car> implements CarDao {
      * Adds car to DB
      *
      * @param car car that will be added to DB
-     * @throws SQLIntegrityConstraintViolationException if car number already exists in DB
+     * @throws SQLIntegrityConstraintViolationException if car number
+     *                                                  already exists
+     *                                                  in DB
      */
     @Override
-    public void create(Car car) throws SQLIntegrityConstraintViolationException {
+    public void create(Car car) throws
+            SQLIntegrityConstraintViolationException {
         try (PreparedStatement preparedStatement = connection
                 .prepareStatement(DbQueries.INSERT_INTO_CARS)) {
             preparedStatement.setString(1, car.getModel());
@@ -66,7 +71,8 @@ public class CarDaoImpl extends AbstractDao<Car> implements CarDao {
         } catch (SQLIntegrityConstraintViolationException e) {
             throw new SQLIntegrityConstraintViolationException(e);
         } catch (SQLException e) {
-            logger.error(LogMessageBuilder.INSTANCE.createEntryError(TableNames.CARS), e
+            logger.error(LogMessageBuilder.INSTANCE.createEntryError
+                    (TableNames.CARS), e
                     .getMessage());
             throw new RuntimeException(e);
         }
@@ -80,7 +86,8 @@ public class CarDaoImpl extends AbstractDao<Car> implements CarDao {
      */
     @Override
     public Optional<Car> getFreeCarByTypeId(Integer typeId) {
-        return findOneByQuery(QueryContainer.INSTANCE.findFreeCarByType(typeId));
+        return findOneByQuery(QueryContainer.INSTANCE.findFreeCarByType
+                (typeId));
     }
 
     /**
@@ -91,13 +98,15 @@ public class CarDaoImpl extends AbstractDao<Car> implements CarDao {
      */
     @Override
     public void updateCarState(Integer carId, String carState) {
-        try (PreparedStatement preparedStatement = connection.prepareStatement(DbQueries
-                .UPDATE_CAR_STATE_BY_ID)) {
+        try (PreparedStatement preparedStatement = connection
+                .prepareStatement(DbQueries
+                        .UPDATE_CAR_STATE_BY_ID)) {
             preparedStatement.setString(1, carState);
             preparedStatement.setInt(2, carId);
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
-            logger.error(LogMessages.UPDATE_CAR_STATE_ERROR, e.getMessage());
+            logger.error(LogMessages.UPDATE_CAR_STATE_ERROR, e
+                    .getMessage());
             throw new RuntimeException(e);
         }
     }

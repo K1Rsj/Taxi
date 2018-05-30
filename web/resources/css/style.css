@@ -28,10 +28,10 @@ form {
 }
 
 .header li {
-    margin: 0 20px;
+    margin: 0 14px;
     padding-top: 20px;
     padding-bottom: 20px;
-    font-size: 22px;
+    font-size: 18px;
 }
 
 .content {
@@ -59,8 +59,8 @@ caption {
 }
 
 img {
-    padding-top: 0;
-    padding-bottom: 0;
+    padding-top: 10px;
+    padding-bottom: 10px;
     width: 150px;
     height: 120px;
 }

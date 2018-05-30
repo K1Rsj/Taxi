@@ -41,11 +41,15 @@ public class CancelOrderCommandTest {
     @Test
     public void execute() {
         when(request.getSession()).thenReturn(session);
-        when(request.getSession().getAttribute(RequestAttributes.ORDER)).thenReturn(order);
-        when(request.getSession().getAttribute(RequestAttributes.ROLE)).thenReturn(role);
+        when(request.getSession().getAttribute(RequestAttributes.ORDER))
+                .thenReturn(order);
+        when(request.getSession().getAttribute(RequestAttributes.ROLE))
+                .thenReturn(role);
         String page = cancelOrderCommand.execute(request);
-        verify(request).setAttribute(RequestAttributes.ORDER_INFORMATION_MESSAGE,
-                BundleManager.INSTANCE.getString(Messages.WE_ARE_DISAPPOINTED));
+        verify(request).setAttribute(RequestAttributes
+                        .ORDER_INFORMATION_MESSAGE,
+                BundleManager.INSTANCE.getString(Messages
+                        .WE_ARE_DISAPPOINTED));
         verify(orderServiceImpl).cancelOrder(order);
         verify(session).removeAttribute(RequestAttributes.ORDER);
         assertNotNull(page);

@@ -19,19 +19,19 @@ public class ServiceFactory {
     }
 
 
-    public UserServiceImpl createUserService(){
+    public UserServiceImpl createUserService() {
         return UserServiceImpl.getInstance();
     }
 
-    public OrderServiceImpl createOrderService(){
+    public OrderServiceImpl createOrderService() {
         return OrderServiceImpl.getInstance();
     }
 
-    public CarServiceImpl createCarService(){
+    public CarServiceImpl createCarService() {
         return CarServiceImpl.getInstance();
     }
 
-    public CarTypeServiceImpl createCarTypeService(){
+    public CarTypeServiceImpl createCarTypeService() {
         return CarTypeServiceImpl.getInstance();
     }
 }
