@@ -1,11 +1,11 @@
 package ua.finalproject.model.dao.impl;
 
-import ua.finalproject.constants.db.DbQueries;
+import ua.finalproject.constants.db.DbSQLQueries;
 import ua.finalproject.constants.db.TableColumnNames;
 import ua.finalproject.constants.db.TableNames;
 import ua.finalproject.model.dao.AbstractDao;
 import ua.finalproject.model.dao.OrderDao;
-import ua.finalproject.model.dao.util.QueryContainer;
+import ua.finalproject.model.dao.util.SQLQueryContainer;
 import ua.finalproject.model.entities.full.Order;
 import ua.finalproject.model.entities.lazy.OrderLazy;
 import ua.finalproject.util.LogMessageBuilder;
@@ -60,7 +60,7 @@ public class OrderDaoImpl extends AbstractDao<Order> implements OrderDao {
     @Override
     public void create(Order order) {
         try (PreparedStatement preparedStatement = connection
-                .prepareStatement(DbQueries.INSERT_INTO_ORDERS)) {
+                .prepareStatement(DbSQLQueries.INSERT_INTO_ORDERS)) {
             preparedStatement.setString(1, order.getDepartureStreet());
             preparedStatement.setString(2, order.getDestinationStreet());
             preparedStatement.setInt(3, order.getCar().getId());
@@ -84,7 +84,7 @@ public class OrderDaoImpl extends AbstractDao<Order> implements OrderDao {
      */
     @Override
     public Optional<List<Order>> findOrdersByUserId(Integer id) {
-        return findAllByQuery(QueryContainer.INSTANCE.
+        return findAllByQuery(SQLQueryContainer.INSTANCE.
                 findOrdersByUserId(id));
     }
 }

@@ -12,4 +12,5 @@ public interface DbConfig {
     String DB_MIN_IDLE = "db.min.idle";
     String DB_MAX_IDLE = "db.max.idle";
     String DB_MAX_OPEN_PS = "db.max.open.prepare.statements";
+    String DB_DLL_VALIDATE = "db.dll.validate";
 }

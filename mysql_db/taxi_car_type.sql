@@ -1,8 +1,8 @@
--- MySQL dump 10.13  Distrib 5.7.21, for Win32 (AMD64)
+-- MySQL dump 10.13  Distrib 5.7.16, for Win64 (x86_64)
 --
 -- Host: localhost    Database: taxi
 -- ------------------------------------------------------
--- Server version	5.7.21-log
+-- Server version	5.7.16-log
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -38,7 +38,7 @@ CREATE TABLE `car_type` (
 
 LOCK TABLES `car_type` WRITE;
 /*!40000 ALTER TABLE `car_type` DISABLE KEYS */;
-INSERT INTO `car_type` VALUES (1,'Standard',3000,500,5),(2,'Comfort',4500,600,10),(3,'Minibus',5500,700,5),(4,'Premium',6000,800,0);
+INSERT INTO `car_type` VALUES (1,'Standard',3000,500,5),(2,'Comfort',4500,600,10),(3,'Minibus',5500,700,0),(4,'Premium',6000,800,5);
 /*!40000 ALTER TABLE `car_type` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -51,4 +51,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-05-30 18:04:10
+-- Dump completed on 2018-07-20 17:16:56

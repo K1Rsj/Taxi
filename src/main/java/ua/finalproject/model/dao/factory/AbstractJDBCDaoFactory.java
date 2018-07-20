@@ -10,21 +10,21 @@ import java.sql.Connection;
 /**
  * Abstract factory for dao
  */
-public abstract class DaoFactory {
-    private static volatile DaoFactory daoFactory;
+public abstract class AbstractJDBCDaoFactory {
+    private static volatile AbstractJDBCDaoFactory abstractJDBCDaoFactory;
 
     /**
      * @return Dao factory
      */
-    public static DaoFactory getInstance() {
-        if (daoFactory == null) {
-            synchronized (DaoFactory.class) {
-                if (daoFactory == null) {
-                    daoFactory = new JDBCDaoFactory();
+    public static AbstractJDBCDaoFactory getInstance() {
+        if (abstractJDBCDaoFactory == null) {
+            synchronized (AbstractJDBCDaoFactory.class) {
+                if (abstractJDBCDaoFactory == null) {
+                    abstractJDBCDaoFactory = new JDBCDaoFactory();
                 }
             }
         }
-        return daoFactory;
+        return abstractJDBCDaoFactory;
     }
 
     public abstract UserDao createUserDao(Connection connection);

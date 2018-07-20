@@ -4,7 +4,7 @@ import ua.finalproject.constants.db.TableColumnNames;
 import ua.finalproject.constants.db.TableNames;
 import ua.finalproject.constants.messages.LogMessages;
 import ua.finalproject.model.dao.CarTypeDao;
-import ua.finalproject.model.dao.connectionPool.ConnectionPoolHolder;
+import ua.finalproject.model.dao.connection.pool.ConnectionPoolHolder;
 import ua.finalproject.model.entities.Lazy;
 import ua.finalproject.model.entities.full.Car;
 import ua.finalproject.model.entities.full.CarType;
@@ -17,7 +17,7 @@ public class CarLazy extends Car implements Lazy {
     public CarType getCarType() {
         if (super.getCarType() == null) {
             Connection connection = ConnectionPoolHolder.getConnection();
-            try (CarTypeDao carTypeDao = daoFactory.createCarTypeDao
+            try (CarTypeDao carTypeDao = ABSTRACT_JDBC_DAO_FACTORY.createCarTypeDao
                     (connection)) {
                 Integer carTypeId = carTypeDao.findForeignKeyInTable
                         (TableNames.CARS, super

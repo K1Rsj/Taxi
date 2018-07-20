@@ -1,8 +1,8 @@
--- MySQL dump 10.13  Distrib 5.7.21, for Win32 (AMD64)
+-- MySQL dump 10.13  Distrib 5.7.16, for Win64 (x86_64)
 --
 -- Host: localhost    Database: taxi
 -- ------------------------------------------------------
--- Server version	5.7.21-log
+-- Server version	5.7.16-log
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -27,7 +27,7 @@ CREATE TABLE `users` (
   `login` varchar(45) NOT NULL,
   `password` varchar(45) NOT NULL,
   `email` varchar(45) NOT NULL,
-  `role` varchar(45) NOT NULL DEFAULT 'user',
+  `role` varchar(45) NOT NULL DEFAULT 'USER',
   `money_spent` bigint(20) NOT NULL DEFAULT '0',
   `first_name` varchar(45) NOT NULL,
   `second_name` varchar(45) NOT NULL,
@@ -35,7 +35,7 @@ CREATE TABLE `users` (
   PRIMARY KEY (`id_users`),
   UNIQUE KEY `login_UNIQUE` (`login`),
   UNIQUE KEY `email_UNIQUE` (`email`)
-) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=27 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -44,7 +44,7 @@ CREATE TABLE `users` (
 
 LOCK TABLES `users` WRITE;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
-INSERT INTO `users` VALUES (1,'k1rs','agruurlowrjm','admin@gmail.com','admin',0,'Денис','Сулима','0956145424'),(2,'misha','qwerty','mihail@gmail.com','user',165050,'Михаил','Чумак','0951234567'),(3,'petya','qwerty','petya@gmail.com','user',0,'Петя','Сердюк','0666781232'),(11,'mega','qwerty','mega@gmail.com','user',0,'Василий','Римар','0957625125'),(13,'joint','123456','joint@gmail.com','user',0,'Богдан','Мустафаев','0671241251'),(14,'nas','qwerty','nas@gmail.com','user',0,'Елена','Слюсаренко','0662154125'),(15,'kubo','123456','kubo@gmail.com','user',0,'Игорь','Швець','0951251215'),(16,'heaven','qwerty','heaven@gmail.com','user',0,'Ирина','Герасименко','0661241252');
+INSERT INTO `users` VALUES (1,'k1rs','agruurlowrjm','admin@gmail.com','ADMIN',0,'Денис','Сулима','0956145424'),(2,'misha','qwerty','mihail@gmail.com','USER',179090,'Михаил','Чумак','0951234567'),(3,'petya','qwerty','petya@gmail.com','USER',12350,'Петя','Сердюк','0666781232'),(11,'mega','qwerty','mega@gmail.com','USER',0,'Василий','Римар','0957625125'),(13,'joint','123456','joint@gmail.com','USER',0,'Богдан','Мустафаев','0671241251'),(14,'nas','qwerty','nas@gmail.com','USER',0,'Елена','Слюсаренко','0662154125'),(15,'kubo','123456','kubo@gmail.com','USER',0,'Игорь','Швець','0951251215');
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -57,4 +57,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-05-30 18:04:10
+-- Dump completed on 2018-07-20 17:16:56

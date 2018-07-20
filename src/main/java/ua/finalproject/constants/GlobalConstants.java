@@ -20,4 +20,5 @@ public interface GlobalConstants {
     String TEXT_HTML = "text/html";
     String UTF_8 = "UTF-8";
     String LOGIN = "login";
+    String ID = "id";
 }

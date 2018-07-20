@@ -3,7 +3,7 @@ package ua.finalproject.model.services;
 import org.junit.Before;
 import org.junit.Test;
 import ua.finalproject.model.dao.CarDao;
-import ua.finalproject.model.dao.connectionPool.ConnectionPoolHolder;
+import ua.finalproject.model.dao.connection.pool.ConnectionPoolHolder;
 import ua.finalproject.model.dao.impl.CarDaoImpl;
 import ua.finalproject.model.entities.full.Car;
 import ua.finalproject.model.services.impl.CarServiceImpl;
@@ -41,12 +41,12 @@ public class CarServiceImplTest {
 
     @Test
     public void showAllCars() {
-//        when(connection.prepareStatement(DbQueries
+//        when(connection.prepareStatement(DbSQLQueries
 // .SELECT_FROM_CARS_LEFT_JOIN_CAR_TYPE))
 // .thenReturn(preparedStatement);
 //        when(preparedStatement.executeQuery()).thenReturn(resultSet);
 //        when(resultSet.next()).thenReturn(false);
-        //when(DaoFactory.getInstance().createCarDao(connection))
+        //when(AbstractJDBCDaoFactory.getInstance().createCarDao(connection))
         // .thenReturn(carDao);
         //when(carDao.findAll()).thenReturn(Optional.of(cars));
         when(carServiceImpl.showAllCars()).thenReturn(Optional.of(cars));

@@ -4,58 +4,87 @@ import ua.finalproject.model.entities.Entity;
 import ua.finalproject.model.entities.EntityBuilder;
 import ua.finalproject.model.entities.lazy.CarLazy;
 
+import javax.persistence.Column;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+
+@javax.persistence.Entity
+@Table(name = "cars")
 public class Car implements Entity<Integer> {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id_cars", nullable = false)
     private Integer id;
+
+    @Column(name = "model", nullable = false, length = 45)
     private String model;
+
+    @Column(name = "number", nullable = false, length = 45, unique = true)
     private String number;
+
+    @Column(name = "state", nullable = false, insertable = false, length = 45)
     private State state;
+
+    @Column(name = "driver", nullable = false, length = 45)
     private String driver;
+
+    @ManyToOne
+    @JoinColumn(name = "car_type_id", referencedColumnName = "id_car_type", nullable = false)
     private CarType carType;
 
-    @Override
+
     public Integer getId() {
         return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
     }
 
     public String getModel() {
         return model;
     }
 
-    public void setModel(String model) {
-        this.model = model;
-    }
-
     public String getNumber() {
         return number;
     }
 
-    public void setNumber(String number) {
-        this.number = number;
-    }
-
-    public State getState() {
+    public Car.State getState() {
+//        if (state != null) {
+//            return state;
+//        } else {
+//            return State.FREE;
+//        }
         return state;
-    }
-
-    public void setState(State state) {
-        this.state = state;
     }
 
     public String getDriver() {
         return driver;
     }
 
-    public void setDriver(String driver) {
-        this.driver = driver;
-    }
-
     public CarType getCarType() {
         return carType;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public void setModel(String model) {
+        this.model = model;
+    }
+
+    public void setNumber(String number) {
+        this.number = number;
+    }
+
+    public void setState(State state) {
+        this.state = state;
+    }
+
+    public void setDriver(String driver) {
+        this.driver = driver;
     }
 
     public void setCarType(CarType carType) {

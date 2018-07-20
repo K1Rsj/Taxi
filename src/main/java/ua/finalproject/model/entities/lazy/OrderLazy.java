@@ -6,7 +6,7 @@ import ua.finalproject.constants.messages.LogMessages;
 import ua.finalproject.model.dao.CarDao;
 import ua.finalproject.model.dao.CarTypeDao;
 import ua.finalproject.model.dao.UserDao;
-import ua.finalproject.model.dao.connectionPool.ConnectionPoolHolder;
+import ua.finalproject.model.dao.connection.pool.ConnectionPoolHolder;
 import ua.finalproject.model.entities.Lazy;
 import ua.finalproject.model.entities.full.Car;
 import ua.finalproject.model.entities.full.CarType;
@@ -21,7 +21,7 @@ public class OrderLazy extends Order implements Lazy {
     public User getUser() {
         if (super.getUser() == null) {
             Connection connection = ConnectionPoolHolder.getConnection();
-            try (UserDao userDao = daoFactory.createUserDao(connection)) {
+            try (UserDao userDao = ABSTRACT_JDBC_DAO_FACTORY.createUserDao(connection)) {
                 Integer userId = userDao.findForeignKeyInTable
                         (TableNames.ORDERS, super
                                         .getId().toString(),
@@ -40,7 +40,7 @@ public class OrderLazy extends Order implements Lazy {
     public Car getCar() {
         if (super.getCar() == null) {
             Connection connection = ConnectionPoolHolder.getConnection();
-            try (CarDao carDao = daoFactory.createCarDao(connection)) {
+            try (CarDao carDao = ABSTRACT_JDBC_DAO_FACTORY.createCarDao(connection)) {
                 Integer carId = carDao.findForeignKeyInTable(TableNames
                                 .ORDERS, super.getId
                                 ().toString(),
@@ -59,7 +59,7 @@ public class OrderLazy extends Order implements Lazy {
     public CarType getCarType() {
         if (super.getCarType() == null) {
             Connection connection = ConnectionPoolHolder.getConnection();
-            try (CarTypeDao carTypeDao = daoFactory.createCarTypeDao
+            try (CarTypeDao carTypeDao = ABSTRACT_JDBC_DAO_FACTORY.createCarTypeDao
                     (connection)) {
                 Integer carTypeId = carTypeDao.findForeignKeyInTable
                         (TableNames.ORDERS,

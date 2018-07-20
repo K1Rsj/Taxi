@@ -1,12 +1,12 @@
 package ua.finalproject.model.dao.impl;
 
-import ua.finalproject.constants.db.DbQueries;
+import ua.finalproject.constants.db.DbSQLQueries;
 import ua.finalproject.constants.db.TableColumnNames;
 import ua.finalproject.constants.db.TableNames;
 import ua.finalproject.constants.messages.LogMessages;
 import ua.finalproject.model.dao.AbstractDao;
 import ua.finalproject.model.dao.CarDao;
-import ua.finalproject.model.dao.util.QueryContainer;
+import ua.finalproject.model.dao.util.SQLQueryContainer;
 import ua.finalproject.model.dao.util.UtilDao;
 import ua.finalproject.model.entities.full.Car;
 import ua.finalproject.model.entities.lazy.CarLazy;
@@ -62,7 +62,7 @@ public class CarDaoImpl extends AbstractDao<Car> implements CarDao {
     public void create(Car car) throws
             SQLIntegrityConstraintViolationException {
         try (PreparedStatement preparedStatement = connection
-                .prepareStatement(DbQueries.INSERT_INTO_CARS)) {
+                .prepareStatement(DbSQLQueries.INSERT_INTO_CARS)) {
             preparedStatement.setString(1, car.getModel());
             preparedStatement.setString(2, car.getNumber());
             preparedStatement.setString(3, car.getDriver());
@@ -86,7 +86,7 @@ public class CarDaoImpl extends AbstractDao<Car> implements CarDao {
      */
     @Override
     public Optional<Car> getFreeCarByTypeId(Integer typeId) {
-        return findOneByQuery(QueryContainer.INSTANCE.findFreeCarByType
+        return findOneByQuery(SQLQueryContainer.INSTANCE.findFreeCarByType
                 (typeId));
     }
 
@@ -99,7 +99,7 @@ public class CarDaoImpl extends AbstractDao<Car> implements CarDao {
     @Override
     public void updateCarState(Integer carId, String carState) {
         try (PreparedStatement preparedStatement = connection
-                .prepareStatement(DbQueries
+                .prepareStatement(DbSQLQueries
                         .UPDATE_CAR_STATE_BY_ID)) {
             preparedStatement.setString(1, carState);
             preparedStatement.setInt(2, carId);

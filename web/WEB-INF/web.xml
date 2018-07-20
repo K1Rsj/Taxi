@@ -68,9 +68,9 @@
         <url-pattern>/taxi/my_discount</url-pattern>
     </filter-mapping>
 
-    <welcome-file-list>
-        <welcome-file>taxi/index</welcome-file>
-    </welcome-file-list>
+    <!--<welcome-file-list>-->
+        <!--<welcome-file>taxi/index</welcome-file>-->
+    <!--</welcome-file-list>-->
 
     <jsp-config>
         <taglib>

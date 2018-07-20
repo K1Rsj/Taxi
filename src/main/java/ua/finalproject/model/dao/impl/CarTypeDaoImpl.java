@@ -1,6 +1,6 @@
 package ua.finalproject.model.dao.impl;
 
-import ua.finalproject.constants.db.DbQueries;
+import ua.finalproject.constants.db.DbSQLQueries;
 import ua.finalproject.constants.db.TableColumnNames;
 import ua.finalproject.constants.db.TableNames;
 import ua.finalproject.constants.messages.LogMessages;
@@ -56,7 +56,7 @@ public class CarTypeDaoImpl extends AbstractDao<CarType> implements
     @Override
     public void create(CarType carType) {
         try (PreparedStatement preparedStatement = connection
-                .prepareStatement(DbQueries.INSERT_INTO_CAR_TYPE)) {
+                .prepareStatement(DbSQLQueries.INSERT_INTO_CAR_TYPE)) {
             preparedStatement.setString(1, carType.getType());
             preparedStatement.setInt(2, carType.getStartingPrice());
             preparedStatement.setInt(3, carType.getPricePerKilometer());
@@ -79,7 +79,7 @@ public class CarTypeDaoImpl extends AbstractDao<CarType> implements
     @Override
     public void updateDiscount(Integer id, Integer discount) {
         try (PreparedStatement preparedStatement = connection
-                .prepareStatement(DbQueries
+                .prepareStatement(DbSQLQueries
                         .UPDATE_CAR_TYPE_SET_DISCOUNT)) {
             preparedStatement.setInt(1, discount);
             preparedStatement.setInt(2, id);

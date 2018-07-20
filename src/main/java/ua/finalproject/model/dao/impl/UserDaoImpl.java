@@ -1,12 +1,12 @@
 package ua.finalproject.model.dao.impl;
 
-import ua.finalproject.constants.db.DbQueries;
+import ua.finalproject.constants.db.DbSQLQueries;
 import ua.finalproject.constants.db.TableColumnNames;
 import ua.finalproject.constants.db.TableNames;
 import ua.finalproject.constants.messages.LogMessages;
 import ua.finalproject.model.dao.AbstractDao;
 import ua.finalproject.model.dao.UserDao;
-import ua.finalproject.model.dao.util.QueryContainer;
+import ua.finalproject.model.dao.util.SQLQueryContainer;
 import ua.finalproject.model.dao.util.UtilDao;
 import ua.finalproject.model.entities.full.User;
 import ua.finalproject.util.LogMessageBuilder;
@@ -72,7 +72,7 @@ public class UserDaoImpl extends AbstractDao<User> implements UserDao {
     public void create(User user) throws
             SQLIntegrityConstraintViolationException {
         try (PreparedStatement preparedStatement = connection
-                .prepareStatement(DbQueries.INSERT_INTO_USERS)) {
+                .prepareStatement(DbSQLQueries.INSERT_INTO_USERS)) {
             preparedStatement.setString(1, user.getLogin());
             preparedStatement.setString(2, user.getPassword());
             preparedStatement.setString(3, user.getEmail());
@@ -98,7 +98,7 @@ public class UserDaoImpl extends AbstractDao<User> implements UserDao {
      */
     @Override
     public Optional<User> findByLogin(String login) {
-        return findOneByQuery(QueryContainer.INSTANCE.findUserByLogin
+        return findOneByQuery(SQLQueryContainer.INSTANCE.findUserByLogin
                 (login));
     }
 
@@ -111,7 +111,7 @@ public class UserDaoImpl extends AbstractDao<User> implements UserDao {
     @Override
     public void updateMoneySpent(Integer userId, Long moneySpent) {
         try (PreparedStatement preparedStatement = connection
-                .prepareStatement(DbQueries
+                .prepareStatement(DbSQLQueries
                         .UPDATE_USER_MONEY_SPENT)) {
             preparedStatement.setLong(1, moneySpent);
             preparedStatement.setInt(2, userId);

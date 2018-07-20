@@ -1,7 +1,7 @@
 package ua.finalproject.model.dao;
 
 import ua.finalproject.constants.messages.LogMessages;
-import ua.finalproject.model.dao.util.QueryContainer;
+import ua.finalproject.model.dao.util.SQLQueryContainer;
 import ua.finalproject.model.entities.Entity;
 import ua.finalproject.util.LogMessageBuilder;
 
@@ -43,7 +43,7 @@ public abstract class AbstractDao<T extends Entity<Integer>> implements
      */
     @Override
     public Optional<T> findById(Integer id) {
-        String query = QueryContainer.INSTANCE.findFromTableById
+        String query = SQLQueryContainer.INSTANCE.findFromTableById
                 (tableName, id);
         return findOneByQuery(query);
     }
@@ -55,7 +55,7 @@ public abstract class AbstractDao<T extends Entity<Integer>> implements
      */
     @Override
     public Optional<List<T>> findAll() {
-        String query = QueryContainer.INSTANCE.findAllFromTable(tableName);
+        String query = SQLQueryContainer.INSTANCE.findAllFromTable(tableName);
         return findAllByQuery(query);
     }
 
@@ -66,7 +66,7 @@ public abstract class AbstractDao<T extends Entity<Integer>> implements
      */
     @Override
     public void delete(Integer id) {
-        String query = QueryContainer.INSTANCE.deleteFromTableById
+        String query = SQLQueryContainer.INSTANCE.deleteFromTableById
                 (tableName, id);
         try (PreparedStatement statement = connection.prepareStatement
                 (query)) {
@@ -87,7 +87,7 @@ public abstract class AbstractDao<T extends Entity<Integer>> implements
      */
     public void deleteByParameter(String parameterName, String
             parameterValue) {
-        String query = QueryContainer.INSTANCE
+        String query = SQLQueryContainer.INSTANCE
                 .deleteFromTableByParameter(tableName,
                         parameterName, parameterValue);
         try (PreparedStatement statement = connection.prepareStatement
@@ -110,7 +110,7 @@ public abstract class AbstractDao<T extends Entity<Integer>> implements
     @Override
     public Integer findForeignKeyInTable(String tableName, String
             entityId, String idName) {
-        String query = QueryContainer.INSTANCE.findForeignKeyIdFromTable
+        String query = SQLQueryContainer.INSTANCE.findForeignKeyIdFromTable
                 (tableName,
                         entityId, idName);
         try (PreparedStatement ps = connection.prepareStatement(query)) {

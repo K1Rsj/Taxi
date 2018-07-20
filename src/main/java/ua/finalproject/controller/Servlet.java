@@ -15,14 +15,8 @@ import ua.finalproject.controller.commands.order.MyOrdersCommand;
 import ua.finalproject.controller.commands.redirect.*;
 import ua.finalproject.controller.commands.user.*;
 import ua.finalproject.controller.util.ControllerUtil;
-import ua.finalproject.model.dao.connectionPool.ConnectionPoolHolder;
-import ua.finalproject.model.dao.factory.DaoFactory;
 import ua.finalproject.model.entities.full.User;
 import ua.finalproject.model.services.ServiceFactory;
-import ua.finalproject.model.services.impl.CarServiceImpl;
-import ua.finalproject.model.services.impl.CarTypeServiceImpl;
-import ua.finalproject.model.services.impl.OrderServiceImpl;
-import ua.finalproject.model.services.impl.UserServiceImpl;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;

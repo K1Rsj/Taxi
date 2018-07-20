@@ -20,7 +20,7 @@ import java.sql.Connection;
  * @see OrderDaoImpl
  * @see CarTypeDaoImpl
  */
-public class JDBCDaoFactory extends DaoFactory {
+public class JDBCDaoFactory extends AbstractJDBCDaoFactory {
 
     /**
      * @param connection connection

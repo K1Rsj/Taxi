@@ -1,5 +1,6 @@
 package ua.finalproject.controller.commands.user;
 
+import org.hibernate.exception.ConstraintViolationException;
 import ua.finalproject.constants.jsp.JSPPages;
 import ua.finalproject.constants.jsp.RequestAttributes;
 import ua.finalproject.constants.messages.Messages;
@@ -11,7 +12,6 @@ import ua.finalproject.model.services.impl.UserServiceImpl;
 import ua.finalproject.util.LogMessageBuilder;
 
 import javax.servlet.http.HttpServletRequest;
-import java.sql.SQLIntegrityConstraintViolationException;
 
 /**
  * Command for registration new user
@@ -39,7 +39,7 @@ public class UserRegistrationCommand implements Command {
                     (request);
             try {
                 userServiceImpl.registerUser(user);
-            } catch (SQLIntegrityConstraintViolationException e) {
+            } catch (ConstraintViolationException e) {
                 request.setAttribute(RequestAttributes
                         .WRONG_INPUT_MESSAGE, DataValidation
                         .loginOrEmailNotUniqueDetermination(e));

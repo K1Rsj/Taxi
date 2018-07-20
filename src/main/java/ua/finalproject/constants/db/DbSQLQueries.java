@@ -3,7 +3,7 @@ package ua.finalproject.constants.db;
 /**
  * DB queries for taxi DB
  */
-public interface DbQueries {
+public interface DbSQLQueries {
 
     String INSERT_INTO_CARS = "INSERT INTO CARS(model, number, driver, " +
             "car_type_id) VALUES " +

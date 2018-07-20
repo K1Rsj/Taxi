@@ -1,4 +1,4 @@
-package ua.finalproject.model.dao.connectionPool;
+package ua.finalproject.model.dao.connection.pool;
 
 import org.apache.commons.dbcp.BasicDataSource;
 import org.apache.logging.log4j.LogManager;

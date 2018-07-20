@@ -64,7 +64,9 @@ public interface Dao<T, ID> extends AutoCloseable {
      * @param idName    id name
      * @return foreign key
      */
-    Integer findForeignKeyInTable(String tableName, String entityId,
-                                  String idName);
+    default Integer findForeignKeyInTable(String tableName, String entityId,
+                                  String idName) {
+        return 0;
+    }
 
 }

@@ -5,7 +5,7 @@
             <PatternLayout pattern="%d{HH:mm:ss.SSS} - %msg%n"/>
         </Console>
         <File name="TaxiInfo"
-              fileName="C:\Users\Олег\Desktop\Taxi\log\Taxi-info.log"
+              fileName="C:\Users\Denys_Sulima\IdeaProjects\Taxi\log\Taxi-info.log"
               immediateFlush="true" append="true">
             <PatternLayout
                     pattern="%d{yyy-MM-dd HH:mm:ss.SSS} %c{1} - %msg%n"

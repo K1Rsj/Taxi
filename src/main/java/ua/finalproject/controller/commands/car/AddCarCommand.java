@@ -1,5 +1,6 @@
 package ua.finalproject.controller.commands.car;
 
+import org.hibernate.exception.ConstraintViolationException;
 import ua.finalproject.constants.jsp.JSPPages;
 import ua.finalproject.constants.jsp.RequestAttributes;
 import ua.finalproject.constants.jsp.RequestParameters;
@@ -13,7 +14,6 @@ import ua.finalproject.model.services.impl.CarServiceImpl;
 import ua.finalproject.util.LogMessageBuilder;
 
 import javax.servlet.http.HttpServletRequest;
-import java.sql.SQLIntegrityConstraintViolationException;
 
 /**
  * Command for adding car to taxi DB
@@ -38,7 +38,7 @@ public class AddCarCommand implements Command {
             String type = request.getParameter(RequestParameters.TYPE);
             try {
                 carServiceImpl.addCar(car, type);
-            } catch (SQLIntegrityConstraintViolationException e) {
+            } catch (ConstraintViolationException e) {
                 request.setAttribute(RequestAttributes
                         .INFORMATION_MESSAGE, bundleManager
                         .getString(ExceptionMessages

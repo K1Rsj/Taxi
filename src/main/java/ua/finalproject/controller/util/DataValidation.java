@@ -1,5 +1,6 @@
 package ua.finalproject.controller.util;
 
+import org.hibernate.exception.ConstraintViolationException;
 import ua.finalproject.constants.GlobalConstants;
 import ua.finalproject.constants.jsp.RequestAttributes;
 import ua.finalproject.constants.jsp.RequestParameters;
@@ -9,7 +10,6 @@ import ua.finalproject.constants.regex.RegexContainer;
 import ua.finalproject.util.BundleManager;
 
 import javax.servlet.http.HttpServletRequest;
-import java.sql.SQLIntegrityConstraintViolationException;
 
 /**
  * Validates input data
@@ -107,8 +107,8 @@ public class DataValidation {
      * @return input field that is not unique
      */
     public static String loginOrEmailNotUniqueDetermination
-    (SQLIntegrityConstraintViolationException e) {
-        if (e.getMessage().contains(GlobalConstants.LOGIN)) {
+    (ConstraintViolationException e) {
+        if (e.getConstraintName().contains(GlobalConstants.LOGIN)) {
             return bundleManager.getString(ExceptionMessages
                     .NOT_UNIQUE_LOGIN);
         } else {
@@ -141,14 +141,10 @@ public class DataValidation {
     public static boolean orderDataValidation(String departureStreet,
                                               String
                                                       destinationStreet) {
-        if (departureStreet == null || !departureStreet.matches
-                (bundleManager.getString
-                        (RegexContainer.REGEX_STREET))) {
-            return false;
-        } else
-            return destinationStreet != null && destinationStreet
-                    .matches(bundleManager
-                            .getString(RegexContainer.REGEX_STREET));
+        return departureStreet != null && departureStreet
+                .matches(bundleManager.getString(RegexContainer.REGEX_STREET))
+                && destinationStreet != null
+                && destinationStreet.matches(bundleManager.getString(RegexContainer.REGEX_STREET));
     }
 
     /**

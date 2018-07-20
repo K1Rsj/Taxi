@@ -5,7 +5,7 @@ import ua.finalproject.constants.db.TableNames;
 /**
  * Query builder
  */
-public enum QueryContainer {
+public enum SQLQueryContainer {
 
     INSTANCE;
 
