@@ -7,12 +7,8 @@ import lombok.Setter;
 import lombok.Builder;
 import ua.finalproject.model.entities.Entity;
 
-import javax.persistence.Basic;
-import javax.persistence.Column;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
+import java.util.List;
 
 @javax.persistence.Entity
 @Table(name = "users")
@@ -52,10 +48,29 @@ public class User implements Entity<Integer> {
     @Column(name = "role", nullable = false, insertable = false, length = 45)
     private Role role;
 
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "user", cascade = CascadeType.REMOVE)
+    private List<Order> orders;
+
     /**
      * User roles
      */
     public enum Role {
         USER, ADMIN
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "id=" + id +
+                ", login='" + login + '\'' +
+                ", password='" + password + '\'' +
+                ", email='" + email + '\'' +
+                ", firstName='" + firstName + '\'' +
+                ", secondName='" + secondName + '\'' +
+                ", phoneNumber='" + phoneNumber + '\'' +
+                ", moneySpent=" + moneySpent +
+                ", role=" + role +
+                ", orders=" + orders +
+                '}';
     }
 }

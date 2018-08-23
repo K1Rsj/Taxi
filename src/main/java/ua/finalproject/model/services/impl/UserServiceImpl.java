@@ -11,6 +11,7 @@ import ua.finalproject.model.entities.full.User;
 import ua.finalproject.model.services.UserService;
 import ua.finalproject.model.util.OrderPriceGenerator;
 
+import javax.transaction.Transactional;
 import java.util.List;
 import java.util.Optional;
 
@@ -37,7 +38,6 @@ public class UserServiceImpl implements UserService {
         } catch (ConstraintViolationException e) {
             throw new ConstraintViolationException(e.getMessage(), e.getSQLException(), e.getConstraintName());
         } catch (Exception e) {
-            e.printStackTrace();
         }
     }
 
@@ -47,7 +47,6 @@ public class UserServiceImpl implements UserService {
         try (UserDao userDao = HibernateDaoFactory.getInstance().createHibernateUserDao(session)) {
             return userDao.findByLogin(login);
         } catch (Exception e) {
-            e.printStackTrace();
         }
         return Optional.empty();
     }
@@ -59,7 +58,6 @@ public class UserServiceImpl implements UserService {
             return OrderPriceGenerator.getDiscountBasedOnMoneySpent(userDao.findByLogin(login)
                     .get().getMoneySpent());
         } catch (Exception e) {
-            e.printStackTrace();
         }
         return 0;
     }
@@ -70,7 +68,6 @@ public class UserServiceImpl implements UserService {
         try (UserDao userDao = HibernateDaoFactory.getInstance().createHibernateUserDao(session)) {
             return userDao.findAll();
         } catch (Exception e) {
-            e.printStackTrace();
         }
         return Optional.empty();
     }
@@ -80,12 +77,15 @@ public class UserServiceImpl implements UserService {
         Session session = HibernateSession.getSession();
         try (UserDao userDao = HibernateDaoFactory.getInstance().createHibernateUserDao(session);
              OrderDao orderDao = HibernateDaoFactory.getInstance().createHibernateOrderDao(session)) {
+//            session.beginTransaction();
+//            orderDao.deleteByParameter(TableColumnNames.USERS_ID, id.toString());
+//            userDao.delete(id);
+//            session.getTransaction().commit();
             session.beginTransaction();
-            orderDao.deleteByParameter(TableColumnNames.USERS_ID, id.toString());
-            userDao.delete(id);
+            User user = session.load(User.class, id);
+            session.delete(user);
             session.getTransaction().commit();
         } catch (Exception e) {
-            e.printStackTrace();
         }
     }
     //    /**

@@ -34,6 +34,7 @@ public class HibernateSession {
         jpaProps.put(Environment.PASS, PropertyManager.CONFIG.getString(DbConfig.DB_PASSWORD));
         jpaProps.put(Environment.HBM2DDL_AUTO, PropertyManager.CONFIG.getString(DbConfig.DB_DLL_VALIDATE));
         jpaProps.put(Environment.SHOW_SQL, true);
+        jpaProps.put(Environment.FORMAT_SQL, true);
 
         Configuration config = new Configuration()
                 .addAnnotatedClass(Order.class)

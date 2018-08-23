@@ -22,7 +22,7 @@ public abstract class AbstractHibernateDao<T extends Entity<Integer>> implements
 
     @Override
     public void create(T entity) throws ConstraintViolationException {
-        session.save(entity);
+        session.persist(entity);
     }
 
     @Override

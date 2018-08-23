@@ -24,7 +24,7 @@ public class CarTypeServiceImplTest {
     public void setUp() {
 
         carTypeDao = mock(CarTypeDao.class);
-        //carTypeServiceImpl = new CarTypeServiceImpl(carTypeDao);
+        carTypeServiceImpl = ServiceFactory.getInstance().createCarTypeService();
         carTypes = new ArrayList<>();
     }
 
@@ -41,8 +41,7 @@ public class CarTypeServiceImplTest {
     @Test
     public void showAllCarTypes() {
         when(carTypeDao.findAll()).thenReturn(Optional.of(carTypes));
-        List<CarType> carTypesTest = carTypeServiceImpl.showAllCarTypes
-                ().get();
+        List<CarType> carTypesTest = carTypeServiceImpl.showAllCarTypes().get();
         verify(carTypeDao).findAll();
         assertEquals(carTypes, carTypesTest);
 

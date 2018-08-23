@@ -66,7 +66,6 @@ public class OrderServiceImpl implements OrderService {
             throw new NoFreeCarWithSuchTypeException();
         }
         catch (Exception e) {
-            e.printStackTrace();
             throw new RuntimeException(e);
         }
     }
